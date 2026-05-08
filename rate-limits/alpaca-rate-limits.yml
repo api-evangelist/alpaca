@@ -5,31 +5,54 @@ provider: Alpaca
 providerId: alpaca
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
-- Fintech
-- Trading
-- Stocks
-- Crypto
-- Brokerage
-- Rate Limiting
-- Quotas
-- Throttling
-description: Placeholder rate-limit artifact for Alpaca. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+  - Fintech
+  - Trading
+  - Stocks
+  - Crypto
+  - Rate Limiting
+description: >-
+  Alpaca enforces per-account rate limits on the Trading and Market Data APIs. The default Free
+  plan caps REST traffic at 200 requests per minute. The Algo Trader Plus plan raises the cap to
+  10,000 requests per minute for Market Data REST. WebSocket symbol subscriptions are also tiered.
+  All endpoints return HTTP 429 when limits are exceeded.
 sources:
-- https://alpaca.markets/
+  - https://docs.alpaca.markets/docs/api-rate-limits
+  - https://alpaca.markets/data
 responseCodes:
   throttled: 429
 limits:
-- name: Default
-  scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+  - name: Trading API default
+    scope: account
+    metric: requests_per_minute
+    limit: 200
+    notes: Free Trading API rate limit per account.
+  - name: Market Data REST (Free)
+    scope: account
+    metric: requests_per_minute
+    limit: 200
+    notes: Free Market Data plan REST rate limit.
+  - name: Market Data REST (Algo Trader Plus)
+    scope: account
+    metric: requests_per_minute
+    limit: 10000
+    notes: Paid plan REST rate limit.
+  - name: WebSocket symbols (Free)
+    scope: connection
+    metric: symbols_per_connection
+    limit: 30
+    notes: Free WebSocket subscription cap.
+  - name: WebSocket symbols (Algo Trader Plus)
+    scope: connection
+    metric: symbols_per_connection
+    limit: -1
+    notes: Unlimited symbols on paid plan.
 policies:
-- name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  - name: Backoff Strategy
+    description: On 429, honor Retry-After and apply exponential backoff with jitter.
+  - name: Connection Limits
+    description: Only one WebSocket connection per account is allowed for market data streams.
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com

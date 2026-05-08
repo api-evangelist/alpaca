@@ -5,37 +5,100 @@ provider: Alpaca
 providerId: alpaca
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
-- Fintech
-- Trading
-- Stocks
-- Crypto
-- Brokerage
-- Plans
-description: Placeholder plans/pricing artifact for Alpaca. Replace with real published pricing once
-  the pipeline researches the provider's plans page.
-notes: Initial scaffold — plans/pricing have not yet been reconciled.
+  - Fintech
+  - Trading
+  - Stocks
+  - Crypto
+  - Brokerage
+  - Plans
+description: >-
+  Alpaca offers a Free Market Data plan (15-minute delayed via REST, real-time IEX-only WebSocket, 200 rpm)
+  and an Algo Trader Plus plan ($99/month) with full SIP real-time data, OPRA options, and up to
+  10,000 rpm. Trading commissions are zero for stocks, options, and crypto. Broker API pricing is
+  bespoke per partner.
 sources:
-- https://alpaca.markets/
+  - https://alpaca.markets/data
+  - https://docs.alpaca.markets/docs/api-rate-limits
 plans:
-- id: alpaca-default
-  name: To Be Reconciled
-  type: enterprise
-  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
-  entries:
-  - label: API Access
-    name: api_access
-    type: flat
-    metric: varies
-    limit: -1
-    timeFrame: usage
-    geo: global
-    unit: 1
-    price: see https://alpaca.markets/
-    userMultiplied: false
-  elements:
-  - name: Pending Reconciliation
+  - id: alpaca-free
+    name: Free
+    type: freemium
+    description: Free Market Data plan with 15-minute delayed REST data and real-time IEX WebSocket.
+    entries:
+      - label: Monthly subscription
+        name: free_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: REST rate limit
+        name: free_rate
+        type: quota
+        metric: requests_per_minute
+        limit: 200
+        timeFrame: minute
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 15-minute delayed REST data
+      - name: IEX real-time WebSocket (30 symbols max)
+      - name: 7+ years historical data
+  - id: alpaca-algo-trader-plus
+    name: Algo Trader Plus
+    type: subscription
+    description: $99/month for full SIP real-time data, OPRA options, unlimited symbols, up to 10,000 rpm.
+    entries:
+      - label: Monthly subscription
+        name: algo_trader_plus_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '99.00'
+        userMultiplied: false
+      - label: REST rate limit
+        name: algo_trader_plus_rate
+        type: quota
+        metric: requests_per_minute
+        limit: 10000
+        timeFrame: minute
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Full SIP real-time stock data
+      - name: Real-time OPRA options data
+      - name: Unlimited WebSocket symbols
+      - name: 7+ years historical data
+  - id: alpaca-broker-api
+    name: Broker API
+    type: enterprise
+    description: Embedded brokerage / white-label. Pricing negotiated per partner.
+    entries:
+      - label: Custom pricing
+        name: broker_custom
+        type: subscription
+        metric: contract
+        limit: -1
+        timeFrame: contract
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Sales-led contract
+      - name: White-label brokerage
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
