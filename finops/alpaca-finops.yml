@@ -1,0 +1,66 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Alpaca
+providerId: alpaca
+created: '2026-05-08'
+modified: '2026-05-08'
+reconciled: false
+tags:
+- Fintech
+- Trading
+- Stocks
+- Crypto
+- Brokerage
+- FinOps
+- Cost Management
+- FOCUS
+description: FOCUS-aligned FinOps placeholder for Alpaca. Pipeline will replace with real billing details.
+notes: Initial scaffold — billing model has not yet been reconciled.
+sources:
+- https://alpaca.markets/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Alpaca
+serviceCategory: Fintech
+billingModel:
+  pricingCategory: To Be Reconciled
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Alpaca
+  ServiceCategory: Fintech
+  ProviderName: Alpaca
+  PublisherName: Alpaca
+  InvoiceIssuerName: Alpaca
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+- name: api_usage
+  description: Catch-all meter pending reconciliation.
+  unit: varies
+  aggregation: sum
+  dimensions:
+  - account
+  - resource
+principles:
+- name: Visibility
+  description: Pull provider invoices or usage exports until a self-serve usage feed is documented.
+- name: Allocation
+  description: Tag invoice line items to consuming business units in your FinOps store.
+- name: Optimization
+  description: Levers depend on the provider's billing model; review at renewal once reconciled.
+- name: Accountability
+  description: Assign a contract owner to review billing against negotiated terms.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

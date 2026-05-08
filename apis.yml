@@ -1,0 +1,29 @@
+aid: alpaca
+url: https://raw.githubusercontent.com/api-evangelist/alpaca/refs/heads/main/apis.yml
+name: Alpaca
+x-type: company
+description: >-
+  Alpaca is an API-first commission-free stock and crypto trading broker. APIs cover trading, market data, account management, watchlists, and broker-as-a-service.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Fintech
+  - Trading
+  - Stocks
+  - Crypto
+  - Brokerage
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://alpaca.markets/
+  - type: Plans
+    url: plans/alpaca-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/alpaca-rate-limits.yml
+  - type: FinOps
+    url: finops/alpaca-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
