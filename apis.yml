@@ -160,6 +160,28 @@ common:
     url: rate-limits/alpaca-rate-limits.yml
   - type: FinOps
     url: finops/alpaca-finops.yml
+  - type: Integrations
+    url: https://alpaca.markets/integrations
+integrations:
+  - name: TradingView
+  - name: Streak
+  - name: Slack
+  - name: QuantRocket
+  - name: Blueshift
+  - name: Tradetron
+  - name: Passiv
+  - name: Zapier
+  - name: Alexa
+  - name: Arcade Trader
+  - name: PredictNow.ai
+  - name: AlgoBulls
+  - name: Trellis
+  - name: Breaking Equity
+  - name: Composer
+  - name: Algorum
+  - name: Wealth-Lab
+  - name: Your project here
+  - name: Close modal
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
