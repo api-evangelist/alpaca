@@ -1,7 +1,7 @@
 aid: alpaca
 url: https://raw.githubusercontent.com/api-evangelist/alpaca/refs/heads/main/apis.yml
 name: Alpaca
-x-type: company
+kind: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Fintech
@@ -148,11 +148,11 @@ common:
     url: https://alpaca.markets/data
   - type: GitHub
     url: https://github.com/alpacahq
-  - type: Status
+  - type: StatusPage
     url: https://status.alpaca.markets/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://alpaca.markets/legal
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://alpaca.markets/privacy
   - type: Plans
     url: plans/alpaca-plans-pricing.yml
