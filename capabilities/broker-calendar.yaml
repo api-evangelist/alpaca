@@ -1,0 +1,86 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Broker API — Calendar
+  description: 'Broker API — Calendar. 1 operations. Lead operation: Query market calendar. Self-contained Naftiko capability
+    covering one Alpaca business surface.'
+  tags:
+  - Alpaca
+  - Calendar
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ALPACA_API_KEY: ALPACA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: broker-calendar
+    baseUri: https://broker-api.sandbox.alpaca.markets
+    description: Broker API — Calendar business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-calendar
+      path: /v1/calendar
+      operations:
+      - name: querymarketcalendar
+        method: GET
+        description: Query market calendar
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: start
+          in: query
+          type: string
+          description: The first date to retrieve data for. (Inclusive) in YYYY-MM-DD format
+        - name: end
+          in: query
+          type: string
+          description: The last date to retrieve data for. (Inclusive) in YYYY-MM-DD format
+    authentication:
+      type: basic
+      username: '{{env.ALPACA_USER}}'
+      password: '{{env.ALPACA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: broker-calendar-rest
+    port: 8080
+    description: REST adapter for Broker API — Calendar. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/calendar
+      name: v1-calendar
+      description: REST surface for v1-calendar.
+      operations:
+      - method: GET
+        name: querymarketcalendar
+        description: Query market calendar
+        call: broker-calendar.querymarketcalendar
+        with:
+          start: rest.start
+          end: rest.end
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: broker-calendar-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Broker API — Calendar. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: query-market-calendar
+      description: Query market calendar
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broker-calendar.querymarketcalendar
+      with:
+        start: tools.start
+        end: tools.end
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,279 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trader API — Orders
+  description: 'Trader API — Orders. 6 operations. Lead operation: Order. Self-contained Naftiko capability covering one Alpaca
+    business surface.'
+  tags:
+  - Alpaca
+  - Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ALPACA_API_KEY: ALPACA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: trading-orders
+    baseUri: https://paper-api.alpaca.markets
+    description: Trader API — Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-orders
+      path: /v2/orders
+      operations:
+      - name: postorder
+        method: POST
+        description: Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getallorders
+        method: GET
+        description: All Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Order status to be queried. open, closed or all. Defaults to open.
+        - name: limit
+          in: query
+          type: integer
+          description: The maximum number of orders in response. Defaults to 50 and max is 500.
+        - name: after
+          in: query
+          type: string
+          description: The response will include only ones submitted after this timestamp (exclusive.)
+        - name: until
+          in: query
+          type: string
+          description: The response will include only ones submitted until this timestamp (exclusive.)
+        - name: direction
+          in: query
+          type: string
+          description: The chronological order of response based on the submission time. asc or desc. Defaults to desc.
+        - name: nested
+          in: query
+          type: boolean
+          description: If true, the result will roll up multi-leg orders under the legs field of primary order.
+        - name: symbols
+          in: query
+          type: string
+          description: A comma-separated list of symbols to filter by (ex. “AAPL,TSLA,MSFT”). A currency pair is required
+            for crypto orders (ex. “BTCUSD,BCHUSD,LTCUSD,ETCUSD”).
+      - name: deleteallorders
+        method: DELETE
+        description: All Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-orders-order_id
+      path: /v2/orders/{order_id}
+      operations:
+      - name: getorderbyorderid
+        method: GET
+        description: Order by Order ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: nested
+          in: query
+          type: boolean
+          description: If true, the result will roll up multi-leg orders under the legs field of primary order.
+      - name: patchorderbyorderid
+        method: PATCH
+        description: Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteorderbyorderid
+        method: DELETE
+        description: Order by Order ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: APCA-API-KEY-ID
+      value: '{{env.ALPACA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: trading-orders-rest
+    port: 8080
+    description: REST adapter for Trader API — Orders. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/v2/orders
+      name: v2-orders
+      description: REST surface for v2-orders.
+      operations:
+      - method: POST
+        name: postorder
+        description: Order
+        call: trading-orders.postorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getallorders
+        description: All Orders
+        call: trading-orders.getallorders
+        with:
+          status: rest.status
+          limit: rest.limit
+          after: rest.after
+          until: rest.until
+          direction: rest.direction
+          nested: rest.nested
+          symbols: rest.symbols
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteallorders
+        description: All Orders
+        call: trading-orders.deleteallorders
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/orders/{order-id}
+      name: v2-orders-order-id
+      description: REST surface for v2-orders-order_id.
+      operations:
+      - method: GET
+        name: getorderbyorderid
+        description: Order by Order ID
+        call: trading-orders.getorderbyorderid
+        with:
+          nested: rest.nested
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchorderbyorderid
+        description: Order
+        call: trading-orders.patchorderbyorderid
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteorderbyorderid
+        description: Order by Order ID
+        call: trading-orders.deleteorderbyorderid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: trading-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trader API — Orders. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: order
+      description: Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: trading-orders.postorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: all-orders
+      description: All Orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: trading-orders.getallorders
+      with:
+        status: tools.status
+        limit: tools.limit
+        after: tools.after
+        until: tools.until
+        direction: tools.direction
+        nested: tools.nested
+        symbols: tools.symbols
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: all-orders-2
+      description: All Orders
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: trading-orders.deleteallorders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: order-order-id
+      description: Order by Order ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: trading-orders.getorderbyorderid
+      with:
+        nested: tools.nested
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: order-2
+      description: Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: trading-orders.patchorderbyorderid
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: order-order-id-2
+      description: Order by Order ID
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: trading-orders.deleteorderbyorderid
+      outputParameters:
+      - type: object
+        mapping: $.

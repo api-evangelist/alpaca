@@ -1,0 +1,115 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Broker API — Corporate Actions
+  description: 'Broker API — Corporate Actions. 1 operations. Lead operation: Retrieving Announcements. Self-contained Naftiko
+    capability covering one Alpaca business surface.'
+  tags:
+  - Alpaca
+  - Corporate Actions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ALPACA_API_KEY: ALPACA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: broker-corporate-actions
+    baseUri: https://broker-api.sandbox.alpaca.markets
+    description: Broker API — Corporate Actions business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-corporate_actions-announcements
+      path: /v1/corporate_actions/announcements
+      operations:
+      - name: getcorporateannouncements
+        method: GET
+        description: Retrieving Announcements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ca_types
+          in: query
+          type: string
+          description: A comma-delimited list of CorporateActionType values
+          required: true
+        - name: since
+          in: query
+          type: string
+          description: The start (inclusive) of the date range when searching corporate action announcements. This should
+            follow the YYYY-MM-DD format. The date range is limited to 90
+          required: true
+        - name: until
+          in: query
+          type: string
+          description: The end (inclusive) of the date range when searching corporate action announcements. This should follow
+            the YYYY-MM-DD format. The date range is limited to 90 d
+          required: true
+        - name: symbol
+          in: query
+          type: string
+          description: The symbol of the company initiating the announcement.
+        - name: cusip
+          in: query
+          type: string
+          description: The CUSIP of the company initiating the announcement.
+        - name: date_type
+          in: query
+          type: string
+          description: An emum of possible ways to use the `since` and `until` parameters to search by.
+    authentication:
+      type: basic
+      username: '{{env.ALPACA_USER}}'
+      password: '{{env.ALPACA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: broker-corporate-actions-rest
+    port: 8080
+    description: REST adapter for Broker API — Corporate Actions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/corporate-actions/announcements
+      name: v1-corporate-actions-announcements
+      description: REST surface for v1-corporate_actions-announcements.
+      operations:
+      - method: GET
+        name: getcorporateannouncements
+        description: Retrieving Announcements
+        call: broker-corporate-actions.getcorporateannouncements
+        with:
+          ca_types: rest.ca_types
+          since: rest.since
+          until: rest.until
+          symbol: rest.symbol
+          cusip: rest.cusip
+          date_type: rest.date_type
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: broker-corporate-actions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Broker API — Corporate Actions. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: retrieving-announcements
+      description: Retrieving Announcements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broker-corporate-actions.getcorporateannouncements
+      with:
+        ca_types: tools.ca_types
+        since: tools.since
+        until: tools.until
+        symbol: tools.symbol
+        cusip: tools.cusip
+        date_type: tools.date_type
+      outputParameters:
+      - type: object
+        mapping: $.

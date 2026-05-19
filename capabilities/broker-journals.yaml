@@ -1,0 +1,276 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Broker API — Journals
+  description: 'Broker API — Journals. 5 operations. Lead operation: Subscribe to journal events (SSE).. Self-contained Naftiko
+    capability covering one Alpaca business surface.'
+  tags:
+  - Alpaca
+  - Journals
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ALPACA_API_KEY: ALPACA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: broker-journals
+    baseUri: https://broker-api.sandbox.alpaca.markets
+    description: Broker API — Journals business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-events-journals-status
+      path: /v1/events/journals/status
+      operations:
+      - name: subscribetojournalstatussse
+        method: GET
+        description: Subscribe to journal events (SSE).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: since
+          in: query
+          type: string
+          description: 'Format: YYYY-MM-DD'
+        - name: until
+          in: query
+          type: string
+          description: 'Format: YYYY-MM-DD'
+        - name: since_id
+          in: query
+          type: integer
+        - name: until_id
+          in: query
+          type: integer
+    - name: v1-journals
+      path: /v1/journals
+      operations:
+      - name: getalljournals
+        method: GET
+        description: Return a list of requested journals.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after
+          in: query
+          type: string
+          description: 'By journal creation date. Format: 2020-01-01'
+        - name: before
+          in: query
+          type: string
+          description: 'By journal creation date. Format: 2020-01-01'
+        - name: status
+          in: query
+          type: string
+          description: See the JournalStatus model for more info
+        - name: entry_type
+          in: query
+          type: string
+          description: JNLC or JNLS
+        - name: to_account
+          in: query
+          type: string
+          description: The account id that received the journal
+        - name: from_account
+          in: query
+          type: string
+          description: The account id that initiated the journal
+      - name: createjournal
+        method: POST
+        description: Create a Journal.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-journals-batch
+      path: /v1/journals/batch
+      operations:
+      - name: createbatchjournal
+        method: POST
+        description: Create a Batch Journal Transaction (One-to-Many)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-journals-journal_id
+      path: /v1/journals/{journal_id}
+      operations:
+      - name: deletejournalbyid
+        method: DELETE
+        description: Cancel a pending journal.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.ALPACA_USER}}'
+      password: '{{env.ALPACA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: broker-journals-rest
+    port: 8080
+    description: REST adapter for Broker API — Journals. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/events/journals/status
+      name: v1-events-journals-status
+      description: REST surface for v1-events-journals-status.
+      operations:
+      - method: GET
+        name: subscribetojournalstatussse
+        description: Subscribe to journal events (SSE).
+        call: broker-journals.subscribetojournalstatussse
+        with:
+          since: rest.since
+          until: rest.until
+          since_id: rest.since_id
+          until_id: rest.until_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/journals
+      name: v1-journals
+      description: REST surface for v1-journals.
+      operations:
+      - method: GET
+        name: getalljournals
+        description: Return a list of requested journals.
+        call: broker-journals.getalljournals
+        with:
+          after: rest.after
+          before: rest.before
+          status: rest.status
+          entry_type: rest.entry_type
+          to_account: rest.to_account
+          from_account: rest.from_account
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createjournal
+        description: Create a Journal.
+        call: broker-journals.createjournal
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/journals/batch
+      name: v1-journals-batch
+      description: REST surface for v1-journals-batch.
+      operations:
+      - method: POST
+        name: createbatchjournal
+        description: Create a Batch Journal Transaction (One-to-Many)
+        call: broker-journals.createbatchjournal
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/journals/{journal-id}
+      name: v1-journals-journal-id
+      description: REST surface for v1-journals-journal_id.
+      operations:
+      - method: DELETE
+        name: deletejournalbyid
+        description: Cancel a pending journal.
+        call: broker-journals.deletejournalbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: broker-journals-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Broker API — Journals. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: subscribe-journal-events-sse
+      description: Subscribe to journal events (SSE).
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broker-journals.subscribetojournalstatussse
+      with:
+        since: tools.since
+        until: tools.until
+        since_id: tools.since_id
+        until_id: tools.until_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: return-list-requested-journals
+      description: Return a list of requested journals.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broker-journals.getalljournals
+      with:
+        after: tools.after
+        before: tools.before
+        status: tools.status
+        entry_type: tools.entry_type
+        to_account: tools.to_account
+        from_account: tools.from_account
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-journal
+      description: Create a Journal.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: broker-journals.createjournal
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-batch-journal-transaction-one
+      description: Create a Batch Journal Transaction (One-to-Many)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: broker-journals.createbatchjournal
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-pending-journal
+      description: Cancel a pending journal.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: broker-journals.deletejournalbyid
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,175 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: OAuth API — Stock Pricing Data API
+  description: 'OAuth API — Stock Pricing Data API. 2 operations. Lead operation: Bars. Self-contained Naftiko capability
+    covering one Alpaca business surface.'
+  tags:
+  - Alpaca
+  - Stock Pricing Data API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ALPACA_API_KEY: ALPACA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: oauth-stock-pricing-data-api
+    baseUri: https://data.alpaca.markets/v2
+    description: OAuth API — Stock Pricing Data API business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-stocks-symbol-bars
+      path: /v2/stocks/{symbol}/bars
+      operations:
+      - name: getbarsstocks
+        method: GET
+        description: Bars
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Apca-Api-Key-Id
+          in: header
+          type: string
+        - name: Apca-Api-Secret-Key
+          in: header
+          type: string
+        - name: start
+          in: query
+          type: string
+          description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
+        - name: end
+          in: query
+          type: string
+          description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
+        - name: timeframe
+          in: query
+          type: string
+          description: 'Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour,
+            1Day.'
+        - name: symbol
+          in: path
+          type: string
+          description: The symbol to query for
+          required: true
+    - name: v2-stocks-symbol-trades
+      path: /v2/stocks/{symbol}/trades
+      operations:
+      - name: gettradesstocks
+        method: GET
+        description: Trades
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Apca-Api-Key-Id
+          in: header
+          type: string
+        - name: Apca-Api-Secret-Key
+          in: header
+          type: string
+        - name: start
+          in: query
+          type: string
+          description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
+        - name: end
+          in: query
+          type: string
+          description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
+        - name: symbol
+          in: path
+          type: string
+          description: The symbol to query for
+          required: true
+    authentication:
+      type: apikey
+      key: APCA-API-KEY-ID
+      value: '{{env.ALPACA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: oauth-stock-pricing-data-api-rest
+    port: 8080
+    description: REST adapter for OAuth API — Stock Pricing Data API. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v2/stocks/{symbol}/bars
+      name: v2-stocks-symbol-bars
+      description: REST surface for v2-stocks-symbol-bars.
+      operations:
+      - method: GET
+        name: getbarsstocks
+        description: Bars
+        call: oauth-stock-pricing-data-api.getbarsstocks
+        with:
+          Apca-Api-Key-Id: rest.Apca-Api-Key-Id
+          Apca-Api-Secret-Key: rest.Apca-Api-Secret-Key
+          start: rest.start
+          end: rest.end
+          timeframe: rest.timeframe
+          symbol: rest.symbol
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/stocks/{symbol}/trades
+      name: v2-stocks-symbol-trades
+      description: REST surface for v2-stocks-symbol-trades.
+      operations:
+      - method: GET
+        name: gettradesstocks
+        description: Trades
+        call: oauth-stock-pricing-data-api.gettradesstocks
+        with:
+          Apca-Api-Key-Id: rest.Apca-Api-Key-Id
+          Apca-Api-Secret-Key: rest.Apca-Api-Secret-Key
+          start: rest.start
+          end: rest.end
+          symbol: rest.symbol
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: oauth-stock-pricing-data-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for OAuth API — Stock Pricing Data API. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: bars
+      description: Bars
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oauth-stock-pricing-data-api.getbarsstocks
+      with:
+        Apca-Api-Key-Id: tools.Apca-Api-Key-Id
+        Apca-Api-Secret-Key: tools.Apca-Api-Secret-Key
+        start: tools.start
+        end: tools.end
+        timeframe: tools.timeframe
+        symbol: tools.symbol
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: trades
+      description: Trades
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oauth-stock-pricing-data-api.gettradesstocks
+      with:
+        Apca-Api-Key-Id: tools.Apca-Api-Key-Id
+        Apca-Api-Secret-Key: tools.Apca-Api-Secret-Key
+        start: tools.start
+        end: tools.end
+        symbol: tools.symbol
+      outputParameters:
+      - type: object
+        mapping: $.

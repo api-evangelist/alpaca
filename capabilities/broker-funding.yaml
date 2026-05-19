@@ -1,0 +1,440 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Broker API — Funding
+  description: 'Broker API — Funding. 10 operations. Lead operation: Retrieve ACH Relationships for an account. Self-contained
+    Naftiko capability covering one Alpaca business surface.'
+  tags:
+  - Alpaca
+  - Funding
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ALPACA_API_KEY: ALPACA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: broker-funding
+    baseUri: https://broker-api.sandbox.alpaca.markets
+    description: Broker API — Funding business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-accounts-account_id-ach_relationships
+      path: /v1/accounts/{account_id}/ach_relationships
+      operations:
+      - name: getaccountachrelationships
+        method: GET
+        description: Retrieve ACH Relationships for an account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: statuses
+          in: query
+          type: string
+          description: Comma-separated status values
+      - name: createachrelationshipforaccount
+        method: POST
+        description: Create an ACH Relationship
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-accounts-account_id-ach_relationships-ach_relationship_id
+      path: /v1/accounts/{account_id}/ach_relationships/{ach_relationship_id}
+      operations:
+      - name: deleteachrelationshipfromaccount
+        method: DELETE
+        description: Delete an existing ACH relationship
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-accounts-account_id-recipient_banks
+      path: /v1/accounts/{account_id}/recipient_banks
+      operations:
+      - name: getrecipientbanks
+        method: GET
+        description: Retrieve bank relationships for an account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+        - name: bank_name
+          in: query
+          type: string
+      - name: createrecipientbank
+        method: POST
+        description: Create a Bank Relationship for an account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-accounts-account_id-recipient_banks-bank_id
+      path: /v1/accounts/{account_id}/recipient_banks/{bank_id}
+      operations:
+      - name: deleterecipientbank
+        method: DELETE
+        description: Delete a Bank Relationship for an account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-accounts-account_id-transfers
+      path: /v1/accounts/{account_id}/transfers
+      operations:
+      - name: gettransfersforaccount
+        method: GET
+        description: Return a list of transfers for an account.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: direction
+          in: query
+          type: string
+          description: INCOMING or OUTGOING
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+      - name: createtransferforaccount
+        method: POST
+        description: Request a new transfer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: account_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-accounts-account_id-transfers-transfer_id
+      path: /v1/accounts/{account_id}/transfers/{transfer_id}
+      operations:
+      - name: deletetransfer
+        method: DELETE
+        description: Request to close a transfer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-events-transfers-status
+      path: /v1/events/transfers/status
+      operations:
+      - name: subscribetotransferstatussse
+        method: GET
+        description: Subscribe to Transfer Events (SSE)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: since
+          in: query
+          type: string
+          description: 'Format: YYYY-MM-DD'
+        - name: until
+          in: query
+          type: string
+          description: 'Format: YYYY-MM-DD'
+        - name: since_id
+          in: query
+          type: integer
+        - name: until_id
+          in: query
+          type: integer
+    authentication:
+      type: basic
+      username: '{{env.ALPACA_USER}}'
+      password: '{{env.ALPACA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: broker-funding-rest
+    port: 8080
+    description: REST adapter for Broker API — Funding. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/v1/accounts/{account-id}/ach-relationships
+      name: v1-accounts-account-id-ach-relationships
+      description: REST surface for v1-accounts-account_id-ach_relationships.
+      operations:
+      - method: GET
+        name: getaccountachrelationships
+        description: Retrieve ACH Relationships for an account
+        call: broker-funding.getaccountachrelationships
+        with:
+          statuses: rest.statuses
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createachrelationshipforaccount
+        description: Create an ACH Relationship
+        call: broker-funding.createachrelationshipforaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/accounts/{account-id}/ach-relationships/{ach-relationship-id}
+      name: v1-accounts-account-id-ach-relationships-ach-relationship-id
+      description: REST surface for v1-accounts-account_id-ach_relationships-ach_relationship_id.
+      operations:
+      - method: DELETE
+        name: deleteachrelationshipfromaccount
+        description: Delete an existing ACH relationship
+        call: broker-funding.deleteachrelationshipfromaccount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/accounts/{account-id}/recipient-banks
+      name: v1-accounts-account-id-recipient-banks
+      description: REST surface for v1-accounts-account_id-recipient_banks.
+      operations:
+      - method: GET
+        name: getrecipientbanks
+        description: Retrieve bank relationships for an account
+        call: broker-funding.getrecipientbanks
+        with:
+          status: rest.status
+          bank_name: rest.bank_name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createrecipientbank
+        description: Create a Bank Relationship for an account
+        call: broker-funding.createrecipientbank
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/accounts/{account-id}/recipient-banks/{bank-id}
+      name: v1-accounts-account-id-recipient-banks-bank-id
+      description: REST surface for v1-accounts-account_id-recipient_banks-bank_id.
+      operations:
+      - method: DELETE
+        name: deleterecipientbank
+        description: Delete a Bank Relationship for an account
+        call: broker-funding.deleterecipientbank
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/accounts/{account-id}/transfers
+      name: v1-accounts-account-id-transfers
+      description: REST surface for v1-accounts-account_id-transfers.
+      operations:
+      - method: GET
+        name: gettransfersforaccount
+        description: Return a list of transfers for an account.
+        call: broker-funding.gettransfersforaccount
+        with:
+          direction: rest.direction
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtransferforaccount
+        description: Request a new transfer
+        call: broker-funding.createtransferforaccount
+        with:
+          account_id: rest.account_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/accounts/{account-id}/transfers/{transfer-id}
+      name: v1-accounts-account-id-transfers-transfer-id
+      description: REST surface for v1-accounts-account_id-transfers-transfer_id.
+      operations:
+      - method: DELETE
+        name: deletetransfer
+        description: Request to close a transfer
+        call: broker-funding.deletetransfer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/events/transfers/status
+      name: v1-events-transfers-status
+      description: REST surface for v1-events-transfers-status.
+      operations:
+      - method: GET
+        name: subscribetotransferstatussse
+        description: Subscribe to Transfer Events (SSE)
+        call: broker-funding.subscribetotransferstatussse
+        with:
+          since: rest.since
+          until: rest.until
+          since_id: rest.since_id
+          until_id: rest.until_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: broker-funding-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Broker API — Funding. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-ach-relationships-account
+      description: Retrieve ACH Relationships for an account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broker-funding.getaccountachrelationships
+      with:
+        statuses: tools.statuses
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-ach-relationship
+      description: Create an ACH Relationship
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: broker-funding.createachrelationshipforaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-existing-ach-relationship
+      description: Delete an existing ACH relationship
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: broker-funding.deleteachrelationshipfromaccount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-bank-relationships-account
+      description: Retrieve bank relationships for an account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broker-funding.getrecipientbanks
+      with:
+        status: tools.status
+        bank_name: tools.bank_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-bank-relationship-account
+      description: Create a Bank Relationship for an account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: broker-funding.createrecipientbank
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-bank-relationship-account
+      description: Delete a Bank Relationship for an account
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: broker-funding.deleterecipientbank
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: return-list-transfers-account
+      description: Return a list of transfers for an account.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broker-funding.gettransfersforaccount
+      with:
+        direction: tools.direction
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-new-transfer
+      description: Request a new transfer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: broker-funding.createtransferforaccount
+      with:
+        account_id: tools.account_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-close-transfer
+      description: Request to close a transfer
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: broker-funding.deletetransfer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: subscribe-transfer-events-sse
+      description: Subscribe to Transfer Events (SSE)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broker-funding.subscribetotransferstatussse
+      with:
+        since: tools.since
+        until: tools.until
+        since_id: tools.since_id
+        until_id: tools.until_id
+      outputParameters:
+      - type: object
+        mapping: $.

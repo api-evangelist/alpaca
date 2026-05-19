@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Market Data API — Screener
+  description: 'Market Data API — Screener. 1 operations. Lead operation: Get Top Market Movers by Market type. Self-contained
+    Naftiko capability covering one Alpaca business surface.'
+  tags:
+  - Alpaca
+  - Screener
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ALPACA_API_KEY: ALPACA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-screener
+    baseUri: https://data.alpaca.markets
+    description: Market Data API — Screener business capability. Self-contained, no shared references.
+    resources:
+    - name: v1beta1-screener-market_type-movers
+      path: /v1beta1/screener/{market_type}/movers
+      operations:
+      - name: gettopmoversbymarkettype
+        method: GET
+        description: Get Top Market Movers by Market type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: top
+          in: query
+          type: integer
+          description: Number of top market movers to fetch (gainers and losers). Will return number top for each. By default
+            10 gainers and 10 losers.
+    authentication:
+      type: apikey
+      key: APCA-API-KEY-ID
+      value: '{{env.ALPACA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: data-screener-rest
+    port: 8080
+    description: REST adapter for Market Data API — Screener. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1beta1/screener/{market-type}/movers
+      name: v1beta1-screener-market-type-movers
+      description: REST surface for v1beta1-screener-market_type-movers.
+      operations:
+      - method: GET
+        name: gettopmoversbymarkettype
+        description: Get Top Market Movers by Market type
+        call: data-screener.gettopmoversbymarkettype
+        with:
+          top: rest.top
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-screener-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Market Data API — Screener. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-top-market-movers-market
+      description: Get Top Market Movers by Market type
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-screener.gettopmoversbymarkettype
+      with:
+        top: tools.top
+      outputParameters:
+      - type: object
+        mapping: $.

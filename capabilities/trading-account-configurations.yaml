@@ -1,0 +1,107 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trader API — Account Configurations
+  description: 'Trader API — Account Configurations. 2 operations. Lead operation: Account Configurations. Self-contained
+    Naftiko capability covering one Alpaca business surface.'
+  tags:
+  - Alpaca
+  - Account Configurations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ALPACA_API_KEY: ALPACA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: trading-account-configurations
+    baseUri: https://paper-api.alpaca.markets
+    description: Trader API — Account Configurations business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-account-configurations
+      path: /v2/account/configurations
+      operations:
+      - name: getaccountconfig
+        method: GET
+        description: Account Configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: patchaccountconfig
+        method: PATCH
+        description: Account Configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: APCA-API-KEY-ID
+      value: '{{env.ALPACA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: trading-account-configurations-rest
+    port: 8080
+    description: REST adapter for Trader API — Account Configurations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v2/account/configurations
+      name: v2-account-configurations
+      description: REST surface for v2-account-configurations.
+      operations:
+      - method: GET
+        name: getaccountconfig
+        description: Account Configurations
+        call: trading-account-configurations.getaccountconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchaccountconfig
+        description: Account Configurations
+        call: trading-account-configurations.patchaccountconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: trading-account-configurations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trader API — Account Configurations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: account-configurations
+      description: Account Configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: trading-account-configurations.getaccountconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: account-configurations-2
+      description: Account Configurations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: trading-account-configurations.patchaccountconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

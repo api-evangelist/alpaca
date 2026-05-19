@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trader API — Clock
+  description: 'Trader API — Clock. 1 operations. Lead operation: Get Market Clock info. Self-contained Naftiko capability
+    covering one Alpaca business surface.'
+  tags:
+  - Alpaca
+  - Clock
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ALPACA_API_KEY: ALPACA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: trading-clock
+    baseUri: https://paper-api.alpaca.markets
+    description: Trader API — Clock business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-clock
+      path: /v2/clock
+      operations:
+      - name: getclock
+        method: GET
+        description: Get Market Clock info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: APCA-API-KEY-ID
+      value: '{{env.ALPACA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: trading-clock-rest
+    port: 8080
+    description: REST adapter for Trader API — Clock. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/v2/clock
+      name: v2-clock
+      description: REST surface for v2-clock.
+      operations:
+      - method: GET
+        name: getclock
+        description: Get Market Clock info
+        call: trading-clock.getclock
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: trading-clock-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trader API — Clock. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-market-clock-info
+      description: Get Market Clock info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: trading-clock.getclock
+      outputParameters:
+      - type: object
+        mapping: $.
