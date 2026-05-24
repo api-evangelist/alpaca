@@ -209,6 +209,8 @@ common:
   url: finops/alpaca-finops.yml
 - type: Integrations
   url: https://alpaca.markets/integrations
+- type: LLMsTxt
+  url: https://docs.alpaca.markets/llms.txt
 integrations:
 - name: TradingView
 - name: Streak
