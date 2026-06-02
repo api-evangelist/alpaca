@@ -1,0 +1,1143 @@
+asyncapi: '2.6.0'
+info:
+  title: Alpaca WebSocket Streaming APIs
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of Alpaca's public WebSocket streaming APIs.
+    Covers real-time stock market data (IEX / SIP / delayed SIP / BOATS),
+    real-time crypto market data (US and Global), real-time news, the
+    market-data test stream, and trade (order) updates on the Trading API.
+
+    All channels and message schemas are sourced from Alpaca's official
+    public documentation at docs.alpaca.markets.
+  contact:
+    name: Alpaca
+    url: https://docs.alpaca.markets/
+  license:
+    name: Alpaca Terms of Service
+    url: https://alpaca.markets/legal
+  x-source-docs:
+    - https://docs.alpaca.markets/docs/streaming-market-data
+    - https://docs.alpaca.markets/docs/websocket-streaming
+    - https://docs.alpaca.markets/docs/real-time-crypto-pricing-data
+    - https://docs.alpaca.markets/docs/streaming-real-time-news
+
+defaultContentType: application/json
+
+servers:
+  stocksIex:
+    url: stream.data.alpaca.markets/v2/iex
+    protocol: wss
+    description: |
+      Real-time stock market data WebSocket on the IEX feed. Available on
+      the free Basic plan. Subscribers receive trades, quotes, and bars
+      sourced from IEX.
+  stocksSip:
+    url: stream.data.alpaca.markets/v2/sip
+    protocol: wss
+    description: |
+      Real-time stock market data WebSocket on the consolidated SIP feed.
+      Includes all US exchanges. Requires an Alpaca Algo Trader Plus (or
+      higher) subscription.
+  stocksDelayedSip:
+    url: stream.data.alpaca.markets/v2/delayed_sip
+    protocol: wss
+    description: |
+      15-minute delayed consolidated SIP stock market data WebSocket feed.
+  stocksBoats:
+    url: stream.data.alpaca.markets/v2/boats
+    protocol: wss
+    description: |
+      Stock market data WebSocket on the BOATS feed (Blue Ocean ATS
+      overnight session).
+  stocksTest:
+    url: stream.data.alpaca.markets/v2/test
+    protocol: wss
+    description: |
+      Free public test stream. Streams data for the fake symbol "FAKEPACA".
+      Useful for exercising the auth + subscribe flow without a paid plan.
+  cryptoUs:
+    url: stream.data.alpaca.markets/v1beta3/crypto/us
+    protocol: wss
+    description: |
+      Real-time crypto market data WebSocket for the Alpaca US crypto
+      venue. Symbols use the BASE/QUOTE convention, e.g. BTC/USD.
+  cryptoGlobal:
+    url: stream.data.alpaca.markets/v1beta3/crypto/global
+    protocol: wss
+    description: |
+      Real-time crypto market data WebSocket for Alpaca's global crypto
+      aggregate.
+  news:
+    url: stream.data.alpaca.markets/v1beta1/news
+    protocol: wss
+    description: |
+      Real-time market news WebSocket. Delivers Benzinga (and other
+      partner) news articles tagged with related stock symbols.
+  tradingLive:
+    url: api.alpaca.markets/stream
+    protocol: wss
+    description: |
+      Live trading account event stream. Delivers trade_updates messages
+      for orders and executions on a live Alpaca trading account.
+  tradingPaper:
+    url: paper-api.alpaca.markets/stream
+    protocol: wss
+    description: |
+      Paper trading account event stream. Identical schema to the live
+      trading stream but for paper accounts. Frames are sent as binary
+      WebSocket frames per Alpaca documentation.
+
+channels:
+
+  # ----------------------------------------------------------------------
+  # Market data (stocks + crypto + news) shared control channels
+  # ----------------------------------------------------------------------
+  '/':
+    description: |
+      The single root WebSocket path used by every market data stream
+      (stocks, crypto, news, and the test feed). All control messages
+      (auth, subscribe, unsubscribe) and all data messages flow over
+      this path. The set of allowed subscription topics depends on the
+      server selected.
+    servers:
+      - stocksIex
+      - stocksSip
+      - stocksDelayedSip
+      - stocksBoats
+      - stocksTest
+      - cryptoUs
+      - cryptoGlobal
+      - news
+    publish:
+      operationId: marketDataClientSend
+      summary: Messages the client sends to a market data stream.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AuthRequest'
+          - $ref: '#/components/messages/SubscribeRequest'
+          - $ref: '#/components/messages/UnsubscribeRequest'
+    subscribe:
+      operationId: marketDataServerReceive
+      summary: Messages the server pushes on a market data stream.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ControlSuccess'
+          - $ref: '#/components/messages/ControlError'
+          - $ref: '#/components/messages/SubscriptionState'
+          - $ref: '#/components/messages/StockTrade'
+          - $ref: '#/components/messages/StockQuote'
+          - $ref: '#/components/messages/StockBar'
+          - $ref: '#/components/messages/StockUpdatedBar'
+          - $ref: '#/components/messages/StockDailyBar'
+          - $ref: '#/components/messages/TradingStatus'
+          - $ref: '#/components/messages/Luld'
+          - $ref: '#/components/messages/TradeCorrection'
+          - $ref: '#/components/messages/TradeCancelError'
+          - $ref: '#/components/messages/CryptoTrade'
+          - $ref: '#/components/messages/CryptoQuote'
+          - $ref: '#/components/messages/CryptoBar'
+          - $ref: '#/components/messages/CryptoUpdatedBar'
+          - $ref: '#/components/messages/CryptoDailyBar'
+          - $ref: '#/components/messages/CryptoOrderbook'
+          - $ref: '#/components/messages/NewsItem'
+
+  # ----------------------------------------------------------------------
+  # Trading API trade_updates stream
+  # ----------------------------------------------------------------------
+  'trade_updates':
+    description: |
+      The trade_updates stream delivers order lifecycle events for a
+      single Alpaca trading account. The client first authenticates
+      with an "auth" action, then subscribes by sending a "listen"
+      action whose data.streams array contains "trade_updates".
+    servers:
+      - tradingLive
+      - tradingPaper
+    publish:
+      operationId: tradingClientSend
+      summary: Messages the client sends to the trading stream.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/TradingAuthRequest'
+          - $ref: '#/components/messages/TradingListenRequest'
+    subscribe:
+      operationId: tradingServerReceive
+      summary: Messages the server pushes on the trading stream.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/TradingAuthorizationResponse'
+          - $ref: '#/components/messages/TradingListeningResponse'
+          - $ref: '#/components/messages/TradingErrorResponse'
+          - $ref: '#/components/messages/TradeUpdate'
+
+components:
+
+  messages:
+
+    # ------------------------------------------------------------------
+    # Market data control messages
+    # ------------------------------------------------------------------
+    AuthRequest:
+      name: AuthRequest
+      title: Authentication handshake
+      summary: |
+        Sent by the client immediately after the connection is opened.
+        The client has 10 seconds to authenticate or it is disconnected.
+      payload:
+        $ref: '#/components/schemas/AuthRequest'
+
+    SubscribeRequest:
+      name: SubscribeRequest
+      title: Subscribe to channels
+      summary: |
+        Subscribes the connection to one or more channels for the listed
+        symbols. Use "*" to subscribe to every symbol on a channel
+        (where the plan allows).
+      payload:
+        $ref: '#/components/schemas/SubscribeRequest'
+
+    UnsubscribeRequest:
+      name: UnsubscribeRequest
+      title: Unsubscribe from channels
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequest'
+
+    ControlSuccess:
+      name: ControlSuccess
+      title: Success control message
+      summary: |
+        Server confirms a control event. Common values for msg are
+        "connected" (right after the socket opens) and "authenticated"
+        (after a successful auth handshake).
+      payload:
+        $ref: '#/components/schemas/ControlSuccess'
+
+    ControlError:
+      name: ControlError
+      title: Error control message
+      summary: |
+        Server reports an error. Known codes include 400 (invalid
+        syntax), 401 (not authenticated), 402 (auth failed), 403
+        (already authenticated), 404 (auth timeout), 405 (symbol
+        limit exceeded), 406 (connection limit exceeded), 407 (slow
+        client), 408 (v2 not enabled), 409 (insufficient subscription),
+        410 (invalid subscribe action), 500 (internal error).
+      payload:
+        $ref: '#/components/schemas/ControlError'
+
+    SubscriptionState:
+      name: SubscriptionState
+      title: Current subscription state
+      summary: |
+        Server echoes the full set of channels and symbols the
+        connection is currently subscribed to after every subscribe
+        or unsubscribe message.
+      payload:
+        $ref: '#/components/schemas/SubscriptionState'
+
+    # ------------------------------------------------------------------
+    # Stock market data messages
+    # ------------------------------------------------------------------
+    StockTrade:
+      name: StockTrade
+      title: Stock trade (t)
+      payload:
+        $ref: '#/components/schemas/StockTrade'
+
+    StockQuote:
+      name: StockQuote
+      title: Stock quote (q)
+      payload:
+        $ref: '#/components/schemas/StockQuote'
+
+    StockBar:
+      name: StockBar
+      title: Stock minute bar (b)
+      payload:
+        $ref: '#/components/schemas/StockBar'
+
+    StockUpdatedBar:
+      name: StockUpdatedBar
+      title: Stock updated bar (u)
+      summary: Bar restated after late trades arrived.
+      payload:
+        $ref: '#/components/schemas/StockUpdatedBar'
+
+    StockDailyBar:
+      name: StockDailyBar
+      title: Stock daily bar (d)
+      payload:
+        $ref: '#/components/schemas/StockDailyBar'
+
+    TradingStatus:
+      name: TradingStatus
+      title: Trading status (s)
+      payload:
+        $ref: '#/components/schemas/TradingStatus'
+
+    Luld:
+      name: Luld
+      title: LULD bands (l)
+      summary: Limit Up / Limit Down price band update.
+      payload:
+        $ref: '#/components/schemas/Luld'
+
+    TradeCorrection:
+      name: TradeCorrection
+      title: Trade correction (c)
+      payload:
+        $ref: '#/components/schemas/TradeCorrection'
+
+    TradeCancelError:
+      name: TradeCancelError
+      title: Trade cancel / error (x)
+      payload:
+        $ref: '#/components/schemas/TradeCancelError'
+
+    # ------------------------------------------------------------------
+    # Crypto market data messages
+    # ------------------------------------------------------------------
+    CryptoTrade:
+      name: CryptoTrade
+      title: Crypto trade (t)
+      payload:
+        $ref: '#/components/schemas/CryptoTrade'
+
+    CryptoQuote:
+      name: CryptoQuote
+      title: Crypto quote (q)
+      payload:
+        $ref: '#/components/schemas/CryptoQuote'
+
+    CryptoBar:
+      name: CryptoBar
+      title: Crypto minute bar (b)
+      payload:
+        $ref: '#/components/schemas/CryptoBar'
+
+    CryptoUpdatedBar:
+      name: CryptoUpdatedBar
+      title: Crypto updated bar (u)
+      payload:
+        $ref: '#/components/schemas/CryptoUpdatedBar'
+
+    CryptoDailyBar:
+      name: CryptoDailyBar
+      title: Crypto daily bar (d)
+      payload:
+        $ref: '#/components/schemas/CryptoDailyBar'
+
+    CryptoOrderbook:
+      name: CryptoOrderbook
+      title: Crypto orderbook (o)
+      payload:
+        $ref: '#/components/schemas/CryptoOrderbook'
+
+    # ------------------------------------------------------------------
+    # News message
+    # ------------------------------------------------------------------
+    NewsItem:
+      name: NewsItem
+      title: News article (n)
+      payload:
+        $ref: '#/components/schemas/NewsItem'
+
+    # ------------------------------------------------------------------
+    # Trading stream control + data messages
+    # ------------------------------------------------------------------
+    TradingAuthRequest:
+      name: TradingAuthRequest
+      title: Trading stream authenticate
+      payload:
+        $ref: '#/components/schemas/TradingAuthRequest'
+
+    TradingListenRequest:
+      name: TradingListenRequest
+      title: Trading stream listen
+      summary: |
+        Subscribes to the trade_updates stream. Sending an empty
+        streams array unsubscribes.
+      payload:
+        $ref: '#/components/schemas/TradingListenRequest'
+
+    TradingAuthorizationResponse:
+      name: TradingAuthorizationResponse
+      title: Trading auth response
+      payload:
+        $ref: '#/components/schemas/TradingAuthorizationResponse'
+
+    TradingListeningResponse:
+      name: TradingListeningResponse
+      title: Trading listening response
+      payload:
+        $ref: '#/components/schemas/TradingListeningResponse'
+
+    TradingErrorResponse:
+      name: TradingErrorResponse
+      title: Trading error response
+      payload:
+        $ref: '#/components/schemas/TradingErrorResponse'
+
+    TradeUpdate:
+      name: TradeUpdate
+      title: trade_updates event
+      summary: |
+        Order lifecycle event. The event field carries one of: new,
+        fill, partial_fill, canceled, expired, done_for_day, replaced,
+        rejected, pending_new, stopped, pending_cancel, pending_replace,
+        calculated, suspended, order_replace_rejected, order_cancel_rejected.
+      payload:
+        $ref: '#/components/schemas/TradeUpdate'
+
+  # --------------------------------------------------------------------
+  # Schemas
+  # --------------------------------------------------------------------
+  schemas:
+
+    AuthRequest:
+      type: object
+      required: [action, key, secret]
+      properties:
+        action:
+          type: string
+          enum: [auth]
+        key:
+          type: string
+          description: API key ID. Use "oauth" for OAuth-issued tokens.
+        secret:
+          type: string
+          description: API secret key (or OAuth access token when key is "oauth").
+
+    SubscribeRequest:
+      type: object
+      required: [action]
+      description: |
+        The action field is always "subscribe". Any of the channel keys
+        listed below may be present. Each value is an array of symbol
+        strings, or ["*"] to subscribe to all symbols on that channel.
+      properties:
+        action:
+          type: string
+          enum: [subscribe]
+        trades:
+          type: array
+          items: { type: string }
+        quotes:
+          type: array
+          items: { type: string }
+        bars:
+          type: array
+          items: { type: string }
+        updatedBars:
+          type: array
+          items: { type: string }
+        dailyBars:
+          type: array
+          items: { type: string }
+        statuses:
+          type: array
+          items: { type: string }
+          description: Stocks only.
+        lulds:
+          type: array
+          items: { type: string }
+          description: Stocks only.
+        corrections:
+          type: array
+          items: { type: string }
+          description: Stocks only.
+        cancelErrors:
+          type: array
+          items: { type: string }
+          description: Stocks only.
+        orderbooks:
+          type: array
+          items: { type: string }
+          description: Crypto only.
+        news:
+          type: array
+          items: { type: string }
+          description: News stream only.
+
+    UnsubscribeRequest:
+      allOf:
+        - $ref: '#/components/schemas/SubscribeRequest'
+        - type: object
+          properties:
+            action:
+              type: string
+              enum: [unsubscribe]
+
+    ControlSuccess:
+      type: object
+      required: [T, msg]
+      properties:
+        T:
+          type: string
+          enum: [success]
+        msg:
+          type: string
+          enum: [connected, authenticated]
+
+    ControlError:
+      type: object
+      required: [T, code, msg]
+      properties:
+        T:
+          type: string
+          enum: [error]
+        code:
+          type: integer
+        msg:
+          type: string
+
+    SubscriptionState:
+      type: object
+      required: [T]
+      properties:
+        T:
+          type: string
+          enum: [subscription]
+        trades:
+          type: array
+          items: { type: string }
+        quotes:
+          type: array
+          items: { type: string }
+        bars:
+          type: array
+          items: { type: string }
+        updatedBars:
+          type: array
+          items: { type: string }
+        dailyBars:
+          type: array
+          items: { type: string }
+        statuses:
+          type: array
+          items: { type: string }
+        lulds:
+          type: array
+          items: { type: string }
+        corrections:
+          type: array
+          items: { type: string }
+        cancelErrors:
+          type: array
+          items: { type: string }
+        orderbooks:
+          type: array
+          items: { type: string }
+        news:
+          type: array
+          items: { type: string }
+
+    # ------------- Stocks -------------
+    StockTrade:
+      type: object
+      required: [T, S, i, x, p, s, c, z, t]
+      properties:
+        T:
+          type: string
+          enum: [t]
+        S:
+          type: string
+          description: Symbol.
+        i:
+          type: integer
+          format: int64
+          description: Trade ID.
+        x:
+          type: string
+          description: Exchange code.
+        p:
+          type: number
+          description: Trade price.
+        s:
+          type: integer
+          description: Trade size.
+        c:
+          type: array
+          items: { type: string }
+          description: Trade condition codes.
+        z:
+          type: string
+          description: Tape (A, B, or C).
+        t:
+          type: string
+          format: date-time
+          description: RFC-3339 timestamp with nanosecond precision.
+
+    StockQuote:
+      type: object
+      required: [T, S, bx, bp, bs, ax, ap, as, c, z, t]
+      properties:
+        T:
+          type: string
+          enum: [q]
+        S:
+          type: string
+        bx:
+          type: string
+          description: Bid exchange code.
+        bp:
+          type: number
+          description: Bid price.
+        bs:
+          type: integer
+          description: Bid size.
+        ax:
+          type: string
+          description: Ask exchange code.
+        ap:
+          type: number
+          description: Ask price.
+        as:
+          type: integer
+          description: Ask size.
+        c:
+          type: array
+          items: { type: string }
+          description: Quote condition codes.
+        z:
+          type: string
+          description: Tape.
+        t:
+          type: string
+          format: date-time
+
+    StockBar:
+      type: object
+      required: [T, S, o, h, l, c, v, t, n, vw]
+      properties:
+        T:
+          type: string
+          enum: [b]
+        S:
+          type: string
+        o:
+          type: number
+        h:
+          type: number
+        l:
+          type: number
+        c:
+          type: number
+        v:
+          type: integer
+        t:
+          type: string
+          format: date-time
+        n:
+          type: integer
+          description: Trade count.
+        vw:
+          type: number
+          description: Volume-weighted average price.
+
+    StockUpdatedBar:
+      allOf:
+        - $ref: '#/components/schemas/StockBar'
+        - type: object
+          properties:
+            T:
+              type: string
+              enum: [u]
+
+    StockDailyBar:
+      allOf:
+        - $ref: '#/components/schemas/StockBar'
+        - type: object
+          properties:
+            T:
+              type: string
+              enum: [d]
+
+    TradingStatus:
+      type: object
+      required: [T, S, sc, sm, rc, rm, t, z]
+      properties:
+        T:
+          type: string
+          enum: [s]
+        S:
+          type: string
+        sc:
+          type: string
+          description: Status code.
+        sm:
+          type: string
+          description: Status message.
+        rc:
+          type: string
+          description: Reason code.
+        rm:
+          type: string
+          description: Reason message.
+        t:
+          type: string
+          format: date-time
+        z:
+          type: string
+          description: Tape.
+
+    Luld:
+      type: object
+      required: [T, S, u, d, i, t, z]
+      properties:
+        T:
+          type: string
+          enum: [l]
+        S:
+          type: string
+        u:
+          type: number
+          description: Limit up price.
+        d:
+          type: number
+          description: Limit down price.
+        i:
+          type: string
+          description: Indicator.
+        t:
+          type: string
+          format: date-time
+        z:
+          type: string
+          description: Tape.
+
+    TradeCorrection:
+      type: object
+      required: [T, S, x, oi, op, os, oc, ci, cp, cs, cc, t, z]
+      properties:
+        T:
+          type: string
+          enum: [c]
+        S:
+          type: string
+        x:
+          type: string
+          description: Exchange code.
+        oi:
+          type: integer
+          format: int64
+          description: Original trade ID.
+        op:
+          type: number
+          description: Original trade price.
+        os:
+          type: integer
+          description: Original trade size.
+        oc:
+          type: array
+          items: { type: string }
+          description: Original trade conditions.
+        ci:
+          type: integer
+          format: int64
+          description: Corrected trade ID.
+        cp:
+          type: number
+          description: Corrected trade price.
+        cs:
+          type: integer
+          description: Corrected trade size.
+        cc:
+          type: array
+          items: { type: string }
+          description: Corrected trade conditions.
+        t:
+          type: string
+          format: date-time
+        z:
+          type: string
+
+    TradeCancelError:
+      type: object
+      required: [T, S, i, x, p, s, a, t, z]
+      properties:
+        T:
+          type: string
+          enum: [x]
+        S:
+          type: string
+        i:
+          type: integer
+          format: int64
+          description: Original trade ID being canceled.
+        x:
+          type: string
+          description: Exchange code.
+        p:
+          type: number
+          description: Original trade price.
+        s:
+          type: integer
+          description: Original trade size.
+        a:
+          type: string
+          description: Action (e.g., "C" cancel, "E" error).
+        t:
+          type: string
+          format: date-time
+        z:
+          type: string
+
+    # ------------- Crypto -------------
+    CryptoTrade:
+      type: object
+      required: [T, S, p, s, t, i]
+      properties:
+        T:
+          type: string
+          enum: [t]
+        S:
+          type: string
+          description: Symbol (BASE/QUOTE).
+        p:
+          type: number
+          description: Trade price.
+        s:
+          type: number
+          description: Trade size.
+        t:
+          type: string
+          format: date-time
+          description: RFC-3339 timestamp (nanosecond).
+        i:
+          type: integer
+          format: int64
+          description: Trade ID.
+        tks:
+          type: string
+          enum: [B, S]
+          description: Taker side. B = buyer, S = seller.
+
+    CryptoQuote:
+      type: object
+      required: [T, S, bp, bs, ap, as, t]
+      properties:
+        T:
+          type: string
+          enum: [q]
+        S:
+          type: string
+        bp:
+          type: number
+        bs:
+          type: number
+        ap:
+          type: number
+        as:
+          type: number
+        t:
+          type: string
+          format: date-time
+
+    CryptoBar:
+      type: object
+      required: [T, S, o, h, l, c, v, t]
+      properties:
+        T:
+          type: string
+          enum: [b]
+        S:
+          type: string
+        o:
+          type: number
+        h:
+          type: number
+        l:
+          type: number
+        c:
+          type: number
+        v:
+          type: number
+        t:
+          type: string
+          format: date-time
+        n:
+          type: integer
+          description: Trade count.
+        vw:
+          type: number
+          description: Volume-weighted average price.
+
+    CryptoUpdatedBar:
+      allOf:
+        - $ref: '#/components/schemas/CryptoBar'
+        - type: object
+          properties:
+            T:
+              type: string
+              enum: [u]
+
+    CryptoDailyBar:
+      allOf:
+        - $ref: '#/components/schemas/CryptoBar'
+        - type: object
+          properties:
+            T:
+              type: string
+              enum: [d]
+
+    CryptoOrderbookLevel:
+      type: object
+      required: [p, s]
+      properties:
+        p:
+          type: number
+          description: Price.
+        s:
+          type: number
+          description: Size at this price level.
+
+    CryptoOrderbook:
+      type: object
+      required: [T, S, t, b, a]
+      properties:
+        T:
+          type: string
+          enum: [o]
+        S:
+          type: string
+        t:
+          type: string
+          format: date-time
+        b:
+          type: array
+          items:
+            $ref: '#/components/schemas/CryptoOrderbookLevel'
+          description: Bids.
+        a:
+          type: array
+          items:
+            $ref: '#/components/schemas/CryptoOrderbookLevel'
+          description: Asks.
+        r:
+          type: boolean
+          description: |
+            Reset flag. When true, this message is a full orderbook
+            snapshot rather than a delta update.
+
+    # ------------- News -------------
+    NewsItem:
+      type: object
+      required: [T, id, headline, created_at, updated_at, symbols]
+      properties:
+        T:
+          type: string
+          enum: [n]
+        id:
+          type: integer
+          format: int64
+          description: Unique article identifier.
+        headline:
+          type: string
+        summary:
+          type: string
+        author:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+        content:
+          type: string
+          description: Full article body. May contain HTML.
+        symbols:
+          type: array
+          items: { type: string }
+          description: Related stock tickers.
+        source:
+          type: string
+          description: Article source (e.g., "benzinga").
+
+    # ------------- Trading stream -------------
+    TradingAuthRequest:
+      type: object
+      required: [action, key, secret]
+      properties:
+        action:
+          type: string
+          enum: [auth, authenticate]
+          description: |
+            The documented values are "auth" (recommended) and
+            "authenticate" (legacy). Both perform the same handshake.
+        key:
+          type: string
+        secret:
+          type: string
+
+    TradingListenRequest:
+      type: object
+      required: [action, data]
+      properties:
+        action:
+          type: string
+          enum: [listen]
+        data:
+          type: object
+          required: [streams]
+          properties:
+            streams:
+              type: array
+              items:
+                type: string
+                enum: [trade_updates]
+
+    TradingAuthorizationResponse:
+      type: object
+      required: [stream, data]
+      properties:
+        stream:
+          type: string
+          enum: [authorization]
+        data:
+          type: object
+          required: [status, action]
+          properties:
+            status:
+              type: string
+              enum: [authorized, unauthorized]
+            action:
+              type: string
+              enum: [authenticate]
+
+    TradingListeningResponse:
+      type: object
+      required: [stream, data]
+      properties:
+        stream:
+          type: string
+          enum: [listening]
+        data:
+          type: object
+          required: [streams]
+          properties:
+            streams:
+              type: array
+              items:
+                type: string
+
+    TradingErrorResponse:
+      type: object
+      required: [stream, data]
+      properties:
+        stream:
+          type: string
+          enum: [error]
+        data:
+          type: object
+          properties:
+            error_message:
+              type: string
+            code:
+              type: integer
+
+    TradeUpdateOrderLeg:
+      type: object
+      description: |
+        A leg of a multi-leg order. Same shape as the parent order
+        object but without nested legs.
+      properties:
+        id: { type: string, format: uuid }
+        client_order_id: { type: string }
+        symbol: { type: string }
+        asset_class: { type: string }
+        qty: { type: string }
+        filled_qty: { type: string }
+        filled_avg_price: { type: string, nullable: true }
+        order_type: { type: string }
+        type: { type: string }
+        side: { type: string, enum: [buy, sell] }
+        position_intent:
+          type: string
+          enum: [buy_to_open, buy_to_close, sell_to_open, sell_to_close]
+        time_in_force: { type: string }
+        limit_price: { type: string, nullable: true }
+        stop_price: { type: string, nullable: true }
+        status: { type: string }
+        extended_hours: { type: boolean }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        submitted_at: { type: string, format: date-time }
+        filled_at: { type: string, format: date-time, nullable: true }
+        expired_at: { type: string, format: date-time, nullable: true }
+        canceled_at: { type: string, format: date-time, nullable: true }
+        failed_at: { type: string, format: date-time, nullable: true }
+        replaced_at: { type: string, format: date-time, nullable: true }
+        replaced_by: { type: string, nullable: true }
+        replaces: { type: string, nullable: true }
+
+    TradeUpdateOrder:
+      allOf:
+        - $ref: '#/components/schemas/TradeUpdateOrderLeg'
+        - type: object
+          properties:
+            legs:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/TradeUpdateOrderLeg'
+
+    TradeUpdate:
+      type: object
+      required: [stream, data]
+      properties:
+        stream:
+          type: string
+          enum: [trade_updates]
+        data:
+          type: object
+          required: [event, order]
+          properties:
+            event:
+              type: string
+              description: |
+                Order lifecycle event. The full set of documented
+                values is enumerated below.
+              enum:
+                - new
+                - fill
+                - partial_fill
+                - canceled
+                - expired
+                - done_for_day
+                - replaced
+                - rejected
+                - pending_new
+                - stopped
+                - pending_cancel
+                - pending_replace
+                - calculated
+                - suspended
+                - order_replace_rejected
+                - order_cancel_rejected
+            execution_id:
+              type: string
+              format: uuid
+              description: Present on fill and partial_fill events.
+            timestamp:
+              type: string
+              format: date-time
+              description: |
+                Event timestamp. Present on fill, partial_fill,
+                canceled, expired, and replaced events.
+            price:
+              type: string
+              description: Execution price. Present on fills.
+            qty:
+              type: string
+              description: Execution quantity. Present on fills.
+            position_qty:
+              type: string
+              description: Resulting position quantity. Present on fills.
+            order:
+              $ref: '#/components/schemas/TradeUpdateOrder'

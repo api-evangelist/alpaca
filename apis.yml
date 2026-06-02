@@ -12,7 +12,7 @@ tags:
 - Market Data
 - Options
 created: '2026-05-08'
-modified: '2026-05-19'
+modified: '2026-05-29'
 specificationVersion: '0.19'
 description: Alpaca is an API-first commission-free stock and crypto trading broker offering trading, market data, options,
   and broker-as-a-service APIs. Alpaca publishes its OpenAPI specifications publicly via the alpacahq/alpaca-docs GitHub repository,
@@ -37,6 +37,8 @@ apis:
     url: https://docs.alpaca.markets/docs/trading-api
   - type: OpenAPI
     url: openapi/alpaca-trading-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
   - type: Sandbox
     url: https://paper-api.alpaca.markets/v2
   - type: NaftikoCapability
@@ -87,6 +89,8 @@ apis:
     url: https://docs.alpaca.markets/docs/about-market-data-api
   - type: OpenAPI
     url: openapi/alpaca-data-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
   - type: NaftikoCapability
     url: capabilities/data-crypto-pricing-data-api.yaml
   - type: NaftikoCapability
