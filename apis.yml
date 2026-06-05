@@ -4,237 +4,188 @@ name: Alpaca
 kind: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Fintech
-- Trading
-- Stocks
-- Crypto
-- Brokerage
-- Market Data
-- Options
+  - Fintech
+  - Trading
+  - Stocks
+  - Crypto
+  - Brokerage
+  - Market Data
+  - Options
 created: '2026-05-08'
 modified: '2026-05-29'
 specificationVersion: '0.19'
-description: Alpaca is an API-first commission-free stock and crypto trading broker offering trading, market data, options,
-  and broker-as-a-service APIs. Alpaca publishes its OpenAPI specifications publicly via the alpacahq/alpaca-docs GitHub repository,
-  with separate specs for Trading, Broker, Market Data, and OAuth.
+description: >-
+  Alpaca is an API-first commission-free stock and crypto trading broker offering trading, market data, options, and
+  broker-as-a-service APIs. Alpaca publishes its OpenAPI specifications publicly via the alpacahq/alpaca-docs GitHub
+  repository, with separate specs for Trading, Broker, Market Data, and OAuth.
 apis:
-- aid: alpaca:trading-api
-  name: Alpaca Trading API
-  tags:
-  - Trading
-  - Stocks
-  - Options
-  - Crypto
-  - Orders
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-  baseURL: https://api.alpaca.markets/v2
-  humanURL: https://docs.alpaca.markets/docs/trading-api
-  description: The Alpaca Trading API enables commission-free trading of US-listed equities, options, and crypto. It exposes
-    endpoints for orders, positions, account information, watchlists, calendar, clock, and assets. A paper trading sandbox
-    is available at paper-api.alpaca.markets.
-  properties:
-  - type: Documentation
-    url: https://docs.alpaca.markets/docs/trading-api
-  - type: OpenAPI
-    url: openapi/alpaca-trading-api-openapi.yml
-  - type: AsyncAPI
-    url: asyncapi/alpaca-asyncapi.yml
-  - type: Sandbox
-    url: https://paper-api.alpaca.markets/v2
-  - type: NaftikoCapability
-    url: capabilities/trading-account-activities.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-account-configurations.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-accounts.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-calendar.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-clock.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-orders.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-portfolio-history.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-positions.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-watchlists.yaml
-  x-features:
-  - Commission-free US equity and options trading
-  - Multi-leg options orders
-  - Crypto trading 24/7
-  - Paper trading environment
-  - Account, positions, orders, watchlists endpoints
-  x-use-cases:
-  - Build automated trading strategies
-  - Power retail trading apps
-  - Backtest with paper trading sandbox
-- aid: alpaca:market-data-api
-  name: Alpaca Market Data API
-  tags:
-  - Market Data
-  - Stocks
-  - Crypto
-  - Options
-  - Real-time
-  - Historical
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-  baseURL: https://data.alpaca.markets
-  humanURL: https://docs.alpaca.markets/docs/about-market-data-api
-  description: The Alpaca Market Data API delivers real-time and historical pricing data for US stocks (SIP and IEX feeds),
-    options (OPRA), and crypto. Supports REST and WebSocket streaming with bars, quotes, trades, snapshots, and corporate
-    actions endpoints. 7+ years of historical data available.
-  properties:
-  - type: Documentation
-    url: https://docs.alpaca.markets/docs/about-market-data-api
-  - type: OpenAPI
-    url: openapi/alpaca-data-api-openapi.yml
-  - type: AsyncAPI
-    url: asyncapi/alpaca-asyncapi.yml
-  - type: NaftikoCapability
-    url: capabilities/data-crypto-pricing-data-api.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-logo.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-news.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-screener.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-stock-pricing-data-api.yaml
-  x-features:
-  - Real-time stock quotes via WebSocket
-  - OPRA options market data
-  - Crypto market data 24/7
-  - 7+ years historical OHLCV
-  - SIP and IEX feed support
-  x-use-cases:
-  - Stream live prices into trading bots
-  - Backtest strategies with historical bars
-  - Power chart and ticker UIs
-- aid: alpaca:broker-api
-  name: Alpaca Broker API
-  tags:
-  - Brokerage
-  - Embedded Finance
-  - White Label
-  - Compliance
-  - Trading
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-  baseURL: https://broker-api.alpaca.markets/v1
-  humanURL: https://docs.alpaca.markets/docs/about-broker-api
-  description: The Alpaca Broker API powers white-label brokerage and embedded finance products. It exposes endpoints for
-    account onboarding, KYC/AML, ACATS transfers, ACH funding, journals, and trading on behalf of end users.
-  properties:
-  - type: Documentation
-    url: https://docs.alpaca.markets/docs/about-broker-api
-  - type: OpenAPI
-    url: openapi/alpaca-broker-api-openapi.yml
-  - type: NaftikoCapability
-    url: capabilities/broker-accounts.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-assets.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-calendar.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-clock.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-corporate-actions.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-documents.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-events.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-funding.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-journals.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-oauth.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-trading.yaml
-  - type: NaftikoCapability
-    url: capabilities/broker-watchlist.yaml
-  x-features:
-  - Account onboarding and KYC
-  - ACATS and ACH transfers
-  - Journal between accounts
-  - Trading on behalf of end users
-  - Rebalancing portfolios
-  x-use-cases:
-  - Launch a neo-broker or robo-advisor
-  - Embed trading in fintech apps
-  - Operate a white-label brokerage
-- aid: alpaca:oauth-api
-  name: Alpaca OAuth API
-  tags:
-  - OAuth
-  - Authentication
-  - Authorization
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-  baseURL: https://api.alpaca.markets/oauth
-  humanURL: https://docs.alpaca.markets/docs/oauth-tokens
-  description: The Alpaca OAuth API allows third-party applications to authenticate Alpaca users and obtain access tokens
-    for the Trading and Market Data APIs.
-  properties:
-  - type: Documentation
-    url: https://docs.alpaca.markets/docs/oauth-tokens
-  - type: OpenAPI
-    url: openapi/alpaca-oauth-api-openapi.yml
-  - type: NaftikoCapability
-    url: capabilities/oauth-stock-pricing-data-api.yaml
-  x-features:
-  - OAuth 2.0 authorization code flow
-  - Token issuance and refresh
-  - Scope-limited access
-  x-use-cases:
-  - Build apps that act on behalf of Alpaca users
-  - Integrate Alpaca login into third-party tools
+  - aid: alpaca:trading-api
+    name: Alpaca Trading API
+    tags:
+      - Trading
+      - Stocks
+      - Options
+      - Crypto
+      - Orders
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.alpaca.markets/v2
+    humanURL: https://docs.alpaca.markets/docs/trading-api
+    description: >-
+      The Alpaca Trading API enables commission-free trading of US-listed equities, options, and crypto. It exposes
+      endpoints for orders, positions, account information, watchlists, calendar, clock, and assets. A paper trading
+      sandbox is available at paper-api.alpaca.markets.
+    properties:
+      - type: Documentation
+        url: https://docs.alpaca.markets/docs/trading-api
+      - type: OpenAPI
+        url: openapi/alpaca-trading-api-openapi.yml
+      - type: AsyncAPI
+        url: asyncapi/alpaca-asyncapi.yml
+      - type: Sandbox
+        url: https://paper-api.alpaca.markets/v2
+    x-features:
+      - Commission-free US equity and options trading
+      - Multi-leg options orders
+      - Crypto trading 24/7
+      - Paper trading environment
+      - Account, positions, orders, watchlists endpoints
+    x-use-cases:
+      - Build automated trading strategies
+      - Power retail trading apps
+      - Backtest with paper trading sandbox
+  - aid: alpaca:market-data-api
+    name: Alpaca Market Data API
+    tags:
+      - Market Data
+      - Stocks
+      - Crypto
+      - Options
+      - Real-time
+      - Historical
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://data.alpaca.markets
+    humanURL: https://docs.alpaca.markets/docs/about-market-data-api
+    description: >-
+      The Alpaca Market Data API delivers real-time and historical pricing data for US stocks (SIP and IEX feeds),
+      options (OPRA), and crypto. Supports REST and WebSocket streaming with bars, quotes, trades, snapshots, and
+      corporate actions endpoints. 7+ years of historical data available.
+    properties:
+      - type: Documentation
+        url: https://docs.alpaca.markets/docs/about-market-data-api
+      - type: OpenAPI
+        url: openapi/alpaca-data-api-openapi.yml
+      - type: AsyncAPI
+        url: asyncapi/alpaca-asyncapi.yml
+    x-features:
+      - Real-time stock quotes via WebSocket
+      - OPRA options market data
+      - Crypto market data 24/7
+      - 7+ years historical OHLCV
+      - SIP and IEX feed support
+    x-use-cases:
+      - Stream live prices into trading bots
+      - Backtest strategies with historical bars
+      - Power chart and ticker UIs
+  - aid: alpaca:broker-api
+    name: Alpaca Broker API
+    tags:
+      - Brokerage
+      - Embedded Finance
+      - White Label
+      - Compliance
+      - Trading
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://broker-api.alpaca.markets/v1
+    humanURL: https://docs.alpaca.markets/docs/about-broker-api
+    description: >-
+      The Alpaca Broker API powers white-label brokerage and embedded finance products. It exposes endpoints for account
+      onboarding, KYC/AML, ACATS transfers, ACH funding, journals, and trading on behalf of end users.
+    properties:
+      - type: Documentation
+        url: https://docs.alpaca.markets/docs/about-broker-api
+      - type: OpenAPI
+        url: openapi/alpaca-broker-api-openapi.yml
+    x-features:
+      - Account onboarding and KYC
+      - ACATS and ACH transfers
+      - Journal between accounts
+      - Trading on behalf of end users
+      - Rebalancing portfolios
+    x-use-cases:
+      - Launch a neo-broker or robo-advisor
+      - Embed trading in fintech apps
+      - Operate a white-label brokerage
+  - aid: alpaca:oauth-api
+    name: Alpaca OAuth API
+    tags:
+      - OAuth
+      - Authentication
+      - Authorization
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.alpaca.markets/oauth
+    humanURL: https://docs.alpaca.markets/docs/oauth-tokens
+    description: >-
+      The Alpaca OAuth API allows third-party applications to authenticate Alpaca users and obtain access tokens for the
+      Trading and Market Data APIs.
+    properties:
+      - type: Documentation
+        url: https://docs.alpaca.markets/docs/oauth-tokens
+      - type: OpenAPI
+        url: openapi/alpaca-oauth-api-openapi.yml
+    x-features:
+      - OAuth 2.0 authorization code flow
+      - Token issuance and refresh
+      - Scope-limited access
+    x-use-cases:
+      - Build apps that act on behalf of Alpaca users
+      - Integrate Alpaca login into third-party tools
 common:
-- type: LinkedIn
-  url: https://www.linkedin.com/company/alpacamarkets
-- type: Portal
-  url: https://alpaca.markets/
-- type: Documentation
-  url: https://docs.alpaca.markets/
-- type: Pricing
-  url: https://alpaca.markets/data
-- type: GitHub
-  url: https://github.com/alpacahq
-- type: StatusPage
-  url: https://status.alpaca.markets/
-- type: TermsOfService
-  url: https://alpaca.markets/legal
-- type: PrivacyPolicy
-  url: https://alpaca.markets/privacy
-- type: Plans
-  url: plans/alpaca-plans-pricing.yml
-- type: RateLimits
-  url: rate-limits/alpaca-rate-limits.yml
-- type: FinOps
-  url: finops/alpaca-finops.yml
-- type: Integrations
-  url: https://alpaca.markets/integrations
-- type: LLMsTxt
-  url: https://docs.alpaca.markets/llms.txt
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/alpacamarkets
+  - type: Portal
+    url: https://alpaca.markets/
+  - type: Documentation
+    url: https://docs.alpaca.markets/
+  - type: Pricing
+    url: https://alpaca.markets/data
+  - type: GitHub
+    url: https://github.com/alpacahq
+  - type: StatusPage
+    url: https://status.alpaca.markets/
+  - type: TermsOfService
+    url: https://alpaca.markets/legal
+  - type: PrivacyPolicy
+    url: https://alpaca.markets/privacy
+  - type: Plans
+    url: plans/alpaca-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/alpaca-rate-limits.yml
+  - type: FinOps
+    url: finops/alpaca-finops.yml
+  - type: Integrations
+    url: https://alpaca.markets/integrations
+  - type: LLMsTxt
+    url: https://docs.alpaca.markets/llms.txt
 integrations:
-- name: TradingView
-- name: Streak
-- name: Slack
-- name: QuantRocket
-- name: Blueshift
-- name: Tradetron
-- name: Passiv
-- name: Zapier
-- name: Alexa
-- name: Arcade Trader
-- name: PredictNow.ai
-- name: AlgoBulls
-- name: Trellis
-- name: Breaking Equity
-- name: Composer
-- name: Algorum
-- name: Wealth-Lab
-- name: Your project here
-- name: Close modal
+  - name: TradingView
+  - name: Streak
+  - name: Slack
+  - name: QuantRocket
+  - name: Blueshift
+  - name: Tradetron
+  - name: Passiv
+  - name: Zapier
+  - name: Alexa
+  - name: Arcade Trader
+  - name: PredictNow.ai
+  - name: AlgoBulls
+  - name: Trellis
+  - name: Breaking Equity
+  - name: Composer
+  - name: Algorum
+  - name: Wealth-Lab
+  - name: Your project here
+  - name: Close modal
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
