@@ -1,0 +1,4631 @@
+{
+  "item": [
+    {
+      "id": "b72a409c-f8c2-4a1c-80b4-b022f13168b5",
+      "name": "Stock Pricing Data API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e70e7ff8-0309-486f-b037-8951f604613d",
+          "name": "Get Bar data for multiple stock symbols",
+          "request": {
+            "name": "Get Bar data for multiple stock symbols",
+            "description": {
+              "content": "The Multi Bars API returns aggregate historical data for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Bar timestamp. This means that you are likely to see only one symbol in your first response if there are enough Bars for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Bars were found for them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "bars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "adjustment",
+                  "value": "<string>",
+                  "description": "specifies the corporate action adjustment(s) for bars data"
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aec2188f-5184-430d-9d07-fcba61e49e34",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "bars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adjustment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bars\": {\n    \"AAPL\": [\n      {\n        \"t\": \"2022-02-28T05:00:00Z\",\n        \"o\": 163.02,\n        \"h\": 165.42,\n        \"l\": 162.43,\n        \"c\": 165.12,\n        \"v\": 90552883,\n        \"n\": 743379,\n        \"vw\": 164.274348\n      }\n    ],\n    \"TSLA\": [\n      {\n        \"t\": \"2022-02-28T05:00:00Z\",\n        \"o\": 815.72,\n        \"h\": 876.86,\n        \"l\": 814.7075,\n        \"c\": 870.43,\n        \"v\": 32122773,\n        \"n\": 848700,\n        \"vw\": 855.748243\n      }\n    ]\n  },\n  \"next_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "884b5b2e-523a-4380-a055-bc1151bff6b4",
+          "name": "Get Latest Bar data for multiple stock symbols",
+          "request": {
+            "name": "Get Latest Bar data for multiple stock symbols",
+            "description": {
+              "content": "The Bars API returns aggregate historical data for the requested security. Returns the latest bar data for the queried stock symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "bars",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8bbd2d24-ac5c-4068-9a1d-ffde6474c13d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "bars",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bars\": {\n    \"AAPL\": {\n      \"t\": \"2022-03-10T20:01:00Z\",\n      \"o\": 158.715,\n      \"h\": 158.73,\n      \"l\": 158.61,\n      \"c\": 158.615,\n      \"v\": 1211,\n      \"n\": 21,\n      \"vw\": 158.680756\n    },\n    \"TSLA\": {\n      \"t\": \"2022-03-10T20:01:00Z\",\n      \"o\": 834.27,\n      \"h\": 834.27,\n      \"l\": 832.46,\n      \"c\": 832.46,\n      \"v\": 1257,\n      \"n\": 48,\n      \"vw\": 833.55574\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a498dc39-c18a-4166-9f51-784f35ace5c1",
+          "name": "Bars",
+          "request": {
+            "name": "Bars",
+            "description": {
+              "content": "The Bars API returns aggregate historical data for the requested security. Returns bars for the queried stock symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "bars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                },
+                {
+                  "disabled": false,
+                  "key": "adjustment",
+                  "value": "<string>",
+                  "description": "specifies the corporate action adjustment(s) for bars data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The stock ticker symbol to query for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d54f00a5-1975-44c0-b06b-9f076c39d21b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "bars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    },
+                    {
+                      "key": "adjustment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The stock ticker symbol to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bars\": [\n    {\n      \"t\": \"2021-02-01T16:01:00Z\",\n      \"o\": 133.32,\n      \"h\": 133.74,\n      \"l\": 133.31,\n      \"c\": 133.5,\n      \"v\": 9876\n    },\n    {\n      \"t\": \"2021-02-01T16:02:00Z\",\n      \"o\": 133.5,\n      \"h\": 133.58,\n      \"l\": 133.44,\n      \"c\": 133.58,\n      \"v\": 3567\n    }\n  ],\n  \"symbol\": \"AAPL\",\n  \"next_page_token\": \"MjAyMS0wMi0wMVQxNDowMjowMFo7MQ==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "927f744c-dce6-4a12-b3c6-646b33149885",
+          "name": "Get Latest Bars for Symbol",
+          "request": {
+            "name": "Get Latest Bars for Symbol",
+            "description": {
+              "content": "The Bars API returns aggregate historical data for the requested security. Returns the latest bar data for the queried stock symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "bars",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The stock ticker symbol to query for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efcacc46-cf69-43dc-83c2-f8a9725ea71f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "bars",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The stock ticker symbol to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"AAPL\",\n  \"bar\": {\n    \"t\": \"2022-03-10T19:26:00Z\",\n    \"o\": 158.035,\n    \"h\": 158.21,\n    \"l\": 158.035,\n    \"c\": 158.21,\n    \"v\": 800,\n    \"n\": 15,\n    \"vw\": 158.113144\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6242acff-039f-40a3-a0ef-832e2a60683d",
+          "name": "Get Trade data for multiple stock symbols",
+          "request": {
+            "name": "Get Trade data for multiple stock symbols",
+            "description": {
+              "content": "The Multi Trades API provides historical trade data for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3eecd632-cd7d-4660-a2b9-5fab221183bc",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trades\": {\n    \"SPY\": [\n      {\n        \"t\": \"2021-02-06T13:04:56.334320128Z\",\n        \"x\": \"C\",\n        \"p\": 387.62,\n        \"s\": 100,\n        \"c\": [\n          \" \",\n          \"T\"\n        ],\n        \"i\": 52983525029461,\n        \"z\": \"B\"\n      },\n      {\n        \"t\": \"2021-02-06T13:09:42.325484032Z\",\n        \"x\": \"C\",\n        \"p\": 387.69,\n        \"s\": 100,\n        \"c\": [\n          \" \",\n          \"T\"\n        ],\n        \"i\": 52983525033813,\n        \"z\": \"B\"\n      }\n    ]\n  },\n  \"next_page_token\": \"MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41e33d49-784a-4807-9574-dba6ad69e56b",
+          "name": "Get Latest Trades data for multiple stock symbols",
+          "request": {
+            "name": "Get Latest Trades data for multiple stock symbols",
+            "description": {
+              "content": "Returns the latest trades data for the queried stock symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "trades",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8370dceb-b396-4aa9-bf27-1332604c1efa",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "trades",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trades\": {\n    \"TSLA\": {\n      \"t\": \"2022-03-11T17:24:55.143671726Z\",\n      \"x\": \"V\",\n      \"p\": 801.83,\n      \"s\": 100,\n      \"c\": [\n        \"@\"\n      ],\n      \"i\": 9924,\n      \"z\": \"C\"\n    },\n    \"AAPL\": {\n      \"t\": \"2022-03-11T17:24:56.321817175Z\",\n      \"x\": \"V\",\n      \"p\": 155.105,\n      \"s\": 300,\n      \"c\": [\n        \"@\"\n      ],\n      \"i\": 7741,\n      \"z\": \"C\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbadaa36-3a87-4d78-a40b-16cc8877264f",
+          "name": "Trades",
+          "request": {
+            "name": "Trades",
+            "description": {
+              "content": "The Trades API provides historical trade data for a given ticker symbol on a specified date. Returns trades for the queried stock signal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "952cf0e5-2290-425b-a0ba-c81ce880006e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trades\": [\n    {\n      \"t\": \"2021-02-06T13:04:56.334320128Z\",\n      \"x\": \"C\",\n      \"p\": 387.62,\n      \"s\": 100,\n      \"c\": [\n        \" \",\n        \"T\"\n      ],\n      \"i\": 52983525029461,\n      \"z\": \"B\"\n    },\n    {\n      \"t\": \"2021-02-06T13:09:42.325484032Z\",\n      \"x\": \"C\",\n      \"p\": 387.69,\n      \"s\": 100,\n      \"c\": [\n        \" \",\n        \"T\"\n      ],\n      \"i\": 52983525033813,\n      \"z\": \"B\"\n    }\n  ],\n  \"symbol\": \"SPY\",\n  \"next_page_token\": \"MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bac84876-0dc1-45b7-8b5d-e2444a28043a",
+          "name": "Latest Trade",
+          "request": {
+            "name": "Latest Trade",
+            "description": {
+              "content": "The Latest Trade API provides the latest trade data for a given ticker symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "trades",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "644717b7-94f7-4d7a-85e4-a2e9d9495283",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "trades",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"AAPL\",\n  \"trade\": {\n    \"t\": \"2022-02-01T17:46:51.111055251Z\",\n    \"x\": \"V\",\n    \"p\": 173.06,\n    \"s\": 100,\n    \"c\": [\n      \"@\"\n    ],\n    \"i\": 6519,\n    \"z\": \"C\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "923fd19b-ed17-43cb-8bbb-93eb0ed74428",
+          "name": "Get Quotes for multiple stock symbols",
+          "request": {
+            "name": "Get Quotes for multiple stock symbols",
+            "description": {
+              "content": "The Multi Quotes API provides NBBO quotes for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f9b55af-709b-4a73-8282-b374553adea6",
+              "name": "Successful response\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": {\n    \"AAPL\": [\n      {\n        \"t\": \"2022-03-11T13:13:49.975594385Z\",\n        \"ax\": \"V\",\n        \"ap\": 159.97,\n        \"as\": 1,\n        \"bx\": \"V\",\n        \"bp\": 0,\n        \"bs\": 0,\n        \"c\": [\n          \"R\"\n        ],\n        \"z\": \"C\"\n      }\n    ]\n  },\n  \"next_page_token\": \"QUFQTHwyMDIyLTAzLTExVDEzOjEzOjQ5Ljk3NTU5NDM4NVp8MDFEQzVERDY=\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ff104d8-56d4-4b78-8847-c7964afc6c2e",
+          "name": "Get Latest Quotes for multiple stock symbols",
+          "request": {
+            "name": "Get Latest Quotes for multiple stock symbols",
+            "description": {
+              "content": "Returns the latest quotes data for the queried stock symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "quotes",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03e52639-9719-41c3-8740-3c5148cfdc23",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "quotes",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": {\n    \"AAPL\": {\n      \"t\": \"2022-03-11T18:40:13.514830169Z\",\n      \"ax\": \"V\",\n      \"ap\": 156.47,\n      \"as\": 3,\n      \"bx\": \"V\",\n      \"bp\": 156.45,\n      \"bs\": 1,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    },\n    \"TSLA\": {\n      \"t\": \"2022-03-11T18:40:12.416216587Z\",\n      \"ax\": \"V\",\n      \"ap\": 850,\n      \"as\": 1,\n      \"bx\": \"V\",\n      \"bp\": 798,\n      \"bs\": 2,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1ee5da5-e5e9-453f-a392-334c329c3f90",
+          "name": "Get Quotes for stock symbol",
+          "request": {
+            "name": "Get Quotes for stock symbol",
+            "description": {
+              "content": "The Quotes API provides NBBO quotes for a single given ticker symbol at a specified date. Returns quotes (NBBOs) for the querried stock symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "317036cb-1648-4f32-8796-393be2473c90",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": [\n    {\n      \"t\": \"2022-02-01T09:00:00.000448Z\",\n      \"ax\": \"K\",\n      \"ap\": 175,\n      \"as\": 1,\n      \"bx\": \"Q\",\n      \"bp\": 174.96,\n      \"bs\": 4,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    },\n    {\n      \"t\": \"2022-02-01T09:00:00.000448Z\",\n      \"ax\": \"K\",\n      \"ap\": 175,\n      \"as\": 12,\n      \"bx\": \"Q\",\n      \"bp\": 174.96,\n      \"bs\": 4,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    }\n  ],\n  \"symbol\": \"AAPL\",\n  \"next_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2337bb0c-f745-40c3-b83f-90606d8637cf",
+          "name": "Get Latest Quote for stock symbol",
+          "request": {
+            "name": "Get Latest Quote for stock symbol",
+            "description": {
+              "content": "The Latest Quote API provides the latest quote data for a given ticker symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "quotes",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91d33f26-5c37-4933-922b-ea321518e345",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "quotes",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"AAPL\",\n  \"quote\": {\n    \"t\": \"2022-02-01T17:51:03.204726425Z\",\n    \"ax\": \"V\",\n    \"ap\": 173.24,\n    \"as\": 4,\n    \"bx\": \"V\",\n    \"bp\": 173.21,\n    \"bs\": 4,\n    \"c\": [\n      \"R\"\n    ],\n    \"z\": \"C\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "098dba30-fbf5-4297-9548-190da738e6d6",
+          "name": "Get Snapshots for multiple stock symbols",
+          "request": {
+            "name": "Get Snapshots for multiple stock symbols",
+            "description": {
+              "content": "The Snapshot API for multiple tickers provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for the given ticker symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4ebd5d6-7aee-47f3-a4d4-7959044ad0be",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AAPL\": {\n    \"latestTrade\": {\n      \"t\": \"2022-03-11T19:08:43.947998695Z\",\n      \"x\": \"V\",\n      \"p\": 156.055,\n      \"s\": 100,\n      \"c\": [\n        \"@\"\n      ],\n      \"i\": 10593,\n      \"z\": \"C\"\n    },\n    \"latestQuote\": {\n      \"t\": \"2022-03-11T19:09:06.125564144Z\",\n      \"ax\": \"V\",\n      \"ap\": 157.2,\n      \"as\": 5,\n      \"bx\": \"V\",\n      \"bp\": 156.08,\n      \"bs\": 1,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    },\n    \"minuteBar\": {\n      \"t\": \"2022-03-11T19:08:00Z\",\n      \"o\": 156.02,\n      \"h\": 156.1,\n      \"l\": 156.02,\n      \"c\": 156.055,\n      \"v\": 4483,\n      \"n\": 26,\n      \"vw\": 156.055956\n    },\n    \"dailyBar\": {\n      \"t\": \"2022-03-11T05:00:00Z\",\n      \"o\": 158.94,\n      \"h\": 159.25,\n      \"l\": 154.76,\n      \"c\": 156.055,\n      \"v\": 1180799,\n      \"n\": 10408,\n      \"vw\": 156.545239\n    },\n    \"prevDailyBar\": {\n      \"t\": \"2022-03-10T05:00:00Z\",\n      \"o\": 160.23,\n      \"h\": 160.38,\n      \"l\": 155.98,\n      \"c\": 158.52,\n      \"v\": 1889292,\n      \"n\": 17072,\n      \"vw\": 157.845202\n    }\n  },\n  \"TSLA\": {\n    \"latestTrade\": {\n      \"t\": \"2022-03-11T19:08:59.479520429Z\",\n      \"x\": \"V\",\n      \"p\": 796.95,\n      \"s\": 100,\n      \"c\": [\n        \"@\"\n      ],\n      \"i\": 13647,\n      \"z\": \"C\"\n    },\n    \"latestQuote\": {\n      \"t\": \"2022-03-11T19:09:06.159593323Z\",\n      \"ax\": \"V\",\n      \"ap\": 850,\n      \"as\": 1,\n      \"bx\": \"V\",\n      \"bp\": 796.49,\n      \"bs\": 1,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    },\n    \"minuteBar\": {\n      \"t\": \"2022-03-11T19:08:00Z\",\n      \"o\": 796.78,\n      \"h\": 797.4,\n      \"l\": 796.78,\n      \"c\": 796.95,\n      \"v\": 2139,\n      \"n\": 46,\n      \"vw\": 797.116889\n    },\n    \"dailyBar\": {\n      \"t\": \"2022-03-11T05:00:00Z\",\n      \"o\": 840.38,\n      \"h\": 843.055,\n      \"l\": 795.33,\n      \"c\": 796.95,\n      \"v\": 466980,\n      \"n\": 13232,\n      \"vw\": 811.369454\n    },\n    \"prevDailyBar\": {\n      \"t\": \"2022-03-10T05:00:00Z\",\n      \"o\": 851.5,\n      \"h\": 853.355,\n      \"l\": 810.76,\n      \"c\": 838.21,\n      \"v\": 578475,\n      \"n\": 16118,\n      \"vw\": 828.766436\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab94ee38-d568-4cba-a84f-28ecffefa217",
+          "name": "Get a Snapshot for a stock symbol",
+          "request": {
+            "name": "Get a Snapshot for a stock symbol",
+            "description": {
+              "content": "The Snapshot API for one ticker provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for a given ticker symbol. This endpoint returns the snapshot for the requested security.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "snapshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58254d99-2337-4150-9f6a-972dbe277f57",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"AAPL\",\n  \"latestTrade\": {\n    \"t\": \"2021-05-11T20:00:00.435997104Z\",\n    \"x\": \"Q\",\n    \"p\": 125.91,\n    \"s\": 5589631,\n    \"c\": [\n      \"@\",\n      \"M\"\n    ],\n    \"i\": 179430,\n    \"z\": \"C\"\n  },\n  \"latestQuote\": {\n    \"t\": \"2021-05-11T22:05:02.307304704Z\",\n    \"ax\": \"P\",\n    \"ap\": 125.68,\n    \"as\": 12,\n    \"bx\": \"P\",\n    \"bp\": 125.6,\n    \"bs\": 4,\n    \"c\": [\n      \"R\"\n    ]\n  },\n  \"minuteBar\": {\n    \"t\": \"2021-05-11T22:02:00Z\",\n    \"o\": 125.66,\n    \"h\": 125.66,\n    \"l\": 125.66,\n    \"c\": 125.66,\n    \"v\": 396\n  },\n  \"dailyBar\": {\n    \"t\": \"2021-05-11T04:00:00Z\",\n    \"o\": 123.5,\n    \"h\": 126.27,\n    \"l\": 122.77,\n    \"c\": 125.91,\n    \"v\": 125863164\n  },\n  \"prevDailyBar\": {\n    \"t\": \"2021-05-10T04:00:00Z\",\n    \"o\": 129.41,\n    \"h\": 129.54,\n    \"l\": 126.81,\n    \"c\": 126.85,\n    \"v\": 79569305\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc0a31fb-d9da-45d9-9324-43af9835aea7",
+          "name": "Get List of supported exchanges",
+          "request": {
+            "name": "Get List of supported exchanges",
+            "description": {
+              "content": "Returns a json object representing the exchanges we support. The keys are the short form codes you will see in our responses and the values are their respective full names.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "meta",
+                "exchanges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7505a84e-ac5a-429c-a5ed-b5569bc3c409",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "meta",
+                    "exchanges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Z\": \"Cboe BZ\",\n  \"I\": \"International Securities Exchange\",\n  \"M\": \"Chicago Stock Exchange\",\n  \"U\": \"Members Exchange\",\n  \"L\": \"Long Term Stock Exchange\",\n  \"W\": \"CBOE\",\n  \"X\": \"NASDAQ OMX PSX\",\n  \"B\": \"NASDAQ OMX BX\",\n  \"D\": \"FINRA ADF\",\n  \"J\": \"Cboe EDGA\",\n  \"P\": \"NYSE Arca\",\n  \"Q\": \"NASDAQ OMX\",\n  \"S\": \"NASDAQ Small Cap\",\n  \"V\": \"IEX\",\n  \"A\": \"NYSE American (AMEX)\",\n  \"E\": \"Market Independent\",\n  \"N\": \"New York Stock Exchange\",\n  \"T\": \"NASDAQ Int\",\n  \"Y\": \"Cboe BYX\",\n  \"C\": \"National Stock Exchange\",\n  \"H\": \"MIAX\",\n  \"K\": \"Cboe EDGX\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b10009d-60a4-4636-8b60-99977717b0dc",
+          "name": "Get list of Conditions",
+          "request": {
+            "name": "Get list of Conditions",
+            "description": {
+              "content": "Each feed/exchange uses its own set of codes to identify trade and quote conditions, so the same condition may have a different code depending on the originator of the data.\n\nSee [Our documentation](https://alpaca.markets/docs/market-data/#conditions) for more information",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "meta",
+                "conditions",
+                ":type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tape",
+                  "value": "<string>",
+                  "description": "(Required) What kind of conditions to retrieve, \"A\" and \"B\" return CTS, where \"C\" will give you UTP "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) either \"trade\" or \"quote\""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a930bb5-ba6b-4acd-8bb6-9a09f66025ef",
+              "name": "OK\n\nResponse is a JSON object mapping a condition to a plain text description",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "meta",
+                    "conditions",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tape",
+                      "value": "A"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) either \"trade\" or \"quote\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"4\": \"Derivatively Priced\",\n  \"5\": \"Market Center Reopening Trade\",\n  \"6\": \"Market Center Closing Trade\",\n  \"7\": \"Qualified Contingent Trade\",\n  \"8\": \"Reserved\",\n  \"9\": \"Corrected Consolidated Close Price as per Listing Market\",\n  \"F\": \"Inter-market Sweep Order\",\n  \"O\": \"Market Center Opening Trade\",\n  \" \": \"Regular Sale\",\n  \"B\": \"Average Price Trade\",\n  \"C\": \"Cash Trade (Same Day Clearing)\",\n  \"E\": \"Automatic Execution\",\n  \"M\": \"Market Center Official Close\",\n  \"T\": \"Extended Hours Trade\",\n  \"U\": \"Extended Hours Sold (Out Of Sequence)\",\n  \"I\": \"Odd Lot Trade\",\n  \"K\": \"Rule 127 (NYSE only) or Rule 155 (NYSE MKT only)\",\n  \"R\": \"Seller\",\n  \"X\": \"Cross Trade\",\n  \"Z\": \"Sold (Out Of Sequence)\",\n  \"N\": \"Next Day Trade (Next Day Clearing)\",\n  \"P\": \"Prior Reference Price\",\n  \"Q\": \"Market Center Official Open\",\n  \"V\": \"Contingent Trade\",\n  \"H\": \"Price Variation Trade\",\n  \"L\": \"Sold Last (Late Reporting)\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ba7d1184-c690-4fd4-b1e9-c907a4966f51",
+      "name": "Crypto Pricing Data API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9800ec1e-923c-4010-8f09-90ee54b0865b",
+          "name": "Get Trade data for multiple crypto symbols",
+          "request": {
+            "name": "Get Trade data for multiple crypto symbols",
+            "description": {
+              "content": "The Multi Trades API provides historical trade data for a list of given crypto symbols on a specified date. Returns trades for the queried crypto symbols.\n\nReturned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "exchanges",
+                  "value": "<string>",
+                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a4bddeb-0ef2-4a73-bc1b-ae19de4d0dd1",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "exchanges",
+                      "value": "ERSX,CBSE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trades\": {\n    \"BTCUSD\": [\n      {\n        \"t\": \"2022-03-02T06:00:00.028455Z\",\n        \"x\": \"CBSE\",\n        \"p\": 44299.16,\n        \"s\": 0.001,\n        \"tks\": \"B\",\n        \"i\": 289852921\n      },\n      {\n        \"t\": \"2022-03-02T06:00:00.028455Z\",\n        \"x\": \"CBSE\",\n        \"p\": 44299.15,\n        \"s\": 0.001,\n        \"tks\": \"B\",\n        \"i\": 289852922\n      }\n    ]\n  },\n  \"next_page_token\": \"QlRDVVNEfDIwMjItMDMtMDJUMDY6MDA6MDAuMDI4NDU1MDAwWnxDQlNFfDA5MjIzMzcyMDM3MTQ0NjI4NzMw\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7485e93a-5157-4ab6-84fd-17b22eb3160e",
+          "name": "Get Latest Trade data for multiple Crypto symbols",
+          "request": {
+            "name": "Get Latest Trade data for multiple Crypto symbols",
+            "description": {
+              "content": "Provides latest trade data for a list of given crypto symbols. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                "trades",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                },
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0712e7e2-1085-4a65-a7a7-a292bbde2680",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    "trades",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    },
+                    {
+                      "key": "exchange",
+                      "value": "ERSX"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trades\": {\n    \"ETHUSD\": {\n      \"t\": \"2022-03-08T22:13:55.777631Z\",\n      \"x\": \"FTXU\",\n      \"p\": 2562.8,\n      \"s\": 0.881,\n      \"tks\": \"S\",\n      \"i\": 26271234\n    },\n    \"BTCUSD\": {\n      \"t\": \"2022-03-08T22:14:47.379901Z\",\n      \"x\": \"FTXU\",\n      \"p\": 38510,\n      \"s\": 0.05,\n      \"tks\": \"B\",\n      \"i\": 26271277\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0f9d967-7677-49a8-b520-3a8837a5e1a9",
+          "name": "Get Trade data for a crypto symbol",
+          "request": {
+            "name": "Get Trade data for a crypto symbol",
+            "description": {
+              "content": "The Trades API provides historical trade data for a given crypto symbol on a specified date. Returns trades for the queried crypto symbol",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                ":symbol",
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "exchanges",
+                  "value": "<string>",
+                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66d0d569-3ac4-4460-9c81-8b1c303a3e8d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    ":symbol",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "exchanges",
+                      "value": "ERSX,CBSE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trades\": [\n    {\n      \"t\": \"2022-02-27T11:04:55.82622Z\",\n      \"x\": \"FTXU\",\n      \"p\": 39330,\n      \"s\": 0.0003,\n      \"tks\": \"B\",\n      \"i\": 25783365\n    }\n  ],\n  \"symbol\": \"BTCUSD\",\n  \"next_page_token\": \"QlRDVVNEfDIwMjItMDItMjdUMTE6MDQ6NTUuODI2MjIwMDAwWnxGVFhVfDA5MjIzMzcyMDM2ODgwNTU5MTcz\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a85e4f6-35a6-414a-a0b5-5a955da9e81a",
+          "name": "Latest Trades",
+          "request": {
+            "name": "Latest Trades",
+            "description": {
+              "content": "The Latest Trades API provides the latest historical trade data for a given crypto symbol. Returns trades for the queried crypto symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                ":symbol",
+                "trades",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26d3e089-49b4-4c55-8941-4ff3499a6179",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    ":symbol",
+                    "trades",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchange",
+                      "value": "ERSX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"BTCUSD\",\n  \"trade\": {\n    \"t\": \"2022-03-08T22:27:26.573044Z\",\n    \"x\": \"FTXU\",\n    \"p\": 38614,\n    \"s\": 0.0019,\n    \"tks\": \"S\",\n    \"i\": 26271424\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48a6eca5-cf94-4a0c-8e1c-5f637b55899f",
+          "name": "Get Bars for multiple Crypto symbols",
+          "request": {
+            "name": "Get Bars for multiple Crypto symbols",
+            "description": {
+              "content": "returns aggregate historical data for the requested crypto symbols.\n\nReturned results are sorted by symbol first then by Bar timestamp. This means that you are likely to see only one symbol in your first response if there are enough Bars for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Bars were found for them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                "bars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "exchanges",
+                  "value": "<string>",
+                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "372eb45d-c513-4e41-9550-766f7c8da463",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    "bars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "exchanges",
+                      "value": "ERSX,CBSE"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bars\": {\n    \"BTCUSD\": [\n      {\n        \"t\": \"2022-02-28T06:00:00Z\",\n        \"x\": \"FTXU\",\n        \"o\": 37866,\n        \"h\": 44340,\n        \"l\": 37494,\n        \"c\": 43241,\n        \"v\": 2817.008,\n        \"n\": 10116,\n        \"vw\": 40876.4518611946\n      }\n    ]\n  },\n  \"next_page_token\": \"QlRDVVNEfER8MjAyMi0wMi0yOFQwNjowMDowMC4wMDAwMDAwMDBafEZUWFU=\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d889127a-0ae3-427b-9c12-9c13242b713a",
+          "name": "Get Latest Bars for multiple Crypto symbols",
+          "request": {
+            "name": "Get Latest Bars for multiple Crypto symbols",
+            "description": {
+              "content": "returns latest historical data for the requested crypto symbols for a specific exchange",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                "bars",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                },
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "741a3e5a-5d2a-4f34-a117-da4a4c8aca62",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    "bars",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    },
+                    {
+                      "key": "exchange",
+                      "value": "ERSX"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bars\": {\n    \"LINKUSD\": {\n      \"t\": \"2022-03-08T17:33:00Z\",\n      \"x\": \"FTXU\",\n      \"o\": 13.3565,\n      \"h\": 13.3565,\n      \"l\": 13.3565,\n      \"c\": 13.3565,\n      \"v\": 41.4,\n      \"n\": 1,\n      \"vw\": 13.3565\n    },\n    \"BTCUSD\": {\n      \"t\": \"2022-03-08T17:40:00Z\",\n      \"x\": \"FTXU\",\n      \"o\": 39055,\n      \"h\": 39055,\n      \"l\": 39055,\n      \"c\": 39055,\n      \"v\": 0.1,\n      \"n\": 1,\n      \"vw\": 39055\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9117638-7b2f-4415-be6a-4ac3f95f3c19",
+          "name": "Get Bar data for a crypto symbol",
+          "request": {
+            "name": "Get Bar data for a crypto symbol",
+            "description": {
+              "content": "The Bars API returns aggregate historical data for the requested securities.. Returns bars for the queried crypto symbol",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                ":symbol",
+                "bars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+                },
+                {
+                  "disabled": false,
+                  "key": "exchanges",
+                  "value": "<string>",
+                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d16ff602-baa5-4b99-8078-b7404aa79e71",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    ":symbol",
+                    "bars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exchanges",
+                      "value": "ERSX,CBSE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bars\": [\n    {\n      \"t\": \"2022-02-01T09:04:00Z\",\n      \"x\": \"CBSE\",\n      \"o\": 38702.54,\n      \"h\": 39013.58,\n      \"l\": 38702.54,\n      \"c\": 39013.58,\n      \"v\": 201.67087877,\n      \"n\": 2965,\n      \"vw\": 38889.6517051631\n    }\n  ],\n  \"symbol\": \"BTCUSD\",\n  \"next_page_token\": \"QlRDVVNEfE18MjAyMi0wMi0wMVQwOTowNDowMC4wMDAwMDAwMDBafENCU0U=\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0efff153-faaf-4363-a32a-eceeffa70d60",
+          "name": "Get Latest Bar data for a Crypto symbol",
+          "request": {
+            "name": "Get Latest Bar data for a Crypto symbol",
+            "description": {
+              "content": "Gets latest historical bar data for the requested crypto symbol for a specific exchange",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                ":symbol",
+                "bars",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83242fd1-96ca-42e0-9e1d-2fbec1309072",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    ":symbol",
+                    "bars",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchange",
+                      "value": "ERSX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"BTCUSD\",\n  \"bar\": {\n    \"t\": \"2022-03-08T21:05:00Z\",\n    \"x\": \"FTXU\",\n    \"o\": 38576,\n    \"h\": 38576,\n    \"l\": 38576,\n    \"c\": 38576,\n    \"v\": 0.063,\n    \"n\": 1,\n    \"vw\": 38576\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "214824c1-575e-4c01-8f68-853ede8ba1f7",
+          "name": "Get Quotes for multiple crypto symbols",
+          "request": {
+            "name": "Get Quotes for multiple crypto symbols",
+            "description": {
+              "content": "The Multi Quotes API provides quotes for a list of given crypto symbols at a specified date. Returns quotes for each of  the queried crypto symbols.\n\nReturned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "exchanges",
+                  "value": "<string>",
+                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6647419-e130-4b11-a96e-da934ef835d1",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "exchanges",
+                      "value": "ERSX,CBSE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": {\n    \"BTCUSD\": [\n      {\n        \"t\": \"2022-03-02T06:00:00.057935872Z\",\n        \"x\": \"FTXU\",\n        \"bp\": 44154.14,\n        \"bs\": 0.1048,\n        \"ap\": 44427.88,\n        \"as\": 2.3321\n      },\n      {\n        \"t\": \"2022-03-02T06:00:00.132880896Z\",\n        \"x\": \"FTXU\",\n        \"bp\": 44154.14,\n        \"bs\": 0.1048,\n        \"ap\": 44427.88,\n        \"as\": 2.3321\n      }\n    ]\n  },\n  \"next_page_token\": \"QlRDVVNEfDIwMjItMDMtMDJUMDY6MDA6MDAuMTMyODgwODk2WnxGVFhVfEM3QkQ4QjI5\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f37b958-1045-4c22-89b4-737762000d0d",
+          "name": "Get Latest Quotes for multiple Crypto symbols",
+          "request": {
+            "name": "Get Latest Quotes for multiple Crypto symbols",
+            "description": {
+              "content": "Provides latest quotes for a list of given crypto symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                "quotes",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                },
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7fd8ea0-3a33-472c-9656-9b6d8d29e4bc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    "quotes",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    },
+                    {
+                      "key": "exchange",
+                      "value": "ERSX"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": {\n    \"ETHUSD\": {\n      \"t\": \"2022-03-08T22:40:52.536436224Z\",\n      \"x\": \"FTXU\",\n      \"bp\": 2562.99,\n      \"bs\": 23.798,\n      \"ap\": 2579.11,\n      \"as\": 22.155\n    },\n    \"BTCUSD\": {\n      \"t\": \"2022-03-08T22:40:52.662990848Z\",\n      \"x\": \"FTXU\",\n      \"bp\": 38465.26,\n      \"bs\": 2.641,\n      \"ap\": 38698.75,\n      \"as\": 1.3746\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d759edd7-6dd8-4904-901f-36e4c08c64ea",
+          "name": "Get Quotes for crypto symbol",
+          "request": {
+            "name": "Get Quotes for crypto symbol",
+            "description": {
+              "content": "The Quotes API provides quotes for a given crypto symbol at a specified date. Returns quotes for the queried crypto symbol",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                ":symbol",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "exchanges",
+                  "value": "<string>",
+                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12fbb17a-091e-457d-9c1a-07bd552715a8",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    ":symbol",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "exchanges",
+                      "value": "ERSX,CBSE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": [\n    {\n      \"t\": \"2022-02-01T06:00:00.009249124Z\",\n      \"x\": \"ERSX\",\n      \"bp\": 38422.64,\n      \"bs\": 1.56,\n      \"ap\": 38515.48,\n      \"as\": 1.5\n    },\n    {\n      \"t\": \"2022-02-01T06:00:00.009249124Z\",\n      \"x\": \"ERSX\",\n      \"bp\": 38419.54,\n      \"bs\": 3,\n      \"ap\": 38515.48,\n      \"as\": 1.5\n    }\n  ],\n  \"symbol\": \"BTCUSD\",\n  \"next_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f234eae-219e-49cf-906a-e75efb4a298f",
+          "name": "Latest Quote",
+          "request": {
+            "name": "Latest Quote",
+            "description": {
+              "content": "Returns latest quote for the queried crypto symbol",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                ":symbol",
+                "quotes",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b68b2339-d36c-4fd5-afd3-bd2a2b313eb1",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    ":symbol",
+                    "quotes",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchange",
+                      "value": "ERSX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"BTCUSD\",\n  \"quote\": {\n    \"t\": \"2022-02-01T20:14:52.486171758Z\",\n    \"x\": \"ERSX\",\n    \"bp\": 38511.45,\n    \"bs\": 1.5,\n    \"ap\": 38598.06,\n    \"as\": 1.556\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7133006-91e5-4ad8-9cfc-38a3d881b818",
+          "name": "Get Snapshots for multiple crypto symbols",
+          "request": {
+            "name": "Get Snapshots for multiple crypto symbols",
+            "description": {
+              "content": "The Multi Snapshot API returns the latest trade, latest quote, minute bar daily bar, and previous daily bar data for list of given crypto symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                "snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4edad3e7-6e39-40c1-9a31-2e0b55fda277",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    "snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchange",
+                      "value": "ERSX"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"latestTrade\": {\n      \"x\": \"string\",\n      \"i\": 6642,\n      \"t\": \"1996-10-31T19:50:02.820Z\",\n      \"p\": 7966.078268105249,\n      \"s\": 289.856882632854,\n      \"c\": [\n        \"string\",\n        \"string\"\n      ],\n      \"z\": \"string\",\n      \"tks\": \"string\"\n    },\n    \"latestQuote\": {\n      \"t\": \"2015-11-18T05:00:10.853Z\",\n      \"ax\": \"string\",\n      \"ap\": 5146.288700517701,\n      \"as\": 3794.631456158972,\n      \"bx\": \"string\",\n      \"bp\": 3215.9092681844736,\n      \"bs\": 4904.691131483353,\n      \"c\": [\n        \"string\",\n        \"string\"\n      ],\n      \"x\": \"string\",\n      \"z\": \"string\"\n    },\n    \"minuteBar\": {\n      \"t\": \"2025-03-31T22:48:51.467Z\",\n      \"o\": 9232.05046492998,\n      \"h\": 8216.737710284928,\n      \"l\": 402.9581127254733,\n      \"c\": 6799.047007246646,\n      \"v\": 9463.482600630281,\n      \"x\": \"FTXU\",\n      \"n\": 8044,\n      \"vw\": 7644.984011299863\n    },\n    \"dailyBar\": {\n      \"t\": \"1985-12-31T12:48:55.198Z\",\n      \"o\": 5221.23409660761,\n      \"h\": 8697.386382912317,\n      \"l\": 3843.193927621693,\n      \"c\": 1872.5771040662241,\n      \"v\": 6289.315813840959,\n      \"x\": \"CBSE\",\n      \"n\": 3412,\n      \"vw\": 2254.23354439535\n    },\n    \"prevDailyBar\": {\n      \"t\": \"2016-04-24T19:33:38.336Z\",\n      \"o\": 5672.241178771792,\n      \"h\": 3496.1280854856846,\n      \"l\": 1846.5560348258282,\n      \"c\": 9042.207717522948,\n      \"v\": 6224.45937863912,\n      \"x\": \"CBSE\",\n      \"n\": 9770,\n      \"vw\": 6782.237724926652\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64f32f7f-ef1c-4989-a6d5-09138f6c657e",
+          "name": "Get a Snapshot for a crypto symbol",
+          "request": {
+            "name": "Get a Snapshot for a crypto symbol",
+            "description": {
+              "content": "The Snapshot API returns the latest trade, latest quote, minute bar daily bar, and previous daily bar data for a given crypto symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                ":symbol",
+                "snapshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0063834-2a04-43ca-af5a-1a7909d941f5",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    ":symbol",
+                    "snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchange",
+                      "value": "ERSX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"latestTrade\": {\n    \"x\": \"string\",\n    \"i\": 2724,\n    \"t\": \"2024-12-24T12:30:02.436Z\",\n    \"p\": 5269.3893409377015,\n    \"s\": 9718.694495317652,\n    \"c\": [\n      \"string\",\n      \"string\"\n    ],\n    \"z\": \"string\",\n    \"tks\": \"string\"\n  },\n  \"latestQuote\": {\n    \"t\": \"2024-11-03T09:55:23.103Z\",\n    \"ax\": \"string\",\n    \"ap\": 4396.393572780913,\n    \"as\": 7311.638015909355,\n    \"bx\": \"string\",\n    \"bp\": 1690.2975707931466,\n    \"bs\": 8985.303596228989,\n    \"c\": [\n      \"string\",\n      \"string\"\n    ],\n    \"x\": \"string\",\n    \"z\": \"string\"\n  },\n  \"minuteBar\": {\n    \"t\": \"1995-11-28T20:17:54.385Z\",\n    \"o\": 511.1181373451967,\n    \"h\": 8889.373421863946,\n    \"l\": 9093.083627570197,\n    \"c\": 1757.6632497608325,\n    \"v\": 4296.389651241099,\n    \"x\": \"FTXU\",\n    \"n\": 5228,\n    \"vw\": 3031.1915820425916\n  },\n  \"dailyBar\": {\n    \"t\": \"2012-11-02T22:05:13.775Z\",\n    \"o\": 8822.040887552688,\n    \"h\": 8391.35117616285,\n    \"l\": 5004.2085832670755,\n    \"c\": 1058.6464595034229,\n    \"v\": 1336.5302206537344,\n    \"x\": \"CBSE\",\n    \"n\": 993,\n    \"vw\": 5639.21367836361\n  },\n  \"prevDailyBar\": {\n    \"t\": \"1997-01-17T23:51:37.323Z\",\n    \"o\": 7424.495241480523,\n    \"h\": 4112.000117280076,\n    \"l\": 195.38681597017438,\n    \"c\": 3776.9714224504114,\n    \"v\": 4856.6993445627895,\n    \"x\": \"CBSE\",\n    \"n\": 8322,\n    \"vw\": 331.2149756313709\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1d5bf45-a484-4396-ae4a-d6163f0e9fb4",
+          "name": "Get Latest XBBO for multiple crypto symbols",
+          "request": {
+            "name": "Get Latest XBBO for multiple crypto symbols",
+            "description": {
+              "content": "Returns the latest XBBO for a given list crypto symbols that calculates the Best Bid and Offer across multiple exchanges. If exchanges is not specified then only the exchanges that can be traded on Alpaca are included in the calculation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                "xbbos",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                },
+                {
+                  "disabled": false,
+                  "key": "exchanges",
+                  "value": "<string>",
+                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a33f6d0-a974-4fc7-8aa8-fdf3881d8533",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    "xbbos",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    },
+                    {
+                      "key": "exchanges",
+                      "value": "ERSX,CBSE"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"xbbos\": {\n    \"BTCUSD\": {\n      \"t\": \"2022-03-08T22:59:49.514811056Z\",\n      \"ax\": \"ERSX\",\n      \"ap\": 38556.7,\n      \"as\": 1.556151,\n      \"bx\": \"FTXU\",\n      \"bp\": 38562,\n      \"bs\": 2.5781\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dad177f2-7d38-4b84-bec9-623df65a0ce9",
+          "name": "Get Latest XBBO for a single crypto symbol",
+          "request": {
+            "name": "Get Latest XBBO for a single crypto symbol",
+            "description": {
+              "content": "Returns the XBBO for a crypto symbol that calculates the Best Bid and Offer across multiple exchanges. If exchanges is not specified then only the exchanges that can be traded on Alpaca are included in the calculation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                ":symbol",
+                "xbbo",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "exchanges",
+                  "value": "<string>",
+                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f248c9d-70a8-479c-b802-4113cf2eb996",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    ":symbol",
+                    "xbbo",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchanges",
+                      "value": "ERSX,CBSE"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"BTCUSD\",\n  \"xbbo\": {\n    \"t\": \"2022-02-01T20:21:03.323000342Z\",\n    \"ax\": \"FTXU\",\n    \"ap\": 38529,\n    \"as\": 0.0688,\n    \"bx\": \"ERSX\",\n    \"bp\": 38534,\n    \"bs\": 1.5\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0ec031a-0817-4b78-b2bb-2d8c3f5262bb",
+          "name": "Get list of crypto spreads per exchange",
+          "request": {
+            "name": "Get list of crypto spreads per exchange",
+            "description": {
+              "content": "Get list of crypto spreads for the different exchanges Alpaca supports in basis points.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "crypto",
+                "meta",
+                "spreads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ee347d5-5ab9-4098-a220-575f09532634",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "crypto",
+                    "meta",
+                    "spreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spreads\": {\n    \"ERSX\": 30,\n    \"FTXU\": 30\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1cae3e3f-508f-4663-b300-c4a8907eed50",
+      "name": "News",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0c61df2b-2f30-4efd-9a91-28ce6da59ed7",
+          "name": "News API",
+          "request": {
+            "name": "News API",
+            "description": {
+              "content": "Returns latest news articles across stocks and crypto. By default returns latest 10 news articles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "news"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort articles by updated date. Options: DESC, ASC"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_content",
+                  "value": "<boolean>",
+                  "description": "Boolean indicator to include content for news articles (if available)"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_contentless",
+                  "value": "<boolean>",
+                  "description": "Boolean indicator to exclude news articles that do not contain content "
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21f10672-ed54-4b37-8a4a-ec57ef9a4fbc",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "news"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "include_content",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "exclude_contentless",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"news\": [\n    {\n      \"id\": 24843171,\n      \"headline\": \"Apple Leader in Phone Sales in China for Second Straight Month in November With 23.6% Share, According to Market Research Data\",\n      \"author\": \"Charles Gross\",\n      \"created_at\": \"2021-12-31T11:08:42Z\",\n      \"updated_at\": \"2021-12-31T11:08:43Z\",\n      \"summary\": \"This headline-only article is meant to show you why a stock is moving, the most difficult aspect of stock trading\",\n      \"content\": \"<p>This headline-only article is meant to show you why a stock is moving, the most difficult aspect of stock trading....</p>\",\n      \"url\": \"https://www.benzinga.com/news/21/12/24843171/apple-leader-in-phone-sales-in-china-for-second-straight-month-in-november-with-23-6-share-according\",\n      \"images\": [],\n      \"symbols\": [\n        \"AAPL\"\n      ],\n      \"source\": \"benzinga\"\n    }\n  ],\n  \"next_page_token\": \"MTY0MDk0ODkyMzAwMDAwMDAwMHwyNDg0MzE3MQ==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3ba414b7-8d1b-4bb5-8f85-123d3a66b5ed",
+      "name": "Logo",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eeb4c491-1fdc-473f-bdb2-a6e6dfd198fc",
+          "name": "Get Logo for symbol",
+          "request": {
+            "name": "Get Logo for symbol",
+            "description": {
+              "content": "Returns logo image resource for provided symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "logos",
+                ":crypto_or_stock_symbol"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "placeholder",
+                  "value": "true",
+                  "description": "If true then the api will generate a placeholder image if no logo was found. Defaults to true"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "crypto_or_stock_symbol",
+                  "description": "(Required) The crypto or stock symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "242c7bff-3a39-42eb-a4f3-a5efe4d8f45c",
+              "name": "Returns the requested logo as an image.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "logos",
+                    ":crypto_or_stock_symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "placeholder",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crypto_or_stock_symbol",
+                      "description": "(Required) The crypto or stock symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "image/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "affe2b0a-4bf8-4d0f-b4fd-93c704a3593f",
+              "name": "No Logo was found for this symbol. This code will only be returned if you set `placeholder` to false. Otherwise we will generate a placeholder image for this symbol",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "logos",
+                    ":crypto_or_stock_symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "placeholder",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crypto_or_stock_symbol",
+                      "description": "(Required) The crypto or stock symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "80d393e7-229f-4c62-a06e-42346a8fd466",
+      "name": "Screener",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9cb8f6af-ce54-424d-81e2-61d23108b00b",
+          "name": "Get Top Market Movers by Market type",
+          "request": {
+            "name": "Get Top Market Movers by Market type",
+            "description": {
+              "content": "Returns top market movers for stocks. By default will return top 5 market gainers and losers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "screener",
+                ":market_type",
+                "movers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "10",
+                  "description": "Number of top market movers to fetch (gainers and losers). Will return number top for each. By default 10 gainers and 10 losers."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "market_type",
+                  "description": "(Required) Screen specific market (stocks or crypto)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e2dd902-00fd-49c1-8611-6c2895a6470d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "screener",
+                    ":market_type",
+                    "movers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "market_type",
+                      "description": "(Required) Screen specific market (stocks or crypto)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"gainers\": [\n    {\n      \"symbol\": \"AGRI\",\n      \"percent_change\": 145.56,\n      \"change\": 2.46,\n      \"price\": 4.15\n    },\n    {\n      \"symbol\": \"GRCYW\",\n      \"percent_change\": 85.63,\n      \"change\": 0.03,\n      \"price\": 0.0594\n    }\n  ],\n  \"losers\": [\n    {\n      \"symbol\": \"MTACW\",\n      \"percent_change\": -63.07,\n      \"change\": -0.26,\n      \"price\": 0.1502\n    },\n    {\n      \"symbol\": \"TIG\",\n      \"percent_change\": -51.21,\n      \"change\": -3.61,\n      \"price\": 3.435\n    }\n  ],\n  \"market_type\": \"stocks\",\n  \"last_updated\": \"2022-03-10T17:53:30.088309839Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "878d8c05-0b4d-4a2e-9b18-3438d47f4f08",
+      "name": "Forex",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://data.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "APCA-API-KEY-ID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "24333ea1-dbad-408a-87e8-8589c7fd62de",
+    "name": "Market Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access Alpaca’s historical and real-time US stock market and crypto data through REST API and WebSocket. There are APIs for Stock Pricing, Crypto Pricing, and News.\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

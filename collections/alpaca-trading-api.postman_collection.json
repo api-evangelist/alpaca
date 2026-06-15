@@ -1,0 +1,3415 @@
+{
+  "item": [
+    {
+      "id": "5c45b659-e818-4992-ad76-d0a45a748c4b",
+      "name": "Accounts",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-references/trading-api/account/ to view complete documentation on the Accounts API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "84a01158-7e3d-4e8d-a4c6-88cefa11fad2",
+          "name": "Get account",
+          "request": {
+            "name": "Get account",
+            "description": {
+              "content": "Returns the account associated with the API key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5556153a-d68b-48cb-ba82-2a4ba2a31dd4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1707cead-41a8-4330-a9b9-35d26705493b\",\n  \"status\": \"ACTIVE\",\n  \"account_number\": \"string\",\n  \"currency\": \"USD\",\n  \"cash\": \"string\",\n  \"portfolio_value\": \"string\",\n  \"pattern_day_trader\": true,\n  \"trade_suspended_by_user\": false,\n  \"trading_blocked\": true,\n  \"transfers_blocked\": true,\n  \"account_blocked\": false,\n  \"created_at\": \"2003-10-25T11:18:35.044Z\",\n  \"shorting_enabled\": true,\n  \"long_market_value\": \"string\",\n  \"short_market_value\": \"string\",\n  \"equity\": \"string\",\n  \"last_equity\": \"string\",\n  \"multiplier\": \"string\",\n  \"buying_power\": \"string\",\n  \"initial_margin\": \"string\",\n  \"maintenance_margin\": \"string\",\n  \"sma\": \"string\",\n  \"daytrade_count\": 5662,\n  \"last_maintenance_margin\": \"string\",\n  \"daytrading_buying_power\": \"string\",\n  \"regt_buying_power\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "108b32f9-9859-49ff-99ae-b28e5d3342e6",
+      "name": "Orders",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/orders/ to view complete documentation on the Orders API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e1012296-1306-41bf-9df8-5d7903adad70",
+          "name": "Order",
+          "request": {
+            "name": "Order",
+            "description": {
+              "content": "Places a new order for the given account. An order request may be rejected if the account is not authorized for trading, or if the tradable balance is insufficient to fill the order..",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"<string>\",\n  \"side\": \"<string>\",\n  \"time_in_force\": \"<string>\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"<string>\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"<string>\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"<string>\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"<string>\",\n      \"side\": \"<string>\",\n      \"time_in_force\": \"<string>\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"<string>\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"<string>\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"<string>\",\n      \"side\": \"<string>\",\n      \"time_in_force\": \"<string>\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"<string>\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"<string>\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6fc51179-93d8-4108-b3ce-466039b97dbf",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b558865-288e-438d-92bc-1bbc8890ebaf",
+              "name": "Forbidden\n\nBuying power or shares is not sufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "756d4bfb-0553-4d21-93c2-c6517954cd51",
+              "name": "Unprocessable\n\nInput parameters are not recognized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c32b34fa-8cc1-4636-ac6b-295503819c9f",
+          "name": "All Orders",
+          "request": {
+            "name": "All Orders",
+            "description": {
+              "content": "Retrieves a list of orders for the account, filtered by the supplied query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Order status to be queried. open, closed or all. Defaults to open."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of orders in response. Defaults to 50 and max is 500."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The response will include only ones submitted after this timestamp (exclusive.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<string>",
+                  "description": "The response will include only ones submitted until this timestamp (exclusive.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+                },
+                {
+                  "disabled": false,
+                  "key": "nested",
+                  "value": "<boolean>",
+                  "description": "If true, the result will roll up multi-leg orders under the legs field of primary order."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "A comma-separated list of symbols to filter by (ex. “AAPL,TSLA,MSFT”). A currency pair is required for crypto orders (ex. “BTCUSD,BCHUSD,LTCUSD,ETCUSD”)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5775fa16-8d13-4423-9bd9-320428a2d801",
+              "name": "Successful response\n\nAn array of Order objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nested",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"symbol\": \"<string>\",\n    \"notional\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"type\": \"stop\",\n    \"side\": \"buy\",\n    \"time_in_force\": \"day\",\n    \"id\": \"<string>\",\n    \"client_order_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"submitted_at\": \"<dateTime>\",\n    \"filled_at\": \"<dateTime>\",\n    \"expired_at\": \"<dateTime>\",\n    \"canceled_at\": \"<dateTime>\",\n    \"failed_at\": \"<dateTime>\",\n    \"replaced_at\": \"<dateTime>\",\n    \"replaced_by\": \"<uuid>\",\n    \"replaces\": \"<uuid>\",\n    \"asset_id\": \"<uuid>\",\n    \"asset_class\": \"us_equity\",\n    \"filled_qty\": \"<string>\",\n    \"filled_avg_price\": \"<string>\",\n    \"order_class\": \"bracket\",\n    \"order_type\": \"<string>\",\n    \"limit_price\": \"<string>\",\n    \"stop_price\": \"<string>\",\n    \"status\": \"new\",\n    \"extended_hours\": \"<boolean>\",\n    \"legs\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      }\n    ],\n    \"trail_percent\": \"<string>\",\n    \"trail_price\": \"<string>\",\n    \"hwm\": \"<string>\"\n  },\n  {\n    \"symbol\": \"<string>\",\n    \"notional\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"type\": \"stop\",\n    \"side\": \"buy\",\n    \"time_in_force\": \"day\",\n    \"id\": \"<string>\",\n    \"client_order_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"submitted_at\": \"<dateTime>\",\n    \"filled_at\": \"<dateTime>\",\n    \"expired_at\": \"<dateTime>\",\n    \"canceled_at\": \"<dateTime>\",\n    \"failed_at\": \"<dateTime>\",\n    \"replaced_at\": \"<dateTime>\",\n    \"replaced_by\": \"<uuid>\",\n    \"replaces\": \"<uuid>\",\n    \"asset_id\": \"<uuid>\",\n    \"asset_class\": \"us_equity\",\n    \"filled_qty\": \"<string>\",\n    \"filled_avg_price\": \"<string>\",\n    \"order_class\": \"bracket\",\n    \"order_type\": \"<string>\",\n    \"limit_price\": \"<string>\",\n    \"stop_price\": \"<string>\",\n    \"status\": \"new\",\n    \"extended_hours\": \"<boolean>\",\n    \"legs\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      }\n    ],\n    \"trail_percent\": \"<string>\",\n    \"trail_price\": \"<string>\",\n    \"hwm\": \"<string>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "991ebdd3-2397-4ea7-a204-5a5212f9782d",
+          "name": "All Orders",
+          "request": {
+            "name": "All Orders",
+            "description": {
+              "content": "Attempts to cancel all open orders. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b557ae5-2ab1-4e16-a48d-7922c7b589e6",
+              "name": "Multi-Status with body.\n\nan array of objects that include the order id and http status code for each status request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"e6f742dd-4ec4-d01d-ec54-1bd7cabb8aaf\",\n    \"status\": 200\n  },\n  {\n    \"id\": \"be1270c9-2be2-e11d-6a93-9f029cfa6a63\",\n    \"status\": 200\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39f99fbd-77a5-4ec5-91dd-f19895cda54a",
+              "name": "Failed to cancel order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d7a29c2-82ea-42e5-950e-d30acd514b55",
+          "name": "Order by Order ID",
+          "request": {
+            "name": "Order by Order ID",
+            "description": {
+              "content": "Retrieves a single order for the given order_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nested",
+                  "value": "<boolean>",
+                  "description": "If true, the result will roll up multi-leg orders under the legs field of primary order."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) order id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a140a0f2-5cdf-4ea7-a0a8-269e2eaa73de",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nested",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ea5e916-9144-4900-94f7-47a2103f2283",
+          "name": "Order",
+          "request": {
+            "name": "Order",
+            "description": {
+              "content": "Replaces a single order with updated parameters. Each parameter overrides the corresponding attribute of the existing order. The other attributes remain the same as the existing order.\n\nA success return code from a replaced order does NOT guarantee the existing open order has been replaced. If the existing open order is filled before the replacing (new) order reaches the execution venue, the replacing (new) order is rejected, and these events are sent in the trade_updates stream channel. \n\nWhile an order is being replaced, buying power is reduced by the larger of the two orders that have been placed (the old order being replaced, and the newly placed order to replace it). If you are replacing a buy entry order with a higher limit price than the original order, the buying power is calculated based on the newly placed order. If you are replacing it with a lower limit price, the buying power is calculated based on the old order.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) order id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qty\": \"<string>\",\n  \"time_in_force\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail\": \"<string>\",\n  \"client_order_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9263dcfe-7fd9-4172-9090-c1f0d779f77b",
+              "name": "Successful response\n\nThe new Order object with the new order ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"qty\": \"<string>\",\n  \"time_in_force\": \"day\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail\": \"<string>\",\n  \"client_order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae93ff0b-f8cf-4226-9751-382c8e0abc3a",
+          "name": "Order by Order ID",
+          "request": {
+            "name": "Order by Order ID",
+            "description": {
+              "content": "Attempts to cancel an Open Order. If the order is no longer cancelable, the request will be rejected with status 422; otherwise accepted with return status 204.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) order id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "533b8660-09c3-402f-9e5f-c3db9bfb765d",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df30056e-12da-445e-979c-6cd36ee386f0",
+              "name": "The order status is not cancelable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "15dea156-1a2e-44b0-b9fe-e5da566e9ef8",
+      "name": "Positions",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/positions/ to view complete documentation on the Positions API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6b5150e4-d630-4ab7-a31d-5cb57abde8ec",
+          "name": "All Open Positions",
+          "request": {
+            "name": "All Open Positions",
+            "description": {
+              "content": "The positions API provides information about an account’s current open positions. The response will include information such as cost basis, shares traded, and market value, which will be updated live as price information is updated. Once a position is closed, it will no longer be queryable through this API\n\nRetrieves a list of the account’s open positions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a447289c-7cca-4553-94f6-4bd80a8398aa",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset_id\": \"d78c15d6-2925-726b-a7c4-b5578d98f42e\",\n    \"symbol\": \"AAPL\",\n    \"exchange\": \"NYSE\",\n    \"asset_class\": \"us_equity\",\n    \"avg_entry_price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"market_value\": \"string\",\n    \"cost_basis\": \"stri\",\n    \"unrealized_pl\": \"string\",\n    \"unrealized_plpc\": \"string\",\n    \"unrealized_intraday_pl\": \"string\",\n    \"unrealized_intraday_plpc\": \"string\",\n    \"current_price\": \"string\",\n    \"lastday_price\": \"string\",\n    \"change_today\": \"string\",\n    \"asset_marginable\": false,\n    \"qty_available\": \"string\"\n  },\n  {\n    \"asset_id\": \"fd4d2d6b-668d-f8d8-8581-d12e93408738\",\n    \"symbol\": \"AAPL\",\n    \"exchange\": \"NYSE\",\n    \"asset_class\": \"us_equity\",\n    \"avg_entry_price\": \"s\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"market_value\": \"string\",\n    \"cost_basis\": \"string\",\n    \"unrealized_pl\": \"string\",\n    \"unrealized_plpc\": \"string\",\n    \"unrealized_intraday_pl\": \"string\",\n    \"unrealized_intraday_plpc\": \"string\",\n    \"current_price\": \"string\",\n    \"lastday_price\": \"string\",\n    \"change_today\": \"string\",\n    \"asset_marginable\": false,\n    \"qty_available\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1d2e14b-9379-4dde-982b-28bb8bba7965",
+          "name": "All Positions",
+          "request": {
+            "name": "All Positions",
+            "description": {
+              "content": "Closes (liquidates) all of the account’s open long and short positions. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cancel_orders",
+                  "value": "<boolean>",
+                  "description": "If true is specified, cancel all open orders before liquidating all positions."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f064015-a93e-4023-90aa-25b26ef087e4",
+              "name": "Multi-Status with body.\n\nan array of PositionClosed responses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cancel_orders",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"symbol\": \"string\",\n    \"status\": \"string\",\n    \"body\": {\n      \"symbol\": \"string\",\n      \"notional\": \"string\",\n      \"qty\": \"string\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"string\",\n      \"client_order_id\": \"string\",\n      \"created_at\": \"2011-05-01T15:57:21.101Z\",\n      \"updated_at\": \"1978-08-24T01:17:40.397Z\",\n      \"submitted_at\": \"1969-12-19T08:12:58.303Z\",\n      \"filled_at\": \"1970-07-10T12:57:41.093Z\",\n      \"expired_at\": \"1990-02-26T12:07:39.502Z\",\n      \"canceled_at\": \"2006-03-22T00:52:12.282Z\",\n      \"failed_at\": \"1990-09-06T16:41:34.826Z\",\n      \"replaced_at\": \"1967-07-19T23:05:15.810Z\",\n      \"replaced_by\": \"1336958a-dc65-94d1-c9f6-5b7cd69cb59f\",\n      \"replaces\": \"6cca6400-506c-7919-e44e-0bd08e54859b\",\n      \"asset_id\": \"f20dca7d-51ef-1454-ed08-d5a251be772d\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"string\",\n      \"filled_avg_price\": \"string\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"string\",\n      \"limit_price\": \"string\",\n      \"stop_price\": \"string\",\n      \"status\": \"new\",\n      \"extended_hours\": true,\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"string\",\n      \"trail_price\": \"string\",\n      \"hwm\": \"string\"\n    }\n  },\n  {\n    \"symbol\": \"string\",\n    \"status\": \"string\",\n    \"body\": {\n      \"symbol\": \"string\",\n      \"notional\": \"string\",\n      \"qty\": \"string\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"string\",\n      \"client_order_id\": \"string\",\n      \"created_at\": \"2018-08-06T21:05:49.580Z\",\n      \"updated_at\": \"2001-08-29T19:19:15.259Z\",\n      \"submitted_at\": \"1964-07-06T03:52:51.904Z\",\n      \"filled_at\": \"1966-04-11T16:32:00.540Z\",\n      \"expired_at\": \"1971-07-18T00:50:58.136Z\",\n      \"canceled_at\": \"1980-10-16T03:05:39.461Z\",\n      \"failed_at\": \"1949-10-25T16:55:54.817Z\",\n      \"replaced_at\": \"2020-05-07T22:38:05.370Z\",\n      \"replaced_by\": \"2deb3949-a9b0-5e54-3029-eaa6ecd0b452\",\n      \"replaces\": \"752ceeba-e394-6d13-18d1-87637cc693f9\",\n      \"asset_id\": \"295f2616-2c3c-e4b2-b56d-555c1e2c3024\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"string\",\n      \"filled_avg_price\": \"string\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"string\",\n      \"limit_price\": \"string\",\n      \"stop_price\": \"string\",\n      \"status\": \"new\",\n      \"extended_hours\": true,\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"string\",\n      \"trail_price\": \"string\",\n      \"hwm\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e49aa9c1-ab4f-4348-b55b-758583e5505f",
+              "name": "Failed to liquidate",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cancel_orders",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2921eb2-c5e5-4e90-a85a-f967817bbbd9",
+          "name": "Open Position",
+          "request": {
+            "name": "Open Position",
+            "description": {
+              "content": "Retrieves the account’s open position for the given symbol or assetId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "positions",
+                ":symbol_or_asset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol_or_asset_id",
+                  "description": "(Required) symbol or assetId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3fbeb344-c868-4423-b658-102d589f4295",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions",
+                    ":symbol_or_asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol_or_asset_id",
+                      "description": "(Required) symbol or assetId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset_id\": \"f12dddee-6327-f8db-9453-00c886ec378e\",\n  \"symbol\": \"AAPL\",\n  \"exchange\": \"NYSE\",\n  \"asset_class\": \"us_equity\",\n  \"avg_entry_price\": \"string\",\n  \"qty\": \"string\",\n  \"side\": \"string\",\n  \"market_value\": \"string\",\n  \"cost_basis\": \"string\",\n  \"unrealized_pl\": \"string\",\n  \"unrealized_plpc\": \"string\",\n  \"unrealized_intraday_pl\": \"string\",\n  \"unrealized_intraday_plpc\": \"string\",\n  \"current_price\": \"string\",\n  \"lastday_price\": \"string\",\n  \"change_today\": \"string\",\n  \"asset_marginable\": false,\n  \"qty_available\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "862a9cd2-ac6c-4513-bebd-2822e79da4de",
+          "name": "Position",
+          "request": {
+            "name": "Position",
+            "description": {
+              "content": "Closes (liquidates) the account’s open position for the given symbol. Works for both long and short positions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "positions",
+                ":symbol_or_asset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "qty",
+                  "value": "<number>",
+                  "description": "the number of shares to liquidate. Can accept up to 9 decimal points. Cannot work with percentage"
+                },
+                {
+                  "disabled": false,
+                  "key": "percentage",
+                  "value": "<number>",
+                  "description": "percentage of position to liquidate. Must be between 0 and 100. Would only sell fractional if position is originally fractional. Can accept up to 9 decimal points. Cannot work with qty"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol_or_asset_id",
+                  "description": "(Required) symbol or assetId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "677c3777-2d4a-4c0e-833a-3f7d9140c984",
+              "name": "Successful response\n\nReturns the order created to close out this position",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions",
+                    ":symbol_or_asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "qty",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "percentage",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol_or_asset_id",
+                      "description": "(Required) symbol or assetId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"string\",\n  \"notional\": \"string\",\n  \"qty\": \"string\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"string\",\n  \"client_order_id\": \"string\",\n  \"created_at\": \"1974-12-13T18:56:58.012Z\",\n  \"updated_at\": \"1976-04-05T15:09:59.791Z\",\n  \"submitted_at\": \"1983-08-29T01:09:54.491Z\",\n  \"filled_at\": \"1968-10-16T05:25:50.432Z\",\n  \"expired_at\": \"1976-11-08T01:36:29.495Z\",\n  \"canceled_at\": \"1995-01-04T08:58:16.993Z\",\n  \"failed_at\": \"2019-10-07T11:14:11.666Z\",\n  \"replaced_at\": \"1962-04-29T05:47:39.318Z\",\n  \"replaced_by\": \"17616690-00a2-a3a9-a205-8c5c5c2a6e74\",\n  \"replaces\": \"3d964160-dd5b-0697-5102-245f71e32c86\",\n  \"asset_id\": \"db2e6ec3-6345-29f9-9f64-cc935ad22f29\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"string\",\n  \"filled_avg_price\": \"string\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"string\",\n  \"limit_price\": \"string\",\n  \"stop_price\": \"string\",\n  \"status\": \"new\",\n  \"extended_hours\": true,\n  \"legs\": [\n    {\n      \"symbol\": \"string\",\n      \"notional\": \"string\",\n      \"qty\": \"string\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"string\",\n      \"client_order_id\": \"string\",\n      \"created_at\": \"1953-08-11T06:10:22.321Z\",\n      \"updated_at\": \"2010-07-23T06:33:21.929Z\",\n      \"submitted_at\": \"2019-03-01T04:56:02.599Z\",\n      \"filled_at\": \"1957-06-21T07:11:26.144Z\",\n      \"expired_at\": \"1965-04-14T08:36:00.162Z\",\n      \"canceled_at\": \"1963-06-04T02:01:10.531Z\",\n      \"failed_at\": \"1980-01-10T18:16:00.309Z\",\n      \"replaced_at\": \"1988-02-17T02:01:49.770Z\",\n      \"replaced_by\": \"95f153f8-f328-b6e2-0916-c0b088a5c3bd\",\n      \"replaces\": \"1bb193cb-09a1-2b9b-8501-e51db885a76e\",\n      \"asset_id\": \"fad3c327-97b2-3e04-c5f7-e16e2b598a59\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"string\",\n      \"filled_avg_price\": \"string\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"string\",\n      \"limit_price\": \"string\",\n      \"stop_price\": \"string\",\n      \"status\": \"new\",\n      \"extended_hours\": true,\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"string\",\n      \"trail_price\": \"string\",\n      \"hwm\": \"string\"\n    },\n    {\n      \"symbol\": \"string\",\n      \"notional\": \"string\",\n      \"qty\": \"string\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"string\",\n      \"client_order_id\": \"string\",\n      \"created_at\": \"2020-03-20T05:47:40.706Z\",\n      \"updated_at\": \"2004-11-03T02:46:24.539Z\",\n      \"submitted_at\": \"2015-09-30T21:10:32.227Z\",\n      \"filled_at\": \"2025-05-06T14:52:03.859Z\",\n      \"expired_at\": \"1949-10-25T14:14:17.937Z\",\n      \"canceled_at\": \"2012-06-20T12:42:14.644Z\",\n      \"failed_at\": \"1981-06-11T23:24:32.379Z\",\n      \"replaced_at\": \"2020-03-16T07:59:54.654Z\",\n      \"replaced_by\": \"1ef6a63a-4a86-c0c1-272f-5d5b515ab3d6\",\n      \"replaces\": \"38ad6ee4-87fa-f51f-df42-ff81e421a3f7\",\n      \"asset_id\": \"7167b433-49f0-9381-d6b5-f491505b79df\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"string\",\n      \"filled_avg_price\": \"string\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"string\",\n      \"limit_price\": \"string\",\n      \"stop_price\": \"string\",\n      \"status\": \"new\",\n      \"extended_hours\": true,\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"string\",\n      \"trail_price\": \"string\",\n      \"hwm\": \"string\"\n    }\n  ],\n  \"trail_percent\": \"string\",\n  \"trail_price\": \"string\",\n  \"hwm\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "27f3620d-fd6f-4f46-8a87-47d41af6b474",
+      "name": "Portfolio History",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/portfolio-history/ to view complete documentation on the Portfolio History API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb2c7b15-de0c-4881-9db3-d56be35d9910",
+          "name": "Account Portfolio History",
+          "request": {
+            "name": "Account Portfolio History",
+            "description": {
+              "content": "Returns timeseries data about equity and profit/loss (P/L) of the account in requested timespan.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "portfolio",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "The duration of the data in <number> + <unit>, such as 1D, where <unit> can be D for day, W for week, M for month and A for year. Defaults to 1M."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_end",
+                  "value": "<date>",
+                  "description": "The date the data is returned up to, in “YYYY-MM-DD” format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)"
+                },
+                {
+                  "disabled": false,
+                  "key": "extended_hours",
+                  "value": "<string>",
+                  "description": "If true, include extended hours in the result. This is effective only for timeframe less than 1D."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "621fc2ba-80b0-4a46-8cca-b85b5f173321",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "portfolio",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_end",
+                      "value": "2022-05-15"
+                    },
+                    {
+                      "key": "extended_hours",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": [\n    6052,\n    3207\n  ],\n  \"equity\": [\n    7833.721182964533,\n    1644.3290438577617\n  ],\n  \"profit_loss\": [\n    2387.6572925501137,\n    8738.033737175645\n  ],\n  \"profit_loss_pct\": [\n    7586.1191712322225,\n    3684.2552210182844\n  ],\n  \"base_value\": 2813.3255601744854,\n  \"timeframe\": \"15Min\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "64e09ef0-849e-4749-b27f-0306074b427e",
+      "name": "Watchlists",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/watchlist/ to view complete documentation on the Watchlist API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c4285e1-a241-4400-8d5a-0eb438295c8e",
+          "name": "Watchlists",
+          "request": {
+            "name": "Watchlists",
+            "description": {
+              "content": "Returns the list of watchlists registered under the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ddd55e8-d287-4fe9-b83e-78d5bedfc34c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"3174d6df-7726-44b4-a5bd-7fda5ae6e009\",\n    \"account_id\": \"abe25343-a7ba-4255-bdeb-f7e013e9ee5d\",\n    \"created_at\": \"2022-01-31T21:49:05.14628Z\",\n    \"updated_at\": \"2022-01-31T21:49:05.14628Z\",\n    \"name\": \"Primary Watchlist\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb431ab1-d812-4bb9-9894-5fbcfb8880f5",
+          "name": "Watchlist",
+          "request": {
+            "name": "Watchlist",
+            "description": {
+              "content": "Create a new watchlist with initial set of assets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9dc838a-6648-47f8-b2f6-c1d636ffaf22",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"24709f10-476f-b187-09bf-508bc7e329ef\",\n  \"account_id\": \"5032dac2-4d40-59e5-24ff-78becfd94425\",\n  \"created_at\": \"1975-07-19T03:59:08.945Z\",\n  \"updated_at\": \"1984-03-27T04:25:14.240Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"86241988-abca-a96b-93a0-308e9bb1c061\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": true,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": false\n    },\n    {\n      \"id\": \"66afdd02-cbb0-7ff0-2dcc-79922870f6a7\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f53ee6f-8c39-4347-8506-d40f80aade19",
+          "name": "Get Watchlist by ID",
+          "request": {
+            "name": "Get Watchlist by ID",
+            "description": {
+              "content": "Returns a watchlist identified by the ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) watchlist id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06b0b438-862b-4d24-99f6-deb22a3a4e4d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) watchlist id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"44f5ac20-85eb-14a9-69aa-d1f1d3fd01b8\",\n  \"account_id\": \"cd2a41c4-11d1-97cc-130e-9103b39877c7\",\n  \"created_at\": \"2009-01-26T09:56:57.136Z\",\n  \"updated_at\": \"1985-06-28T07:58:15.385Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"a5462631-9571-08d9-ebb1-090cb09bddbe\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"52f88598-2b67-5848-f9c5-9ffdb632456b\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d1c391d-1cee-4f0e-82c7-4512f3060fee",
+          "name": "Update Watchlist By Id",
+          "request": {
+            "name": "Update Watchlist By Id",
+            "description": {
+              "content": "Update the name and/or content of watchlist",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) watchlist id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0cd60b01-1320-443e-9137-04b3eed5c5a6",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) watchlist id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"44f5ac20-85eb-14a9-69aa-d1f1d3fd01b8\",\n  \"account_id\": \"cd2a41c4-11d1-97cc-130e-9103b39877c7\",\n  \"created_at\": \"2009-01-26T09:56:57.136Z\",\n  \"updated_at\": \"1985-06-28T07:58:15.385Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"a5462631-9571-08d9-ebb1-090cb09bddbe\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"52f88598-2b67-5848-f9c5-9ffdb632456b\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cecf634b-7d88-4315-bfcc-a869ff61fdb3",
+          "name": "Add Asset to Watchlist",
+          "request": {
+            "name": "Add Asset to Watchlist",
+            "description": {
+              "content": "Append an asset for the symbol to the end of watchlist asset list",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) watchlist id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "97d2061f-4623-4ee8-ba82-4f88999222ed",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) watchlist id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"AAPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"44f5ac20-85eb-14a9-69aa-d1f1d3fd01b8\",\n  \"account_id\": \"cd2a41c4-11d1-97cc-130e-9103b39877c7\",\n  \"created_at\": \"2009-01-26T09:56:57.136Z\",\n  \"updated_at\": \"1985-06-28T07:58:15.385Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"a5462631-9571-08d9-ebb1-090cb09bddbe\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"52f88598-2b67-5848-f9c5-9ffdb632456b\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f614039-02a4-4461-9e77-5e596b1cd728",
+          "name": "Delete Watchlist By Id",
+          "request": {
+            "name": "Delete Watchlist By Id",
+            "description": {
+              "content": "Delete a watchlist. This is a permanent deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) watchlist id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae8b7c24-ffb5-4da3-bde4-abc14e341126",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) watchlist id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44a3bd2c-cee3-431f-b338-7a52353e288b",
+          "name": "Get Watchlist by Name",
+          "request": {
+            "name": "Get Watchlist by Name",
+            "description": {
+              "content": "Returns a watchlist by name",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists:by_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) name of the watchlist"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f9419e13-5fb1-44a2-af81-4d6c4818fc0e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists:by_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"44f5ac20-85eb-14a9-69aa-d1f1d3fd01b8\",\n  \"account_id\": \"cd2a41c4-11d1-97cc-130e-9103b39877c7\",\n  \"created_at\": \"2009-01-26T09:56:57.136Z\",\n  \"updated_at\": \"1985-06-28T07:58:15.385Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"a5462631-9571-08d9-ebb1-090cb09bddbe\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"52f88598-2b67-5848-f9c5-9ffdb632456b\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80a59d5c-bf25-46f3-b4eb-ddc36ac0da0f",
+          "name": "Update Watchlist By Name",
+          "request": {
+            "name": "Update Watchlist By Name",
+            "description": {
+              "content": "Update the name and/or content of watchlist",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists:by_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) name of the watchlist"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa85642e-73e3-4cdc-b1cc-949e5e4131a4",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists:by_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"44f5ac20-85eb-14a9-69aa-d1f1d3fd01b8\",\n  \"account_id\": \"cd2a41c4-11d1-97cc-130e-9103b39877c7\",\n  \"created_at\": \"2009-01-26T09:56:57.136Z\",\n  \"updated_at\": \"1985-06-28T07:58:15.385Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"a5462631-9571-08d9-ebb1-090cb09bddbe\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"52f88598-2b67-5848-f9c5-9ffdb632456b\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6099eed9-31ff-4dd6-b1d3-4a88bc00206e",
+          "name": "Add Asset to Watchlist By Name",
+          "request": {
+            "name": "Add Asset to Watchlist By Name",
+            "description": {
+              "content": "Append an asset for the symbol to the end of watchlist asset list",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists:by_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) name of the watchlist"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "985c2e3b-d927-4d0f-830f-c0574329dde1",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists:by_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"AAPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"44f5ac20-85eb-14a9-69aa-d1f1d3fd01b8\",\n  \"account_id\": \"cd2a41c4-11d1-97cc-130e-9103b39877c7\",\n  \"created_at\": \"2009-01-26T09:56:57.136Z\",\n  \"updated_at\": \"1985-06-28T07:58:15.385Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"a5462631-9571-08d9-ebb1-090cb09bddbe\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"52f88598-2b67-5848-f9c5-9ffdb632456b\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c13d6283-ffff-498e-a6a2-1a61f04a6ab2",
+          "name": "Delete Watchlist By Name",
+          "request": {
+            "name": "Delete Watchlist By Name",
+            "description": {
+              "content": "Delete a watchlist. This is a permanent deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists:by_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) name of the watchlist"
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52c17212-4953-44d7-8644-f58bcb17306c",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists:by_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc556b79-0073-4b6c-a15c-63b121fe54a3",
+          "name": "Symbol from Watchlist",
+          "request": {
+            "name": "Symbol from Watchlist",
+            "description": {
+              "content": "Delete one entry for an asset by symbol name",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id",
+                ":symbol"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) Watchlist ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) symbol name to remove from the watchlist content"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14ac4e9b-d334-4926-97c6-0b6bce6dfa7b",
+              "name": "Returns the updated watchlist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) Watchlist ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) symbol name to remove from the watchlist content"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"44f5ac20-85eb-14a9-69aa-d1f1d3fd01b8\",\n  \"account_id\": \"cd2a41c4-11d1-97cc-130e-9103b39877c7\",\n  \"created_at\": \"2009-01-26T09:56:57.136Z\",\n  \"updated_at\": \"1985-06-28T07:58:15.385Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"a5462631-9571-08d9-ebb1-090cb09bddbe\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"52f88598-2b67-5848-f9c5-9ffdb632456b\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": true,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1eb7c281-e02d-44ce-8faf-2d26b0595275",
+      "name": "Account Configurations",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/account-configuration/ to view complete documentation on the Account Configurations API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "27e07840-02aa-4441-b4a9-b5d18a2e77b4",
+          "name": "Account Configurations",
+          "request": {
+            "name": "Account Configurations",
+            "description": {
+              "content": "gets the current account configuration values",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "configurations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44e8cdce-77f6-4d5b-a0f3-ae31b25df629",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "configurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dtbp_check\": \"exit\",\n  \"trade_confirm_email\": \"string\",\n  \"suspend_trade\": false,\n  \"no_shorting\": false,\n  \"fractional_trading\": true,\n  \"max_margin_multiplier\": \"string\",\n  \"pdt_check\": \"entry\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8e1893f-8748-444a-91da-d775f8c978ce",
+          "name": "Account Configurations",
+          "request": {
+            "name": "Account Configurations",
+            "description": {
+              "content": "Updates and returns the current account configuration values",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "configurations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dtbp_check\": \"<string>\",\n  \"trade_confirm_email\": \"<string>\",\n  \"suspend_trade\": \"<boolean>\",\n  \"no_shorting\": \"<boolean>\",\n  \"fractional_trading\": \"<boolean>\",\n  \"max_margin_multiplier\": \"<string>\",\n  \"pdt_check\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c322af4-8496-4ab4-88ed-d86e76cd2378",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "configurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dtbp_check\": \"<string>\",\n  \"trade_confirm_email\": \"<string>\",\n  \"suspend_trade\": \"<boolean>\",\n  \"no_shorting\": \"<boolean>\",\n  \"fractional_trading\": \"<boolean>\",\n  \"max_margin_multiplier\": \"<string>\",\n  \"pdt_check\": \"entry\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dtbp_check\": \"<string>\",\n  \"trade_confirm_email\": \"<string>\",\n  \"suspend_trade\": \"<boolean>\",\n  \"no_shorting\": \"<boolean>\",\n  \"fractional_trading\": \"<boolean>\",\n  \"max_margin_multiplier\": \"<string>\",\n  \"pdt_check\": \"entry\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4adb0770-fb62-4817-85a1-ff9f2c24a18a",
+      "name": "Account Activities",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-references/trading-api/account-activities/ to view complete documentation on the Account Activities API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "760dd76e-7964-405b-a4e4-7e69b063e09c",
+          "name": "Get account activities of one type",
+          "request": {
+            "name": "Get account activities of one type",
+            "description": {
+              "content": "Returns account activity entries for many types of activities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "description": "The date for which you want to see activities."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<dateTime>",
+                  "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "asc or desc (default desc if unspecified.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The maximum number of entries to return in the response. (See the section on paging above.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The ID of the end of your current page of results. "
+                },
+                {
+                  "disabled": false,
+                  "key": "activity_types",
+                  "value": "<string>",
+                  "description": "A comma-separated list of the activity types to include in the response. If unspecified, activities of all types will be returned. See ActivityType model for values"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa42a950-1d15-4079-a0d5-7422a83c4df6",
+              "name": "returns an array of Account activities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "activity_types",
+                      "value": "FILL"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"activity_type\": \"FEE\",\n    \"id\": \"string\",\n    \"cum_qty\": \"string\",\n    \"leaves_qty\": \"string\",\n    \"price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"symbol\": \"AAPL\",\n    \"transaction_time\": \"1955-02-23T22:35:14.135Z\",\n    \"order_id\": \"13f9cf11-d084-20d2-8494-1ac8b69f8086\",\n    \"type\": \"fill\",\n    \"order_status\": \"new\"\n  },\n  {\n    \"activity_type\": \"SC\",\n    \"id\": \"string\",\n    \"cum_qty\": \"string\",\n    \"leaves_qty\": \"string\",\n    \"price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"symbol\": \"AAPL\",\n    \"transaction_time\": \"1996-06-17T20:11:33.818Z\",\n    \"order_id\": \"21b4545f-428b-0f44-1350-e5b8d5896f36\",\n    \"type\": \"fill\",\n    \"order_status\": \"new\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c97f6ee0-ff61-496b-96b4-e463b9f50156",
+          "name": "Get account activities of one type",
+          "request": {
+            "name": "Get account activities of one type",
+            "description": {
+              "content": "Returns account activity entries for a specific type of activity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "activities",
+                ":activity_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "description": "The date for which you want to see activities."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<dateTime>",
+                  "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "asc or desc (default desc if unspecified.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The maximum number of entries to return in the response. (See the section on paging above.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The ID of the end of your current page of results. "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "activity_type",
+                  "description": "(Required) The activity type you want to view entries for. A list of valid activity types can be found at the bottom of this page."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "597e6f8d-d8cd-468a-9361-1ea6531113a7",
+              "name": "returns an array of Account activities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "activities",
+                    ":activity_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "activity_type",
+                      "description": "(Required) The activity type you want to view entries for. A list of valid activity types can be found at the bottom of this page."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"activity_type\": \"FEE\",\n    \"id\": \"string\",\n    \"cum_qty\": \"string\",\n    \"leaves_qty\": \"string\",\n    \"price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"symbol\": \"AAPL\",\n    \"transaction_time\": \"1955-02-23T22:35:14.135Z\",\n    \"order_id\": \"13f9cf11-d084-20d2-8494-1ac8b69f8086\",\n    \"type\": \"fill\",\n    \"order_status\": \"new\"\n  },\n  {\n    \"activity_type\": \"SC\",\n    \"id\": \"string\",\n    \"cum_qty\": \"string\",\n    \"leaves_qty\": \"string\",\n    \"price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"symbol\": \"AAPL\",\n    \"transaction_time\": \"1996-06-17T20:11:33.818Z\",\n    \"order_id\": \"21b4545f-428b-0f44-1350-e5b8d5896f36\",\n    \"type\": \"fill\",\n    \"order_status\": \"new\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1d6e26ed-d2ed-4da2-8167-68278651678a",
+      "name": "Calendar",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-references/trading-api/calendar/ to view complete documentation on the Market Calendar API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "565a8490-7168-43c1-a4fa-a3e0d9a73c44",
+          "name": "Get Market Calendar info",
+          "request": {
+            "name": "Get Market Calendar info",
+            "description": {
+              "content": "Returns the market calendar.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "calendar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "The first date to retrieve data for (inclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "The last date to retrieve data for (inclusive)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76e917c5-1098-45a6-a200-d003d3794384",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "calendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"date\": \"string\",\n    \"open\": \"string\",\n    \"close\": \"string\",\n    \"session_open\": \"string\",\n    \"session_close\": \"string\"\n  },\n  {\n    \"date\": \"string\",\n    \"open\": \"string\",\n    \"close\": \"string\",\n    \"session_open\": \"string\",\n    \"session_close\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5f220cd1-dd3b-4f20-a727-9795c9875a66",
+      "name": "Clock",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-references/trading-api/clock/ to view complete documentation on the Market Clock API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f657aa8e-d5c5-4b40-82a6-d1b8856ff7db",
+          "name": "Get Market Clock info",
+          "request": {
+            "name": "Get Market Clock info",
+            "description": {
+              "content": "The clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close.\n\nReturns the market clock.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "clock"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0543abf3-332a-424f-8a89-39badec95cbe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "clock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "APCA-API-KEY-ID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2006-11-06T16:59:14.759Z\",\n  \"is_open\": true,\n  \"next_open\": \"1993-10-11T10:07:47.076Z\",\n  \"next_close\": \"2020-01-25T11:53:08.639Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://paper-api.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "APCA-API-KEY-ID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7fa94a3f-0d3b-45a8-8766-4033b97a95b5",
+    "name": "Trader API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Alpaca's Trading API is a modern platform for algorithmic trading.\n\nFor complete documentation on the Trading API and to obtain your keys head to https://alpaca.markets/docs/api-documentation/api-v2/. Once you have your keys, head to the environments tab to quickly get started.\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

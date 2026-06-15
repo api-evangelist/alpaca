@@ -1,0 +1,757 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trader API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "APCA-API-KEY-ID",
+      "value": "{{APCA-API-KEY-ID}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/account"
+          },
+          "docs": "Returns the account associated with the API key."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "All Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/orders",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Order status to be queried. open, closed or all. Defaults to open."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of orders in response. Defaults to 50 and max is 500."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The response will include only ones submitted after this timestamp (exclusive.)"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The response will include only ones submitted until this timestamp (exclusive.)"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+              },
+              {
+                "name": "nested",
+                "value": "",
+                "type": "query",
+                "description": "If true, the result will roll up multi-leg orders under the legs field of primary order."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of symbols to filter by (ex. “AAPL,TSLA,MSFT”). A currency pair is required for crypto orders (ex. “BTCUSD,BCHUSD,LTCUSD,ETCUSD”)."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of orders for the account, filtered by the supplied query parameters."
+        },
+        {
+          "info": {
+            "name": "Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://paper-api.alpaca.markets/v2/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Places a new order for the given account. An order request may be rejected if the account is not authorized for trading, or if the tradable balance is insufficient to fill the order.."
+        },
+        {
+          "info": {
+            "name": "All Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://paper-api.alpaca.markets/v2/orders"
+          },
+          "docs": "Attempts to cancel all open orders. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request."
+        },
+        {
+          "info": {
+            "name": "Order by Order ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "order id"
+              },
+              {
+                "name": "nested",
+                "value": "",
+                "type": "query",
+                "description": "If true, the result will roll up multi-leg orders under the legs field of primary order."
+              }
+            ]
+          },
+          "docs": "Retrieves a single order for the given order_id."
+        },
+        {
+          "info": {
+            "name": "Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://paper-api.alpaca.markets/v2/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "order id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces a single order with updated parameters. Each parameter overrides the corresponding attribute of the existing order. The other attributes remain the same as the existing order.\n\nA success return code from a replaced order does NOT guarantee the existing open order has been replaced. If the existing open order is filled before the replacing (new) order reaches the execution venue, the replacing (new) order is rejected, and these events are sent in the trade_updates stream channel. \n\nWhile"
+        },
+        {
+          "info": {
+            "name": "Order by Order ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://paper-api.alpaca.markets/v2/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "order id"
+              }
+            ]
+          },
+          "docs": "Attempts to cancel an Open Order. If the order is no longer cancelable, the request will be rejected with status 422; otherwise accepted with return status 204."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Positions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "All Open Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/positions"
+          },
+          "docs": "The positions API provides information about an account’s current open positions. The response will include information such as cost basis, shares traded, and market value, which will be updated live as price information is updated. Once a position is closed, it will no longer be queryable through this API\n\nRetrieves a list of the account’s open positions"
+        },
+        {
+          "info": {
+            "name": "All Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://paper-api.alpaca.markets/v2/positions",
+            "params": [
+              {
+                "name": "cancel_orders",
+                "value": "",
+                "type": "query",
+                "description": "If true is specified, cancel all open orders before liquidating all positions."
+              }
+            ]
+          },
+          "docs": "Closes (liquidates) all of the account’s open long and short positions. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request."
+        },
+        {
+          "info": {
+            "name": "Open Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/positions/:symbol_or_asset_id",
+            "params": [
+              {
+                "name": "symbol_or_asset_id",
+                "value": "",
+                "type": "path",
+                "description": "symbol or assetId"
+              }
+            ]
+          },
+          "docs": "Retrieves the account’s open position for the given symbol or assetId."
+        },
+        {
+          "info": {
+            "name": "Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://paper-api.alpaca.markets/v2/positions/:symbol_or_asset_id",
+            "params": [
+              {
+                "name": "symbol_or_asset_id",
+                "value": "",
+                "type": "path",
+                "description": "symbol or assetId"
+              },
+              {
+                "name": "qty",
+                "value": "",
+                "type": "query",
+                "description": "the number of shares to liquidate. Can accept up to 9 decimal points. Cannot work with percentage"
+              },
+              {
+                "name": "percentage",
+                "value": "",
+                "type": "query",
+                "description": "percentage of position to liquidate. Must be between 0 and 100. Would only sell fractional if position is originally fractional. Can accept up to 9 decimal points. Cannot work with qty"
+              }
+            ]
+          },
+          "docs": "Closes (liquidates) the account’s open position for the given symbol. Works for both long and short positions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Portfolio History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Account Portfolio History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/account/portfolio/history",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "The duration of the data in <number> + <unit>, such as 1D, where <unit> can be D for day, W for week, M for month and A for year. Defaults to 1M."
+              },
+              {
+                "name": "timeframe",
+                "value": "",
+                "type": "query",
+                "description": "The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D."
+              },
+              {
+                "name": "date_end",
+                "value": "",
+                "type": "query",
+                "description": "The date the data is returned up to, in “YYYY-MM-DD” format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)"
+              },
+              {
+                "name": "extended_hours",
+                "value": "",
+                "type": "query",
+                "description": "If true, include extended hours in the result. This is effective only for timeframe less than 1D."
+              }
+            ]
+          },
+          "docs": "Returns timeseries data about equity and profit/loss (P/L) of the account in requested timespan."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Watchlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists"
+          },
+          "docs": "Returns the list of watchlists registered under the account."
+        },
+        {
+          "info": {
+            "name": "Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new watchlist with initial set of assets."
+        },
+        {
+          "info": {
+            "name": "Get Watchlist by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "watchlist id"
+              }
+            ]
+          },
+          "docs": "Returns a watchlist identified by the ID."
+        },
+        {
+          "info": {
+            "name": "Add Asset to Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "watchlist id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append an asset for the symbol to the end of watchlist asset list"
+        },
+        {
+          "info": {
+            "name": "Update Watchlist By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "watchlist id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the name and/or content of watchlist"
+        },
+        {
+          "info": {
+            "name": "Delete Watchlist By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "watchlist id"
+              }
+            ]
+          },
+          "docs": "Delete a watchlist. This is a permanent deletion."
+        },
+        {
+          "info": {
+            "name": "Get Watchlist by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists:by_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name of the watchlist"
+              }
+            ]
+          },
+          "docs": "Returns a watchlist by name"
+        },
+        {
+          "info": {
+            "name": "Add Asset to Watchlist By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists:by_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name of the watchlist"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append an asset for the symbol to the end of watchlist asset list"
+        },
+        {
+          "info": {
+            "name": "Update Watchlist By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists:by_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name of the watchlist"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the name and/or content of watchlist"
+        },
+        {
+          "info": {
+            "name": "Delete Watchlist By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists:by_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name of the watchlist"
+              }
+            ]
+          },
+          "docs": "Delete a watchlist. This is a permanent deletion."
+        },
+        {
+          "info": {
+            "name": "Symbol from Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://paper-api.alpaca.markets/v2/watchlists/:watchlist_id/:symbol",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Watchlist ID"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "symbol name to remove from the watchlist content"
+              }
+            ]
+          },
+          "docs": "Delete one entry for an asset by symbol name"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account Configurations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Account Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/account/configurations"
+          },
+          "docs": "gets the current account configuration values"
+        },
+        {
+          "info": {
+            "name": "Account Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://paper-api.alpaca.markets/v2/account/configurations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates and returns the current account configuration values"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account Activities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account activities of one type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/account/activities",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date for which you want to see activities."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "asc or desc (default desc if unspecified.)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return in the response. (See the section on paging above.)"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the end of your current page of results. "
+              },
+              {
+                "name": "activity_types",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of the activity types to include in the response. If unspecified, activities of all types will be returned. See ActivityType model for values"
+              }
+            ]
+          },
+          "docs": "Returns account activity entries for many types of activities."
+        },
+        {
+          "info": {
+            "name": "Get account activities of one type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/account/activities/:activity_type",
+            "params": [
+              {
+                "name": "activity_type",
+                "value": "",
+                "type": "path",
+                "description": "The activity type you want to view entries for. A list of valid activity types can be found at the bottom of this page."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date for which you want to see activities."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "asc or desc (default desc if unspecified.)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return in the response. (See the section on paging above.)"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the end of your current page of results. "
+              }
+            ]
+          },
+          "docs": "Returns account activity entries for a specific type of activity."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Calendar",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Market Calendar info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/calendar",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The first date to retrieve data for (inclusive)"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The last date to retrieve data for (inclusive)"
+              }
+            ]
+          },
+          "docs": "Returns the market calendar."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Clock",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Market Clock info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://paper-api.alpaca.markets/v2/clock"
+          },
+          "docs": "The clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close.\n\nReturns the market clock."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,338 @@
+{
+  "item": [
+    {
+      "id": "7c0c489b-5f7a-418e-8612-c2902b36660c",
+      "name": "OAuth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "a8a550dc-6356-40bb-ae29-9b2034b02f47",
+      "name": "Crypto Pricing Data API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "52f5f6aa-56f2-49d5-9bf4-e2d64502c101",
+      "name": "Stock Pricing Data API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cde4d5d6-7092-416f-b02f-196559a72da2",
+          "name": "Bars",
+          "request": {
+            "name": "Bars",
+            "description": {
+              "content": "The bars API returns aggregate historical data for the requested securities",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "bars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Apca-Api-Key-Id",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "Apca-Api-Secret-Key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c63a536c-4536-4041-b63a-b0050cbadfcb",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "bars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2020-04-01T0:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-08-26T11:00:00Z"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "1Min"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Apca-Api-Key-Id",
+                    "value": "{{APCA_API_KEY_ID}}",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Apca-Api-Secret-Key",
+                    "value": "{{APCA_API_SECRET_KEY}}",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23615fe4-86dc-4e85-b246-d59da43b12d9",
+          "name": "Trades",
+          "request": {
+            "name": "Trades",
+            "description": {
+              "content": "The Trades API provides historcial trade data for a given ticker symbol on a specified date. Returns trades for the queried stock signal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Apca-Api-Key-Id",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "Apca-Api-Secret-Key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1506072-1ff2-4d24-a1e3-c081b37bcb34",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2020-04-01T0:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-08-26T11:00:00Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Apca-Api-Key-Id",
+                    "value": "{{APCA_API_KEY_ID}}",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Apca-Api-Secret-Key",
+                    "value": "{{APCA_API_SECRET_KEY}}",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://data.alpaca.markets/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7625e0fe-9376-4fc3-841c-013d5b3eb82d",
+    "name": "OAuth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OAuth API allows you to request market data and manage portfolios on behalf of your end-users. \n\nFor more information, visit https://alpaca.markets/docs/build-apps_services-with-alpaca/oauth-guide/.\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

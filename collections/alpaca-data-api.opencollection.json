@@ -1,0 +1,1290 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Market Data API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "APCA-API-KEY-ID",
+      "value": "{{APCA-API-KEY-ID}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stock Pricing Data API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bar data for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/bars",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "timeframe",
+                "value": "",
+                "type": "query",
+                "description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "adjustment",
+                "value": "",
+                "type": "query",
+                "description": "specifies the corporate action adjustment(s) for bars data"
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Multi Bars API returns aggregate historical data for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Bar timestamp. This means that you are likely to see only one symbol in your first response if there are enough Bars for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Bars were found for them"
+        },
+        {
+          "info": {
+            "name": "Get Latest Bar data for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/bars/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Bars API returns aggregate historical data for the requested security. Returns the latest bar data for the queried stock symbols."
+        },
+        {
+          "info": {
+            "name": "Bars",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/:symbol/bars",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "timeframe",
+                "value": "",
+                "type": "query",
+                "description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              },
+              {
+                "name": "adjustment",
+                "value": "",
+                "type": "query",
+                "description": "specifies the corporate action adjustment(s) for bars data"
+              }
+            ]
+          },
+          "docs": "The Bars API returns aggregate historical data for the requested security. Returns bars for the queried stock symbol."
+        },
+        {
+          "info": {
+            "name": "Get Latest Bars for Symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/:symbol/bars/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Bars API returns aggregate historical data for the requested security. Returns the latest bar data for the queried stock symbol."
+        },
+        {
+          "info": {
+            "name": "Get Trade data for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/trades",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Multi Trades API provides historical trade data for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for"
+        },
+        {
+          "info": {
+            "name": "Get Latest Trades data for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/trades/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "Returns the latest trades data for the queried stock symbols."
+        },
+        {
+          "info": {
+            "name": "Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/:symbol/trades",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Trades API provides historical trade data for a given ticker symbol on a specified date. Returns trades for the queried stock signal."
+        },
+        {
+          "info": {
+            "name": "Latest Trade",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/:symbol/trades/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Latest Trade API provides the latest trade data for a given ticker symbol."
+        },
+        {
+          "info": {
+            "name": "Get Quotes for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/quotes",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Multi Quotes API provides NBBO quotes for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them."
+        },
+        {
+          "info": {
+            "name": "Get Latest Quotes for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/quotes/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "Returns the latest quotes data for the queried stock symbols."
+        },
+        {
+          "info": {
+            "name": "Get Quotes for stock symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/:symbol/quotes",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Quotes API provides NBBO quotes for a single given ticker symbol at a specified date. Returns quotes (NBBOs) for the querried stock symbol."
+        },
+        {
+          "info": {
+            "name": "Get Latest Quote for stock symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/:symbol/quotes/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Latest Quote API provides the latest quote data for a given ticker symbol."
+        },
+        {
+          "info": {
+            "name": "Get Snapshots for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/snapshots",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Snapshot API for multiple tickers provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for the given ticker symbols."
+        },
+        {
+          "info": {
+            "name": "Get a Snapshot for a stock symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/:symbol/snapshot",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Snapshot API for one ticker provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for a given ticker symbol. This endpoint returns the snapshot for the requested security."
+        },
+        {
+          "info": {
+            "name": "Get List of supported exchanges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/meta/exchanges"
+          },
+          "docs": "Returns a json object representing the exchanges we support. The keys are the short form codes you will see in our responses and the values are their respective full names."
+        },
+        {
+          "info": {
+            "name": "Get list of Conditions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v2/stocks/meta/conditions/:type",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "either \"trade\" or \"quote\""
+              },
+              {
+                "name": "tape",
+                "value": "",
+                "type": "query",
+                "description": "What kind of conditions to retrieve, \"A\" and \"B\" return CTS, where \"C\" will give you UTP "
+              }
+            ]
+          },
+          "docs": "Each feed/exchange uses its own set of codes to identify trade and quote conditions, so the same condition may have a different code depending on the originator of the data.\n\nSee [Our documentation](https://alpaca.markets/docs/market-data/#conditions) for more information"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Crypto Pricing Data API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Trade data for multiple crypto symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/trades",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              }
+            ]
+          },
+          "docs": "The Multi Trades API provides historical trade data for a list of given crypto symbols on a specified date. Returns trades for the queried crypto symbols.\n\nReturned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the ne"
+        },
+        {
+          "info": {
+            "name": "Get Latest Trade data for multiple Crypto symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/trades/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "Provides latest trade data for a list of given crypto symbols. "
+        },
+        {
+          "info": {
+            "name": "Get Trade data for a crypto symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/:symbol/trades",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              }
+            ]
+          },
+          "docs": "The Trades API provides historical trade data for a given crypto symbol on a specified date. Returns trades for the queried crypto symbol"
+        },
+        {
+          "info": {
+            "name": "Latest Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/:symbol/trades/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "The Latest Trades API provides the latest historical trade data for a given crypto symbol. Returns trades for the queried crypto symbol."
+        },
+        {
+          "info": {
+            "name": "Get Bars for multiple Crypto symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/bars",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "timeframe",
+                "value": "",
+                "type": "query",
+                "description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "returns aggregate historical data for the requested crypto symbols.\n\nReturned results are sorted by symbol first then by Bar timestamp. This means that you are likely to see only one symbol in your first response if there are enough Bars for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Bars were found for them."
+        },
+        {
+          "info": {
+            "name": "Get Latest Bars for multiple Crypto symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/bars/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "returns latest historical data for the requested crypto symbols for a specific exchange"
+        },
+        {
+          "info": {
+            "name": "Get Bar data for a crypto symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/:symbol/bars",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "timeframe",
+                "value": "",
+                "type": "query",
+                "description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              }
+            ]
+          },
+          "docs": "The Bars API returns aggregate historical data for the requested securities.. Returns bars for the queried crypto symbol"
+        },
+        {
+          "info": {
+            "name": "Get Latest Bar data for a Crypto symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/:symbol/bars/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "Gets latest historical bar data for the requested crypto symbol for a specific exchange"
+        },
+        {
+          "info": {
+            "name": "Get Quotes for multiple crypto symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/quotes",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              }
+            ]
+          },
+          "docs": "The Multi Quotes API provides quotes for a list of given crypto symbols at a specified date. Returns quotes for each of  the queried crypto symbols.\n\nReturned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next sym"
+        },
+        {
+          "info": {
+            "name": "Get Latest Quotes for multiple Crypto symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/quotes/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "Provides latest quotes for a list of given crypto symbols."
+        },
+        {
+          "info": {
+            "name": "Get Quotes for crypto symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/:symbol/quotes",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              }
+            ]
+          },
+          "docs": "The Quotes API provides quotes for a given crypto symbol at a specified date. Returns quotes for the queried crypto symbol"
+        },
+        {
+          "info": {
+            "name": "Latest Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/:symbol/quotes/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "Returns latest quote for the queried crypto symbol"
+        },
+        {
+          "info": {
+            "name": "Get Snapshots for multiple crypto symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/snapshots",
+            "params": [
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              }
+            ]
+          },
+          "docs": "The Multi Snapshot API returns the latest trade, latest quote, minute bar daily bar, and previous daily bar data for list of given crypto symbols."
+        },
+        {
+          "info": {
+            "name": "Get a Snapshot for a crypto symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/:symbol/snapshot",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "The Snapshot API returns the latest trade, latest quote, minute bar daily bar, and previous daily bar data for a given crypto symbol."
+        },
+        {
+          "info": {
+            "name": "Get Latest XBBO for multiple crypto symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/xbbos/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "Returns the latest XBBO for a given list crypto symbols that calculates the Best Bid and Offer across multiple exchanges. If exchanges is not specified then only the exchanges that can be traded on Alpaca are included in the calculation."
+        },
+        {
+          "info": {
+            "name": "Get Latest XBBO for a single crypto symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/:symbol/xbbo/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`"
+              }
+            ]
+          },
+          "docs": "Returns the XBBO for a crypto symbol that calculates the Best Bid and Offer across multiple exchanges. If exchanges is not specified then only the exchanges that can be traded on Alpaca are included in the calculation."
+        },
+        {
+          "info": {
+            "name": "Get list of crypto spreads per exchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/crypto/meta/spreads"
+          },
+          "docs": "Get list of crypto spreads for the different exchanges Alpaca supports in basis points."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "News",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "News API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/news",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "sort",
+                "value": "DESC",
+                "type": "query",
+                "description": "Sort articles by updated date. Options: DESC, ASC"
+              },
+              {
+                "name": "include_content",
+                "value": "",
+                "type": "query",
+                "description": "Boolean indicator to include content for news articles (if available)"
+              },
+              {
+                "name": "exclude_contentless",
+                "value": "",
+                "type": "query",
+                "description": "Boolean indicator to exclude news articles that do not contain content "
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              }
+            ]
+          },
+          "docs": "Returns latest news articles across stocks and crypto. By default returns latest 10 news articles."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Screener",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Top Market Movers by Market type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/screener/:market_type/movers",
+            "params": [
+              {
+                "name": "market_type",
+                "value": "",
+                "type": "path",
+                "description": "Screen specific market (stocks or crypto)"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "Number of top market movers to fetch (gainers and losers). Will return number top for each. By default 10 gainers and 10 losers."
+              }
+            ]
+          },
+          "docs": "Returns top market movers for stocks. By default will return top 5 market gainers and losers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Logo",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Logo for symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.alpaca.markets/v1beta1/logos/:crypto_or_stock_symbol",
+            "params": [
+              {
+                "name": "crypto_or_stock_symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto or stock symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "placeholder",
+                "value": "",
+                "type": "query",
+                "description": "If true then the api will generate a placeholder image if no logo was found. Defaults to true"
+              }
+            ]
+          },
+          "docs": "Returns logo image resource for provided symbol."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

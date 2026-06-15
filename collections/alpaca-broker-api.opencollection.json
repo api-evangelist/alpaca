@@ -1,0 +1,1558 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Pass space-delimited tokens. The response will contain accounts that match with each of the tokens (logical AND). A match means the token is present in either the account’s associated account number, phone number, name, or e-mail address (logical OR)."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "See the AccountStatus model for values"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+              },
+              {
+                "name": "entities",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited entity names to include in the response"
+              }
+            ]
+          },
+          "docs": "Retrieves all accounts found by the query'"
+        },
+        {
+          "info": {
+            "name": "Create an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an account application with KYC information. This will create a trading account for the end user. The account status may or may not be ACTIVE immediately and you will receive account status updates on the event API. "
+        },
+        {
+          "info": {
+            "name": "Get an account by Id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ]
+          },
+          "docs": "You can query a specific account that you submitted to Alpaca by passing into the query the account_id associated with the account you’re retrieving.\n"
+        },
+        {
+          "info": {
+            "name": "Update an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This operation updates account information.\n\nIf all parameters are valid and updates have been made, it returns with status code 200. The response is the account model."
+        },
+        {
+          "info": {
+            "name": "Request to close an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ]
+          },
+          "docs": "This operation closes an active account."
+        },
+        {
+          "info": {
+            "name": "Upload a document to an already existing account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/documents/upload",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload a document to be attached to an account.\n\nDocuments are binary objects whose contents are encoded in base64. Each encoded content size is limited to 10MB if you use Alpaca for KYCaaS. If you perform your own KYC there are no document size limitations."
+        },
+        {
+          "info": {
+            "name": "Delete a Bank Relationship for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/recipient_banks/:bank_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "bank_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "If successful, deletes Bank Relationship for an account"
+        },
+        {
+          "info": {
+            "name": "Request to close a transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/transfers/:transfer_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "path",
+                "description": "Tranfer identifier"
+              }
+            ]
+          },
+          "docs": "Request to close a transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve account activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/activities",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "id of a single account to filter by"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported. Cannot be used with date."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return in the response"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The Activity ID of the end of your current page of results. "
+              }
+            ]
+          },
+          "docs": "Returns an array of Activities\n\nNotes:\n* Pagination is handled using the `page_token` and `page_size` parameters.\n* `page_token` represents the ID of the end of your current page of results.\n  for example if in your first response the id of the last Activiy item returned in the array was `20220203000000000::045b3b8d-c566-4bef-b741-2bf598dd6ae7`, you'd pass that value as `page_token` to get the next page of results\n\n* If specified with a `direction` of `desc`, for example, the results will end be"
+        },
+        {
+          "info": {
+            "name": "Retrieve specific account activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/activities/:activity_type",
+            "params": [
+              {
+                "name": "activity_type",
+                "value": "",
+                "type": "path",
+                "description": "see ActivityType model for details about what the different types mean"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "id of a single account to filter by"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return in the response"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the end of your current page of results"
+              }
+            ]
+          },
+          "docs": "Retrieves an Array of Activies by type\n\nNotes:\n* Pagination is handled using the `page_token` and `page_size` parameters.\n* `page_token` represents the ID of the end of your current page of results.\n  for example if in your first response the id of the last Activiy item returned in the array was `20220203000000000::045b3b8d-c566-4bef-b741-2bf598dd6ae7`, you'd pass that value as `page_token` to get the next page of results\n\n* If specified with a `direction` of `desc`, for example, the results wil"
+        },
+        {
+          "info": {
+            "name": "Retrieve ACH Relationships for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/ach_relationships",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated status values"
+              }
+            ]
+          },
+          "docs": "Returns a list of ACH Relationships for an account"
+        },
+        {
+          "info": {
+            "name": "Create an ACH Relationship",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/ach_relationships",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new ACHRelationship for an account\n\nIf successful, will return 200 code with a newly created ACH Relationship entity."
+        },
+        {
+          "info": {
+            "name": "Delete an existing ACH relationship",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/ach_relationships/:ach_relationship_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "ach_relationship_id",
+                "value": "",
+                "type": "path",
+                "description": "ACH relationship identifier"
+              }
+            ]
+          },
+          "docs": "Delete an existing ACH relationship for an account"
+        },
+        {
+          "info": {
+            "name": "Retrieve trading details for an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/account",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ]
+          },
+          "docs": "As a broker you can view more trading details about your users.\n\nThe response is a Trading Account model."
+        },
+        {
+          "info": {
+            "name": "Subscribe to account status events (SSE).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/events/accounts/status",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "since_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Events API provide event push as well as historical queries via SSE (server sent events).\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can’t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will not return any historic data\n- if `until` or `until_id` reached stream will end (status 20"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return a list of account documents.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/documents",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "optional date value to filter the list (inclusive)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "optional date value to filter the list (inclusive)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "See DocumentType model for reference and explanation of values"
+              }
+            ]
+          },
+          "docs": "This endpoint allows you to query all the documents that belong to a certain account. You can filter by date, or type of document."
+        },
+        {
+          "info": {
+            "name": "Download a document file that belongs to an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/documents/:document_id/download",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Document identifier."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This endpoint allows you to download a document identified by the document_id passed in the header. The returned document is in PDF format.\n\nThe operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.\n"
+        },
+        {
+          "info": {
+            "name": "Download a document file directly",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Document identifier."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "The operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Funding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve bank relationships for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/recipient_banks",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bank_name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves Bank Relationships for an account"
+        },
+        {
+          "info": {
+            "name": "Create a Bank Relationship for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/recipient_banks",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If successful, retrieves Bank Relationships for an account"
+        },
+        {
+          "info": {
+            "name": "Return a list of transfers for an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/transfers",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "INCOMING or OUTGOING"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "You can query a list of transfers for an account.\n\n\nYou can filter requested transfers by values such as direction and status.\n"
+        },
+        {
+          "info": {
+            "name": "Request a new transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/transfers",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new transfer to an account to fund it.\n\nIn the sandbox environment, you can instantly deposit to or withdraw from an account with a virtual money amount. In the production environment, this endpoint is used only for requesting an outgoing (withdrawal) wire transfer at this moment. For the wire transfer (in production), you need to create a bank resource first using the Bank API. For more on how to fund an account in sandbox please check out this tutorial [here](https://alpaca.markets/le"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Trading",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List open positions for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/positions",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ]
+          },
+          "docs": "List open positions for an account"
+        },
+        {
+          "info": {
+            "name": "Close All Positions for an Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/positions",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "cancel_orders",
+                "value": "",
+                "type": "query",
+                "description": "If true is specified, cancel all open orders before liquidating all positions."
+              }
+            ]
+          },
+          "docs": "Closes (liquidates) all of the account’s open long and short positions. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request."
+        },
+        {
+          "info": {
+            "name": "Get an Open Position for account by Symbol or AssetId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/positions/:symbol_or_asset_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "symbol_or_asset_id",
+                "value": "",
+                "type": "path",
+                "description": "The symbol or asset_id "
+              }
+            ]
+          },
+          "docs": "Retrieves the account’s open position for the given symbol or asset_id."
+        },
+        {
+          "info": {
+            "name": "Close a Position for an Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/positions/:symbol_or_asset_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "symbol_or_asset_id",
+                "value": "",
+                "type": "path",
+                "description": "The symbol or asset_id "
+              },
+              {
+                "name": "qty",
+                "value": "",
+                "type": "query",
+                "description": "Optional the number of shares to liquidate. Can accept up to 9 decimal points. Cannot work with percentage"
+              },
+              {
+                "name": "percentage",
+                "value": "",
+                "type": "query",
+                "description": "percentage of position to liquidate. Must be between 0 and 100. Would only sell fractional if position is originally fractional. Can accept up to 9 decimal points. Cannot work with qty"
+              }
+            ]
+          },
+          "docs": "Closes (liquidates) the account’s open position for the given symbol. Works for both long and short positions."
+        },
+        {
+          "info": {
+            "name": "Retrieves a single order for the given order_id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/orders/:order_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves a single order for the given order_id."
+        },
+        {
+          "info": {
+            "name": "Replaces a single order with updated parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/orders/:order_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces a single order with updated parameters. Each parameter overrides the corresponding attribute of the existing order. The other attributes remain the same as the existing order.\n\nA success return code from a replaced order does NOT guarantee the existing open order has been replaced. If the existing open order is filled before the replacing (new) order reaches the execution venue, the replacing (new) order is rejected, and these events are sent in the trade_updates stream channel found [h"
+        },
+        {
+          "info": {
+            "name": "Attempts to cancel an open order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/orders/:order_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier."
+              }
+            ]
+          },
+          "docs": "Attempts to cancel an open order. If the order is no longer cancelable (for example if the status is \"filled\"), the server will respond with status 422, and reject the request.\n\nUpon acceptance of the cancel request, it returns status 204."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of orders for the account, filtered by the supplied query parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/orders",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Order status to be queried. open, closed or all. Defaults to open."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of orders in response. Defaults to 50 and max is 500."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The response will include only ones submitted after this timestamp (exclusive.)"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The response will include only ones submitted until this timestamp (exclusive.)"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+              },
+              {
+                "name": "nested",
+                "value": "",
+                "type": "query",
+                "description": "If true, the result will roll up multi-leg orders under the legs field of primary order."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of symbols to filter by."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of orders for the account, filtered by the supplied query parameters.\n\nEndpoint defaults to open orders if no parameters are provided."
+        },
+        {
+          "info": {
+            "name": "Create an order for an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/orders",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an order for an account."
+        },
+        {
+          "info": {
+            "name": "Attempts to cancel all open orders. A response will be provided for each order that is attempted to be cancelled.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/orders",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ]
+          },
+          "docs": "Attempts to cancel all open orders. A response will be provided for each order that is attempted to be cancelled."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/assets",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Asset status to filter by, will default to `all`"
+              },
+              {
+                "name": "asset_class",
+                "value": "",
+                "type": "query",
+                "description": "Asset class to filter by, `us_equity` or `crypto`. Defaults to `us_equity`"
+              }
+            ]
+          },
+          "docs": "Returns all assets"
+        },
+        {
+          "info": {
+            "name": "Retrieve an asset by UUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/assets/:symbol_or_asset_id",
+            "params": [
+              {
+                "name": "symbol_or_asset_id",
+                "value": "",
+                "type": "path",
+                "description": "you can use either the asset's Id or the symbol to search"
+              }
+            ]
+          },
+          "docs": "Returns the requested asset, if found"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Calendar",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query market calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/calendar",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The first date to retrieve data for. (Inclusive) in YYYY-MM-DD format"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The last date to retrieve data for. (Inclusive) in YYYY-MM-DD format"
+              }
+            ]
+          },
+          "docs": "The calendar API serves the full list of market days from 1970 to 2029. It can also be queried by specifying a start and/or end time to narrow down the results. In addition to the dates, the response also contains the specific open and close times for the market days, taking into account early closures."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Clock",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query market clock",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/clock"
+          },
+          "docs": "The Clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Journals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to journal events (SSE).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/events/journals/status",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "since_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to journal status updates as they get processed by our backoffice.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can’t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will no"
+        },
+        {
+          "info": {
+            "name": "Return a list of requested journals.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/journals",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "By journal creation date. Format: 2020-01-01"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "By journal creation date. Format: 2020-01-01"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "See the JournalStatus model for more info"
+              },
+              {
+                "name": "entry_type",
+                "value": "",
+                "type": "query",
+                "description": "JNLC or JNLS"
+              },
+              {
+                "name": "to_account",
+                "value": "",
+                "type": "query",
+                "description": "The account id that received the journal"
+              },
+              {
+                "name": "from_account",
+                "value": "",
+                "type": "query",
+                "description": "The account id that initiated the journal"
+              }
+            ]
+          },
+          "docs": "Returns an array of journal objects."
+        },
+        {
+          "info": {
+            "name": "Create a Journal.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/journals",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A journal can be JNLC (move cash) or JNLS (move shares), dictated by `entry_type`. Generally, journal requests are subject to approval and starts from the `pending` status. The status changes are propagated through the Event API. Under certain conditions agreed for the partner, such journal transactions that meet the criteria are executed right away.\n"
+        },
+        {
+          "info": {
+            "name": "Cancel a pending journal.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/journals/:journal_id",
+            "params": [
+              {
+                "name": "journal_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "You can only delete a journal if the journal is still in a pending state, if a journal is executed you will not be able to delete. The alternative is to create a mirror journal entry to reverse the flow of funds."
+        },
+        {
+          "info": {
+            "name": "Create a Batch Journal Transaction (One-to-Many)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/journals/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You can create a batch of journal requests by using this endpoint. This is enabled on JNLC type Journals for now only.\n\nEvery single request must be valid for the entire batch operation to succeed.\n\nIn the case of a successful request, the response will contain an array of journal objects with an extra attribute error_message in the case when a specific account fails to receive a journal."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to Transfer Events (SSE)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/events/transfers/status",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "since_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to transfer status updates as they get processed by our backoffice, for both end-user and firm accounts.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can’t be used at the same time\nBehavior:\n- if `since` or"
+        },
+        {
+          "info": {
+            "name": "Subscribe to Trade Events (SSE)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/events/trades",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "since_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to events related to trade updates. Most market trades sent during market hours are filled instantly; you can listen to limit order updates through this endpoint.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OAuth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an OAuth client",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/oauth/clients/:client_id",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "response_type",
+                "value": "",
+                "type": "query",
+                "description": "code or token"
+              },
+              {
+                "name": "redirect_uri",
+                "value": "",
+                "type": "query",
+                "description": "Redirect URI of the OAuth flow"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Requested scopes by the OAuth flow"
+              }
+            ]
+          },
+          "docs": "The endpoint returns the details of OAuth client to display in the authorization page.\n"
+        },
+        {
+          "info": {
+            "name": "Issue an OAuth token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/oauth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The operation issues an OAuth code which can be used in the OAuth code flow.\n"
+        },
+        {
+          "info": {
+            "name": "Authorize an OAuth Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/oauth/authorize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The operation issues an OAuth code which can be used in the OAuth code flow.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Watchlist",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/watchlists",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account."
+              }
+            ]
+          },
+          "docs": "Fetch a list of all watchlists currently in an account."
+        },
+        {
+          "info": {
+            "name": "Create a new watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/watchlists",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the watchlist object"
+        },
+        {
+          "info": {
+            "name": "Manage watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account"
+              },
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of a watchlist"
+              }
+            ]
+          },
+          "docs": "Fetch a single watchlist by identifier."
+        },
+        {
+          "info": {
+            "name": "Update an existing watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account"
+              },
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of a watchlist"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace entirely the set of securities contained in the watchlist while optionally renaming it. Destructive operation."
+        },
+        {
+          "info": {
+            "name": "Remove a watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account"
+              },
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of a watchlist"
+              }
+            ]
+          },
+          "docs": "Irrevocably delete a watchlist."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Corporate Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieving Announcements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/corporate_actions/announcements",
+            "params": [
+              {
+                "name": "ca_types",
+                "value": "",
+                "type": "query",
+                "description": "A comma-delimited list of CorporateActionType values"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "The symbol of the company initiating the announcement."
+              },
+              {
+                "name": "cusip",
+                "value": "",
+                "type": "query",
+                "description": "The CUSIP of the company initiating the announcement."
+              },
+              {
+                "name": "date_type",
+                "value": "",
+                "type": "query",
+                "description": "An emum of possible ways to use the `since` and `until` parameters to search by.\n\nthe types are:\n\n- **declaration_date**: The date of the preliminary announcement details or the date that any subsequent term updates took place.\n- **ex_date**: The date on which any security purchasing activity will not result in a corporate action entitlement. Any selling activity that takes place on or after this date will result in a corporate action entitlement.\n- **record_date**: The date the company checks its records to determine who is shareholder in order to allocate entitlements.\n- **payable_date**: The date that the stock and cash positions will update according to the account positions as of the record date."
+              }
+            ]
+          },
+          "docs": "This enables searching for an array of corporate action announcements based on criteria."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
