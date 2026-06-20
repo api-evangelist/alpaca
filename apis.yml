@@ -2,7 +2,7 @@ aid: alpaca
 url: https://raw.githubusercontent.com/api-evangelist/alpaca/refs/heads/main/apis.yml
 name: Alpaca
 kind: company
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Fintech
   - Trading
@@ -27,7 +27,7 @@ apis:
       - Options
       - Crypto
       - Orders
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.alpaca.markets/v2
     humanURL: https://docs.alpaca.markets/docs/trading-api
     description: >-
@@ -62,7 +62,7 @@ apis:
       - Options
       - Real-time
       - Historical
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://data.alpaca.markets
     humanURL: https://docs.alpaca.markets/docs/about-market-data-api
     description: >-
@@ -94,7 +94,7 @@ apis:
       - White Label
       - Compliance
       - Trading
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://broker-api.alpaca.markets/v1
     humanURL: https://docs.alpaca.markets/docs/about-broker-api
     description: >-
@@ -121,7 +121,7 @@ apis:
       - OAuth
       - Authentication
       - Authorization
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.alpaca.markets/oauth
     humanURL: https://docs.alpaca.markets/docs/oauth-tokens
     description: >-
