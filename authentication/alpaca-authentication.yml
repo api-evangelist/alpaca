@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/alpaca-broker-api-openapi.yml, openapi/alpaca-data-api-openapi.yml, openapi/alpaca-oauth-api-openapi.yml,
+  openapi/alpaca-trading-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/alpaca-broker-api-openapi.yml
+- name: API_Key
+  type: apiKey
+  in: header
+  parameter: APCA-API-KEY-ID
+  sources:
+  - openapi/alpaca-data-api-openapi.yml
+  - openapi/alpaca-oauth-api-openapi.yml
+  - openapi/alpaca-trading-api-openapi.yml
+- name: API_Secret
+  type: apiKey
+  in: header
+  parameter: APCA-API-SECRET-KEY
+  sources:
+  - openapi/alpaca-data-api-openapi.yml
+  - openapi/alpaca-oauth-api-openapi.yml
+  - openapi/alpaca-trading-api-openapi.yml

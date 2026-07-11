@@ -140,6 +140,10 @@ apis:
       - Build apps that act on behalf of Alpaca users
       - Integrate Alpaca login into third-party tools
 common:
+  - type: DomainSecurity
+    url: security/alpaca-domain-security.yml
+  - type: Authentication
+    url: authentication/alpaca-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/alpacamarkets
   - type: Portal
@@ -166,6 +170,8 @@ common:
     url: https://alpaca.markets/integrations
   - type: LlmsText
     url: https://docs.alpaca.markets/llms.txt
+  - url: https://alpaca.markets/blog/feed/
+    type: Blog
 integrations:
   - name: TradingView
   - name: Streak
