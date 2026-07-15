@@ -140,6 +140,8 @@ apis:
       - Build apps that act on behalf of Alpaca users
       - Integrate Alpaca login into third-party tools
 common:
+  - type: AgenticAccess
+    url: agentic-access/alpaca-agentic-access.yml
   - type: DomainSecurity
     url: security/alpaca-domain-security.yml
   - type: Authentication
