@@ -1,0 +1,1775 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Crypto Pricing Data API API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Crypto Pricing Data API
+paths:
+  /v1beta1/crypto/trades:
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Get Trade data for multiple crypto symbols
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/crypto-exchanges'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page_token'
+      - $ref: '#/components/parameters/crypto-symbols'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiTradesResponse'
+              examples:
+                example-1:
+                  value:
+                    trades:
+                      BTCUSD:
+                      - t: '2022-03-02T06:00:00.028455Z'
+                        x: CBSE
+                        p: 44299.16
+                        s: 0.001
+                        tks: B
+                        i: 289852921
+                      - t: '2022-03-02T06:00:00.028455Z'
+                        x: CBSE
+                        p: 44299.15
+                        s: 0.001
+                        tks: B
+                        i: 289852922
+                    next_page_token: QlRDVVNEfDIwMjItMDMtMDJUMDY6MDA6MDAuMDI4NDU1MDAwWnxDQlNFfDA5MjIzMzcyMDM3MTQ0NjI4NzMw
+      operationId: getTradesForMultipleCryptoSymbols
+      description: 'The Multi Trades API provides historical trade data for a list of given crypto symbols on a specified date. Returns trades for the queried crypto symbols.
+
+
+        Returned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.
+
+
+        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for them.'
+  /v1beta1/crypto/trades/latest:
+    get:
+      summary: Get Latest Trade data for multiple Crypto symbols
+      tags:
+      - Crypto Pricing Data API
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestMultiTradesResponse'
+              examples:
+                example-1:
+                  value:
+                    trades:
+                      ETHUSD:
+                        t: '2022-03-08T22:13:55.777631Z'
+                        x: FTXU
+                        p: 2562.8
+                        s: 0.881
+                        tks: S
+                        i: 26271234
+                      BTCUSD:
+                        t: '2022-03-08T22:14:47.379901Z'
+                        x: FTXU
+                        p: 38510
+                        s: 0.05
+                        tks: B
+                        i: 26271277
+      operationId: getLatestTradesForMultipleCryptoSymbols
+      description: 'Provides latest trade data for a list of given crypto symbols. '
+      parameters:
+      - $ref: '#/components/parameters/crypto-symbols'
+      - $ref: '#/components/parameters/crypto-exchange'
+  /v1beta1/crypto/{symbol}/trades:
+    parameters:
+    - $ref: '#/components/parameters/crypto-symbol'
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Get Trade data for a crypto symbol
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/crypto-exchanges'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page_token'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradesResponse'
+              examples:
+                example-1:
+                  value:
+                    trades:
+                    - t: '2022-02-27T11:04:55.82622Z'
+                      x: FTXU
+                      p: 39330
+                      s: 0.0003
+                      tks: B
+                      i: 25783365
+                    symbol: BTCUSD
+                    next_page_token: QlRDVVNEfDIwMjItMDItMjdUMTE6MDQ6NTUuODI2MjIwMDAwWnxGVFhVfDA5MjIzMzcyMDM2ODgwNTU5MTcz
+      operationId: getTradesForCryptoSymbol
+      description: The Trades API provides historical trade data for a given crypto symbol on a specified date. Returns trades for the queried crypto symbol
+  /v1beta1/crypto/{symbol}/trades/latest:
+    parameters:
+    - $ref: '#/components/parameters/crypto-symbol'
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Latest Trades
+      parameters:
+      - $ref: '#/components/parameters/crypto-exchange'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestTradeResponse'
+              examples:
+                example-1:
+                  value:
+                    symbol: BTCUSD
+                    trade:
+                      t: '2022-03-08T22:27:26.573044Z'
+                      x: FTXU
+                      p: 38614
+                      s: 0.0019
+                      tks: S
+                      i: 26271424
+      operationId: getLatestTradesForCryptoSymbol
+      description: The Latest Trades API provides the latest historical trade data for a given crypto symbol. Returns trades for the queried crypto symbol.
+  /v1beta1/crypto/bars:
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Get Bars for multiple Crypto symbols
+      description: 'returns aggregate historical data for the requested crypto symbols.
+
+
+        Returned results are sorted by symbol first then by Bar timestamp. This means that you are likely to see only one symbol in your first response if there are enough Bars for that symbol to hit the limit you requested on that request.
+
+
+        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Bars were found for them.'
+      parameters:
+      - $ref: '#/components/parameters/crypto-symbols'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/timeframe'
+      - $ref: '#/components/parameters/page_token'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/crypto-exchanges'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiBarsResponse'
+              examples:
+                example-1:
+                  value:
+                    bars:
+                      BTCUSD:
+                      - t: '2022-02-28T06:00:00Z'
+                        x: FTXU
+                        o: 37866
+                        h: 44340
+                        l: 37494
+                        c: 43241
+                        v: 2817.008
+                        n: 10116
+                        vw: 40876.4518611946
+                    next_page_token: QlRDVVNEfER8MjAyMi0wMi0yOFQwNjowMDowMC4wMDAwMDAwMDBafEZUWFU=
+      operationId: getBarsForMultipleCryptoSymbols
+  /v1beta1/crypto/bars/latest:
+    get:
+      summary: Get Latest Bars for multiple Crypto symbols
+      tags:
+      - Crypto Pricing Data API
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestMultiBarsResponse'
+              examples:
+                example-1:
+                  value:
+                    bars:
+                      LINKUSD:
+                        t: '2022-03-08T17:33:00Z'
+                        x: FTXU
+                        o: 13.3565
+                        h: 13.3565
+                        l: 13.3565
+                        c: 13.3565
+                        v: 41.4
+                        n: 1
+                        vw: 13.3565
+                      BTCUSD:
+                        t: '2022-03-08T17:40:00Z'
+                        x: FTXU
+                        o: 39055
+                        h: 39055
+                        l: 39055
+                        c: 39055
+                        v: 0.1
+                        n: 1
+                        vw: 39055
+      operationId: getLatestBarsForMultipleCryptoSymbols
+      description: returns latest historical data for the requested crypto symbols for a specific exchange
+      parameters:
+      - $ref: '#/components/parameters/crypto-symbols'
+      - $ref: '#/components/parameters/crypto-exchange'
+  /v1beta1/crypto/{symbol}/bars:
+    parameters:
+    - $ref: '#/components/parameters/crypto-symbol'
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Get Bar data for a crypto symbol
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/timeframe'
+      - $ref: '#/components/parameters/crypto-exchanges'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page_token'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BarsResponse'
+              examples:
+                example-1:
+                  value:
+                    bars:
+                    - t: '2022-02-01T09:04:00Z'
+                      x: CBSE
+                      o: 38702.54
+                      h: 39013.58
+                      l: 38702.54
+                      c: 39013.58
+                      v: 201.67087877
+                      n: 2965
+                      vw: 38889.6517051631
+                    symbol: BTCUSD
+                    next_page_token: QlRDVVNEfE18MjAyMi0wMi0wMVQwOTowNDowMC4wMDAwMDAwMDBafENCU0U=
+      operationId: getBarsForCryptoSymbol
+      description: The Bars API returns aggregate historical data for the requested securities.. Returns bars for the queried crypto symbol
+  /v1beta1/crypto/{symbol}/bars/latest:
+    parameters:
+    - $ref: '#/components/parameters/crypto-symbol'
+    get:
+      summary: Get Latest Bar data for a Crypto symbol
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestBarResponse'
+              examples:
+                example-1:
+                  value:
+                    symbol: BTCUSD
+                    bar:
+                      t: '2022-03-08T21:05:00Z'
+                      x: FTXU
+                      o: 38576
+                      h: 38576
+                      l: 38576
+                      c: 38576
+                      v: 0.063
+                      n: 1
+                      vw: 38576
+      operationId: getLatestBarsForCryptoSymbol
+      description: Gets latest historical bar data for the requested crypto symbol for a specific exchange
+      tags:
+      - Crypto Pricing Data API
+      parameters:
+      - $ref: '#/components/parameters/crypto-exchange'
+  /v1beta1/crypto/quotes:
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Get Quotes for multiple crypto symbols
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/crypto-exchanges'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page_token'
+      - $ref: '#/components/parameters/crypto-symbols'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiQuotesReponse'
+              examples:
+                example-1:
+                  value:
+                    quotes:
+                      BTCUSD:
+                      - t: '2022-03-02T06:00:00.057935872Z'
+                        x: FTXU
+                        bp: 44154.14
+                        bs: 0.1048
+                        ap: 44427.88
+                        as: 2.3321
+                      - t: '2022-03-02T06:00:00.132880896Z'
+                        x: FTXU
+                        bp: 44154.14
+                        bs: 0.1048
+                        ap: 44427.88
+                        as: 2.3321
+                    next_page_token: QlRDVVNEfDIwMjItMDMtMDJUMDY6MDA6MDAuMTMyODgwODk2WnxGVFhVfEM3QkQ4QjI5
+      operationId: getQuotesForMultipleCryptoSymbols
+      description: 'The Multi Quotes API provides quotes for a list of given crypto symbols at a specified date. Returns quotes for each of  the queried crypto symbols.
+
+
+        Returned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.
+
+
+        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them.'
+  /v1beta1/crypto/quotes/latest:
+    get:
+      summary: Get Latest Quotes for multiple Crypto symbols
+      tags:
+      - Crypto Pricing Data API
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestMultiQuotesResponse'
+              examples:
+                example-1:
+                  value:
+                    quotes:
+                      ETHUSD:
+                        t: '2022-03-08T22:40:52.536436224Z'
+                        x: FTXU
+                        bp: 2562.99
+                        bs: 23.798
+                        ap: 2579.11
+                        as: 22.155
+                      BTCUSD:
+                        t: '2022-03-08T22:40:52.662990848Z'
+                        x: FTXU
+                        bp: 38465.26
+                        bs: 2.641
+                        ap: 38698.75
+                        as: 1.3746
+      operationId: getLatestQuotesForMultipleCryptoSymbols
+      description: Provides latest quotes for a list of given crypto symbols.
+      parameters:
+      - $ref: '#/components/parameters/crypto-symbols'
+      - $ref: '#/components/parameters/crypto-exchange'
+  /v1beta1/crypto/{symbol}/quotes:
+    parameters:
+    - $ref: '#/components/parameters/crypto-symbol'
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Get Quotes for crypto symbol
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/crypto-exchanges'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page_token'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuotesResponse'
+              examples:
+                example-1:
+                  value:
+                    quotes:
+                    - t: '2022-02-01T06:00:00.009249124Z'
+                      x: ERSX
+                      bp: 38422.64
+                      bs: 1.56
+                      ap: 38515.48
+                      as: 1.5
+                    - t: '2022-02-01T06:00:00.009249124Z'
+                      x: ERSX
+                      bp: 38419.54
+                      bs: 3
+                      ap: 38515.48
+                      as: 1.5
+                    symbol: BTCUSD
+                    next_page_token: null
+      operationId: getQuotesForCryptoSymbol
+      description: The Quotes API provides quotes for a given crypto symbol at a specified date. Returns quotes for the queried crypto symbol
+  /v1beta1/crypto/{symbol}/quotes/latest:
+    parameters:
+    - $ref: '#/components/parameters/crypto-symbol'
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Latest Quote
+      parameters:
+      - $ref: '#/components/parameters/crypto-exchange'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestQuoteResponse'
+              examples:
+                example-1:
+                  value:
+                    symbol: BTCUSD
+                    quote:
+                      t: '2022-02-01T20:14:52.486171758Z'
+                      x: ERSX
+                      bp: 38511.45
+                      bs: 1.5
+                      ap: 38598.06
+                      as: 1.556
+      operationId: getLatestQuoteForCryptoSymbol
+      description: Returns latest quote for the queried crypto symbol
+  /v1beta1/crypto/snapshots:
+    parameters: []
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Get Snapshots for multiple crypto symbols
+      parameters:
+      - $ref: '#/components/parameters/crypto-exchange'
+      - $ref: '#/components/parameters/crypto-symbols'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiSnapshotResponse'
+              examples: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
+      operationId: getSnapshotsForMultipleCryptoSymbols
+      description: The Multi Snapshot API returns the latest trade, latest quote, minute bar daily bar, and previous daily bar data for list of given crypto symbols.
+  /v1beta1/crypto/{symbol}/snapshot:
+    parameters:
+    - $ref: '#/components/parameters/crypto-symbol'
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Get a Snapshot for a crypto symbol
+      parameters:
+      - $ref: '#/components/parameters/crypto-exchange'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+              examples: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+      operationId: getSnapshotForCryptoSymbol
+      description: The Snapshot API returns the latest trade, latest quote, minute bar daily bar, and previous daily bar data for a given crypto symbol.
+  /v1beta1/crypto/xbbos/latest:
+    parameters: []
+    get:
+      summary: Get Latest XBBO for multiple crypto symbols
+      tags:
+      - Crypto Pricing Data API
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestMultiXBBOResponse'
+              examples:
+                example-1:
+                  value:
+                    xbbos:
+                      BTCUSD:
+                        t: '2022-03-08T22:59:49.514811056Z'
+                        ax: ERSX
+                        ap: 38556.7
+                        as: 1.556151
+                        bx: FTXU
+                        bp: 38562
+                        bs: 2.5781
+      operationId: getLatestXBBOForMultipleCryptoSymbols
+      description: Returns the latest XBBO for a given list crypto symbols that calculates the Best Bid and Offer across multiple exchanges. If exchanges is not specified then only the exchanges that can be traded on Alpaca are included in the calculation.
+      parameters:
+      - $ref: '#/components/parameters/crypto-symbols'
+      - $ref: '#/components/parameters/crypto-exchanges'
+  /v1beta1/crypto/{symbol}/xbbo/latest:
+    parameters:
+    - $ref: '#/components/parameters/crypto-symbol'
+    get:
+      tags:
+      - Crypto Pricing Data API
+      summary: Get Latest XBBO for a single crypto symbol
+      parameters:
+      - $ref: '#/components/parameters/crypto-exchanges'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestXBBOResponse'
+              examples:
+                example-1:
+                  value:
+                    symbol: BTCUSD
+                    xbbo:
+                      t: '2022-02-01T20:21:03.323000342Z'
+                      ax: FTXU
+                      ap: 38529
+                      as: 0.0688
+                      bx: ERSX
+                      bp: 38534
+                      bs: 1.5
+      operationId: getLatestXBBOForCryptoSymbol
+      description: Returns the XBBO for a crypto symbol that calculates the Best Bid and Offer across multiple exchanges. If exchanges is not specified then only the exchanges that can be traded on Alpaca are included in the calculation.
+  /v1beta1/crypto/meta/spreads:
+    parameters: []
+    get:
+      summary: Get list of crypto spreads per exchange
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptoSpreadsResponse'
+              examples:
+                example-1:
+                  value:
+                    spreads:
+                      ERSX: 30
+                      FTXU: 30
+      operationId: getCryptoMetaSpreads
+      description: Get list of crypto spreads for the different exchanges Alpaca supports in basis points.
+      tags:
+      - Crypto Pricing Data API
+components:
+  parameters:
+    crypto-exchange:
+      name: exchange
+      in: query
+      required: true
+      schema:
+        type: string
+        enum:
+        - ERSX
+        - CBSE
+        - FTXU
+        example: ERSX
+      description: Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`
+    timeframe:
+      name: timeframe
+      in: query
+      required: true
+      schema:
+        type: string
+      description: 'Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour.'
+    crypto-exchanges:
+      name: exchanges
+      in: query
+      required: false
+      schema:
+        type: string
+        example: ERSX,CBSE
+      description: A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`
+    crypto-symbol:
+      name: symbol
+      in: path
+      required: true
+      schema:
+        type: string
+        example: BTCUSD
+      description: The crypto symbol to query for. Note, currently all crypto symbols must be appended with "USD", ie "BTCUSD" would be how you query for BTC.
+    end:
+      name: end
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-01-01T00:00:00Z'
+      description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
+    page_token:
+      name: page_token
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+      description: Number of data points to return. Must be in range 1-10000, defaults to 1000.
+    start:
+      name: start
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-01-01T00:00:00Z'
+      description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
+    crypto-symbols:
+      name: symbols
+      in: query
+      required: true
+      schema:
+        type: string
+        example: BTCUSD,ETHUSD
+      description: The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with "USD", ie "BTCUSD,ETHUSD" would get both BTC and ETH
+  schemas:
+    Trade:
+      title: Trade
+      type: object
+      description: A model representing a trade
+      x-examples:
+        trade-example-1:
+          t: '2021-02-06T13:04:56.334320128Z'
+          x: C
+          p: 387.62
+          s: 100
+          c:
+          - ' '
+          - T
+          i: 52983525029461
+          z: B
+        example-crypto:
+          t: '2022-02-27T11:04:55.82622Z'
+          x: FTXU
+          p: 39330
+          s: 0.0003
+          tks: B
+          i: 25783365
+      properties:
+        t:
+          type: string
+          description: Timestamp in RFC-3339 format with nanosecond precision
+          format: date-time
+        x:
+          type: string
+          description: Exchange where the trade happened.
+        p:
+          type: number
+          description: Trade price.
+        s:
+          type: number
+          description: Trade Size.
+        c:
+          type: array
+          description: Trade conditions (Stock trade only)
+          items:
+            type: string
+        i:
+          type: integer
+          description: Trade ID
+          format: int64
+        z:
+          type: string
+          description: Tape (Stock trade only)
+        tks:
+          type: string
+          description: Taker's side (crypto trade only)
+      required:
+      - x
+      - i
+    LatestMultiTradesResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-crypto-1:
+          trades:
+            ETHUSD:
+              t: '2022-03-08T22:13:55.777631Z'
+              x: FTXU
+              p: 2562.8
+              s: 0.881
+              tks: S
+              i: 26271234
+            BTCUSD:
+              t: '2022-03-08T22:14:47.379901Z'
+              x: FTXU
+              p: 38510
+              s: 0.05
+              tks: B
+              i: 26271277
+        example-1:
+          trades:
+            TSLA:
+              t: '2022-03-11T17:24:55.143671726Z'
+              x: V
+              p: 801.83
+              s: 100
+              c:
+              - '@'
+              i: 9924
+              z: C
+            AAPL:
+              t: '2022-03-11T17:24:56.321817175Z'
+              x: V
+              p: 155.105
+              s: 300
+              c:
+              - '@'
+              i: 7741
+              z: C
+      properties:
+        trades:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Trade'
+      required:
+      - trades
+    BarsResponse:
+      description: ''
+      type: object
+      x-examples:
+        barsResponse-stock-example-1:
+          bars:
+          - t: '2021-02-01T16:01:00Z'
+            o: 133.32
+            h: 133.74
+            l: 133.31
+            c: 133.5
+            v: 9876
+          - t: '2021-02-01T16:02:00Z'
+            o: 133.5
+            h: 133.58
+            l: 133.44
+            c: 133.58
+            v: 3567
+          symbol: AAPL
+          next_page_token: MjAyMS0wMi0wMVQxNDowMjowMFo7MQ==
+        barsResponse-crypto-example-1:
+          bars:
+          - t: '2022-03-10T06:00:00Z'
+            x: CBSE
+            o: 39230.55
+            h: 40302.06
+            l: 38560.85
+            c: 39259.91
+            v: 11328.17046589
+            n: 353132
+            vw: 39208.3129673941
+          - t: '2022-03-10T06:00:00Z'
+            x: ERSX
+            o: 39246.4
+            h: 40151
+            l: 38791
+            c: 39270
+            v: 153.254034
+            n: 230
+            vw: 39255.8594375793
+          - t: '2022-03-10T06:00:00Z'
+            x: FTXU
+            o: 39170
+            h: 40290
+            l: 38560
+            c: 39200
+            v: 1511.2828
+            n: 5248
+            vw: 39214.2388224758
+          symbol: BTCUSD
+          next_page_token: null
+      title: BarsResponse
+      properties:
+        bars:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          description: The array of Bar data
+          items:
+            $ref: '#/components/schemas/Bar'
+        symbol:
+          type: string
+          minLength: 1
+          example: AAPL
+          description: the stock ticker or crypto symbol this set of bar data is for
+        next_page_token:
+          type: string
+          minLength: 1
+          nullable: true
+      required:
+      - bars
+      - symbol
+      - next_page_token
+    CryptoSpreadsResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          spreads:
+            ERSX: 30
+            FTXU: 30
+      properties:
+        spreads:
+          type: object
+          additionalProperties:
+            type: integer
+      required:
+      - spreads
+    XBBO:
+      description: XBBO or Cross Best Bid and Offer represents the Best Bid and Offer for an exchange
+      type: object
+      x-examples:
+        example-1:
+          t: '2022-02-01T20:21:03.323000342Z'
+          ax: FTXU
+          ap: 38529
+          as: 0.0688
+          bx: ERSX
+          bp: 38534
+          bs: 1.5
+      properties:
+        t:
+          type: string
+          format: date-time
+          description: Timestamp in RFC-3339 format with nanosecond precision.
+        ax:
+          type: string
+          minLength: 1
+          description: Ask exchange.
+        ap:
+          type: number
+          description: Ask price.
+        as:
+          type: number
+          description: Ask size.
+        bx:
+          type: string
+          minLength: 1
+          description: Bid exchange.
+        bp:
+          type: number
+          description: Bid price.
+        bs:
+          type: number
+          description: Bid size.
+      required:
+      - t
+      - ax
+      - ap
+      - as
+      - bx
+      - bp
+      - bs
+      title: XBBO
+    LatestXBBOResponse:
+      description: Represents the Latest XBBO for a crypto symbol that calculates the Best Bid and Offer across multiple exchanges.
+      type: object
+      x-examples:
+        example-1:
+          symbol: BTCUSD
+          xbbo:
+            t: '2022-02-01T20:21:03.323000342Z'
+            ax: FTXU
+            ap: 38529
+            as: 0.0688
+            bx: ERSX
+            bp: 38534
+            bs: 1.5
+      properties:
+        symbol:
+          type: string
+          minLength: 1
+        xbbo:
+          $ref: '#/components/schemas/XBBO'
+      required:
+      - symbol
+      - xbbo
+      title: LatestXBBOResponse
+    LatestBarResponse:
+      description: 'A model representing the result of hitting one of the Latest Bar api endpoints.
+
+
+        Represents a single Bar that should be the latest Bar data for a given ticker symbol'
+      type: object
+      x-examples:
+        crypto-example-1:
+          symbol: BTCUSD
+          bar:
+            t: '2022-03-08T21:05:00Z'
+            x: FTXU
+            o: 38576
+            h: 38576
+            l: 38576
+            c: 38576
+            v: 0.063
+            n: 1
+            vw: 38576
+        stock-example-1:
+          symbol: AAPL
+          bar:
+            t: '2022-03-10T19:26:00Z'
+            o: 158.035
+            h: 158.21
+            l: 158.035
+            c: 158.21
+            v: 800
+            n: 15
+            vw: 158.113144
+      properties:
+        symbol:
+          type: string
+          minLength: 1
+        bar:
+          $ref: '#/components/schemas/Bar'
+      required:
+      - symbol
+      - bar
+    Bar:
+      title: Bar
+      type: object
+      description: 'The bars API returns aggregate historical data for the requested securities.
+
+        '
+      x-examples:
+        stock-example-1:
+          t: '2022-03-10T19:26:00Z'
+          o: 158.035
+          h: 158.21
+          l: 158.035
+          c: 158.21
+          v: 800
+          n: 15
+          vw: 158.113144
+        crypto-example-1:
+          t: '2022-03-10T19:30:00Z'
+          x: FTXU
+          o: 39284
+          h: 39284
+          l: 39200
+          c: 39200
+          v: 1.1271
+          n: 9
+          vw: 39233.9329252063
+      properties:
+        t:
+          type: string
+          description: Timestamp in RFC-3339 format with nanosecond precision.
+          format: date-time
+        x:
+          type: string
+          description: Exchange. Only present on Bars for Crypto symbols
+          enum:
+          - FTXU
+          - ERSX
+          - CBSE
+        o:
+          type: number
+          description: Open price
+        h:
+          type: number
+          description: High price.
+        l:
+          type: number
+          description: 'Low price.
+
+            '
+        c:
+          type: number
+          description: Close price.
+        v:
+          description: Volume.
+          type: number
+        n:
+          type: integer
+          description: Number of trades.
+          format: int64
+        vw:
+          description: Volume weighted average price.
+          type: number
+      required:
+      - t
+      - o
+      - h
+      - l
+      - c
+      - v
+    Snapshot:
+      title: Snapshot
+      type: object
+      description: 'The Snapshot API for one ticker provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for a given ticker symbol.
+
+        '
+      x-examples:
+        snapshot-example-1:
+          symbol: AAPL
+          latestTrade:
+            t: '2021-05-11T20:00:00.435997104Z'
+            x: Q
+            p: 125.91
+            s: 5589631
+            c:
+            - '@'
+            - M
+            i: 179430
+            z: C
+          latestQuote:
+            t: '2021-05-11T22:05:02.307304704Z'
+            ax: P
+            ap: 125.68
+            as: 12
+            bx: P
+            bp: 125.6
+            bs: 4
+            c:
+            - R
+          minuteBar:
+            t: '2021-05-11T22:02:00Z'
+            o: 125.66
+            h: 125.66
+            l: 125.66
+            c: 125.66
+            v: 396
+          dailyBar:
+            t: '2021-05-11T04:00:00Z'
+            o: 123.5
+            h: 126.27
+            l: 122.77
+            c: 125.91
+            v: 125863164
+          prevDailyBar:
+            t: '2021-05-10T04:00:00Z'
+            o: 129.41
+            h: 129.54
+            l: 126.81
+            c: 126.85
+            v: 79569305
+      properties:
+        latestTrade:
+          $ref: '#/components/schemas/Trade'
+        latestQuote:
+          $ref: '#/components/schemas/Quote'
+        minuteBar:
+          $ref: '#/components/schemas/Bar'
+        dailyBar:
+          $ref: '#/components/schemas/Bar'
+        prevDailyBar:
+          $ref: '#/components/schemas/Bar'
+    Quote:
+      title: Quote
+      type: object
+      description: 'The Quotes API provides NBBO quotes for a given ticker symbol at a specified date.
+
+        '
+      x-examples:
+        example-1:
+          t: '2022-03-11T13:13:49.975594385Z'
+          ax: V
+          ap: 18696.3338
+          as: 1
+          bx: V
+          bp: 0
+          bs: 0
+          c:
+          - R
+          z: C
+        example-crypto:
+          t: '2022-03-21T05:00:00.011543552Z'
+          x: FTXU
+          bp: 40761.35
+          bs: 0.465
+          ap: 41007.66
+          as: 2.8675
+      properties:
+        t:
+          type: string
+          description: Timestamp in RFC-3339 format with nanosecond precision
+          format: date-time
+        ax:
+          type: string
+          description: ask exchange (Stock quote only)
+        ap:
+          type: number
+          description: 'ask price
+
+            '
+        as:
+          type: number
+          description: 'ask size
+
+            '
+        bx:
+          type: string
+          description: bid exchange (Stock quote only)
+        bp:
+          type: number
+          description: 'bid price
+
+            '
+        bs:
+          description: bid size
+          type: number
+        c:
+          type: array
+          description: quote conditions (Stock quotes only)
+          items:
+            type: string
+        x:
+          type: string
+          description: Exchange (Crypto quote Only)
+        z:
+          type: string
+          description: Tape (Stock quote only)
+      required:
+      - t
+    MultiQuotesReponse:
+      title: MultiQuotesReponse
+      type: object
+      description: 'A model representing the result of hitting the Multi Quotes api; represents multiple Quotes for multiple symbols.
+
+
+        Returned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.
+
+
+        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them.
+
+        '
+      x-examples:
+        multiQuotesResponse-example-1:
+          quotes:
+            AAPL:
+            - t: '2022-02-01T09:00:00.000448Z'
+              ax: K
+              ap: 175
+              as: 1
+              bx: Q
+              bp: 174.96
+              bs: 4
+              c:
+              - R
+              z: C
+          next_page_token: QUFQTHwyMDIyLTAyLTAxVDA5OjAwOjAwLjAwMDQ0ODAwMFp8MjIzMEUxOUM=
+        multiTradesResponse-with-multiple-symbols-at-once-example-1:
+          quotes:
+            AAPL:
+            - t: '2022-02-01T09:00:00.000448Z'
+              ax: K
+              ap: 175
+              as: 1
+              bx: Q
+              bp: 174.96
+              bs: 4
+              c:
+              - R
+              z: C
+            GOOGL:
+            - t: '2022-02-01T09:00:00.000448Z'
+              ax: K
+              ap: 175
+              as: 1
+              bx: Q
+              bp: 175
+              bs: 4
+              c:
+              - R
+              z: C
+          next_page_token: QUFQTHwyMDIyLTAyLTAxVDA5OjAwOjAwLjAwMDQ0ODAwMFp8MjIzMEUxOUM=
+      properties:
+        quotes:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Quote'
+        next_page_token:
+          type: string
+          description: pass this token with your request again to get the next page of results
+          nullable: true
+      required:
+      - quotes
+    LatestTradeResponse:
+      title: LatestTradeResponse
+      type: object
+      description: 'A model representing the result of hitting the Latest Trade api.
+
+
+        Represents a single Trade that should be the latest trade data for a given ticker symbol'
+      x-examples:
+        latestTradesResponse-example-1:
+          symbol: AAPL
+          trade:
+            t: '2022-02-01T17:46:51.111055251Z'
+            x: V
+            p: 173.06
+            s: 100
+            c:
+            - '@'
+            i: 6519
+            z: C
+        crypto-example-1:
+          symbol: BTCUSD
+          trade:
+            t: '2022-03-08T22:27:26.573044Z'
+            x: FTXU
+            p: 38614
+            s: 0.0019
+            tks: S
+            i: 26271424
+      properties:
+        trade:
+          $ref: '#/components/schemas/Trade'
+        symbol:
+          type: string
+          description: Symbol that was queried
+          example: AAPL
+          minLength: 1
+      required:
+      - symbol
+    TradesResponse:
+      title: TradesResponse
+      type: object
+      description: 'A model representing the result of hitting the Trades api.
+
+
+        Represents multiple Trades for a single symbol with support for paging.'
+      x-examples:
+        trades-example-1:
+          trades:
+          - t: '2021-02-06T13:04:56.334320128Z'
+            x: C
+            p: 387.62
+            s: 100
+            c:
+            - ' '
+            - T
+            i: 52983525029461
+            z: B
+          - t: '2021-02-06T13:09:42.325484032Z'
+            x: C
+            p: 387.69
+            s: 100
+            c:
+            - ' '
+            - T
+            i: 52983525033813
+            z: B
+          symbol: SPY
+          next_page_token: MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==
+      properties:
+        trades:
+          type: array
+          description: Array of trades
+          items:
+            $ref: '#/components/schemas/Trade'
+        symbol:
+          type: string
+          description: Symbol that was queried
+          example: AAPL
+          minLength: 1
+        next_page_token:
+          type: string
+          description: Token that can be used to query the next page
+          nullable: true
+      required:
+      - trades
+      - symbol
+    MultiTradesResponse:
+      title: MultiTradesResponse
+      type: object
+      description: 'A model representing the result of hitting the Multi Trades api; represents multiple trades for multiple symbols.
+
+
+        Returned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.
+
+
+        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for them.
+
+        '
+      x-examples:
+        multiTradesResponse-example-1:
+          trades:
+            SPY:
+            - t: '2021-02-06T13:04:56.334320128Z'
+              x: C
+              p: 387.62
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525029461
+              z: B
+            - t: '2021-02-06T13:09:42.325484032Z'
+              x: C
+              p: 387.69
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525033813
+              z: B
+          next_page_token: MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==
+        multiTradesResponse-with-multiple-symbols-at-once-example-1:
+          trades:
+            AAPL:
+            - t: '2021-02-06T13:04:56.334320128Z'
+              x: C
+              p: 387.62
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525029461
+              z: B
+            - t: '2021-02-06T13:09:42.325484032Z'
+              x: C
+              p: 387.69
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525033813
+              z: B
+            SPY:
+            - t: '2021-02-06T05:09:42.325484032Z'
+              x: C
+              p: 400.55
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525033954
+              z: B
+          next_page_token: MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==
+      properties:
+        trades:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Trade'
+        next_page_token:
+          type: string
+          nullable: true
+      required:
+      - trades
+    MultiSnapshotResponse:
+      title: MultiSnapshotResponse
+      type: object
+      description: 'A model representing the result of hitting the Multi Snapshots api; represents Snapshots for multiple symbols.
+
+
+        The result is an object whose keys are the requested symbols and values are their respecitve Snapshot
+
+        '
+      additionalProperties:
+        $ref: '#/components/schemas/Snapshot'
+      x-examples:
+        example-1:
+          AAPL:
+            latestTrade:
+              t: '2022-03-11T19:08:43.947998695Z'
+              x: V
+              p: 156.055
+              s: 100
+              c:
+              - '@'
+              i: 10593
+              z: C
+            latestQuote:
+              t: '2022-03-11T19:09:06.125564144Z'
+              ax: V
+              ap: 157.2
+              as: 5
+              bx: V
+              bp: 156.08
+              bs: 1
+              c:
+              - R
+              z: C
+            minuteBar:
+              t: '2022-03-11T19:08:00Z'
+              o: 156.02
+              h: 156.1
+              l: 156.02
+              c: 156.055
+              v: 4483
+              n: 26
+              vw: 156.055956
+            dailyBar:
+              t: '2022-03-11T05:00:00Z'
+              o: 158.94
+              h: 159.25
+              l: 154.76
+              c: 156.055
+              v: 1180799
+              n: 10408
+              vw: 156.545239
+            prevDailyBar:
+              t: '2022-03-10T05:00:00Z'
+              o: 160.23
+              h: 160.38
+              l: 155.98
+              c: 158.52
+              v: 1889292
+              n: 17072
+              vw: 157.845202
+          TSLA:
+            latestTrade:
+              t: '2022-03-11T19:08:59.479520429Z'
+              x: V
+              p: 796.95
+              s: 100
+              c:
+              - '@'
+              i: 13647
+              z: C
+            latestQuote:
+              t: '2022-03-11T19:09:06.159593323Z'
+              ax: V
+              ap: 850
+              as: 1
+              bx: V
+              bp: 796.49
+              bs: 1
+              c:
+              - R
+              z: C
+            minuteBar:
+              t: '2022-03-11T19:08:00Z'
+              o: 796.78
+              h: 797.4
+              l: 796.78
+              c: 796.95
+              v: 2139
+              n: 46
+              vw: 797.116889
+            dailyBar:
+              t: '2022-03-11T05:00:00Z'
+              o: 840.38
+              h: 843.055
+              l: 795.33
+              c: 796.95
+              v: 466980
+              n: 13232
+              vw: 811.369454
+            prevDailyBar:
+              t: '2022-03-10T05:00:00Z'
+              o: 851.5
+              h: 853.355
+              l: 810.76
+              c: 838.21
+              v: 578475
+              n: 16118
+              vw: 828.766436
+    LatestMultiXBBOResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          xbbos:
+            BTCUSD:
+              t: '2022-03-08T22:59:49.514811056Z'
+              ax: ERSX
+              ap: 38556.7
+              as: 1.556151
+              bx: FTXU
+              bp: 38562
+              bs: 2.5781
+      properties:
+        xbbos:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/XBBO'
+      required:
+      - xbbos
+    LatestQuoteResponse:
+      description: 'A model representing the result of hitting the Latest Quote api.
+
+
+        Represents a single Quote that should be the latest quote data for a given ticker symbol'
+      type: object
+      x-examples:
+        quotesResponse-example-1:
+          symbol: AAPL
+          quote:
+            t: '2022-02-01T17:51:03.204726425Z'
+            ax: V
+            ap: 173.24
+            as: 4
+            bx: V
+            bp: 173.21
+            bs: 4
+            c:
+            - R
+            z: C
+      title: LatestQuotesResponse
+      properties:
+        quote:
+          $ref: '#/components/schemas/Quote'
+        symbol:
+          type: string
+          minLength: 1
+          example: AAPL
+      required:
+      - quote
+      - symbol
+    QuotesResponse:
+      description: 'The Quotes API provides NBBO quotes for a given ticker symbol at a specified date.
+
+        '
+      type: object
+      x-examples:
+        quotesResponse-example-1:
+          quotes:
+          - t: '2022-02-01T09:00:00.000448Z'
+            ax: K
+            ap: 175
+            as: 1
+            bx: Q
+            bp: 174.96
+            bs: 4
+            c:
+            - R
+            z: C
+          - t: '2022-02-01T09:00:00.000448Z'
+            ax: K
+            ap: 175
+            as: 12
+            bx: Q
+            bp: 174.96
+            bs: 4
+            c:
+            - R
+            z: C
+          symbol: AAPL
+          next_page_token: QUFQTHwyMDIyLTAyLTAxVDA5OjAwOjAwLjAwMDQ0ODAwMFp8MzFDODgxNkY=
+        no-data-found-example:
+          quotes: null
+          symbol: AAPL
+          next_page_token: null
+      title: QuotesResponse
+      properties:
+        quotes:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Quote'
+        symbol:
+          type: string
+          minLength: 1
+          example: AAPL
+        next_page_token:
+          type: string
+          minLength: 1
+          nullable: true
+      required:
+      - quotes
+      - symbol
+    LatestMultiBarsResponse:
+      title: LatestMultiBarsResponse
+      type: object
+      x-examples:
+        example-1:
+          bars:
+            LINKUSD:
+              t: '2022-03-08T17:33:00Z'
+              x: FTXU
+              o: 13.3565
+              h: 13.3565
+              l: 13.3565
+              c: 13.3565
+              v: 41.4
+              n: 1
+              vw: 13.3565
+            BTCUSD:
+              t: '2022-03-08T17:40:00Z'
+              x: FTXU
+              o: 39055
+              h: 39055
+              l: 39055
+              c: 39055
+              v: 0.1
+              n: 1
+              vw: 39055
+      description: 'A model representing the result of hitting the Latest Multi Bars api; represents the latest Bars for multiple symbols.
+
+        '
+      properties:
+        bars:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Bar'
+      required:
+      - bars
+    MultiBarsResponse:
+      description: 'A model representing the result of hitting the Multi Bars api; represents multiple Bars for multiple symbols.
+
+
+        Returned results are sorted by symbol first then by Bar timestamp. This means that you are likely to see only one symbol in your first response if there are enough Bars in the duration you specified for that symbol to hit the limit you requested on that request.
+
+
+        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Bars were found for them in the timeframe.
+
+        '
+      type: object
+      x-examples:
+        multiBarsResponse-with-multiple-symbols-at-once-example-1:
+          bars:
+            AAPL:
+            - t: '2022-02-01T09:04:00Z'
+              o: 175.14
+              h: 175.16
+              l: 175.12
+              c: 175.16
+              v: 1395
+              n: 61
+              vw: 175.174624
+            - t: '2022-02-01T09:05:00Z'
+              o: 175.21
+              h: 175.21
+              l: 175.1
+              c: 175.13
+              v: 1821
+              n: 61
+              vw: 175.143635
+            TSLA:
+            - t: '2022-02-01T09:05:00Z'
+              o: 944.99
+              h: 944.99
+              l: 944.99
+              c: 944.99
+              v: 2520
+              n: 207
+              vw: 944.437393
+          next_page_token: null
+        multiBarsResponse-with-page-token-example-1:
+          bars:
+            BTCUSD:
+            - t: '2022-02-28T06:00:00Z'
+              x: FTXU
+              o: 37866
+              h: 44340
+              l: 37494
+              c: 43241
+              v: 2817.008
+              n: 10116
+              vw: 40876.4518611946
+          next_page_token: QlRDVVNEfER8MjAyMi0wMi0yOFQwNjowMDowMC4wMDAwMDAwMDBafEZUWFU=
+      title: MultiBarsResponse
+      properties:
+        bars:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Bar'
+        next_page_token:
+          type: string
+          nullable: true
+      required:
+      - bars
+    LatestMultiQuotesResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-crypto:
+          quotes:
+            ETHUSD:
+              t: '2022-03-08T22:40:52.536436224Z'
+              x: FTXU
+              bp: 2562.99
+              bs: 23.798
+              ap: 2579.11
+              as: 22.155
+            BTCUSD:
+              t: '2022-03-08T22:40:52.662990848Z'
+              x: FTXU
+              bp: 38465.26
+              bs: 2.641
+              ap: 38698.75
+              as: 1.3746
+        example-1:
+          quotes:
+            AAPL:
+              t: '2022-03-11T18:40:13.514830169Z'
+              ax: V
+              ap: 156.47
+              as: 3
+              bx: V
+              bp: 156.45
+              bs: 1
+              c:
+              - R
+              z: C
+            TSLA:
+              t: '2022-03-11T18:40:12.416216587Z'
+              ax: V
+              ap: 850
+              as: 1
+              bx: V
+              bp: 798
+              bs: 2
+              c:
+              - R
+              z: C
+      properties:
+        quotes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Quote'
+      required:
+      - quotes
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

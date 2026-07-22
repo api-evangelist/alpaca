@@ -1,0 +1,43 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.alpaca.markets/us/docs/using-oauth2-and-trading-api.md
+docs: https://docs.alpaca.markets/docs/using-oauth2-and-trading-api
+description: >-
+  OAuth 2.0 scopes for Alpaca Connect (third-party apps acting for Alpaca users on the Trading and
+  Market Data APIs). Read-only endpoint access is assumed by default when no scope is requested.
+  The harvested OpenAPI declares only apiKey/basic schemes, so this scope surface comes from the
+  published OAuth docs, plus the RFC 8414 metadata of the authx authorization server that fronts
+  the hosted Broker MCP Server.
+schemes:
+  - name: Alpaca Connect OAuth 2.0
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://app.alpaca.markets/oauth/authorize
+        tokenUrl: https://api.alpaca.markets/oauth/token
+        notes:
+          - Optional env parameter (live | paper); both prompted if unspecified.
+          - scope is a space-delimited list; read-only access is the default grant.
+    source: https://docs.alpaca.markets/docs/using-oauth2-and-trading-api
+  - name: authx (Broker MCP authorization server)
+    metadata: well-known/alpaca-authx-oauth-authorization-server.json
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://authx.alpaca.markets/v1/oauth2/authorize
+        tokenUrl: https://authx.alpaca.markets/v1/oauth2/token
+        notes:
+          - PKCE (S256) supported; grants also include client_credentials, jwt-bearer, refresh_token.
+          - The protected-resource metadata for /mcp advertises scopes_supported [] (no public scope registry).
+    source: https://authx.alpaca.markets/v1/.well-known/oauth-authorization-server
+scopes:
+  - scope: account:write
+    description: Write access for account configurations and watchlists.
+    flows: [authorizationCode]
+  - scope: trading
+    description: Place, cancel or modify orders.
+    flows: [authorizationCode]
+  - scope: data
+    description: Access to the Data API.
+    flows: [authorizationCode]
+  - scope: (default / no scope)
+    description: Read-only endpoint access is assumed by default.
+    flows: [authorizationCode]

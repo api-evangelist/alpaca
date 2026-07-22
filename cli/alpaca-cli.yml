@@ -1,0 +1,50 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.alpaca.markets/us/docs/alpacas-cli.md + https://github.com/alpacahq/cli
+name: alpaca
+description: >-
+  First-party Trading CLI (alpha preview, Apache 2.0). Direct terminal access to the Trading and
+  Market Data APIs — trade stocks, options, and crypto, query market data, manage account and
+  watchlists, and automate workflows. Designed for AI-agent integration: no confirmation prompts,
+  structured JSON errors on stderr with exit codes (0 success / 1 error / 2 auth failure),
+  automatic retry on 429/5xx respecting Retry-After, --dry-run order preview, --schema response
+  inspection, and built-in jq filtering.
+install:
+  - method: go
+    command: go install github.com/alpacahq/cli/cmd/alpaca@latest
+  - method: homebrew
+    command: brew install alpacahq/tap/cli
+authentication:
+  - flow: OAuth (paper trading)
+    command: alpaca profile login
+  - flow: API keys (paper or live)
+    command: alpaca profile login --api-key [--live]
+  - flow: Environment variables (CI / agents)
+    note: Credentials via env vars; multiple named profiles supported.
+commands:
+  - group: Account & Portfolio
+    commands: [account get, account config get, account config set, account activity list, account portfolio]
+  - group: Orders
+    commands: [order submit, order list, order get, order replace, order cancel, order cancel-all]
+    flags: ["--dry-run (preview without submitting)", "--client-order-id (idempotent submission)"]
+  - group: Positions
+    commands: [position list, position get, position close, position close-all]
+  - group: Options
+    commands: [option contracts, option get, option exercise, option do-not-exercise]
+  - group: Market Data — Stocks
+    commands: [data bars, data quotes, data trades, data latest-bar, data latest-quote, data latest-trade, data snapshot, data screener most-actives, data screener movers]
+  - group: Market Data — Crypto
+    commands: [data crypto bars, data crypto latest-quotes, data crypto snapshots, data crypto-orderbook]
+  - group: Market Data — Options
+    commands: [data option chain, data option snapshot, data option latest-quotes]
+  - group: Market Data — Other
+    commands: [data news, data corporate-actions, data forex rates, clock, calendar]
+  - group: Watchlists
+    commands: [watchlist list, watchlist create, watchlist get, watchlist add, watchlist remove, watchlist delete]
+  - group: Assets
+    commands: [asset list, asset get]
+  - group: Raw API access
+    commands: ["api GET/POST <path> (any endpoint not yet covered by named commands)"]
+  - group: Utility
+    commands: [version, doctor, --help, --help-all, "<cmd> --schema"]
+output_formats: [json (default), csv, filtered json (built-in jq), --quiet]

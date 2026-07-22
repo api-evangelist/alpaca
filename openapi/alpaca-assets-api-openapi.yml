@@ -1,0 +1,196 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Assets API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Assets
+paths:
+  /v1/assets:
+    get:
+      tags:
+      - Assets
+      summary: Retrieve all assets
+      description: Returns all assets
+      responses:
+        '200':
+          description: An array of asset objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Asset'
+      operationId: getAssets
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - active
+          - inactive
+          - all
+          example: all
+          default: all
+        in: query
+        name: status
+        description: Asset status to filter by, will default to `all`
+      - schema:
+          type: string
+          enum:
+          - us_equity
+          - crypto
+          example: us_equity
+          default: us_equity
+        in: query
+        name: asset_class
+        description: Asset class to filter by, `us_equity` or `crypto`. Defaults to `us_equity`
+  /v1/assets/{symbol_or_asset_id}:
+    parameters:
+    - name: symbol_or_asset_id
+      required: true
+      in: path
+      schema:
+        type: string
+      description: you can use either the asset's Id or the symbol to search
+    get:
+      tags:
+      - Assets
+      summary: Retrieve an asset by UUID
+      description: Returns the requested asset, if found
+      responses:
+        '200':
+          description: Returns asset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+        '404':
+          description: Asset not found
+      operationId: getAssetBySymbolOrId
+components:
+  schemas:
+    Exchange:
+      type: string
+      title: Exchange
+      example: NASDAQ
+      description: 'Represents the exchange where an asset is traded.
+
+
+        For Stocks:
+
+        - AMEX
+
+        - ARCA
+
+        - BATS
+
+        - NYSE
+
+        - NASDAQ
+
+        - NYSEARCA
+
+        - OTC
+
+
+        For Crypto:
+
+        - ERSX
+
+        - FTXU'
+      enum:
+      - AMEX
+      - ARCA
+      - BATS
+      - NYSE
+      - NASDAQ
+      - NYSEARCA
+      - OTC
+      - ERSX
+      - FTXU
+    AssetClass:
+      type: string
+      enum:
+      - us_equity
+      - crypto
+    Asset:
+      title: Asset
+      type: object
+      description: Assets are sorted by asset class, exchange and symbol. Some assets are not tradable with Alpaca. These assets will be marked with the flag tradable=false
+      properties:
+        id:
+          type: string
+          example: 904837e3-3b76-47ec-b432-046db621571b
+          format: uuid
+          description: Asset ID
+        class:
+          $ref: '#/components/schemas/AssetClass'
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        symbol:
+          type: string
+          example: AAPL
+          description: The symbol of the asset
+        name:
+          type: string
+          example: Apple Inc. Common Stock
+          description: The official name of the asset
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          description: active or inactive
+          example: active
+        tradable:
+          type: boolean
+          example: true
+          description: Asset is tradable on Alpaca or not
+        marginable:
+          type: boolean
+          example: true
+          description: Asset is marginable or not
+        shortable:
+          type: boolean
+          example: true
+          description: Asset is shortable or not
+        easy_to_borrow:
+          type: boolean
+          example: true
+          description: Asset is easy-to-borrow or not (filtering for easy_to_borrow = True is the best way to check whether the name is currently available to short at Alpaca).
+        fractionable:
+          type: boolean
+          example: true
+          description: Asset is fractionable or not
+        last_close_pct_change:
+          type: string
+          format: decimal
+          description: 'Percent change for the trading day as of last market closure. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
+        last_price:
+          type: string
+          format: decimal
+          description: 'Most recent available price for this asset on the market. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
+        last_close:
+          type: string
+          description: 'Last price of the asset upon market closure on the most recent trading day. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
+          format: decimal
+      required:
+      - id
+      - class
+      - symbol
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

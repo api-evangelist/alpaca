@@ -1,0 +1,25 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.alpaca.markets/us/llms.txt (reference pages) + https://docs.alpaca.markets/us/changelog + https://status.alpaca.markets/
+versioning:
+  scheme: uri-path
+  surfaces:
+    - {api: Trading API, current: v2}
+    - {api: Broker API, current: v1, note: event streams migrated v1 -> v2 (ULID-based)}
+    - {api: Market Data API, current: v2 stocks; v1beta1 options/news/screener/indices; v1beta3 crypto}
+    - {api: Connect (OAuth), current: oauth endpoints on api.alpaca.markets + app.alpaca.markets}
+deprecation:
+  policy_url: null
+  practice: >-
+    Alpaca deprecates per-endpoint in the docs and changelog rather than via a standalone policy
+    page: the corporate-actions announcement endpoints are marked deprecated in favor of the new
+    corporate-actions endpoint; the legacy /v1/events/trades stream is closed to new broker
+    partners with all partners urged to migrate to /v2/events/trades; the interim /v2beta1 events
+    endpoints will be permanently redirected to /v2 before removal.
+  sunset_header: false
+  deprecated_operations:
+    - openapi/alpaca-corporate-actions-api-openapi.yml#getCorporateAnnouncements (docs: deprecated, use the new corporate actions endpoint)
+    - Broker legacy GET /v1/events/trades (existing partners only; migrate to /v2/events/trades)
+status_page: https://status.alpaca.markets/
+changelog: https://docs.alpaca.markets/us/changelog
+sla: null

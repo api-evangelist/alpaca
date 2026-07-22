@@ -1,0 +1,446 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Watchlists API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Watchlists
+  description: Head to https://alpaca.markets/docs/api-documentation/api-v2/watchlist/ to view complete documentation on the Watchlist API.
+paths:
+  /v2/watchlists:
+    get:
+      tags:
+      - Watchlists
+      summary: Watchlists
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value:
+                  - id: 3174d6df-7726-44b4-a5bd-7fda5ae6e009
+                    account_id: abe25343-a7ba-4255-bdeb-f7e013e9ee5d
+                    created_at: '2022-01-31T21:49:05.14628Z'
+                    updated_at: '2022-01-31T21:49:05.14628Z'
+                    name: Primary Watchlist
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Watchlist'
+      operationId: getWatchlists
+      description: Returns the list of watchlists registered under the account.
+    post:
+      tags:
+      - Watchlists
+      summary: Watchlist
+      description: Create a new watchlist with initial set of assets.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWatchlistRequest'
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      operationId: postWatchlist
+  /v2/watchlists/{watchlist_id}:
+    parameters:
+    - schema:
+        type: string
+        format: uuid
+      name: watchlist_id
+      in: path
+      required: true
+      description: watchlist id
+    get:
+      tags:
+      - Watchlists
+      summary: Get Watchlist by ID
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      operationId: getWatchlistById
+      description: Returns a watchlist identified by the ID.
+    put:
+      tags:
+      - Watchlists
+      summary: Update Watchlist By Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWatchlistRequest'
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      operationId: updateWatchlistById
+      description: Update the name and/or content of watchlist
+    post:
+      tags:
+      - Watchlists
+      summary: Add Asset to Watchlist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAssetToWatchlistRequest'
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      operationId: addAssetToWatchlist
+      description: Append an asset for the symbol to the end of watchlist asset list
+    delete:
+      tags:
+      - Watchlists
+      summary: Delete Watchlist By Id
+      parameters: []
+      responses:
+        '204':
+          description: No Content
+      operationId: deleteWatchlistById
+      description: Delete a watchlist. This is a permanent deletion.
+  /v2/watchlists:by_name:
+    parameters: []
+    get:
+      tags:
+      - Watchlists
+      summary: Get Watchlist by Name
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: name
+        required: true
+        description: name of the watchlist
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      operationId: getWatchlistByName
+      description: Returns a watchlist by name
+    put:
+      tags:
+      - Watchlists
+      summary: Update Watchlist By Name
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWatchlistRequest'
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: name
+        required: true
+        description: name of the watchlist
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      operationId: updateWatchlistByName
+      description: Update the name and/or content of watchlist
+    post:
+      tags:
+      - Watchlists
+      summary: Add Asset to Watchlist By Name
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAssetToWatchlistRequest'
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: name
+        required: true
+        description: name of the watchlist
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      operationId: addAssetToWatchlistByName
+      description: Append an asset for the symbol to the end of watchlist asset list
+    delete:
+      tags:
+      - Watchlists
+      summary: Delete Watchlist By Name
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: name
+        required: true
+        description: name of the watchlist
+      responses:
+        '204':
+          description: No Content
+      operationId: deleteWatchlistByName
+      description: Delete a watchlist. This is a permanent deletion.
+  /v2/watchlists/{watchlist_id}/{symbol}:
+    parameters:
+    - schema:
+        type: string
+        format: uuid
+      name: watchlist_id
+      in: path
+      required: true
+      description: Watchlist ID
+    - schema:
+        type: string
+      name: symbol
+      in: path
+      required: true
+      description: symbol name to remove from the watchlist content
+    delete:
+      tags:
+      - Watchlists
+      summary: Symbol from Watchlist
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+          description: Returns the updated watchlist
+      operationId: removeAssetFromWatchlist
+      description: Delete one entry for an asset by symbol name
+components:
+  schemas:
+    Assets:
+      description: 'The assets API serves as the master list of assets available for trade and data consumption from Alpaca. Assets are sorted by asset class, exchange and symbol. Some assets are only available for data consumption via Polygon, and are not tradable with Alpaca. These assets will be marked with the flag tradable=false.
+
+        '
+      type: object
+      x-examples:
+        example-1:
+          id: b0b6dd9d-8b9b-48a9-ba46-b9d54906e415
+          class: us_equity
+          exchange: NASDAQ
+          symbol: AAPL
+          name: Apple Inc. Common Stock
+          status: active
+          tradable: true
+          marginable: true
+          shortable: true
+          easy_to_borrow: true
+          fractionable: true
+      title: Assets
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Asset ID
+        class:
+          $ref: '#/components/schemas/AssetClass'
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        symbol:
+          type: string
+          description: The symbol of the asset
+          example: AAPL
+        name:
+          type: string
+          minLength: 1
+          description: The official name of the asset
+        status:
+          type: string
+          description: active or inactive
+          example: active
+          enum:
+          - active
+          - inactive
+        tradable:
+          type: boolean
+          description: Asset is tradable on Alpaca or not
+        marginable:
+          type: boolean
+          description: Asset is marginable or not
+        shortable:
+          type: boolean
+          description: Asset is shortable or not
+        easy_to_borrow:
+          type: boolean
+          description: Asset is easy-to-borrow or not (filtering for easy_to_borrow = True is the best way to check whether the name is currently available to short at Alpaca).
+        fractionable:
+          type: boolean
+          description: Asset is fractionable or not
+      required:
+      - id
+      - class
+      - exchange
+      - symbol
+      - name
+      - status
+      - tradable
+      - marginable
+      - shortable
+      - easy_to_borrow
+      - fractionable
+    Watchlist:
+      description: 'The watchlist API provides CRUD operation for the account’s watchlist. An account can have multiple watchlists and each is uniquely identified by id but can also be addressed by user-defined name. Each watchlist is an ordered list of assets.
+
+        '
+      type: object
+      x-examples:
+        example-1:
+          id: 3174d6df-7726-44b4-a5bd-7fda5ae6e009
+          account_id: abe25343-a7ba-4255-bdeb-f7e013e9ee5d
+          created_at: '2022-01-31T21:49:05.14628Z'
+          updated_at: '2022-01-31T21:49:05.14628Z'
+          name: Primary Watchlist
+          assets:
+          - id: 8ccae427-5dd0-45b3-b5fe-7ba5e422c766
+            class: us_equity
+            exchange: NASDAQ
+            symbol: TSLA
+            name: Tesla, Inc. Common Stock
+            status: active
+            tradable: true
+            marginable: true
+            shortable: true
+            easy_to_borrow: true
+            fractionable: true
+      title: Watchlist
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: watchlist id
+        account_id:
+          type: string
+          format: uuid
+          description: account ID
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          minLength: 1
+          description: user-defined watchlist name (up to 64 characters)
+        assets:
+          type: array
+          description: the content of this watchlist, in the order as registered by the client
+          items:
+            $ref: '#/components/schemas/Assets'
+      required:
+      - id
+      - account_id
+      - created_at
+      - updated_at
+      - name
+    Exchange:
+      title: Exchange
+      type: string
+      description: 'Represents the current exchanges Alpaca supports. List is currently:
+
+
+        - AMEX
+
+        - ARCA
+
+        - BATS
+
+        - NYSE
+
+        - NASDAQ
+
+        - NYSEARCA
+
+        - OTC'
+      enum:
+      - AMEX
+      - ARCA
+      - BATS
+      - NYSE
+      - NASDAQ
+      - NYSEARCA
+      - OTC
+      example: NYSE
+    AssetClass:
+      type: string
+      title: AssetClass
+      enum:
+      - us_equity
+      - crypto
+      example: us_equity
+      description: Represents what class of asset this is. Currently only supports `us_equity` or `crypto`
+      x-examples:
+        example-1: us_equity
+    AddAssetToWatchlistRequest:
+      title: AddAssetToWatchlistRequest
+      type: object
+      description: Append an asset for the symbol to the end of watchlist asset list
+      properties:
+        symbol:
+          type: string
+          example: AAPL
+          description: symbol name to append to watchlist
+    UpdateWatchlistRequest:
+      title: PostWatchlistRequest
+      type: object
+      description: Request format used for creating a new watchlist or updating an existing watchlist with a set of assets and name.
+      properties:
+        name:
+          type: string
+        symbols:
+          type: array
+          items:
+            type: string
+            nullable: true
+      required:
+      - name
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

@@ -1,0 +1,55 @@
+generated: '2026-07-22'
+method: searched
+source: https://alpaca.markets/security + https://authx.alpaca.markets/v1/.well-known/oauth-authorization-server + openapi/*.yml + docs.alpaca.markets
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      Alpaca Connect implements OAuth 2.0 authorization-code flow (app.alpaca.markets/oauth/authorize,
+      api.alpaca.markets/oauth/token) with documented scopes; the Broker MCP Server uses an RFC-compliant
+      authorization server at authx.alpaca.markets/v1.
+  - id: rfc8414-authorization-server-metadata
+    conforms: true
+    evidence: https://authx.alpaca.markets/v1/.well-known/oauth-authorization-server returns full AS metadata (saved in well-known/).
+  - id: rfc9728-protected-resource-metadata
+    conforms: true
+    evidence: https://broker-api.alpaca.markets/.well-known/oauth-protected-resource/mcp returns resource metadata naming the Broker MCP Server.
+  - id: pkce-rfc7636
+    conforms: true
+    evidence: authx metadata advertises code_challenge_methods_supported including S256.
+  - id: oidc
+    conforms: false
+    evidence: no openid-configuration discovered on any Alpaca host; OAuth is authorization-only, not OIDC identity.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: no /.well-known/security.txt on alpaca.markets, api.alpaca.markets, or broker-api.alpaca.markets (docs-host hit is an HTML shell).
+  - id: rfc9727-api-catalog
+    conforms: true
+    evidence: docs.alpaca.markets/.well-known/api-catalog returns a linkset (application/linkset+json) of the doc projects (saved in well-known/).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors use a custom {code, message} JSON envelope, not application/problem+json.
+  - id: mcp
+    conforms: true
+    evidence: official Trading MCP server (PyPI alpaca-mcp-server) and hosted OAuth-gated Broker MCP endpoint at broker-api.alpaca.markets/mcp.
+  - id: idempotency-key-header
+    conforms: true
+    evidence: Broker API journals and instant-funding endpoints document the Idempotency-Key header with replay semantics and 422 on key reuse with a different body.
+  - id: cursor-pagination
+    conforms: true
+    evidence: Market Data endpoints use limit/page_token with next_page_token responses.
+  - id: sse
+    conforms: true
+    evidence: Broker Events API streams account status, trade, and NTA events via Server-Sent Events with replay cursors.
+  - id: websocket-streaming
+    conforms: true
+    evidence: market data and trade updates stream over WebSockets (see asyncapi/alpaca-asyncapi.yml).
+  - id: soc2-type2
+    conforms: true
+    evidence: https://alpaca.markets/security — annual SOC 2 Type 2 assessments against all five Trust Services Criteria.
+  - id: iso27001
+    conforms: true
+    evidence: https://alpaca.markets/security — adheres to ISO 27001:2022.
+  - id: gdpr
+    conforms: true
+    evidence: https://alpaca.markets/security — complies with GDPR and UK ICO Data Protection programs.

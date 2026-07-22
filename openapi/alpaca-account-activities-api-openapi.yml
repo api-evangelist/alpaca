@@ -1,0 +1,315 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Account Activities
+  description: Head to https://alpaca.markets/docs/api-references/trading-api/account-activities/ to view complete documentation on the Account Activities API.
+paths:
+  /v2/account/activities:
+    get:
+      summary: Get account activities of one type
+      tags:
+      - Account Activities
+      responses:
+        '200':
+          description: returns an array of Account activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  anyOf:
+                  - $ref: '#/components/schemas/TradingActivities'
+                  - $ref: '#/components/schemas/NonTradeActivities'
+                  description: Will be a mix of TradingActivity or NonTradeActivity objects based on what is passed in the activity_types parameter
+      operationId: getAccountActivities
+      description: Returns account activity entries for many types of activities.
+      parameters:
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: date
+        description: The date for which you want to see activities.
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        description: The response will contain only activities submitted before this date. (Cannot be used with date.)
+        name: until
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        description: The response will contain only activities submitted after this date. (Cannot be used with date.)
+        name: after
+      - schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: desc
+        in: query
+        name: direction
+        description: asc or desc (default desc if unspecified.)
+      - schema:
+          type: integer
+        in: query
+        name: page_size
+        description: The maximum number of entries to return in the response. (See the section on paging above.)
+      - schema:
+          type: string
+        in: query
+        description: 'The ID of the end of your current page of results. '
+        name: page_token
+      - schema:
+          type: string
+          example: FILL
+        in: query
+        name: activity_types
+        description: A comma-separated list of the activity types to include in the response. If unspecified, activities of all types will be returned. See ActivityType model for values
+  /v2/account/activities/{activity_type}:
+    parameters:
+    - schema:
+        type: string
+      name: activity_type
+      in: path
+      description: The activity type you want to view entries for. A list of valid activity types can be found at the bottom of this page.
+      required: true
+    get:
+      summary: Get account activities of one type
+      tags:
+      - Account Activities
+      responses:
+        '200':
+          description: returns an array of Account activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/TradingActivities'
+                  - $ref: '#/components/schemas/NonTradeActivities'
+                  description: Will be one of a TradingActivity or NonTradeActivity based on activity_type used in path
+      operationId: getAccountActivitiesByActivityType
+      description: Returns account activity entries for a specific type of activity.
+      parameters:
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: date
+        description: The date for which you want to see activities.
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        description: The response will contain only activities submitted before this date. (Cannot be used with date.)
+        name: until
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        description: The response will contain only activities submitted after this date. (Cannot be used with date.)
+        name: after
+      - schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: desc
+        in: query
+        name: direction
+        description: asc or desc (default desc if unspecified.)
+      - schema:
+          type: integer
+        in: query
+        name: page_size
+        description: The maximum number of entries to return in the response. (See the section on paging above.)
+      - schema:
+          type: string
+        in: query
+        description: 'The ID of the end of your current page of results. '
+        name: page_token
+components:
+  schemas:
+    OrderStatus:
+      type: string
+      title: OrderStatus
+      description: "An order executed through Alpaca can experience several status changes during its lifecycle. The most common statuses are described in detail below:\n\n- new\n  The order has been received by Alpaca, and routed to exchanges for execution. This is the usual initial state of an order.\n\n- partially_filled\n  The order has been partially filled.\n\n- filled\n  The order has been filled, and no further updates will occur for the order.\n\n- done_for_day\n  The order is done executing for the day, and will not receive further updates until the next trading day.\n\n- canceled\n  The order has been canceled, and no further updates will occur for the order. This can be either due to a cancel request by the user, or the order has been canceled by the exchanges due to its time-in-force.\n\n- expired\n  The order has expired, and no further updates will occur for the order.\n\n- replaced\n  The order was replaced by another order, or was updated due to a market event such as corporate action.\n\n- pending_cancel\n  The order is waiting to be canceled.\n\n- pending_replace\n  The order is waiting to be replaced by another order. The order will reject cancel request while in this state.\n\nLess common states are described below. Note that these states only occur on very rare occasions, and most users will likely never see their orders reach these states:\n\n- accepted\n  The order has been received by Alpaca, but hasn’t yet been routed to the execution venue. This could be seen often out side of trading session hours.\n\n- pending_new\n  The order has been received by Alpaca, and routed to the exchanges, but has not yet been accepted for execution. This state only occurs on rare occasions.\n\n- accepted_for_bidding\n  The order has been received by exchanges, and is evaluated for pricing. This state only occurs on rare occasions.\n\n- stopped\n  The order has been stopped, and a trade is guaranteed for the order, usually at a stated price or better, but has not yet occurred. This state only occurs on rare occasions.\n\n- rejected\n  The order has been rejected, and no further updates will occur for the order. This state occurs on rare occasions and may occur based on various conditions decided by the exchanges.\n\n- suspended\n  The order has been suspended, and is not eligible for trading. This state only occurs on rare occasions.\n\n- calculated\n  The order has been completed for the day (either filled or done for day), but remaining settlement calculations are still pending. This state only occurs on rare occasions.\n\n\nAn order may be canceled through the API up until the point it reaches a state of either filled, canceled, or expired."
+      enum:
+      - new
+      - partially_filled
+      - filled
+      - done_for_day
+      - canceled
+      - expired
+      - replaced
+      - pending_cancel
+      - pending_replace
+      - accepted
+      - pending_new
+      - accepted_for_bidding
+      - stopped
+      - rejected
+      - suspended
+      - calculated
+      example: new
+    ActivityType:
+      type: string
+      title: ActivityType
+      description: "- FILL\n  Order fills (both partial and full fills)\n\n- TRANS\n  Cash transactions (both CSD and CSW)\n\n- MISC\n  Miscellaneous or rarely used activity types (All types except those in TRANS, DIV, or FILL)\n\n- ACATC\n  ACATS IN/OUT (Cash)\n\n- ACATS\n  ACATS IN/OUT (Securities)\n\n- CFEE\n  Crypto fee\n\n- CSD\n  Cash deposit(+)\n\n- CSW\n  Cash withdrawal(-)\n\n- DIV\n  Dividends\n\n- DIVCGL\n  Dividend (capital gain long term)\n\n- DIVCGS\n  Dividend (capital gain short term)\n\n- DIVFEE\n  Dividend fee\n\n- DIVFT\n  Dividend adjusted (Foreign Tax Withheld)\n\n- DIVNRA\n  Dividend adjusted (NRA Withheld)\n\n- DIVROC\n  Dividend return of capital\n\n- DIVTW\n  Dividend adjusted (Tefra Withheld)\n\n- DIVTXEX\n  Dividend (tax exempt)\n\n- FEE\n  Fee denominated in USD\n\n- INT\n  Interest (credit/margin)\n\n- INTNRA\n  Interest adjusted (NRA Withheld)\n\n- INTTW\n  Interest adjusted (Tefra Withheld)\n\n- JNL\n  Journal entry\n\n- JNLC\n  Journal entry (cash)\n\n- JNLS\n  Journal entry (stock)\n\n- MA\n  Merger/Acquisition\n\n- NC\n  Name change\n\n- OPASN\n  Option assignment\n\n- OPEXP\n  Option expiration\n\n- OPXRC\n  Option exercise\n\n- PTC\n  Pass Thru Charge\n\n- PTR\n  Pass Thru Rebate\n\n- REORG\n  Reorg CA\n\n- SC\n  Symbol change\n\n- SSO\n  Stock spinoff\n\n- SSP\n  Stock split"
+      enum:
+      - FILL
+      - TRANS
+      - MISC
+      - ACATC
+      - ACATS
+      - CSD
+      - CSW
+      - DIV
+      - DIVCGL
+      - DIVCGS
+      - DIVFEE
+      - DIVFT
+      - DIVNRA
+      - DIVROC
+      - DIVTW
+      - DIVTXEX
+      - INT
+      - INTNRA
+      - INTTW
+      - JNL
+      - JNLC
+      - JNLS
+      - MA
+      - NC
+      - OPASN
+      - OPEXP
+      - OPXRC
+      - PTC
+      - PTR
+      - REORG
+      - SC
+      - SSO
+      - SSP
+      - CFEE
+      - FEE
+      x-examples:
+        example-1: FILL
+    TradingActivities:
+      title: AccountTradingActivities
+      type: object
+      x-examples:
+        example-1:
+          id: 20220202135509981::2d7be4ff-d1f3-43e9-856a-0f5cf5c5088e
+          activity_type: FILL
+          transaction_time: '2022-02-02T18:55:09.981482Z'
+          type: fill
+          price: '174.78'
+          qty: '2'
+          side: buy
+          symbol: AAPL
+          leaves_qty: '0'
+          order_id: b5abe576-6a8a-49f3-a353-46b72c1ccae9
+          cum_qty: '2'
+          order_status: filled
+      properties:
+        activity_type:
+          $ref: '#/components/schemas/ActivityType'
+        id:
+          type: string
+          description: An id for the activity. Always in “::” format. Can be sent as page_token in requests to facilitate the paging of results.
+        cum_qty:
+          description: The cumulative quantity of shares involved in the execution.
+          type: string
+        leaves_qty:
+          type: string
+          description: 'For partially_filled orders, the quantity of shares that are left to be filled.
+
+            '
+        price:
+          type: string
+          description: The per-share price that the trade was executed at.
+        qty:
+          type: string
+          description: The number of shares involved in the trade execution.
+        side:
+          type: string
+          description: buy or sell
+        symbol:
+          type: string
+          description: The symbol of the security being traded.
+          example: AAPL
+        transaction_time:
+          type: string
+          description: The time at which the execution occurred.
+          format: date-time
+        order_id:
+          type: string
+          description: The id for the order that filled.
+          format: uuid
+        type:
+          type: string
+          description: fill or partial_fill
+          enum:
+          - fill
+          - partial_fill
+          example: fill
+        order_status:
+          $ref: '#/components/schemas/OrderStatus'
+    NonTradeActivities:
+      title: AccountNonTradeActivities
+      type: object
+      properties:
+        activity_type:
+          $ref: '#/components/schemas/ActivityType'
+        id:
+          type: string
+          description: An ID for the activity, always in “::” format. Can be sent as page_token in requests to facilitate the paging of results.
+        date:
+          type: string
+          description: The date on which the activity occurred or on which the transaction associated with the activity settled.
+          format: date-time
+        net_amount:
+          type: string
+          description: The net amount of money (positive or negative) associated with the activity.
+        symbol:
+          type: string
+          description: The symbol of the security involved with the activity. Not present for all activity types.
+        qty:
+          type: string
+          description: 'For dividend activities, the number of shares that contributed to the payment. Not present for other activity types.
+
+            '
+        per_share_amount:
+          type: string
+          description: For dividend activities, the average amount paid per share. Not present for other activity types.
+      x-examples:
+        example-1:
+          activity_type: DIV
+          id: 20190801011955195::5f596936-6f23-4cef-bdf1-3806aae57dbf
+          date: '2019-08-01'
+          net_amount: '1.02'
+          symbol: T
+          qty: '2'
+          per_share_amount: '0.51'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

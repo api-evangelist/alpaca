@@ -1,0 +1,243 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Corporate Actions API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Corporate Actions
+paths:
+  /v1/corporate_actions/announcements:
+    get:
+      summary: Retrieving Announcements
+      tags:
+      - Corporate Actions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Announcement'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: getCorporateAnnouncements
+      description: This enables searching for an array of corporate action announcements based on criteria.
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: ca_types
+        description: A comma-delimited list of CorporateActionType values
+        required: true
+      - schema:
+          type: string
+          format: date
+        in: query
+        required: true
+        name: since
+        description: The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days.
+      - schema:
+          type: string
+          format: date
+        in: query
+        required: true
+        description: The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days.
+        name: until
+      - schema:
+          type: string
+        in: query
+        name: symbol
+        description: The symbol of the company initiating the announcement.
+      - schema:
+          type: string
+        in: query
+        name: cusip
+        description: The CUSIP of the company initiating the announcement.
+      - schema:
+          type: string
+          enum:
+          - declaration_date
+          - ex_date
+          - record_date
+          - payable_date
+        in: query
+        name: date_type
+        description: 'An emum of possible ways to use the `since` and `until` parameters to search by.
+
+
+          the types are:
+
+
+          - **declaration_date**: The date of the preliminary announcement details or the date that any subsequent term updates took place.
+
+          - **ex_date**: The date on which any security purchasing activity will not result in a corporate action entitlement. Any selling activity that takes place on or after this date will result in a corporate action entitlement.
+
+          - **record_date**: The date the company checks its records to determine who is shareholder in order to allocate entitlements.
+
+          - **payable_date**: The date that the stock and cash positions will update according to the account positions as of the record date.'
+components:
+  responses:
+    BadRequest:
+      description: Malformed input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AnnouncementCAType:
+      type: string
+      description: "Announcements have both a type and a subtype to categorize them. This model represents the higher level abstract \"types\" of Announcement. Please see the AnnouncementCASubType model for finer grain descriptions of the subtypes\n\nPossible values are:\n- dividend\n  can have `cash` and `stock` subtypes\n- merger\n  has `merger_update` and `merger_completion` sub types\n- split\n  has `stock_split`, `until_split`, `reverse_split`, and `recapitalization` sub types\n- spinoff\n  currently has only the `spinoff` subtype and thus is just this higher level category for now. A disbursement of a newly tradable security when the intiating_symbol creates the target_symbol."
+      title: ''
+      enum:
+      - dividend
+      - merger
+      - split
+      - spinoff
+      example: dividend
+    AnnouncementCASubType:
+      type: string
+      description: "Announcements have both a type and a subtype to categorize them. This model represents the lowever level abstract \"sub types\" of Announcement. Please see the AnnouncementCAType model for higher level descriptions of the possible types\n\nPossible values are:\n\n- from the `dividend` type:\n  - **cash**\n\n    A cash payment based on the number of shares the account holds on the record date.\n  - **stock**\n\n    A stock payment based on the number of shares the account holds on the record date.\n\n- from the `merger` type:\n  - **merger_update**\n\n    An update to the terms of an upcoming merger. This can happen any number of times before the merger is completed and can be tracked by using the id parameter.\n\n  - **merger_completion**\n\n    A final update in the terms of the merger in which the intiating_symbol will acquire the target_symbol. Any previous terms updates for this announcement will have the same id value.\n\n- from the `split` type:\n  - **stock_split**\n\n    An increase in the number of shares outstanding with a decrease in the dollar value of each share. The new_rate and old_rate parameters will be returned in order to derive the ratio of the split\n  - **until_split**\n\n    An increase in the number of shares outstanding with a decrease in the dollar value of each share. The new_rate and old_rate parameters will be returned in order to derive the ratio of the split.\n  - **reverse_split**\n\n    A decrease in the number of shares outstanding with an increase in the dollar value of each share. The new_rate and old_rate parameters will be returned in order to derive the ratio of the spli\n  - **recapitalization**\n\n    A stock recapitalization, typically used by a company to adjust debt and equity ratios.\n\n- from the `spinoff` type:\n  - **spinoff**\n\n    A disbursement of a newly tradable security when the intiating_symbol creates the target_symbol."
+      title: ''
+      enum:
+      - cash
+      - stock
+      - merger_update
+      - merger_completion
+      - stock_split
+      - until_split
+      - reverse_split
+      - recapitalization
+      - spinoff
+    Announcement:
+      description: 'The announcements endpoint contains public information on previous and upcoming dividends, mergers, spinoffs, and stock splits.
+
+
+        Announcement data is made available through the API as soon as it is ingested by Alpaca, which is typically the following trading day after the declaration date. This provides insight into future account stock position and cash balance changes that will take effect on an announcement’s payable date. Additionally, viewing previous announcement details can improve bookkeeping and reconciling previous account cash and position changes.'
+      type: object
+      x-examples:
+        example-1:
+          id: bebc5ece-34be-47e9-b944-687e69a102be
+          corporate_action_id: 78467X109_AA22
+          ca_type: dividend
+          ca_sub_type: cash
+          initiating_symbol: DIA
+          initiating_original_cusip: '252787106'
+          target_symbol: DIA
+          target_original_cusip: '252787106'
+          declaration_date: '2021-12-19'
+          ex_date: '2022-01-21'
+          record_date: '2022-01-24'
+          payable_date: '2022-02-14'
+          cash: '0'
+          old_rate: '1'
+          new_rate: '1'
+      title: Announcement
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: ID that is specific to a single announcement.
+        corporate_action_id:
+          type: string
+          minLength: 1
+          description: ID that remains consistent across all announcements for the same corporate action. Unlike ‘id’, this can be used to connect multiple announcements to see how the terms have changed throughout the lifecycle of the corporate action event.
+        ca_type:
+          $ref: '#/components/schemas/AnnouncementCAType'
+        ca_sub_type:
+          $ref: '#/components/schemas/AnnouncementCASubType'
+        initiating_symbol:
+          type: string
+          minLength: 1
+          description: Symbol of the company initiating the announcement.
+        initiating_original_cusip:
+          type: string
+          minLength: 1
+          description: CUSIP of the company initiating the announcement.
+        target_symbol:
+          type: string
+          minLength: 1
+          description: Symbol of the child company involved in the announcement.
+          nullable: true
+        target_original_cusip:
+          type: string
+          minLength: 1
+          description: CUSIP of the child company involved in the announcement.
+          nullable: true
+        declaration_date:
+          type: string
+          minLength: 1
+          description: Date the corporate action or subsequent terms update was announced.
+        ex_date:
+          type: string
+          minLength: 1
+          description: The first date that purchasing a security will not result in a corporate action entitlement.
+          nullable: true
+        record_date:
+          type: string
+          minLength: 1
+          description: The date an account must hold a settled position in the security in order to receive the corporate action entitlement.
+          nullable: true
+        payable_date:
+          type: string
+          minLength: 1
+          description: The date the announcement will take effect. On this date, account stock and cash balances are expected to be processed accordingly.
+        cash:
+          type: string
+          minLength: 1
+          description: The amount of cash to be paid per share held by an account on the record date.
+          nullable: true
+        old_rate:
+          type: string
+          minLength: 1
+          description: The denominator to determine any quantity change ratios in positions.
+          nullable: true
+        new_rate:
+          type: string
+          minLength: 1
+          description: The numerator to determine any quantity change ratios in positions.
+          nullable: true
+      required:
+      - id
+      - corporate_action_id
+      - ca_type
+      - ca_sub_type
+      - initiating_symbol
+      - initiating_original_cusip
+      - target_symbol
+      - target_original_cusip
+      - declaration_date
+      - ex_date
+      - record_date
+      - payable_date
+      - cash
+      - old_rate
+      - new_rate
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+      required:
+      - code
+      - message
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

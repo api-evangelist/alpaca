@@ -1,0 +1,68 @@
+generated: '2026-07-22'
+method: searched
+source: >-
+  docs.alpaca.markets (authentication, using-oauth2-and-trading-api, paper-trading, broker-api
+  reference pages incl. Idempotency-Key documentation on journals/instant-funding, api-rate-limits)
+  + derived from openapi/*.yml securitySchemes and parameters
+authentication:
+  styles:
+    - api: Trading API / Market Data API
+      scheme: API key headers
+      headers: [APCA-API-KEY-ID, APCA-API-SECRET-KEY]
+    - api: Broker API
+      scheme: HTTP Basic (API key as username, secret as password)
+    - api: Connect (OAuth2)
+      scheme: Bearer access token via OAuth 2.0 authorization-code flow
+  see: authentication/alpaca-authentication.yml
+idempotency:
+  supported: true
+  surfaces:
+    - api: Broker API
+      mechanism: Idempotency-Key request header
+      operations: [createJournal, post-v1-instant-funding]
+      semantics: >-
+        Multiple requests with the same key and identical body create only one resource; a repeat
+        returns the previously created resource. Reusing a key with a different body returns
+        422 Unprocessable Entity. Alpaca recommends always supplying a client-generated UUID in
+        production so retries on timeout/5xx are safe.
+    - api: Trading API (orders)
+      mechanism: client_order_id request field (up to 128 chars)
+      semantics: >-
+        The API rejects duplicate submissions with the same client_order_id, preventing accidental
+        double-orders in retry logic. If omitted, Alpaca generates one. Also exposed as the CLI
+        --client-order-id flag.
+  docs: https://docs.alpaca.markets/reference/createjournal
+pagination:
+  - api: Market Data API
+    style: cursor
+    request_params: [limit, page_token]
+    response_field: next_page_token
+  - api: Broker/Trading list endpoints
+    style: offset/window filters
+    request_params: [limit, after, until, direction, page_size, page_token]
+  - api: Events API (SSE)
+    style: replay cursors
+    request_params: [since, until, since_id, until_id, last_event_id]
+    rules: until requires since; until_id requires since_id; since and since_id are mutually exclusive.
+request_tracing:
+  header: X-Request-ID
+  note: Returned on API responses (observed on broker-api.alpaca.markets); include it in support requests.
+versioning:
+  scheme: uri-path
+  current: {trading_api: v2, broker_api: v1, market_data: v2 (stocks) / v1beta1-v1beta3 (newer asset classes)}
+  see: lifecycle/alpaca-lifecycle.yml
+error_envelope:
+  shape: '{"code": <int>, "message": <string>}'
+  content_type: application/json
+  see: errors/alpaca-problem-types.yml
+rate_limiting:
+  throttled_status: 429
+  retry_after: Respected by the first-party CLI (automatic retry on 429/5xx honoring Retry-After).
+  limits: see rate-limits/alpaca-rate-limits.yml (200 rpm free; 10,000 rpm Algo Trader Plus)
+streaming:
+  websocket: wss market data streams (stocks IEX/SIP, crypto, options, news) — see asyncapi/alpaca-asyncapi.yml
+  sse: Broker Events API (accounts status, trade events v2, NTA, admin actions) with ULID event ids
+money_precision:
+  note: >-
+    Monetary values are decimal strings; Alpaca publishes a dedicated money-precision skill
+    (skills/alpaca-broker-api-money-precision.md) covering rounding and fractional quantities.

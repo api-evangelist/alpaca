@@ -1,0 +1,58 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/*.yml components.schemas ($ref links + id-reference fields)
+description: >-
+  Entity-relationship view of the Alpaca platform derived from the harvested OpenAPI schemas.
+  Two account notions coexist — the Broker API Account (a partner's end-customer, addressed by
+  account_id in paths) and the Trading API TradeAccount (the caller's own account) — with trading
+  entities (orders, positions, watchlists) hanging off either, and market-data entities keyed by
+  symbol rather than by id reference.
+entities:
+  core:
+    - {name: Account, id: uuid, note: "Broker API end-customer account (KYC identity, contact, disclosures, agreements, documents)"}
+    - {name: TradeAccount, id: uuid, note: "Trading API account (equity, buying power, status)"}
+    - {name: Order, id: uuid, note: also carries client_order_id for idempotent submission}
+    - {name: Position, id: asset_id+account, note: keyed by symbol or asset_id}
+    - {name: Asset, id: uuid, note: "master list of tradable instruments (symbol, exchange, class)"}
+    - {name: Watchlist, id: uuid}
+    - {name: Activity, id: "id (string)", note: trade + non-trade activities}
+    - {name: PortfolioHistory, id: none, note: time-series projection of an account}
+  broker:
+    - {name: ACHRelationship, id: uuid}
+    - {name: Bank, id: uuid}
+    - {name: Transfer, id: uuid}
+    - {name: Journal, id: uuid, note: JNLC cash / JNLS securities moves between accounts}
+    - {name: Document, id: uuid}
+    - {name: Event, id: event_id/ulid, note: "AccountStatusEvent, TradeUpdateEvent, TransferStatusEvent, JournalStatusEvent via SSE"}
+  market_data:
+    - {name: Bar, keyed_by: symbol+timeframe}
+    - {name: Quote, keyed_by: symbol}
+    - {name: Trade, keyed_by: symbol}
+    - {name: Snapshot, keyed_by: symbol}
+    - {name: News, id: integer, note: "references symbols[]"}
+    - {name: Announcement, id: uuid, note: corporate actions; references initiating/target symbols}
+    - {name: Exchange, keyed_by: code}
+relationships:
+  - {from: Order, to: Asset, kind: belongs_to, via: "[asset_id, symbol]"}
+  - {from: Order, to: Account, kind: belongs_to, via: "account path parameter (Broker) or API key (Trading)"}
+  - {from: Order, to: Order, kind: has_many, via: legs, note: multi-leg / bracket order classes}
+  - {from: Order, to: Order, kind: has_one, via: replaced_by / replaces}
+  - {from: Position, to: Asset, kind: belongs_to, via: "[asset_id, symbol]"}
+  - {from: Position, to: Account, kind: belongs_to, via: account context}
+  - {from: Watchlist, to: Asset, kind: has_many, via: "assets[]"}
+  - {from: Watchlist, to: Account, kind: belongs_to, via: account_id}
+  - {from: Activity, to: Account, kind: belongs_to, via: account_id}
+  - {from: Activity, to: Order, kind: belongs_to, via: order_id, note: fill activities}
+  - {from: ACHRelationship, to: Account, kind: belongs_to, via: account_id}
+  - {from: Transfer, to: Account, kind: belongs_to, via: account_id}
+  - {from: Transfer, to: ACHRelationship, kind: belongs_to, via: relationship_id}
+  - {from: Transfer, to: Bank, kind: belongs_to, via: bank_id, note: wire transfers}
+  - {from: Journal, to: Account, kind: belongs_to, via: "[from_account, to_account]"}
+  - {from: Document, to: Account, kind: belongs_to, via: account_id}
+  - {from: PortfolioHistory, to: Account, kind: belongs_to, via: account context}
+  - {from: TradeUpdateEvent, to: Order, kind: belongs_to, via: order payload}
+  - {from: AccountStatusEvent, to: Account, kind: belongs_to, via: account_id}
+  - {from: News, to: Asset, kind: references, via: "symbols[]"}
+  - {from: Announcement, to: Asset, kind: references, via: "[initiating_symbol, target_symbol]"}
+  - {from: Bar, to: Asset, kind: references, via: symbol}
+  - {from: Snapshot, to: Asset, kind: references, via: symbol}

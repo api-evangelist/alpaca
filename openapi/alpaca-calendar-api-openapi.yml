@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Calendar API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Calendar
+paths:
+  /v1/calendar:
+    get:
+      tags:
+      - Calendar
+      summary: Query market calendar
+      parameters:
+      - name: start
+        description: The first date to retrieve data for. (Inclusive) in YYYY-MM-DD format
+        in: query
+        schema:
+          type: string
+          format: date
+          example: '2022-01-01'
+      - name: end
+        description: The last date to retrieve data for. (Inclusive) in YYYY-MM-DD format
+        in: query
+        schema:
+          type: string
+          format: date
+          example: '2022-01-01'
+      responses:
+        '200':
+          description: Returns the calendar object
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Calendar'
+      operationId: queryMarketCalendar
+      description: The calendar API serves the full list of market days from 1970 to 2029. It can also be queried by specifying a start and/or end time to narrow down the results. In addition to the dates, the response also contains the specific open and close times for the market days, taking into account early closures.
+  /v2/calendar:
+    get:
+      summary: Get Market Calendar info
+      tags:
+      - Calendar
+      parameters:
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: start
+        description: The first date to retrieve data for (inclusive)
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: end
+        description: The last date to retrieve data for (inclusive)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Calendar_2'
+      operationId: getCalendar
+      description: Returns the market calendar.
+components:
+  schemas:
+    Calendar_2:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          date: '2022-02-01'
+          open: 09:30
+          close: '16:00'
+          session_open: '0700'
+          session_close: '1900'
+      title: Calendar
+      properties:
+        date:
+          type: string
+          minLength: 1
+          description: Date string in “%Y-%m-%d” format
+        open:
+          type: string
+          minLength: 1
+          description: The time the market opens at on this date in “%H:%M” format
+        close:
+          type: string
+          minLength: 1
+          description: The time the market closes at on this date in “%H:%M” format
+        session_open:
+          type: string
+          minLength: 1
+        session_close:
+          type: string
+          minLength: 1
+      required:
+      - date
+      - open
+      - close
+      - session_open
+      - session_close
+    Calendar:
+      title: Calendar
+      type: object
+      description: The calendar API serves the full list of market days from 1970 to 2029. It can also be queried by specifying a start and/or end time to narrow down the results. In addition to the dates, the response also contains the specific open and close times for the market days, taking into account early closures.
+      properties:
+        date:
+          type: string
+          example: '2021-04-06'
+          format: date
+          description: Date string in YYYY-MM-DD format
+        open:
+          type: string
+          example: 09:30
+          description: The time the market opens at on this date in HH:MM format
+        close:
+          type: string
+          example: '16:00'
+          description: The time the market closes at on this date in HH:MM format
+        session_open:
+          type: string
+          example: '0700'
+          deprecated: true
+          description: this field has been deprecated please ignore
+        session_close:
+          type: string
+          example: '1900'
+          deprecated: true
+          description: this field has been deprecated please ignore
+      required:
+      - date
+      - open
+      - close
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

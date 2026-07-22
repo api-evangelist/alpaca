@@ -1,0 +1,16 @@
+generated: '2026-07-22'
+method: searched
+probe: true
+url: https://trust.alpaca.markets/
+certifications: [SOC 2 Type 2, ISO 27001:2022, GDPR, UK ICO Data Protection]
+evidence:
+  - source: https://alpaca.markets/security
+    keywords: [SOC 2 Type 2, ISO 27001:2022, GDPR, AICPA SOC for Service Organizations, trust center]
+    detail: >-
+      "Alpaca adheres to the ISO 27001:2022 standard and undergoes annual SOC 2 Type 2 assessments
+      against all 5 trust services criteria — Security, Confidentiality, Availability, Integrity,
+      and Privacy. Further, Alpaca complies with GDPR and UK's ICO Data Protection programs."
+      Encryption AES-256 at rest / TLS in transit; Zero Trust architecture; infrastructure on GCP.
+  - source: https://trust.alpaca.markets/
+    keywords: [Alpaca Trust Center]
+    detail: Dedicated trust-center portal (JS-rendered; HTTP 200, titled "Alpaca Trust Center").

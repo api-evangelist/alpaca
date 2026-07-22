@@ -1,0 +1,45 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.alpaca.markets/us/changelog
+description: >-
+  Alpaca publishes an auto-generated, dated API changelog on the docs site (announced alongside the
+  Trading MCP Server and CLI in June 2026). Entries are per-change, tagged by API surface (Broker,
+  Trading, Market Data) and list affected endpoints. Recent window captured below; the live
+  changelog is the source of truth.
+scheme: dated entries (auto-generated from spec/docs changes), per-API-surface
+entries:
+  - date: '2026-07-20'
+    title: ULID Regeneration for Historical v1 Event Streams
+    apis: [Broker API]
+    kind: data-correction
+    highlights:
+      - Regenerated non-unique event_ulid values on /v1/events/accounts/status and /v1/events/nta (June 2023 - December 2024 window); numeric event_id unchanged.
+    url: https://docs.alpaca.markets/us/changelog/ulid-regeneration-for-historical-v1-event-streams
+  - date: '2026-07-20'
+    title: Clarified the archive-portfolio description
+    apis: [Broker API]
+    kind: docs-clarification
+    affected: ['DELETE /v1/rebalancing/portfolios/{portfolio_id}']
+    url: https://docs.alpaca.markets/us/changelog/2026-07-20-portfolio-archive-90d3cf9
+  - date: '2026-07-20'
+    title: '"fractionable" field added to US treasury and corporate bond schemas'
+    apis: [Broker API]
+    kind: addition
+    affected: ['GET /v1/assets/fixed_income/us_corporates', 'GET /v1/assets/fixed_income/us_treasuries']
+    url: https://docs.alpaca.markets/us/changelog/2026-07-20-fractionable-56627af
+  - date: '2026-07-20'
+    title: Portfolio history numeric fields can be null
+    apis: [Broker API, Trading API]
+    kind: schema-change
+    affected: ['GET /v1/trading/accounts/{account_id}/account/portfolio/history', 'GET /v2/account/portfolio/history']
+    highlights:
+      - equity, profit_loss, profit_loss_pct, and base_value on PortfolioHistory are now nullable to match service behavior.
+    url: https://docs.alpaca.markets/us/changelog/2026-07-20-portfolio-history-09b0f9f
+  - date: '2026-07-20'
+    title: New Corporate Actions events streaming endpoint (SSE)
+    apis: [Market Data API]
+    kind: addition
+    affected: ['GET /v1beta1/events/corporate-actions']
+    highlights:
+      - Streams cash/stock dividends, splits, mergers, spin-offs, reorganizations, rights, redemptions, name changes, and more; filter by event type/region; replay via since/until and event-id cursors.
+    url: https://docs.alpaca.markets/us/changelog/2026-07-20-corporate-actions-b7b8e98

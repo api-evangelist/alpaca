@@ -1,0 +1,128 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Clock API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Clock
+paths:
+  /v1/clock:
+    get:
+      tags:
+      - Clock
+      summary: Query market clock
+      responses:
+        '200':
+          description: The current market's timestamp
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Clock'
+              examples: {}
+      operationId: queryMarketClock
+      description: The Clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close.
+  /v2/clock:
+    get:
+      summary: Get Market Clock info
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Clock_2'
+      operationId: getClock
+      description: 'The clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close.
+
+
+        Returns the market clock.'
+      tags:
+      - Clock
+components:
+  schemas:
+    Clock_2:
+      title: Clock
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: 'Current timestamp
+
+            '
+          format: date-time
+        is_open:
+          type: boolean
+          description: 'Whether or not the market is open
+
+            '
+        next_open:
+          type: string
+          description: Next Market open timestamp
+          format: date-time
+        next_close:
+          type: string
+          description: Next market close timestamp
+          format: date-time
+      x-examples:
+        example-1:
+          timestamp: '2019-08-24T14:15:22Z'
+          is_open: true
+          next_open: '2019-08-24T14:15:22Z'
+          next_close: '2019-08-24T14:15:22Z'
+    Clock:
+      description: Represents the current market time and open/close events.
+      type: object
+      x-examples:
+        example:
+          timestamp: '2018-04-01T12:00:00.000Z'
+          is_open: true
+          next_open: '2018-04-01T12:00:00.000Z'
+          next_close: '2018-04-01T12:00:00.000Z'
+        example-1:
+          timestamp: '2022-02-16T13:06:05.210563128-05:00'
+          is_open: true
+          next_open: '2022-02-17T09:30:00-05:00'
+          next_close: '2022-02-16T16:00:00-05:00'
+      title: Clock
+      properties:
+        timestamp:
+          type: string
+          minLength: 1
+          format: date-time
+          description: Current timestamp
+          example: '2022-02-16T13:06:05.210563128-05:00'
+        is_open:
+          type: boolean
+          description: Whether the market is open or not
+        next_open:
+          type: string
+          minLength: 1
+          format: date-time
+          description: Next market open timestamp
+        next_close:
+          type: string
+          minLength: 1
+          format: date-time
+          description: Next market close timestamp
+      required:
+      - timestamp
+      - is_open
+      - next_open
+      - next_close
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

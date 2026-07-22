@@ -1,0 +1,56 @@
+generated: '2026-07-22'
+method: searched
+source: https://github.com/alpacahq/alpaca-skills
+description: >-
+  Provider-published Agent Skills, saved verbatim from Alpaca's official alpaca-skills repository
+  ("drop-in SKILL.md files" for the Trading API and Broker API, announced 2026-06-17). Each file is
+  the upstream SKILL.md; alpaca-agents.md is the repo's AGENTS.md operating guide.
+skills:
+  - file: alpaca-broker-api-integration.md
+    name: alpaca-broker-integration
+    api: Broker API
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/integration/SKILL.md
+  - file: alpaca-broker-api-account-onboarding.md
+    name: alpaca-broker-account-onboarding
+    api: Broker API
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/account-onboarding/SKILL.md
+  - file: alpaca-broker-api-funding-transfers.md
+    name: alpaca-broker-funding-transfers
+    api: Broker API
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/funding-transfers/SKILL.md
+  - file: alpaca-broker-api-journals.md
+    name: alpaca-broker-journals
+    api: Broker API
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/journals/SKILL.md
+  - file: alpaca-broker-api-trading-orders.md
+    name: alpaca-broker-trading-orders
+    api: Broker API
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/trading-orders/SKILL.md
+  - file: alpaca-broker-api-market-data.md
+    name: alpaca-broker-market-data
+    api: Broker API / Market Data API
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/market-data/SKILL.md
+  - file: alpaca-broker-api-money-precision.md
+    name: alpaca-broker-money-precision
+    api: Broker API
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/money-precision/SKILL.md
+  - file: alpaca-broker-api-rate-limits-resilience.md
+    name: alpaca-broker-rate-limits-resilience
+    api: Broker API
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/rate-limits-resilience/SKILL.md
+  - file: alpaca-broker-api-reconciliation-idempotency.md
+    name: alpaca-broker-reconciliation-idempotency
+    api: Broker API
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/reconciliation-idempotency/SKILL.md
+  - file: alpaca-broker-api-sse-events.md
+    name: alpaca-broker-sse-events
+    api: Broker API (Events / SSE)
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/broker-api/sse-events/SKILL.md
+  - file: alpaca-trading-api-backtest.md
+    name: alpaca-trading-backtest
+    api: Trading API + Trading CLI
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/skills/trading-api/backtest/SKILL.md
+  - file: alpaca-agents.md
+    name: AGENTS.md
+    api: repo operating guide
+    source: https://github.com/alpacahq/alpaca-skills/blob/main/AGENTS.md

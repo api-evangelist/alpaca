@@ -1,0 +1,503 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Orders API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Orders
+  description: Head to https://alpaca.markets/docs/api-documentation/api-v2/orders/ to view complete documentation on the Orders API.
+paths:
+  /v2/orders:
+    post:
+      tags:
+      - Orders
+      summary: Order
+      operationId: postOrder
+      description: Places a new order for the given account. An order request may be rejected if the account is not authorized for trading, or if the tradable balance is insufficient to fill the order..
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+        description: ''
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '403':
+          description: 'Forbidden
+
+
+            Buying power or shares is not sufficient.'
+        '422':
+          description: 'Unprocessable
+
+
+            Input parameters are not recognized.'
+    get:
+      tags:
+      - Orders
+      summary: All Orders
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - open
+          - closed
+          - all
+          example: open
+        in: query
+        name: status
+        description: Order status to be queried. open, closed or all. Defaults to open.
+      - schema:
+          type: integer
+        in: query
+        name: limit
+        description: The maximum number of orders in response. Defaults to 50 and max is 500.
+      - schema:
+          type: string
+        in: query
+        name: after
+        description: The response will include only ones submitted after this timestamp (exclusive.)
+      - schema:
+          type: string
+        in: query
+        name: until
+        description: The response will include only ones submitted until this timestamp (exclusive.)
+      - schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        in: query
+        name: direction
+        description: The chronological order of response based on the submission time. asc or desc. Defaults to desc.
+      - schema:
+          type: boolean
+        in: query
+        name: nested
+        description: If true, the result will roll up multi-leg orders under the legs field of primary order.
+      - schema:
+          type: string
+        in: query
+        name: symbols
+        description: A comma-separated list of symbols to filter by (ex. “AAPL,TSLA,MSFT”). A currency pair is required for crypto orders (ex. “BTCUSD,BCHUSD,LTCUSD,ETCUSD”).
+      responses:
+        '200':
+          description: 'Successful response
+
+
+            An array of Order objects'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+      operationId: getAllOrders
+      description: Retrieves a list of orders for the account, filtered by the supplied query parameters.
+      x-internal: false
+    delete:
+      tags:
+      - Orders
+      summary: All Orders
+      parameters: []
+      responses:
+        '207':
+          description: 'Multi-Status with body.
+
+
+            an array of objects that include the order id and http status code for each status request.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CanceledOrderResponse'
+        '500':
+          description: Failed to cancel order.
+      operationId: deleteAllOrders
+      description: Attempts to cancel all open orders. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request.
+  /v2/orders/{order_id}:
+    parameters:
+    - schema:
+        type: string
+        format: uuid
+      name: order_id
+      in: path
+      required: true
+      description: order id
+    get:
+      tags:
+      - Orders
+      summary: Order by Order ID
+      parameters:
+      - schema:
+          type: boolean
+        in: query
+        name: nested
+        description: If true, the result will roll up multi-leg orders under the legs field of primary order.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+      operationId: getOrderByOrderID
+      description: Retrieves a single order for the given order_id.
+    patch:
+      tags:
+      - Orders
+      summary: Order
+      description: "Replaces a single order with updated parameters. Each parameter overrides the corresponding attribute of the existing order. The other attributes remain the same as the existing order.\n\nA success return code from a replaced order does NOT guarantee the existing open order has been replaced. If the existing open order is filled before the replacing (new) order reaches the execution venue, the replacing (new) order is rejected, and these events are sent in the trade_updates stream channel. \n\nWhile an order is being replaced, buying power is reduced by the larger of the two orders that have been placed (the old order being replaced, and the newly placed order to replace it). If you are replacing a buy entry order with a higher limit price than the original order, the buying power is calculated based on the newly placed order. If you are replacing it with a lower limit price, the buying power is calculated based on the old order.\n"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchOrderRequest'
+      responses:
+        '200':
+          description: 'Successful response
+
+
+            The new Order object with the new order ID.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+      operationId: patchOrderByOrderId
+    delete:
+      tags:
+      - Orders
+      summary: Order by Order ID
+      parameters: []
+      responses:
+        '204':
+          description: No Content
+        '422':
+          description: The order status is not cancelable.
+      operationId: deleteOrderByOrderID
+      description: Attempts to cancel an Open Order. If the order is no longer cancelable, the request will be rejected with status 422; otherwise accepted with return status 204.
+components:
+  schemas:
+    TimeInForce:
+      type: string
+      title: TimeInForce
+      description: "Note: For Crypto Trading, Alpaca supports the following Time-In-Force designations: day, gtc, ioc and fok. OPG and CLS are not supported.\n\nAlpaca supports the following Time-In-Force designations:\n\n- day\n  A day order is eligible for execution only on the day it is live. By default, the order is only valid during Regular Trading Hours (9:30am - 4:00pm ET). If unfilled after the closing auction, it is automatically canceled. If submitted after the close, it is queued and submitted the following trading day. However, if marked as eligible for extended hours, the order can also execute during supported extended hours.\n\n- gtc\n  The order is good until canceled. Non-marketable GTC limit orders are subject to price adjustments to offset corporate actions affecting the issue. We do not currently support Do Not Reduce(DNR) orders to opt out of such price adjustments.\n\n- opg\n  Use this TIF with a market/limit order type to submit “market on open” (MOO) and “limit on open” (LOO) orders. This order is eligible to execute only in the market opening auction. Any unfilled orders after the open will be cancelled. OPG orders submitted after 9:28am but before 7:00pm ET will be rejected. OPG orders submitted after 7:00pm will be queued and routed to the following day’s opening auction. On open/on close orders are routed to the primary exchange. Such orders do not necessarily execute exactly at 9:30am / 4:00pm ET but execute per the exchange’s auction rules.\n\n- cls\n  Use this TIF with a market/limit order type to submit “market on close” (MOC) and “limit on close” (LOC) orders. This order is eligible to execute only in the market closing auction. Any unfilled orders after the close will be cancelled. CLS orders submitted after 3:50pm but before 7:00pm ET will be rejected. CLS orders submitted after 7:00pm will be queued and routed to the following day’s closing auction. Only available with API v2.\n\n- ioc\n  An Immediate Or Cancel (IOC) order requires all or part of the order to be executed immediately. Any unfilled portion of the order is canceled. Only available with API v2. Most market makers who receive IOC orders will attempt to fill the order on a principal basis only, and cancel any unfilled balance. On occasion, this can result in the entire order being cancelled if the market maker does not have any existing inventory of the security in question.\n\n- fok\n  A Fill or Kill (FOK) order is only executed if the entire order quantity can be filled, otherwise the order is canceled. Only available with API v2."
+      enum:
+      - day
+      - gtc
+      - opg
+      - cls
+      - ioc
+      - fok
+      example: day
+    OrderType:
+      type: string
+      enum:
+      - market
+      - limit
+      - stop
+      - stop_limit
+      - trailing_stop
+      example: stop
+      description: 'Represents the types of orders Alpaca currently supports
+
+
+        - market
+
+        - limit
+
+        - stop
+
+        - stop_limit
+
+        - trailing_stop'
+      title: OrderType
+    PatchOrderRequest:
+      title: PatchOrderRequest
+      type: object
+      description: Represents a request to patch an order.
+      properties:
+        qty:
+          type: string
+          description: number of shares to trade
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        limit_price:
+          type: string
+          description: required if original order type is limit or stop_limit
+        stop_price:
+          type: string
+          description: required if original order type is limit or stop_limit
+        trail:
+          type: string
+          description: the new value of the trail_price or trail_percent value (works only for type=“trailing_stop”)
+        client_order_id:
+          type: string
+          description: A unique identifier for the order. Automatically generated if not sent.
+          maxLength: 48
+    Order:
+      description: 'The Orders API allows a user to monitor, place and cancel their orders with Alpaca.
+
+
+        Each order has a unique identifier provided by the client. This client-side unique order ID will be automatically generated by the system if not provided by the client, and will be returned as part of the order object along with the rest of the fields described below. Once an order is placed, it can be queried using the client-side order ID to check the status.
+
+
+        Updates on open orders at Alpaca will also be sent over the streaming interface, which is the recommended method of maintaining order state.'
+      type: object
+      x-examples:
+        example-1:
+          id: 61e69015-8549-4bfd-b9c3-01e75843f47d
+          client_order_id: eb9e2aaa-f71a-4f51-b5b4-52a6c565dad4
+          created_at: '2021-03-16T18:38:01.942282Z'
+          updated_at: '2021-03-16T18:38:01.942282Z'
+          submitted_at: '2021-03-16T18:38:01.937734Z'
+          filled_at: null
+          expired_at: null
+          canceled_at: null
+          failed_at: null
+          replaced_at: null
+          replaced_by: null
+          replaces: null
+          asset_id: b0b6dd9d-8b9b-48a9-ba46-b9d54906e415
+          symbol: AAPL
+          asset_class: us_equity
+          notional: '500'
+          qty: null
+          filled_qty: '0'
+          filled_avg_price: null
+          order_class: ''
+          order_type: market
+          type: market
+          side: buy
+          time_in_force: day
+          limit_price: null
+          stop_price: null
+          status: accepted
+          extended_hours: false
+          legs: null
+          trail_percent: null
+          trail_price: null
+          hwm: null
+      title: Order
+      properties:
+        id:
+          type: string
+          description: Order ID
+        client_order_id:
+          type: string
+          description: Client unique order ID
+          maxLength: 48
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+        submitted_at:
+          type: string
+          format: date-time
+          nullable: true
+        filled_at:
+          type: string
+          format: date-time
+          nullable: true
+        expired_at:
+          type: string
+          format: date-time
+          nullable: true
+        canceled_at:
+          type: string
+          format: date-time
+          nullable: true
+        failed_at:
+          type: string
+          format: date-time
+          nullable: true
+        replaced_at:
+          type: string
+          format: date-time
+          nullable: true
+        replaced_by:
+          type: string
+          format: uuid
+          description: The order ID that this order was replaced by
+          nullable: true
+        replaces:
+          type: string
+          format: uuid
+          description: The order ID that this order replaces
+          nullable: true
+        asset_id:
+          type: string
+          format: uuid
+          description: Asset ID
+        symbol:
+          type: string
+          minLength: 1
+          description: Asset symbol
+        asset_class:
+          $ref: '#/components/schemas/AssetClass'
+        notional:
+          type: string
+          minLength: 1
+          description: Ordered notional amount. If entered, qty will be null. Can take up to 9 decimal points.
+          nullable: true
+        qty:
+          type: string
+          minLength: 1
+          description: Ordered quantity. If entered, notional will be null. Can take up to 9 decimal points.
+          nullable: true
+        filled_qty:
+          type: string
+          minLength: 1
+          description: Filled quantity
+        filled_avg_price:
+          type: string
+          description: Filled average price
+          nullable: true
+        order_class:
+          $ref: '#/components/schemas/OrderClass'
+        order_type:
+          type: string
+          deprecated: true
+          description: 'Deprecated in favour of the field "type" '
+        type:
+          $ref: '#/components/schemas/OrderType'
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        limit_price:
+          type: string
+          description: Limit price
+          nullable: true
+        stop_price:
+          description: Stop price
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        extended_hours:
+          type: boolean
+          description: If true, eligible for execution outside regular trading hours.
+        legs:
+          type: array
+          description: When querying non-simple order_class orders in a nested style, an array of Order entities associated with this order. Otherwise, null.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Order'
+        trail_percent:
+          type: string
+          description: The percent value away from the high water mark for trailing stop orders.
+        trail_price:
+          type: string
+          description: The dollar value away from the high water mark for trailing stop orders.
+        hwm:
+          type: string
+          description: The highest (lowest) market price seen since the trailing stop order was submitted.
+      required:
+      - symbol
+      - notional
+      - qty
+      - type
+      - side
+      - time_in_force
+    AssetClass:
+      type: string
+      title: AssetClass
+      enum:
+      - us_equity
+      - crypto
+      example: us_equity
+      description: Represents what class of asset this is. Currently only supports `us_equity` or `crypto`
+      x-examples:
+        example-1: us_equity
+    OrderStatus:
+      type: string
+      title: OrderStatus
+      description: "An order executed through Alpaca can experience several status changes during its lifecycle. The most common statuses are described in detail below:\n\n- new\n  The order has been received by Alpaca, and routed to exchanges for execution. This is the usual initial state of an order.\n\n- partially_filled\n  The order has been partially filled.\n\n- filled\n  The order has been filled, and no further updates will occur for the order.\n\n- done_for_day\n  The order is done executing for the day, and will not receive further updates until the next trading day.\n\n- canceled\n  The order has been canceled, and no further updates will occur for the order. This can be either due to a cancel request by the user, or the order has been canceled by the exchanges due to its time-in-force.\n\n- expired\n  The order has expired, and no further updates will occur for the order.\n\n- replaced\n  The order was replaced by another order, or was updated due to a market event such as corporate action.\n\n- pending_cancel\n  The order is waiting to be canceled.\n\n- pending_replace\n  The order is waiting to be replaced by another order. The order will reject cancel request while in this state.\n\nLess common states are described below. Note that these states only occur on very rare occasions, and most users will likely never see their orders reach these states:\n\n- accepted\n  The order has been received by Alpaca, but hasn’t yet been routed to the execution venue. This could be seen often out side of trading session hours.\n\n- pending_new\n  The order has been received by Alpaca, and routed to the exchanges, but has not yet been accepted for execution. This state only occurs on rare occasions.\n\n- accepted_for_bidding\n  The order has been received by exchanges, and is evaluated for pricing. This state only occurs on rare occasions.\n\n- stopped\n  The order has been stopped, and a trade is guaranteed for the order, usually at a stated price or better, but has not yet occurred. This state only occurs on rare occasions.\n\n- rejected\n  The order has been rejected, and no further updates will occur for the order. This state occurs on rare occasions and may occur based on various conditions decided by the exchanges.\n\n- suspended\n  The order has been suspended, and is not eligible for trading. This state only occurs on rare occasions.\n\n- calculated\n  The order has been completed for the day (either filled or done for day), but remaining settlement calculations are still pending. This state only occurs on rare occasions.\n\n\nAn order may be canceled through the API up until the point it reaches a state of either filled, canceled, or expired."
+      enum:
+      - new
+      - partially_filled
+      - filled
+      - done_for_day
+      - canceled
+      - expired
+      - replaced
+      - pending_cancel
+      - pending_replace
+      - accepted
+      - pending_new
+      - accepted_for_bidding
+      - stopped
+      - rejected
+      - suspended
+      - calculated
+      example: new
+    OrderSide:
+      type: string
+      enum:
+      - buy
+      - sell
+      example: buy
+      title: OrderSide
+      description: 'Represents which side this order was on:
+
+
+        - buy
+
+        - sell'
+    OrderClass:
+      type: string
+      enum:
+      - simple
+      - bracket
+      - oco
+      - oto
+      - ''
+      example: bracket
+      description: This will either be the empty string "", "simple", "bracket", "oco", or "oto".
+      title: OrderClass
+    CanceledOrderResponse:
+      title: CanceledOrderResponse
+      type: object
+      x-examples:
+        example-1:
+          id: d56ba3ea-6d04-48ce-8175-817e242ee608
+          status: 200
+      description: Represents the result of a request to cancel and order
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: orderId
+        status:
+          type: integer
+          description: http response code
+          example: 200
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

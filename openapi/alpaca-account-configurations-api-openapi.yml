@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Account Configurations API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Account Configurations
+  description: Head to https://alpaca.markets/docs/api-documentation/api-v2/account-configuration/ to view complete documentation on the Account Configurations API.
+paths:
+  /v2/account/configurations:
+    get:
+      tags:
+      - Account Configurations
+      summary: Account Configurations
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountConfigurations'
+      operationId: getAccountConfig
+      description: gets the current account configuration values
+    patch:
+      tags:
+      - Account Configurations
+      summary: Account Configurations
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountConfigurations'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountConfigurations'
+      operationId: patchAccountConfig
+      description: Updates and returns the current account configuration values
+components:
+  schemas:
+    AccountConfigurations:
+      title: AccountConfigurations
+      type: object
+      x-examples:
+        example-1:
+          dtbp_check: entry
+          trade_confirm_email: all
+          suspend_trade: false
+          no_shorting: false
+          fractional_trading: true
+          max_margin_multiplier: '4'
+          pdt_check: entry
+      description: The account configuration API provides custom configurations about your trading account settings. These configurations control various allow you to modify settings to suit your trading needs.
+      properties:
+        dtbp_check:
+          type: string
+          description: both, entry, or exit. Controls Day Trading Margin Call (DTMC) checks.
+          enum:
+          - both
+          - entry
+          - exit
+        trade_confirm_email:
+          type: string
+          description: all or none. If none, emails for order fills are not sent.
+        suspend_trade:
+          type: boolean
+          description: If true, new orders are blocked.
+        no_shorting:
+          type: boolean
+          description: If true, account becomes long-only mode.
+        fractional_trading:
+          type: boolean
+          description: If true, account is able to participate in fractional trading
+        max_margin_multiplier:
+          type: string
+          description: Can be "1" or "2"
+        pdt_check:
+          type: string
+          example: entry
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

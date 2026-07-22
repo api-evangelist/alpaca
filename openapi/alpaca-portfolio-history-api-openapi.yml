@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Portfolio History API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Portfolio History
+  description: Head to https://alpaca.markets/docs/api-documentation/api-v2/portfolio-history/ to view complete documentation on the Portfolio History API.
+paths:
+  /v2/account/portfolio/history:
+    get:
+      tags:
+      - Portfolio History
+      summary: Account Portfolio History
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: period
+        description: The duration of the data in <number> + <unit>, such as 1D, where <unit> can be D for day, W for week, M for month and A for year. Defaults to 1M.
+      - schema:
+          type: string
+        in: query
+        name: timeframe
+        description: The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D.
+      - schema:
+          type: string
+          format: date
+          example: '2022-05-15'
+        in: query
+        name: date_end
+        description: The date the data is returned up to, in “YYYY-MM-DD” format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)
+      - schema:
+          type: string
+        in: query
+        name: extended_hours
+        description: If true, include extended hours in the result. This is effective only for timeframe less than 1D.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioHistory'
+      operationId: getAccountPortfolioHistory
+      description: Returns timeseries data about equity and profit/loss (P/L) of the account in requested timespan.
+components:
+  schemas:
+    PortfolioHistory:
+      title: PortfolioHistory
+      type: object
+      properties:
+        timestamp:
+          type: array
+          description: time of each data element, left-labeled (the beginning of time window)
+          items:
+            type: integer
+        equity:
+          type: array
+          description: equity value of the account in dollar amount as of the end of each time window
+          items:
+            type: number
+        profit_loss:
+          type: array
+          description: profit/loss in dollar from the base value
+          items:
+            type: number
+        profit_loss_pct:
+          type: array
+          description: profit/loss in percentage from the base value
+          items:
+            type: number
+        base_value:
+          type: number
+          description: basis in dollar of the profit loss calculation
+        timeframe:
+          type: string
+          description: time window size of each data element
+          example: 15Min
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

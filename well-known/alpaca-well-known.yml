@@ -1,0 +1,73 @@
+generated: '2026-07-22'
+method: searched
+hosts:
+  - host: https://docs.alpaca.markets
+    documents:
+      - path: /.well-known/api-catalog          # RFC 9727 linkset (ReadMe)
+        status: 200
+        file: alpaca-api-catalog.json
+      - path: /llms.txt
+        status: 200
+        file: ../llms/alpaca-llms.txt
+        note: docs host also serves per-project indexes at /us/llms.txt and /in-giftcity/llms.txt; the US index is saved.
+      - path: /.well-known/security.txt
+        status: 200
+        note: HTML docs shell, not a real security.txt — treated as absent.
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        note: HTML docs shell, not a real manifest — treated as absent.
+  - host: https://alpaca.markets
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: soft 404 — returns the site 404 page with HTTP 200; treated as absent.
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: soft 404 (HTML 404 page); treated as absent.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        note: soft 404 (HTML 404 page); treated as absent.
+      - path: /.well-known/api-catalog
+        status: 200
+        note: soft 404 (HTML 404 page); treated as absent.
+  - host: https://api.alpaca.markets
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://broker-api.alpaca.markets
+    documents:
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        note: RFC 9728 protected-resource metadata; authorization server https://authx.alpaca.markets/v1.
+      - path: /.well-known/oauth-protected-resource/mcp
+        status: 200
+        file: alpaca-broker-oauth-protected-resource-mcp.json
+        note: resource_name "Alpaca Broker MCP Server".
+      - path: /.well-known/security.txt
+        status: 401
+      - path: /.well-known/openid-configuration
+        status: 401
+      - path: /.well-known/oauth-authorization-server
+        status: 401
+  - host: https://data.alpaca.markets
+    documents:
+      - path: /.well-known/security.txt
+        status: 401
+      - path: /.well-known/openid-configuration
+        status: 401
+  - host: https://authx.alpaca.markets
+    documents:
+      - path: /v1/.well-known/oauth-authorization-server   # RFC 8414
+        status: 200
+        file: alpaca-authx-oauth-authorization-server.json
+        note: OAuth authorization-server metadata for the hosted Broker MCP Server (PKCE S256, authorization_code/client_credentials/jwt-bearer/refresh_token grants).

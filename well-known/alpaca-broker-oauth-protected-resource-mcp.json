@@ -1,0 +1,1 @@
+{"resource":"https://broker-api.alpaca.markets","authorization_servers":["https://authx.alpaca.markets/v1"],"scopes_supported":[],"bearer_methods_supported":["header"],"resource_name":"Alpaca Broker MCP Server","resource_documentation":"https://docs.alpaca.markets/"}

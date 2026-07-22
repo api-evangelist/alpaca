@@ -1,0 +1,253 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities News API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: News
+paths:
+  /v1beta1/news:
+    get:
+      summary: News API
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/crypto-symbols'
+      - $ref: '#/components/parameters/limit'
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+        description: 'Sort articles by updated date. Options: DESC, ASC'
+        example: DESC
+      - name: include_content
+        in: query
+        schema:
+          type: boolean
+        description: Boolean indicator to include content for news articles (if available)
+      - name: exclude_contentless
+        in: query
+        schema:
+          type: boolean
+        description: 'Boolean indicator to exclude news articles that do not contain content '
+      - $ref: '#/components/parameters/page_token'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              examples:
+                news-response-example:
+                  value:
+                    news:
+                    - id: 24843171
+                      headline: Apple Leader in Phone Sales in China for Second Straight Month in November With 23.6% Share, According to Market Research Data
+                      author: Charles Gross
+                      created_at: '2021-12-31T11:08:42Z'
+                      updated_at: '2021-12-31T11:08:43Z'
+                      summary: This headline-only article is meant to show you why a stock is moving, the most difficult aspect of stock trading
+                      content: <p>This headline-only article is meant to show you why a stock is moving, the most difficult aspect of stock trading....</p>
+                      url: https://www.benzinga.com/news/21/12/24843171/apple-leader-in-phone-sales-in-china-for-second-straight-month-in-november-with-23-6-share-according
+                      images: []
+                      symbols:
+                      - AAPL
+                      source: benzinga
+                    next_page_token: MTY0MDk0ODkyMzAwMDAwMDAwMHwyNDg0MzE3MQ==
+              schema:
+                $ref: '#/components/schemas/GetNewsResponse'
+      operationId: getNews
+      description: Returns latest news articles across stocks and crypto. By default returns latest 10 news articles.
+      tags:
+      - News
+components:
+  schemas:
+    NewsImage:
+      description: A model representing images for news article. simply a url to the image along with a size parameter suggesting the display size of the image
+      type: object
+      x-examples:
+        newsimage-example-1:
+          size: thumb
+          url: https://cdn.benzinga.com/files/imagecache/250x187xUP/images/story/2012/doge_12.jpg
+      title: NewsImage
+      properties:
+        size:
+          type: string
+          minLength: 1
+          description: Possible values for size are thumb, small and large.
+          example: thumb
+          enum:
+          - thumb
+          - small
+          - large
+          readOnly: true
+        url:
+          type: string
+          minLength: 1
+          description: url to image from news article
+          format: uri
+          readOnly: true
+      required:
+      - size
+      - url
+    GetNewsResponse:
+      title: GetNewsResponse
+      type: object
+      properties:
+        news:
+          type: array
+          items:
+            $ref: '#/components/schemas/News'
+        next_page_token:
+          type: string
+          description: Pagination token for next page
+    News:
+      description: Model representing a news article from the Alpaca Market Data API
+      type: object
+      x-examples:
+        news-example-1:
+          id: 24803233
+          headline: Benzinga's Top 5 Articles For 2021 — Or 'Who Let The Dog Out?'
+          author: Sue Strachan
+          created_at: '2021-12-29T15:11:03Z'
+          updated_at: '2021-12-30T20:37:41Z'
+          summary: '2021 may have been the Year of the Ox in the Chinese calendar, but for Benzinga, it was the Year of the Dog, or should we say, Year of the Dogecoin (CRYPTO: DOGE).'
+          content: "<p>2021 may have been the Year of the Ox in the Chinese calendar, but for Benzinga, it was the Year of the Dog, or should we say, Year of the <strong>Dogecoin</strong> (CRYPTO: <a class=\"ticker\" href=\"https://www.benzinga.com/quote/doge/usd\">DOGE</a>).</p>\r\n\r\n<p>The memecoin created in 2013...."
+          url: https://www.benzinga.com/news/21/12/24843171/apple-leader-in-phone-sales-in-china-for-second-straight-month-in-november-with-23-6-share-according
+          images:
+          - size: large
+            url: https://cdn.benzinga.com/files/imagecache/2048x1536xUP/images/story/2012/doge_12.jpg
+          - size: small
+            url: https://cdn.benzinga.com/files/imagecache/1024x768xUP/images/story/2012/doge_12.jpg
+          - size: thumb
+            url: https://cdn.benzinga.com/files/imagecache/250x187xUP/images/story/2012/doge_12.jpg
+          symbols:
+          - AMZN
+          - BTCUSD
+          - COIN
+          - DOGEUSD
+          - SPCE
+          - TSLA
+          - TWTR
+          source: benzinga
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: News article ID
+        headline:
+          type: string
+          minLength: 1
+          description: Headline or title of the article
+        author:
+          type: string
+          minLength: 1
+          description: Original author of news article
+        created_at:
+          type: string
+          format: date-time
+          description: Date article was created (RFC 3339)
+        updated_at:
+          type: string
+          format: date-time
+          description: Date article was updated (RFC 3339)
+        summary:
+          type: string
+          minLength: 1
+          description: Summary text for the article (may be first sentence of content)
+        content:
+          type: string
+          minLength: 1
+          description: Content of the news article (might contain HTML)
+        url:
+          type: string
+          format: uri
+          description: URL of article (if applicable)
+          nullable: true
+        images:
+          type: array
+          uniqueItems: true
+          description: List of images (URLs) related to given article (may be empty)
+          items:
+            $ref: '#/components/schemas/NewsImage'
+        symbols:
+          type: array
+          description: List of related or mentioned symbols
+          items:
+            type: string
+        source:
+          type: string
+          minLength: 1
+          description: Source where the news originated from (e.g. Benzinga)
+      required:
+      - id
+      - headline
+      - author
+      - created_at
+      - updated_at
+      - summary
+      - content
+      - images
+      - symbols
+      - source
+  parameters:
+    end:
+      name: end
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-01-01T00:00:00Z'
+      description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
+    crypto-symbols:
+      name: symbols
+      in: query
+      required: true
+      schema:
+        type: string
+        example: BTCUSD,ETHUSD
+      description: The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with "USD", ie "BTCUSD,ETHUSD" would get both BTC and ETH
+    start:
+      name: start
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-01-01T00:00:00Z'
+      description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
+    page_token:
+      name: page_token
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+      description: Number of data points to return. Must be in range 1-10000, defaults to 1000.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

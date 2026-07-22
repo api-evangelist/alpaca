@@ -1,0 +1,35 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Alpaca Trading API
+  version: 1.0.0
+extends: openapi/alpaca-trading-api-openapi.yml
+x-provenance:
+  generated: '2026-07-22'
+  method: generated
+  note: >-
+    Non-destructive overlay capturing API Evangelist enrichment context for the harvested spec;
+    the original OpenAPI is never mutated.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist:
+        provider: alpaca
+        artifacts:
+          authentication: authentication/alpaca-authentication.yml
+          conventions: conventions/alpaca-conventions.yml
+          errors: errors/alpaca-problem-types.yml
+          sandbox: sandbox/alpaca-sandbox.yml
+          rate-limits: rate-limits/alpaca-rate-limits.yml
+          lifecycle: lifecycle/alpaca-lifecycle.yml
+          mcp: mcp/alpaca-mcp.yml
+          tool-crosswalk: mcp/alpaca-tool-crosswalk.yml
+  - target: $.info
+    update:
+      x-sandbox:
+        baseURL: https://paper-api.alpaca.markets
+        note: Paper trading environment; same API spec, separate API keys.
+  - target: $.info
+    update:
+      x-idempotency:
+        mechanism: client_order_id
+        note: Duplicate submissions with the same client_order_id are rejected.

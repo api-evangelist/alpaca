@@ -1,0 +1,250 @@
+generated: '2026-07-22'
+method: searched
+status: published
+source: https://github.com/alpacahq/alpaca-mcp-server + https://docs.alpaca.markets/us/docs/alpaca-mcp-server.md + https://docs.alpaca.markets/us/docs/broker-mcp-server.md
+servers:
+  - name: alpaca-trading-mcp
+    description: >-
+      Official MCP server for Alpaca's Trading API — stocks, ETFs, options, crypto, portfolio
+      management, and market data through natural language. V2 is a complete rewrite built with
+      FastMCP and OpenAPI; tools are spec-derived with overrides. Tool filtering via the
+      ALPACA_TOOLSETS env var. No hosted remote endpoint for the Trading MCP — run locally
+      (uvx alpaca-mcp-server) or self-host.
+    transport: stdio
+    package: alpaca-mcp-server            # PyPI, v2.1.1
+    install: uvx alpaca-mcp-server
+    repository: https://github.com/alpacahq/alpaca-mcp-server
+    docs: https://docs.alpaca.markets/us/docs/alpaca-mcp-server
+    auth:
+      type: apiKey
+      env: [ALPACA_API_KEY, ALPACA_SECRET_KEY]
+      note: Free paper-trading keys from the Alpaca dashboard work.
+  - name: alpaca-broker-mcp
+    description: >-
+      Hosted (remote) MCP server for the Broker API, in beta for select broker partners. OAuth
+      authorization through the Broker Dashboard (super users only). Includes built-in OpenAPI
+      discovery tools, curated docs lookup, and a create_sandbox_account tool for synthetic
+      sandbox accounts with KYC/account-status fixture outcomes.
+    transport: http
+    url: https://broker-api.alpaca.markets/mcp
+    sandbox_url: https://broker-api.sandbox.alpaca.markets/mcp
+    docs: https://docs.alpaca.markets/us/docs/broker-mcp-server
+    plugins: https://github.com/alpacahq/agentic   # Cursor / Claude Code plugin marketplace
+    auth:
+      type: oauth2
+      authorization_server: https://authx.alpaca.markets/v1
+      resource_metadata: well-known/alpaca-broker-oauth-protected-resource-mcp.json
+      note: >-
+        tools/list returns 401 unauthorized anonymously — the live tool schema is auth-gated
+        and requires an authorized Broker Dashboard OAuth grant to introspect.
+tools:
+  # Trading MCP Server tool list, from the published README (Available Tools).
+  # Input schemas are spec-derived server-side; see mcp/alpaca-tool-crosswalk.yml for the
+  # OpenAPI operation each tool inherits its real parameters from.
+  - name: get_account_info
+    category: account
+    description: "Balance, margin, and account status"
+  - name: get_account_config
+    category: account
+    description: "Trading restrictions, margin settings, PDT checks"
+  - name: update_account_config
+    category: account
+    description: "Update account configuration settings"
+  - name: get_portfolio_history
+    category: account
+    description: "Equity and P/L over time"
+  - name: get_account_activities
+    category: account
+    description: "Fills, dividends, transfers"
+  - name: get_account_activities_by_type
+    category: account
+    description: "Activities filtered by type"
+  - name: get_orders
+    category: orders
+    description: "Retrieve orders with filters"
+  - name: get_order_by_id
+    category: orders
+    description: "Single order by ID"
+  - name: get_order_by_client_id
+    category: orders
+    description: "Single order by client order ID"
+  - name: replace_order_by_id
+    category: orders
+    description: "Replace an existing open order"
+  - name: cancel_order_by_id
+    category: orders
+    description: "Cancel a specific order"
+  - name: cancel_all_orders
+    category: orders
+    description: "Cancel all open orders"
+  - name: place_stock_order
+    category: orders
+    description: "Stocks/ETFs (market, limit, stop, stop-limit, trailing-stop, brackets)"
+  - name: place_crypto_order
+    category: orders
+    description: "Crypto (market, limit, stop-limit)"
+  - name: place_option_order
+    category: orders
+    description: "Options (single-leg or multi-leg)"
+  - name: get_all_positions
+    category: positions
+    description: "All current positions"
+  - name: get_open_position
+    category: positions
+    description: "Details for a specific position"
+  - name: close_position
+    category: positions
+    description: "Close a specific position"
+  - name: close_all_positions
+    category: positions
+    description: "Liquidate entire portfolio"
+  - name: exercise_options_position
+    category: positions
+    description: "Exercise a held option contract"
+  - name: do_not_exercise_options_position
+    category: positions
+    description: "Do-not-exercise instruction"
+  - name: create_watchlist
+    category: watchlists
+    description: "Create a new watchlist"
+  - name: get_watchlists
+    category: watchlists
+    description: "List all watchlists"
+  - name: get_watchlist_by_id
+    category: watchlists
+    description: "Get a specific watchlist"
+  - name: update_watchlist_by_id
+    category: watchlists
+    description: "Update a watchlist"
+  - name: delete_watchlist_by_id
+    category: watchlists
+    description: "Delete a watchlist"
+  - name: add_asset_to_watchlist_by_id
+    category: watchlists
+    description: "Add an asset to a watchlist"
+  - name: remove_asset_from_watchlist_by_id
+    category: watchlists
+    description: "Remove an asset from a watchlist"
+  - name: get_all_assets
+    category: assets
+    description: "List assets with optional filtering"
+  - name: get_asset
+    category: assets
+    description: "Detailed info for a specific asset"
+  - name: get_option_contracts
+    category: assets
+    description: "Option contracts for underlying symbol(s)"
+  - name: get_option_contract
+    category: assets
+    description: "Single option contract by symbol or ID"
+  - name: get_calendar
+    category: market-info
+    description: "Market calendar for a date range"
+  - name: get_clock
+    category: market-info
+    description: "Current market status and next open/close"
+  - name: get_corporate_action_announcements
+    category: market-info
+    description: "Corporate action announcements"
+  - name: get_corporate_action_announcement
+    category: market-info
+    description: "Single announcement by ID"
+  - name: get_stock_bars
+    category: stock-data
+    description: "Historical OHLCV bars"
+  - name: get_stock_quotes
+    category: stock-data
+    description: "Historical bid/ask quotes"
+  - name: get_stock_trades
+    category: stock-data
+    description: "Historical trades"
+  - name: get_stock_latest_bar
+    category: stock-data
+    description: "Latest minute bar"
+  - name: get_stock_latest_quote
+    category: stock-data
+    description: "Latest quote"
+  - name: get_stock_latest_trade
+    category: stock-data
+    description: "Latest trade"
+  - name: get_stock_snapshot
+    category: stock-data
+    description: "Comprehensive snapshot"
+  - name: get_most_active_stocks
+    category: stock-data
+    description: "Most active by volume/trade count"
+  - name: get_market_movers
+    category: stock-data
+    description: "Top gainers and losers"
+  - name: get_crypto_bars
+    category: crypto-data
+    description: "Historical OHLCV bars"
+  - name: get_crypto_quotes
+    category: crypto-data
+    description: "Historical quotes"
+  - name: get_crypto_trades
+    category: crypto-data
+    description: "Historical trades"
+  - name: get_crypto_latest_bar
+    category: crypto-data
+    description: "Latest minute bar"
+  - name: get_crypto_latest_quote
+    category: crypto-data
+    description: "Latest quote"
+  - name: get_crypto_latest_trade
+    category: crypto-data
+    description: "Latest trade"
+  - name: get_crypto_snapshot
+    category: crypto-data
+    description: "Comprehensive snapshot"
+  - name: get_crypto_latest_orderbook
+    category: crypto-data
+    description: "Latest orderbook"
+  - name: get_option_bars
+    category: options-data
+    description: "Historical OHLCV bars"
+  - name: get_option_trades
+    category: options-data
+    description: "Historical trades"
+  - name: get_option_latest_trade
+    category: options-data
+    description: "Latest trade"
+  - name: get_option_latest_quote
+    category: options-data
+    description: "Latest quote with bid/ask and exchange info"
+  - name: get_option_snapshot
+    category: options-data
+    description: "Snapshot with Greeks and IV"
+  - name: get_option_chain
+    category: options-data
+    description: "Full option chain for an underlying"
+  - name: get_option_exchange_codes
+    category: options-data
+    description: "Exchange code to name mapping"
+  - name: get_corporate_actions
+    category: corporate-actions
+    description: "Corporate action announcements from market data"
+  - name: get_news
+    category: news
+    description: "News articles for stocks and crypto"
+  - name: get_fixed_income_latest_quotes
+    category: fixed-income
+    description: "Latest quotes for fixed income securities by ISIN"
+  - name: get_index_latest_values
+    category: index-data
+    description: "Latest values for market indices"
+  - name: get_index_values
+    category: index-data
+    description: "Historical values for market indices"
+  - name: get_locates
+    category: locates
+    description: "List locate requests filtered by status, symbol, or date range"
+  - name: create_locate
+    category: locates
+    description: "Create a locate request for a short sale"
+  - name: get_locate
+    category: locates
+    description: "Get a single locate request by ID"
+  - name: get_locate_quotes
+    category: locates
+    description: "Get locate availability and pricing for symbols"

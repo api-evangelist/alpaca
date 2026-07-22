@@ -1,0 +1,104 @@
+generated: '2026-07-22'
+method: derived
+source: mcp/alpaca-mcp.yml (published Trading MCP tool list) x openapi/*.yml operationIds
+description: >-
+  Binds each Alpaca Trading MCP Server tool to the backing OpenAPI operation(s) in this repo, so a
+  tool inherits its real input contract (parameters + requestBody) from the spec. The Trading MCP v2
+  is itself spec-derived (FastMCP + OpenAPI), so bindings are mostly direct name/semantics matches.
+  The hosted Broker MCP Server's tool schema is OAuth-gated (tools/list returns 401 anonymously),
+  so its tools are not enumerated here. Tools with no backing operation in the harvested specs are
+  recorded in mcp_only[] — newer Market Data surfaces (options data, orderbooks, fixed income,
+  indices, locates, most-actives) postdate the harvested specs.
+surfaces:
+  openapi: openapi/ (25 specs, 218 operations; Trading v2 + Broker v1 + Market Data + OAuth)
+  mcp:
+    trading: alpaca-mcp-server (stdio, PyPI) — tool list published in README; schemas spec-derived server-side
+    broker: https://broker-api.alpaca.markets/mcp — tools/list auth-gated (OAuth via authx.alpaca.markets)
+  graphql: none
+crosswalk:
+  - {tool: get_account_info, category: account, rest: [getAccount], binding: rest, confidence: high, note: "getAccount is declared twice in openapi/alpaca-accounts-api-openapi.yml (GET /v2/account and GET /v1/accounts/{account_id}); the tool backs onto GET /v2/account."}
+  - {tool: get_account_config, category: account, rest: [getAccountConfig], binding: rest, confidence: high}
+  - {tool: update_account_config, category: account, rest: [patchAccountConfig], binding: rest, confidence: high}
+  - {tool: get_portfolio_history, category: account, rest: [getAccountPortfolioHistory], binding: rest, confidence: high}
+  - {tool: get_account_activities, category: account, rest: [getAccountActivities], binding: rest, confidence: high}
+  - {tool: get_account_activities_by_type, category: account, rest: [getAccountActivitiesByActivityType], binding: rest, confidence: high}
+  - {tool: get_orders, category: orders, rest: [getAllOrders], binding: rest, confidence: high}
+  - {tool: get_order_by_id, category: orders, rest: [getOrderByOrderID], binding: rest, confidence: high}
+  - {tool: replace_order_by_id, category: orders, rest: [patchOrderByOrderId], binding: rest, confidence: high}
+  - {tool: cancel_order_by_id, category: orders, rest: [deleteOrderByOrderID], binding: rest, confidence: high}
+  - {tool: cancel_all_orders, category: orders, rest: [deleteAllOrders], binding: rest, confidence: high}
+  - {tool: place_stock_order, category: orders, rest: [postOrder], binding: rest, confidence: high, note: one POST /v2/orders operation backs the three asset-class order tools}
+  - {tool: place_crypto_order, category: orders, rest: [postOrder], binding: rest, confidence: high}
+  - {tool: place_option_order, category: orders, rest: [postOrder], binding: rest, confidence: high}
+  - {tool: get_all_positions, category: positions, rest: [getAllOpenPositions], binding: rest, confidence: high}
+  - {tool: get_open_position, category: positions, rest: [getOpenPosition], binding: rest, confidence: high}
+  - {tool: close_position, category: positions, rest: [deleteOpenPosition], binding: rest, confidence: high}
+  - {tool: close_all_positions, category: positions, rest: [deleteAllOpenPositions], binding: rest, confidence: high}
+  - {tool: create_watchlist, category: watchlists, rest: [postWatchlist], binding: rest, confidence: high}
+  - {tool: get_watchlists, category: watchlists, rest: [getWatchlists], binding: rest, confidence: high}
+  - {tool: get_watchlist_by_id, category: watchlists, rest: [getWatchlistById], binding: rest, confidence: high}
+  - {tool: update_watchlist_by_id, category: watchlists, rest: [updateWatchlistById], binding: rest, confidence: high}
+  - {tool: delete_watchlist_by_id, category: watchlists, rest: [deleteWatchlistById], binding: rest, confidence: high}
+  - {tool: add_asset_to_watchlist_by_id, category: watchlists, rest: [addAssetToWatchlist], binding: rest, confidence: high}
+  - {tool: remove_asset_from_watchlist_by_id, category: watchlists, rest: [removeAssetFromWatchlist], binding: rest, confidence: high}
+  - {tool: get_all_assets, category: assets, rest: [getAssets], binding: rest, confidence: high}
+  - {tool: get_asset, category: assets, rest: [getAssetBySymbolOrId], binding: rest, confidence: high}
+  - {tool: get_calendar, category: market-info, rest: [getCalendar], binding: rest, confidence: high, note: queryMarketCalendar is the Broker-API sibling}
+  - {tool: get_clock, category: market-info, rest: [getClock], binding: rest, confidence: high, note: queryMarketClock is the Broker-API sibling}
+  - {tool: get_corporate_action_announcements, category: market-info, rest: [getCorporateAnnouncements], binding: rest, confidence: medium, note: spec endpoint is deprecated in docs in favor of the newer corporate-actions endpoint}
+  - {tool: get_stock_bars, category: stock-data, rest: [getBarsForStockSymbol, getBarsForMultipleStockSymbols], binding: rest, confidence: high}
+  - {tool: get_stock_quotes, category: stock-data, rest: [getQuotesForStockSymbol, getQuotesForMultipleStockSymbols], binding: rest, confidence: high}
+  - {tool: get_stock_trades, category: stock-data, rest: [getTradesForStockSymbol, getTradesForMultipleStockSymbols], binding: rest, confidence: high}
+  - {tool: get_stock_latest_bar, category: stock-data, rest: [getLatestBarForStockSymbol, getLatestBarsForMultipleStockSymbols], binding: rest, confidence: high}
+  - {tool: get_stock_latest_quote, category: stock-data, rest: [getLatestQuoteForStockSymbol, getLatestQuotesForMultipleStockSymbols], binding: rest, confidence: high}
+  - {tool: get_stock_latest_trade, category: stock-data, rest: [getLatestTradeForStockSymbol, getLatestTradesForMultipleStockSymbols], binding: rest, confidence: high}
+  - {tool: get_stock_snapshot, category: stock-data, rest: [getSnapshotForStockSymbol, getSnapshotsForMultipleStockSymbols], binding: rest, confidence: high}
+  - {tool: get_market_movers, category: stock-data, rest: [getTopMoversByMarketType], binding: rest, confidence: high}
+  - {tool: get_crypto_bars, category: crypto-data, rest: [getBarsForCryptoSymbol, getBarsForMultipleCryptoSymbols], binding: rest, confidence: high}
+  - {tool: get_crypto_quotes, category: crypto-data, rest: [getQuotesForCryptoSymbol, getQuotesForMultipleCryptoSymbols], binding: rest, confidence: high}
+  - {tool: get_crypto_trades, category: crypto-data, rest: [getTradesForCryptoSymbol, getTradesForMultipleCryptoSymbols], binding: rest, confidence: high}
+  - {tool: get_crypto_latest_bar, category: crypto-data, rest: [getLatestBarsForCryptoSymbol, getLatestBarsForMultipleCryptoSymbols], binding: rest, confidence: high}
+  - {tool: get_crypto_latest_quote, category: crypto-data, rest: [getLatestQuoteForCryptoSymbol, getLatestQuotesForMultipleCryptoSymbols], binding: rest, confidence: high}
+  - {tool: get_crypto_latest_trade, category: crypto-data, rest: [getLatestTradesForCryptoSymbol, getLatestTradesForMultipleCryptoSymbols], binding: rest, confidence: high}
+  - {tool: get_crypto_snapshot, category: crypto-data, rest: [getSnapshotForCryptoSymbol, getSnapshotsForMultipleCryptoSymbols], binding: rest, confidence: high}
+  - {tool: get_news, category: news, rest: [getNews], binding: rest, confidence: high}
+mcp_only:
+  - {tool: get_order_by_client_id, reason: "backing endpoint GET /v2/orders:by_client_order_id is not present in the harvested specs"}
+  - {tool: exercise_options_position, reason: "POST /v2/positions/{symbol_or_contract_id}/exercise not present in the harvested specs"}
+  - {tool: do_not_exercise_options_position, reason: "do-not-exercise endpoint not present in the harvested specs"}
+  - {tool: get_option_contracts, reason: "GET /v2/options/contracts not present in the harvested specs"}
+  - {tool: get_option_contract, reason: "GET /v2/options/contracts/{symbol_or_id} not present in the harvested specs"}
+  - {tool: get_corporate_action_announcement, reason: "single-announcement endpoint not present in the harvested specs (list endpoint only)"}
+  - {tool: get_most_active_stocks, reason: "screener most-actives endpoint not present in the harvested specs"}
+  - {tool: get_crypto_latest_orderbook, reason: "crypto orderbooks endpoint (v1beta3) not present in the harvested specs"}
+  - {tool: get_option_bars, reason: "options market data endpoints (v1beta1/options) not present in the harvested specs"}
+  - {tool: get_option_trades, reason: "options market data endpoints not present in the harvested specs"}
+  - {tool: get_option_latest_trade, reason: "options market data endpoints not present in the harvested specs"}
+  - {tool: get_option_latest_quote, reason: "options market data endpoints not present in the harvested specs"}
+  - {tool: get_option_snapshot, reason: "options market data endpoints not present in the harvested specs"}
+  - {tool: get_option_chain, reason: "options market data endpoints not present in the harvested specs"}
+  - {tool: get_option_exchange_codes, reason: "options exchange-codes endpoint not present in the harvested specs"}
+  - {tool: get_corporate_actions, reason: "market-data corporate-actions endpoint (v1beta1/corporate-actions) not present in the harvested specs"}
+  - {tool: get_fixed_income_latest_quotes, reason: "fixed-income market data endpoints not present in the harvested specs"}
+  - {tool: get_index_latest_values, reason: "index market data endpoints not present in the harvested specs"}
+  - {tool: get_index_values, reason: "index market data endpoints not present in the harvested specs"}
+  - {tool: get_locates, reason: "short-sale locates endpoints (2026 hard-to-borrow launch) not present in the harvested specs"}
+  - {tool: create_locate, reason: "locates endpoints not present in the harvested specs"}
+  - {tool: get_locate, reason: "locates endpoints not present in the harvested specs"}
+  - {tool: get_locate_quotes, reason: "locates endpoints not present in the harvested specs"}
+rest_only:
+  - capability: Broker API — accounts, KYC, documents, funding, transfers, journals, events (SSE), OAuth clients
+    operations_note: >-
+      ~120 Broker/Connect operations (accounts, funding, journals, documents, events, corporate
+      actions, watchlists-for-account, trading-for-account, oauth) have no tool in the published
+      Trading MCP list; the hosted Broker MCP Server covers this surface but its tool schema is
+      auth-gated.
+  - capability: Trading API SSE stream (subscribeToTradeSSE) — streaming surfaces are not exposed as MCP tools
+  - capability: Market data metadata (getExchanges, getConditions, getCryptoMetaSpreads, getLatestXBBOForCryptoSymbol, getLatestXBBOForMultipleCryptoSymbols)
+  - capability: Logo API (getLogoForSymbol) and Screener/News beyond the bound tools
+coverage:
+  mcp_tools_published: 69
+  mcp_tools_bound_to_rest: 46
+  mcp_only: 23
+  rest_operations_total: 218
+  rest_operations_with_tool: 60

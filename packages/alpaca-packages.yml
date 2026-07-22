@@ -1,0 +1,83 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.alpaca.markets/us/docs/sdks-and-tools.md + npm/PyPI/NuGet/pkg.go.dev registry lookups + github.com/alpacahq
+packages:
+  - language: python
+    registry: pypi
+    name: alpaca-py
+    version: 0.43.5
+    url: https://pypi.org/project/alpaca-py/
+    install: pip install alpaca-py
+    repository: https://github.com/alpacahq/alpaca-py
+    official: true
+    note: The official Python SDK for the Trading, Broker, and Market Data APIs.
+  - language: python
+    registry: pypi
+    name: alpaca-trade-api
+    version: 3.2.0
+    url: https://pypi.org/project/alpaca-trade-api/
+    install: pip install alpaca-trade-api
+    repository: https://github.com/alpacahq/alpaca-trade-api-python
+    official: true
+    deprecated: true
+    note: Legacy Python client, superseded by alpaca-py.
+  - language: python
+    registry: pypi
+    name: alpaca-mcp-server
+    version: 2.1.1
+    url: https://pypi.org/project/alpaca-mcp-server/
+    install: uvx alpaca-mcp-server
+    repository: https://github.com/alpacahq/alpaca-mcp-server
+    official: true
+    note: Official MCP server for the Trading API (FastMCP + OpenAPI, v2 rewrite).
+  - language: javascript
+    registry: npm
+    name: "@alpacahq/alpaca-trade-api"
+    version: 4.0.1
+    url: https://www.npmjs.com/package/@alpacahq/alpaca-trade-api
+    install: npm install @alpacahq/alpaca-trade-api
+    repository: https://github.com/alpacahq/alpaca-trade-api-js
+    official: true
+    note: Node.js library for the Trade API.
+  - language: typescript
+    registry: npm
+    name: "@alpacahq/typescript-sdk"
+    version: 0.0.32-preview
+    url: https://www.npmjs.com/package/@alpacahq/typescript-sdk
+    install: npm install @alpacahq/typescript-sdk
+    repository: https://github.com/alpacahq/typescript-sdk
+    official: true
+    note: TypeScript SDK for the REST API and WebSocket streams (preview).
+  - language: csharp
+    registry: nuget
+    name: Alpaca.Markets
+    version: 8.0.0-beta4
+    url: https://www.nuget.org/packages/Alpaca.Markets
+    install: dotnet add package Alpaca.Markets
+    repository: https://github.com/alpacahq/alpaca-trade-api-csharp
+    official: true
+    note: C# SDK for the Alpaca Trade API.
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/alpacahq/alpaca-trade-api-go/v3
+    version: v3.11.0
+    url: https://pkg.go.dev/github.com/alpacahq/alpaca-trade-api-go/v3
+    install: go get github.com/alpacahq/alpaca-trade-api-go/v3
+    repository: https://github.com/alpacahq/alpaca-trade-api-go
+    official: true
+    note: Go client for the trade API.
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/alpacahq/cli
+    url: https://github.com/alpacahq/cli
+    install: go install github.com/alpacahq/cli/cmd/alpaca@latest
+    repository: https://github.com/alpacahq/cli
+    official: true
+    note: First-party Trading CLI (also via `brew install alpacahq/tap/cli`). Command surface catalogued in cli/alpaca-cli.yml.
+  - language: java
+    registry: github
+    name: alpaca-java
+    url: https://github.com/alpacahq/alpaca-java
+    repository: https://github.com/alpacahq/alpaca-java
+    official: true
+    note: The official Java SDK; distributed from the GitHub repository (not on Maven Central under the alpacahq group).

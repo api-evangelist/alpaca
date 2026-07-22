@@ -1,0 +1,37 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.alpaca.markets/us/docs/paper-trading.md + https://docs.alpaca.markets/us/docs/getting-started-with-broker-api.md + https://docs.alpaca.markets/us/docs/broker-mcp-server.md
+description: >-
+  Alpaca ships two sandbox surfaces: a Paper Trading environment for the Trading API (real-time
+  simulation against live NBBO quotes) and a Broker API sandbox for partner integration testing.
+environments:
+  - name: Paper Trading (Trading API)
+    base_url: https://paper-api.alpaca.markets
+    env_var: APCA_API_BASE_URL=https://paper-api.alpaca.markets
+    signup: Anyone globally can create a Paper Only Account with just an email address.
+    keys: Separate API key pair from live; generate from the paper dashboard. Free real-time IEX data.
+    default_balance: "$100,000 (configurable; create/delete paper accounts from the dashboard)"
+    behavior:
+      - Orders are simulated against real-time NBBO quotes, never routed to a live exchange.
+      - Non-marketable limit orders fill only when they become marketable.
+      - 10% of eligible fills are random partial fills; remainder re-evaluated.
+      - Order quantity is not checked against NBBO liquidity.
+      - No dividends simulation, no order-fill emails, no borrow fees (live only).
+      - Margin, short selling, and pre/after-hours trading all work as in live.
+    docs: https://docs.alpaca.markets/docs/paper-trading
+  - name: Broker API sandbox
+    base_url: https://broker-api.sandbox.alpaca.markets
+    market_data_url: https://data.sandbox.alpaca.markets
+    keys: Sandbox API key from the Broker Dashboard; test data available immediately on signup.
+    behavior:
+      - Full broker workflows testable end-to-end — account opening (KYC), funding, transfers, trading, watchlists, documents, options, rebalancing, journals, instant funding, IPOs.
+      - Sandbox and live credentials are not interchangeable.
+    docs: https://docs.alpaca.markets/docs/getting-started-with-broker-api
+    fixtures:
+      - name: create_sandbox_account (Broker MCP tool)
+        note: >-
+          Generates synthetic test accounts with valid defaults and optional KYC or account-status
+          fixture outcomes for demos, QA, and integration testing.
+  - name: Broker MCP sandbox endpoint
+    base_url: https://broker-api.sandbox.alpaca.markets/mcp
+    note: Hosted MCP endpoint against the Broker sandbox; use it to test write operations safely.

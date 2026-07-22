@@ -1,129 +1,319 @@
 openapi: 3.0.0
 info:
-  title: OAuth API
+  title: Broker Account Activities OAuth API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
   version: 1.0.0
-  description: |-
-    The OAuth API allows you to request market data and manage portfolios on behalf of your end-users. 
-
-    For more information, visit https://alpaca.markets/docs/build-apps_services-with-alpaca/oauth-guide/.
   contact:
     name: Alpaca Support
     email: support@alpaca.markets
-    url: 'https://alpaca.markets/support'
-  termsOfService: 'https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf'
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
 servers:
-  - url: 'https://data.alpaca.markets/v2'
-    description: Production
-  - description: Sandbox
-    url: 'https://data.sandbox.alpaca.markets/v2'
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
 tags:
-  - name: OAuth
-  - name: Crypto Pricing Data API
-  - name: Stock Pricing Data API
+- name: OAuth
 paths:
-  '/v2/stocks/{symbol}/bars':
-    get:
-      tags:
-        - Stock Pricing Data API
-      summary: Bars
-      parameters:
-        - name: Apca-Api-Key-Id
-          in: header
-          schema:
-            type: string
-          example: '{{APCA_API_KEY_ID}}'
-        - name: Apca-Api-Secret-Key
-          in: header
-          schema:
-            type: string
-          example: '{{APCA_API_SECRET_KEY}}'
-        - name: start
-          in: query
-          schema:
-            type: string
-          description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
-          example: '2020-04-01T0:00:00Z'
-        - name: end
-          in: query
-          schema:
-            type: string
-          description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
-          example: '2021-08-26T11:00:00Z'
-        - name: timeframe
-          in: query
-          schema:
-            type: string
-          description: 'Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day.'
-          example: 1Min
-        - name: symbol
-          in: path
-          schema:
-            type: string
-          required: true
-          description: The symbol to query for
-          example: AAPL
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-      operationId: 'getBarsStocks' #simply copying the id used in the data spec
-      description: 'The bars API returns aggregate historical data for the requested securities'
+  /v1/oauth/clients/{client_id}:
     parameters:
-      - schema:
-          type: string
-        name: symbol
-        in: path
-        required: true
-  '/v2/stocks/{symbol}/trades':
+    - name: client_id
+      required: true
+      in: path
+      schema:
+        type: string
+        format: uuid
     get:
+      summary: Get an OAuth client
       tags:
-        - Stock Pricing Data API
-      summary: Trades
-      operationId: getTradesStocks #just using same values from the data api
-      description: The Trades API provides historcial trade data for a given ticker symbol on a specified date. Returns trades for the queried stock signal.
+      - OAuth
+      description: 'The endpoint returns the details of OAuth client to display in the authorization page.
+
+        '
       parameters:
-        - name: Apca-Api-Key-Id
-          in: header
-          schema:
-            type: string
-          example: '{{APCA_API_KEY_ID}}'
-        - name: Apca-Api-Secret-Key
-          in: header
-          schema:
-            type: string
-          example: '{{APCA_API_SECRET_KEY}}'
-        - name: start
-          in: query
-          schema:
-            type: string
-          description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
-          example: '2020-04-01T0:00:00Z'
-        - name: end
-          in: query
-          schema:
-            type: string
-          description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
-          example: '2021-08-26T11:00:00Z'
-        - name: symbol
-          in: path
-          schema:
-            type: string
-          required: true
-          description: The symbol to query for
-          example: AAPL
+      - name: response_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - code
+          - token
+          example: token
+        description: code or token
+      - name: redirect_uri
+        in: query
+        schema:
+          type: string
+          example: https://example.com/authorize
+        description: Redirect URI of the OAuth flow
+      - name: scope
+        in: query
+        schema:
+          type: string
+          example: general
+        description: Requested scopes by the OAuth flow
       responses:
         '200':
-          description: Successful response
+          description: Success.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OathClientResponse'
+              examples:
+                example-1:
+                  value:
+                    client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
+                    name: TradingApp
+                    description: Sample description
+                    url: http://test.com
+                    terms_of_use: ''
+                    privacy_policy: ''
+                    status: ACTIVE
+                    redirect_uri:
+                    - http://localhost
+                    live_trading_approved: false
+        '401':
+          description: 'Client does not exist or you do not have access to the client.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: string
+      operationId: getOAuthClient
+  /v1/oauth/token:
+    post:
+      summary: Issue an OAuth token.
+      tags:
+      - OAuth
+      description: 'The operation issues an OAuth code which can be used in the OAuth code flow.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuthTokenRequest'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueOAuthTokenResponse'
+              examples:
+                example-1:
+                  value:
+                    access_token: 87586f14-c3f4-4912-b107-f75bc17ff87a
+                    token_type: Bearer
+                    scope: general
+        '401':
+          description: 'Client does not exists, you do not have access to the client, or “client_secret” is incorrect.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: string
+        '422':
+          description: 'Redirect URI or scope is invalid.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: string
+      operationId: issueOAuthToken
+  /v1/oauth/authorize:
+    post:
+      summary: Authorize an OAuth Token
+      tags:
+      - OAuth
+      description: 'The operation issues an OAuth code which can be used in the OAuth code flow.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuthTokenRequest'
+      responses:
+        '200':
+          description: Successfully issued a code.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizeOAuthTokenResponse'
+        '401':
+          description: 'Client does not exists, you do not have access to the client, or “client_secret” is incorrect.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: string
+        '422':
+          description: 'Redirect URI or scope is invalid.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: string
+      operationId: authorizeOAuthToken
 components:
+  schemas:
+    IssueOAuthTokenResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          access_token: 87586f14-c3f4-4912-b107-f75bc17ff87a
+          token_type: Bearer
+          scope: general
+      properties:
+        access_token:
+          type: string
+          description: OAuth token
+        token_type:
+          type: string
+          description: Always `Bearer`
+          enum:
+          - Bearer
+          example: Bearer
+        scope:
+          type: string
+          description: Token’s scope
+      required:
+      - access_token
+      - token_type
+      - scope
+    AuthorizeOAuthTokenResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          code: 912b5502-c983-40f7-a01d-6a66f13a754d
+          client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
+          redirect_uri: http://localhost
+          scope: ''
+      properties:
+        code:
+          type: string
+          minLength: 1
+          description: OAuth code to exchange with token
+        client_id:
+          type: string
+          minLength: 1
+          description: OAuth `client_id`
+        redirect_uri:
+          type: string
+          minLength: 1
+          description: Redirect URI of OAuth flow
+        scope:
+          type: string
+          description: Granted scopes
+      required:
+      - code
+      - client_id
+      - redirect_uri
+      - scope
+    OathClientResponse:
+      title: OathClientResponse
+      type: object
+      example:
+        client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
+        name: TradingApp
+        description: Sample description
+        url: http://test.com
+        terms_of_use: ''
+        privacy_policy: ''
+        status: ACTIVE
+        redirect_uri:
+        - http://localhost
+        live_trading_approved: true
+      x-examples:
+        example-1:
+          client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
+          name: TradingApp
+          description: Sample description
+          url: http://test.com
+          terms_of_use: ''
+          privacy_policy: ''
+          status: ACTIVE
+          redirect_uri:
+          - http://localhost
+          live_trading_approved: true
+      properties:
+        client_id:
+          type: string
+          description: OAuth client id
+        name:
+          type: string
+          description: Broker name (your name)
+        description:
+          type: string
+        url:
+          type: string
+        terms_of_use:
+          type: string
+          description: URL of Terms of Use
+        privacy_policy:
+          type: string
+          description: URL of Privacy Policy
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - DISABLED
+          description: ACTIVE or DISABLED
+          example: ACTIVE
+        redirect_uri:
+          type: array
+          items:
+            type: string
+        live_trading_approved:
+          type: boolean
+          example: true
+    OAuthTokenRequest:
+      title: OAuthTokenRequest
+      type: object
+      example:
+        client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
+        client_secret: bbb14da2b6b8e7117a3c52a910e1dc2a
+        redirect_uri: http://localhost
+        scope: general
+        account_id: 0d18ae51-3c94-4511-b209-101e1666416b
+      properties:
+        client_id:
+          type: string
+          description: OAuth client ID
+        client_secret:
+          type: string
+          description: OAuth client secret
+        redirect_uri:
+          type: string
+          description: redirect URI for the OAuth flow
+        scope:
+          type: string
+          description: scopes requested by the OAuth flow
+        account_id:
+          type: string
+          format: uuid
+          description: end-user account ID
+      required:
+      - client_id
+      - client_secret
+      - redirect_uri
+      - scope
+      - account_id
+      description: This model is used for both the Issue and Authorize OAuth token routes
   securitySchemes:
-    API_Key:
-      name: APCA-API-KEY-ID
-      type: apiKey
-      in: header
-    API_Secret:
-      name: APCA-API-SECRET-KEY
-      type: apiKey
-      in: header
+    BasicAuth:
+      type: http
+      scheme: basic

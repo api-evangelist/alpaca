@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Alpaca OAuth API
+  version: 1.0.0
+extends: openapi/alpaca-oauth-api-openapi.yml
+x-provenance:
+  generated: '2026-07-22'
+  method: generated
+  note: >-
+    Non-destructive overlay capturing API Evangelist enrichment context for the harvested spec;
+    the original OpenAPI is never mutated.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist:
+        provider: alpaca
+        artifacts:
+          scopes: scopes/alpaca-scopes.yml
+          authentication: authentication/alpaca-authentication.yml
+          well-known: well-known/alpaca-well-known.yml
+  - target: $.info
+    update:
+      x-oauth:
+        authorizationUrl: https://app.alpaca.markets/oauth/authorize
+        tokenUrl: https://api.alpaca.markets/oauth/token
+        scopes: [account:write, trading, data]
+        default: read-only when no scope requested

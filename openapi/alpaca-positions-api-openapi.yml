@@ -1,0 +1,588 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Positions API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Positions
+  description: Head to https://alpaca.markets/docs/api-documentation/api-v2/positions/ to view complete documentation on the Positions API.
+paths:
+  /v2/positions:
+    get:
+      tags:
+      - Positions
+      summary: All Open Positions
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+      operationId: getAllOpenPositions
+      description: 'The positions API provides information about an account’s current open positions. The response will include information such as cost basis, shares traded, and market value, which will be updated live as price information is updated. Once a position is closed, it will no longer be queryable through this API
+
+
+        Retrieves a list of the account’s open positions'
+    delete:
+      tags:
+      - Positions
+      summary: All Positions
+      parameters:
+      - schema:
+          type: boolean
+        in: query
+        name: cancel_orders
+        description: If true is specified, cancel all open orders before liquidating all positions.
+      responses:
+        '207':
+          description: 'Multi-Status with body.
+
+
+            an array of PositionClosed responses'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PositionClosedReponse'
+        '500':
+          description: Failed to liquidate
+      operationId: deleteAllOpenPositions
+      description: Closes (liquidates) all of the account’s open long and short positions. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request.
+  /v2/positions/{symbol_or_asset_id}:
+    parameters:
+    - schema:
+        type: string
+      name: symbol_or_asset_id
+      in: path
+      required: true
+      description: symbol or assetId
+    get:
+      tags:
+      - Positions
+      summary: Open Position
+      description: Retrieves the account’s open position for the given symbol or assetId.
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+      operationId: getOpenPosition
+    delete:
+      tags:
+      - Positions
+      summary: Position
+      parameters:
+      - schema:
+          type: number
+        in: query
+        name: qty
+        description: the number of shares to liquidate. Can accept up to 9 decimal points. Cannot work with percentage
+      - schema:
+          type: number
+        in: query
+        name: percentage
+        description: percentage of position to liquidate. Must be between 0 and 100. Would only sell fractional if position is originally fractional. Can accept up to 9 decimal points. Cannot work with qty
+      responses:
+        '200':
+          description: 'Successful response
+
+
+            Returns the order created to close out this position'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+      description: Closes (liquidates) the account’s open position for the given symbol. Works for both long and short positions.
+      operationId: deleteOpenPosition
+components:
+  schemas:
+    Position:
+      description: The positions API provides information about an account’s current open positions. The response will include information such as cost basis, shares traded, and market value, which will be updated live as price information is updated. Once a position is closed, it will no longer be queryable through this API.
+      type: object
+      x-examples:
+        example-1:
+          asset_id: 904837e3-3b76-47ec-b432-046db621571b
+          symbol: AAPL
+          exchange: NASDAQ
+          asset_class: us_equity
+          avg_entry_price: '100.0'
+          qty: '5'
+          qty_available: '4'
+          side: long
+          market_value: '600.0'
+          cost_basis: '500.0'
+          unrealized_pl: '100.0'
+          unrealized_plpc: '0.20'
+          unrealized_intraday_pl: '10.0'
+          unrealized_intraday_plpc: '0.0084'
+          current_price: '120.0'
+          lastday_price: '119.0'
+          change_today: '0.0084'
+        example-2:
+          asset_id: b0b6dd9d-8b9b-48a9-ba46-b9d54906e415
+          symbol: AAPL
+          exchange: NASDAQ
+          asset_class: us_equity
+          asset_marginable: false
+          qty: '2'
+          qty_available: '2'
+          avg_entry_price: '174.78'
+          side: long
+          market_value: '348.58'
+          cost_basis: '349.56'
+          unrealized_pl: '-0.98'
+          unrealized_plpc: '-0.0028035244307129'
+          unrealized_intraday_pl: '-0.98'
+          unrealized_intraday_plpc: '-0.0028035244307129'
+          current_price: '174.29'
+          lastday_price: '174.61'
+          change_today: '-0.0018326556325525'
+      title: Position
+      properties:
+        asset_id:
+          type: string
+          description: Asset ID
+          format: uuid
+        symbol:
+          type: string
+          description: Symbol name of the asset
+          example: AAPL
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        asset_class:
+          $ref: '#/components/schemas/AssetClass'
+        avg_entry_price:
+          type: string
+          minLength: 1
+          description: Average entry price of the position
+        qty:
+          type: string
+          minLength: 1
+          description: The number of shares
+        qty_available:
+          type: string
+          minLength: 1
+          description: Total number of shares available minus open orders
+        side:
+          type: string
+          minLength: 1
+          description: “long”
+        market_value:
+          type: string
+          minLength: 1
+          description: Total dollar amount of the position
+        cost_basis:
+          type: string
+          minLength: 1
+          description: Total cost basis in dollar
+        unrealized_pl:
+          type: string
+          minLength: 1
+          description: Unrealized profit/loss in dollars
+        unrealized_plpc:
+          type: string
+          minLength: 1
+          description: Unrealized profit/loss percent (by a factor of 1)
+        unrealized_intraday_pl:
+          type: string
+          minLength: 1
+          description: Unrealized profit/loss in dollars for the day
+        unrealized_intraday_plpc:
+          type: string
+          minLength: 1
+          description: Unrealized profit/loss percent (by a factor of 1)
+        current_price:
+          type: string
+          minLength: 1
+          description: Current asset price per share
+        lastday_price:
+          type: string
+          minLength: 1
+          description: Last day’s asset price per share based on the closing value of the last trading day
+        change_today:
+          type: string
+          minLength: 1
+          description: Percent change from last day price (by a factor of 1)
+        asset_marginable:
+          type: boolean
+      required:
+      - asset_id
+      - symbol
+      - exchange
+      - asset_class
+      - avg_entry_price
+      - qty
+      - side
+      - market_value
+      - cost_basis
+      - unrealized_pl
+      - unrealized_plpc
+      - unrealized_intraday_pl
+      - unrealized_intraday_plpc
+      - current_price
+      - lastday_price
+      - change_today
+      - asset_marginable
+    TimeInForce:
+      type: string
+      title: TimeInForce
+      description: "Note: For Crypto Trading, Alpaca supports the following Time-In-Force designations: day, gtc, ioc and fok. OPG and CLS are not supported.\n\nAlpaca supports the following Time-In-Force designations:\n\n- day\n  A day order is eligible for execution only on the day it is live. By default, the order is only valid during Regular Trading Hours (9:30am - 4:00pm ET). If unfilled after the closing auction, it is automatically canceled. If submitted after the close, it is queued and submitted the following trading day. However, if marked as eligible for extended hours, the order can also execute during supported extended hours.\n\n- gtc\n  The order is good until canceled. Non-marketable GTC limit orders are subject to price adjustments to offset corporate actions affecting the issue. We do not currently support Do Not Reduce(DNR) orders to opt out of such price adjustments.\n\n- opg\n  Use this TIF with a market/limit order type to submit “market on open” (MOO) and “limit on open” (LOO) orders. This order is eligible to execute only in the market opening auction. Any unfilled orders after the open will be cancelled. OPG orders submitted after 9:28am but before 7:00pm ET will be rejected. OPG orders submitted after 7:00pm will be queued and routed to the following day’s opening auction. On open/on close orders are routed to the primary exchange. Such orders do not necessarily execute exactly at 9:30am / 4:00pm ET but execute per the exchange’s auction rules.\n\n- cls\n  Use this TIF with a market/limit order type to submit “market on close” (MOC) and “limit on close” (LOC) orders. This order is eligible to execute only in the market closing auction. Any unfilled orders after the close will be cancelled. CLS orders submitted after 3:50pm but before 7:00pm ET will be rejected. CLS orders submitted after 7:00pm will be queued and routed to the following day’s closing auction. Only available with API v2.\n\n- ioc\n  An Immediate Or Cancel (IOC) order requires all or part of the order to be executed immediately. Any unfilled portion of the order is canceled. Only available with API v2. Most market makers who receive IOC orders will attempt to fill the order on a principal basis only, and cancel any unfilled balance. On occasion, this can result in the entire order being cancelled if the market maker does not have any existing inventory of the security in question.\n\n- fok\n  A Fill or Kill (FOK) order is only executed if the entire order quantity can be filled, otherwise the order is canceled. Only available with API v2."
+      enum:
+      - day
+      - gtc
+      - opg
+      - cls
+      - ioc
+      - fok
+      example: day
+    OrderType:
+      type: string
+      enum:
+      - market
+      - limit
+      - stop
+      - stop_limit
+      - trailing_stop
+      example: stop
+      description: 'Represents the types of orders Alpaca currently supports
+
+
+        - market
+
+        - limit
+
+        - stop
+
+        - stop_limit
+
+        - trailing_stop'
+      title: OrderType
+    Order:
+      description: 'The Orders API allows a user to monitor, place and cancel their orders with Alpaca.
+
+
+        Each order has a unique identifier provided by the client. This client-side unique order ID will be automatically generated by the system if not provided by the client, and will be returned as part of the order object along with the rest of the fields described below. Once an order is placed, it can be queried using the client-side order ID to check the status.
+
+
+        Updates on open orders at Alpaca will also be sent over the streaming interface, which is the recommended method of maintaining order state.'
+      type: object
+      x-examples:
+        example-1:
+          id: 61e69015-8549-4bfd-b9c3-01e75843f47d
+          client_order_id: eb9e2aaa-f71a-4f51-b5b4-52a6c565dad4
+          created_at: '2021-03-16T18:38:01.942282Z'
+          updated_at: '2021-03-16T18:38:01.942282Z'
+          submitted_at: '2021-03-16T18:38:01.937734Z'
+          filled_at: null
+          expired_at: null
+          canceled_at: null
+          failed_at: null
+          replaced_at: null
+          replaced_by: null
+          replaces: null
+          asset_id: b0b6dd9d-8b9b-48a9-ba46-b9d54906e415
+          symbol: AAPL
+          asset_class: us_equity
+          notional: '500'
+          qty: null
+          filled_qty: '0'
+          filled_avg_price: null
+          order_class: ''
+          order_type: market
+          type: market
+          side: buy
+          time_in_force: day
+          limit_price: null
+          stop_price: null
+          status: accepted
+          extended_hours: false
+          legs: null
+          trail_percent: null
+          trail_price: null
+          hwm: null
+      title: Order
+      properties:
+        id:
+          type: string
+          description: Order ID
+        client_order_id:
+          type: string
+          description: Client unique order ID
+          maxLength: 48
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+        submitted_at:
+          type: string
+          format: date-time
+          nullable: true
+        filled_at:
+          type: string
+          format: date-time
+          nullable: true
+        expired_at:
+          type: string
+          format: date-time
+          nullable: true
+        canceled_at:
+          type: string
+          format: date-time
+          nullable: true
+        failed_at:
+          type: string
+          format: date-time
+          nullable: true
+        replaced_at:
+          type: string
+          format: date-time
+          nullable: true
+        replaced_by:
+          type: string
+          format: uuid
+          description: The order ID that this order was replaced by
+          nullable: true
+        replaces:
+          type: string
+          format: uuid
+          description: The order ID that this order replaces
+          nullable: true
+        asset_id:
+          type: string
+          format: uuid
+          description: Asset ID
+        symbol:
+          type: string
+          minLength: 1
+          description: Asset symbol
+        asset_class:
+          $ref: '#/components/schemas/AssetClass'
+        notional:
+          type: string
+          minLength: 1
+          description: Ordered notional amount. If entered, qty will be null. Can take up to 9 decimal points.
+          nullable: true
+        qty:
+          type: string
+          minLength: 1
+          description: Ordered quantity. If entered, notional will be null. Can take up to 9 decimal points.
+          nullable: true
+        filled_qty:
+          type: string
+          minLength: 1
+          description: Filled quantity
+        filled_avg_price:
+          type: string
+          description: Filled average price
+          nullable: true
+        order_class:
+          $ref: '#/components/schemas/OrderClass'
+        order_type:
+          type: string
+          deprecated: true
+          description: 'Deprecated in favour of the field "type" '
+        type:
+          $ref: '#/components/schemas/OrderType'
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        limit_price:
+          type: string
+          description: Limit price
+          nullable: true
+        stop_price:
+          description: Stop price
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        extended_hours:
+          type: boolean
+          description: If true, eligible for execution outside regular trading hours.
+        legs:
+          type: array
+          description: When querying non-simple order_class orders in a nested style, an array of Order entities associated with this order. Otherwise, null.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Order'
+        trail_percent:
+          type: string
+          description: The percent value away from the high water mark for trailing stop orders.
+        trail_price:
+          type: string
+          description: The dollar value away from the high water mark for trailing stop orders.
+        hwm:
+          type: string
+          description: The highest (lowest) market price seen since the trailing stop order was submitted.
+      required:
+      - symbol
+      - notional
+      - qty
+      - type
+      - side
+      - time_in_force
+    AssetClass:
+      type: string
+      title: AssetClass
+      enum:
+      - us_equity
+      - crypto
+      example: us_equity
+      description: Represents what class of asset this is. Currently only supports `us_equity` or `crypto`
+      x-examples:
+        example-1: us_equity
+    Exchange:
+      title: Exchange
+      type: string
+      description: 'Represents the current exchanges Alpaca supports. List is currently:
+
+
+        - AMEX
+
+        - ARCA
+
+        - BATS
+
+        - NYSE
+
+        - NASDAQ
+
+        - NYSEARCA
+
+        - OTC'
+      enum:
+      - AMEX
+      - ARCA
+      - BATS
+      - NYSE
+      - NASDAQ
+      - NYSEARCA
+      - OTC
+      example: NYSE
+    PositionClosedReponse:
+      title: PositionClosedReponse
+      type: object
+      description: 'Represents the result of asking the api to close a position. '
+      properties:
+        symbol:
+          type: string
+          description: Symbol name of the asset
+        status:
+          type: string
+          description: Http status code for the attempt to close this position
+        body:
+          $ref: '#/components/schemas/Order'
+      required:
+      - symbol
+      - status
+      x-examples:
+        example-1:
+          symbol: AAPL
+          status: 200
+          body:
+            id: f7f25e89-939a-4587-aaf6-414a6b3c341d
+            client_order_id: 52f8574c-96d5-49b6-94c1-2570a268434e
+            created_at: '2022-02-04T16:53:29.53427917Z'
+            updated_at: '2022-02-04T16:53:29.53427917Z'
+            submitted_at: '2022-02-04T16:53:29.533738219Z'
+            filled_at: null
+            expired_at: null
+            canceled_at: null
+            failed_at: null
+            replaced_at: null
+            replaced_by: null
+            replaces: null
+            asset_id: b0b6dd9d-8b9b-48a9-ba46-b9d54906e415
+            symbol: AAPL
+            asset_class: us_equity
+            notional: null
+            qty: '2'
+            filled_qty: '0'
+            filled_avg_price: null
+            order_class: ''
+            order_type: market
+            type: market
+            side: sell
+            time_in_force: day
+            limit_price: null
+            stop_price: null
+            status: accepted
+            extended_hours: false
+            legs: null
+            trail_percent: null
+            trail_price: null
+            hwm: null
+    OrderStatus:
+      type: string
+      title: OrderStatus
+      description: "An order executed through Alpaca can experience several status changes during its lifecycle. The most common statuses are described in detail below:\n\n- new\n  The order has been received by Alpaca, and routed to exchanges for execution. This is the usual initial state of an order.\n\n- partially_filled\n  The order has been partially filled.\n\n- filled\n  The order has been filled, and no further updates will occur for the order.\n\n- done_for_day\n  The order is done executing for the day, and will not receive further updates until the next trading day.\n\n- canceled\n  The order has been canceled, and no further updates will occur for the order. This can be either due to a cancel request by the user, or the order has been canceled by the exchanges due to its time-in-force.\n\n- expired\n  The order has expired, and no further updates will occur for the order.\n\n- replaced\n  The order was replaced by another order, or was updated due to a market event such as corporate action.\n\n- pending_cancel\n  The order is waiting to be canceled.\n\n- pending_replace\n  The order is waiting to be replaced by another order. The order will reject cancel request while in this state.\n\nLess common states are described below. Note that these states only occur on very rare occasions, and most users will likely never see their orders reach these states:\n\n- accepted\n  The order has been received by Alpaca, but hasn’t yet been routed to the execution venue. This could be seen often out side of trading session hours.\n\n- pending_new\n  The order has been received by Alpaca, and routed to the exchanges, but has not yet been accepted for execution. This state only occurs on rare occasions.\n\n- accepted_for_bidding\n  The order has been received by exchanges, and is evaluated for pricing. This state only occurs on rare occasions.\n\n- stopped\n  The order has been stopped, and a trade is guaranteed for the order, usually at a stated price or better, but has not yet occurred. This state only occurs on rare occasions.\n\n- rejected\n  The order has been rejected, and no further updates will occur for the order. This state occurs on rare occasions and may occur based on various conditions decided by the exchanges.\n\n- suspended\n  The order has been suspended, and is not eligible for trading. This state only occurs on rare occasions.\n\n- calculated\n  The order has been completed for the day (either filled or done for day), but remaining settlement calculations are still pending. This state only occurs on rare occasions.\n\n\nAn order may be canceled through the API up until the point it reaches a state of either filled, canceled, or expired."
+      enum:
+      - new
+      - partially_filled
+      - filled
+      - done_for_day
+      - canceled
+      - expired
+      - replaced
+      - pending_cancel
+      - pending_replace
+      - accepted
+      - pending_new
+      - accepted_for_bidding
+      - stopped
+      - rejected
+      - suspended
+      - calculated
+      example: new
+    OrderSide:
+      type: string
+      enum:
+      - buy
+      - sell
+      example: buy
+      title: OrderSide
+      description: 'Represents which side this order was on:
+
+
+        - buy
+
+        - sell'
+    OrderClass:
+      type: string
+      enum:
+      - simple
+      - bracket
+      - oco
+      - oto
+      - ''
+      example: bracket
+      description: This will either be the empty string "", "simple", "bracket", "oco", or "oto".
+      title: OrderClass
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

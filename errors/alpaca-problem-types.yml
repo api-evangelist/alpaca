@@ -1,0 +1,222 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/*.yml 4xx/5xx responses; error envelope from docs.alpaca.markets
+format: custom
+envelope:
+  shape: '{"code": <int>, "message": <string>}'
+  content_type: application/json
+  note: Alpaca errors return a JSON body with a numeric code and human-readable message; not RFC 9457 problem+json.
+problems:
+- status: 400
+  title: The post body is not well formed.
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#createAccount
+  - openapi/alpaca-accounts-api-openapi.yml#patchAccount
+  occurrences: 2
+- status: 400
+  title: Bad Request. The body in the request is not valid.
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#uploadDocToAccount
+  occurrences: 1
+- status: 400
+  title: Bad request. The body in the request is not valid.
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#getRecipientBanks
+  - openapi/alpaca-funding-api-openapi.yml#getRecipientBanks
+  occurrences: 2
+- status: 400
+  title: Bad Request
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#createRecipientBank
+  - openapi/alpaca-accounts-api-openapi.yml#deleteRecipientBank
+  - openapi/alpaca-funding-api-openapi.yml#createRecipientBank
+  - openapi/alpaca-funding-api-openapi.yml#deleteRecipientBank
+  occurrences: 4
+- status: 400
+  title: null
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#createACHRelationshipForAccount
+  - openapi/alpaca-corporate-actions-api-openapi.yml#getCorporateAnnouncements
+  - openapi/alpaca-funding-api-openapi.yml#createACHRelationshipForAccount
+  - openapi/alpaca-trading-api-openapi.yml#getOrderForAccount
+  - openapi/alpaca-trading-api-openapi.yml#replaceOrderForAccount
+  - openapi/alpaca-trading-api-openapi.yml#deleteOrderForAccount
+  - openapi/alpaca-trading-api-openapi.yml#getAllOrdersForAccount
+  - openapi/alpaca-trading-api-openapi.yml#createOrderForAccount
+  occurrences: 9
+- status: 400
+  title: the passed in account_id or relationship_id were invalid
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#deleteACHRelationshipFromAccount
+  - openapi/alpaca-funding-api-openapi.yml#deleteACHRelationshipFromAccount
+  occurrences: 2
+- status: 400
+  title: One of the parameters is invalid.
+  source_operations:
+  - openapi/alpaca-journals-api-openapi.yml#createJournal
+  occurrences: 1
+- status: 401
+  title: null
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#createACHRelationshipForAccount
+  - openapi/alpaca-funding-api-openapi.yml#createACHRelationshipForAccount
+  occurrences: 2
+- status: 401
+  title: Client does not exist or you do not have access to the client.
+  source_operations:
+  - openapi/alpaca-oauth-api-openapi.yml#getOAuthClient
+  occurrences: 1
+- status: 401
+  title: Client does not exists, you do not have access to the client, or “client_secret” is incorrect.
+  source_operations:
+  - openapi/alpaca-oauth-api-openapi.yml#issueOAuthToken
+  - openapi/alpaca-oauth-api-openapi.yml#authorizeOAuthToken
+  occurrences: 2
+- status: 403
+  title: The amount requested to move is not available.
+  source_operations:
+  - openapi/alpaca-journals-api-openapi.yml#createJournal
+  occurrences: 1
+- status: 403
+  title: Forbidden Buying power or shares is not sufficient.
+  source_operations:
+  - openapi/alpaca-orders-api-openapi.yml#postOrder
+  occurrences: 1
+- status: 403
+  title: Buying power or shares are not sufficient
+  source_operations:
+  - openapi/alpaca-trading-api-openapi.yml#replaceOrderForAccount
+  occurrences: 1
+- status: 403
+  title: null
+  source_operations:
+  - openapi/alpaca-trading-api-openapi.yml#createOrderForAccount
+  occurrences: 1
+- status: 404
+  title: Not Found. No account was found for this account_id
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#uploadDocToAccount
+  occurrences: 1
+- status: 404
+  title: Bank Not Found
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#deleteRecipientBank
+  - openapi/alpaca-funding-api-openapi.yml#deleteRecipientBank
+  occurrences: 2
+- status: 404
+  title: null
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#deleteTransfer
+  - openapi/alpaca-accounts-api-openapi.yml#deleteACHRelationshipFromAccount
+  - openapi/alpaca-funding-api-openapi.yml#deleteTransfer
+  - openapi/alpaca-funding-api-openapi.yml#deleteACHRelationshipFromAccount
+  - openapi/alpaca-trading-api-openapi.yml#getOrderForAccount
+  - openapi/alpaca-trading-api-openapi.yml#replaceOrderForAccount
+  - openapi/alpaca-trading-api-openapi.yml#deleteOrderForAccount
+  - openapi/alpaca-trading-api-openapi.yml#getAllOrdersForAccount
+  occurrences: 10
+- status: 404
+  title: Asset not found
+  source_operations:
+  - openapi/alpaca-assets-api-openapi.yml#getAssetBySymbolOrId
+  occurrences: 1
+- status: 404
+  title: Not found
+  source_operations:
+  - openapi/alpaca-documents-api-openapi.yml#getDocsForAccount
+  occurrences: 1
+- status: 404
+  title: The document is not found.
+  source_operations:
+  - openapi/alpaca-documents-api-openapi.yml#downloadDocFromAccount
+  occurrences: 1
+- status: 404
+  title: The document was not found.
+  source_operations:
+  - openapi/alpaca-documents-api-openapi.yml#downloadDocumentById
+  occurrences: 1
+- status: 404
+  title: One of the account is not found.
+  source_operations:
+  - openapi/alpaca-journals-api-openapi.yml#createJournal
+  occurrences: 1
+- status: 404
+  title: The journal is not found.
+  source_operations:
+  - openapi/alpaca-journals-api-openapi.yml#deleteJournalById
+  occurrences: 1
+- status: 404
+  title: No Logo was found for this symbol. This code will only be returned if you set `placeholder` to false. Otherwise we
+    will generate a placeholder image for this sy
+  source_operations:
+  - openapi/alpaca-logo-api-openapi.yml#getLogoForSymbol
+  occurrences: 1
+- status: 404
+  title: Account doesn't have a position for this symbol or asset_id
+  source_operations:
+  - openapi/alpaca-trading-api-openapi.yml#getPositionsForAccountBySymbol
+  occurrences: 1
+- status: 409
+  title: There is already an existing account registered with the same email address.
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#createAccount
+  occurrences: 1
+- status: 409
+  title: Conflict
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#createRecipientBank
+  - openapi/alpaca-funding-api-openapi.yml#createRecipientBank
+  occurrences: 2
+- status: 409
+  title: The account already has an active relationship.
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#createACHRelationshipForAccount
+  - openapi/alpaca-funding-api-openapi.yml#createACHRelationshipForAccount
+  occurrences: 2
+- status: 422
+  title: One of the input values is not a valid value.
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#createAccount
+  occurrences: 1
+- status: 422
+  title: ​ The request body contains an attribute that is not permitted to be updated or you are attempting to set an invalid
+    value.
+  source_operations:
+  - openapi/alpaca-accounts-api-openapi.yml#patchAccount
+  occurrences: 1
+- status: 422
+  title: The journal is not in the pending status.
+  source_operations:
+  - openapi/alpaca-journals-api-openapi.yml#deleteJournalById
+  occurrences: 1
+- status: 422
+  title: Redirect URI or scope is invalid.
+  source_operations:
+  - openapi/alpaca-oauth-api-openapi.yml#issueOAuthToken
+  - openapi/alpaca-oauth-api-openapi.yml#authorizeOAuthToken
+  occurrences: 2
+- status: 422
+  title: Unprocessable Input parameters are not recognized.
+  source_operations:
+  - openapi/alpaca-orders-api-openapi.yml#postOrder
+  occurrences: 1
+- status: 422
+  title: The order status is not cancelable.
+  source_operations:
+  - openapi/alpaca-orders-api-openapi.yml#deleteOrderByOrderID
+  occurrences: 1
+- status: 500
+  title: Failed to cancel order.
+  source_operations:
+  - openapi/alpaca-orders-api-openapi.yml#deleteAllOrders
+  occurrences: 1
+- status: 500
+  title: Failed to liquidate
+  source_operations:
+  - openapi/alpaca-positions-api-openapi.yml#deleteAllOpenPositions
+  occurrences: 1
+- status: 500
+  title: Failed to liquidate some positions
+  source_operations:
+  - openapi/alpaca-trading-api-openapi.yml#closeAllPositionsForAccount
+  occurrences: 1

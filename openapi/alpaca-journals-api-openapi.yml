@@ -1,0 +1,602 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Journals API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Journals
+paths:
+  /v1/events/journals/status:
+    get:
+      summary: Subscribe to journal events (SSE).
+      tags:
+      - Journals
+      description: 'The Events API provides event push as well as historical queries via SSE (server sent events).
+
+
+        You can listen to journal status updates as they get processed by our backoffice.
+
+
+        Historical events are streamed immediately if queried, and updates are pushed as events occur.
+
+
+        Query Params Rules:
+
+        - `since` required if `until` specified
+
+        - `since_id` required if `until_id` specified
+
+        - `since` and `since_id` can’t be used at the same time
+
+        Behavior:
+
+        - if `since` or `since_id` not specified this will not return any historic data
+
+        - if `until` or `until_id` reached stream will end (status 200)
+
+
+        ---
+
+
+        Note for people using the clients generated from this OAS spec. Currently OAS-3 doesn''t have full support for representing SSE style responses from an API, so if you are using a generated client and don''t specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.
+
+
+        If you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.'
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: 'Format: YYYY-MM-DD'
+      - name: until
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: 'Format: YYYY-MM-DD'
+      - name: since_id
+        in: query
+        schema:
+          type: integer
+      - name: until_id
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Connected. Events will now start streaming as long as you keep the connection open.
+          content:
+            text/event-stream:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JournalStatusEvent'
+      operationId: subscribeToJournalStatusSSE
+  /v1/journals:
+    get:
+      summary: Return a list of requested journals.
+      tags:
+      - Journals
+      parameters:
+      - name: after
+        in: query
+        schema:
+          type: string
+          format: date
+        description: 'By journal creation date. Format: 2020-01-01'
+      - name: before
+        in: query
+        schema:
+          type: string
+          format: date
+        description: 'By journal creation date. Format: 2020-01-01'
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - pending
+          - canceled
+          - executed
+          - queued
+          - rejected
+          - deleted
+        description: See the JournalStatus model for more info
+      - name: entry_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - JNLC
+          - JNLS
+        description: JNLC or JNLS
+      - name: to_account
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: The account id that received the journal
+      - name: from_account
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: The account id that initiated the journal
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                discriminator:
+                  propertyName: entry_type
+                  mapping:
+                    JNLC: '#/components/schemas/JNLC'
+                    JNLS: '#/components/schemas/JNLS'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Journal'
+      operationId: getAllJournals
+      description: Returns an array of journal objects.
+    post:
+      summary: Create a Journal.
+      tags:
+      - Journals
+      description: 'A journal can be JNLC (move cash) or JNLS (move shares), dictated by `entry_type`. Generally, journal requests are subject to approval and starts from the `pending` status. The status changes are propagated through the Event API. Under certain conditions agreed for the partner, such journal transactions that meet the criteria are executed right away.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJournalRequest'
+            example:
+              entry_type: JNLC
+              from_account: 7c891489-574f-4f9a-82f0-4082a07f4736
+              to_account: 2d47a229-0c25-40a2-8cc7-b2c8821ff93a
+              amount: '115.5'
+      responses:
+        '200':
+          description: The New Journal object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journal'
+        '400':
+          description: One of the parameters is invalid.
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: The amount requested to move is not available.
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: One of the account is not found.
+          content:
+            application/json:
+              schema:
+                type: string
+      operationId: createJournal
+  /v1/journals/{journal_id}:
+    parameters:
+    - name: journal_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    delete:
+      summary: Cancel a pending journal.
+      tags:
+      - Journals
+      description: You can only delete a journal if the journal is still in a pending state, if a journal is executed you will not be able to delete. The alternative is to create a mirror journal entry to reverse the flow of funds.
+      responses:
+        '204':
+          description: 'The cancel request succeeded. (No-content)
+
+            '
+        '404':
+          description: 'The journal is not found.
+
+            '
+        '422':
+          description: 'The journal is not in the pending status.
+
+            '
+      operationId: deleteJournalById
+  /v1/journals/batch:
+    post:
+      summary: Create a Batch Journal Transaction (One-to-Many)
+      operationId: createBatchJournal
+      responses:
+        '200':
+          description: an array of journal objects with an extra attribute error_message in the case when a specific account fails to receive a journal.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchJournalResponse'
+              examples: {}
+      description: 'You can create a batch of journal requests by using this endpoint. This is enabled on JNLC type Journals for now only.
+
+
+        Every single request must be valid for the entire batch operation to succeed.
+
+
+        In the case of a successful request, the response will contain an array of journal objects with an extra attribute error_message in the case when a specific account fails to receive a journal.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchJournalRequest'
+        description: ''
+      tags:
+      - Journals
+components:
+  schemas:
+    CreateJournalRequest:
+      description: "Journals API allows you to move cash or securities from one account to another.\n\nThis model represents the fields you can specify when creating a Journal\n\nFixture Rules\n\n- No Fixtures\n  - anything below limit is executed immediately\n  - anything above limit is pending until executed at EOD,\n- With Fixtures\n  - any status = rejected will be rejected EOD\n  - any status = pending will be pending forever"
+      type: object
+      x-examples:
+        example-1:
+          from_account: c94bu7rn-4483-4199-840f-6c5fe0b7ca24
+          entry_type: JNLC
+          to_account: fn68sbrk-6f2a-433c-8c33-17b66b8941fa
+          amount: '51'
+          description: test text /fixtures/status=rejected/fixtures/
+      properties:
+        to_account:
+          type: string
+          minLength: 1
+          format: uuid
+          description: The account_id you wish to journal to
+        from_account:
+          type: string
+          minLength: 1
+          format: uuid
+          description: The account_id you wish to journal from
+        entry_type:
+          $ref: '#/components/schemas/JournalEntryType'
+        amount:
+          type: string
+          description: Required if `entry_type` = `JNLC`
+        symbol:
+          type: string
+          description: Required if `entry_type` = `JNLS`
+        qty:
+          type: string
+          description: Required if `entry_type` = `JNLS`
+        description:
+          type: string
+          description: Max 1024 characters. Can include fixtures for amounts that are above the transaction limit
+          maxLength: 1024
+        transmitter_name:
+          type: string
+          maxLength: 255
+          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
+        transmitter_account_number:
+          type: string
+          maxLength: 255
+          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
+        transmitter_address:
+          type: string
+          maxLength: 255
+          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
+        transmitter_financial_institution:
+          type: string
+          maxLength: 255
+          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
+        transmitter_timestamp:
+          type: string
+          description: RFC 3339 format. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
+          format: date-time
+      required:
+      - to_account
+      - from_account
+      - entry_type
+    JournalEntryType:
+      type: string
+      title: ''
+      description: "This enum represents the various kinds of Journal alpaca supports.\n\nCurrent values are:\n\n- **JNLC**\n\n  Journal Cash between accounts\n\n- **JNLS**\n\n  Journal Securities between accounts"
+      enum:
+      - JNLC
+      - JNLS
+    Journal:
+      title: Journal
+      example:
+        id: h7h5g33f-ef01-4458-9a4b-9598727a406f
+        entry_type: JNLS
+        from_account: 8fjkjn-4483-4199-840f-6c5fe0b7ca24
+        to_account: 3gtt65jd-6f2a-433c-8c33-17b66b8941fa
+        status: executed
+        symbol: AAPL
+        qty: '2'
+        price: '128.23'
+      x-examples:
+        example:
+          id: h7h5g33f-ef01-4458-9a4b-9598727a406f
+          entry_type: JNLS
+          from_account: 8fjkjn-4483-4199-840f-6c5fe0b7ca24
+          to_account: 3gtt65jd-6f2a-433c-8c33-17b66b8941fa
+          status: executed
+          symbol: AAPL
+          qty: '2'
+          settle_date: '2020-12-24'
+          price: '128.23'
+        example-pending:
+          id: 6d2cba43-cb57-4534-9603-a6e159167c0a
+          entry_type: JNLC
+          from_account: 3dcb795c-3ccc-402a-abb9-07e26a1b1326
+          to_account: 2a87c088-ffb6-472b-a4a3-cd9305c8605c
+          symbol: null
+          qty: null
+          price: '0'
+          status: pending
+          settle_date: '2022-02-17'
+          system_date: '2022-02-17'
+          net_amount: '645'
+          description: ''
+        example-queued:
+          id: 6d2cba43-cb57-4534-9603-a6e159167c0a
+          entry_type: JNLC
+          from_account: 3dcb795c-3ccc-402a-abb9-07e26a1b1326
+          to_account: 2a87c088-ffb6-472b-a4a3-cd9305c8605c
+          symbol: ''
+          qty: null
+          price: '0'
+          status: queued
+          settle_date: null
+          system_date: null
+          net_amount: '645'
+          description: ''
+      description: Represents a cash or security transfer between accounts, as specified by the `entry_type` parameter.
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            description: journal ID
+          entry_type:
+            $ref: '#/components/schemas/JournalEntryType'
+          from_account:
+            type: string
+            format: uuid
+            description: account ID the shares go from
+          to_account:
+            type: string
+            format: uuid
+            description: account ID the shares go to
+          settle_date:
+            type: string
+            format: date
+          status:
+            $ref: '#/components/schemas/JournalStatus'
+        required:
+        - id
+        - entry_type
+        - from_account
+        - to_account
+        - settle_date
+      - oneOf:
+        - $ref: '#/components/schemas/JNLS'
+        - $ref: '#/components/schemas/JNLC'
+    JournalStatus:
+      type: string
+      enum:
+      - pending
+      - canceled
+      - executed
+      - queued
+      - rejected
+      - deleted
+      description: "Represents the status that a Journal instance can be in.\n\nCurrent Values:\n  - pending\n  - canceled\n  - executed\n  - queued\n  - rejected\n  - deleted"
+    BatchJournalRequest:
+      title: BatchJournalRequest
+      type: object
+      description: 'Journals API allows you to move cash or securities from one account to another.
+
+
+        This model represents the fields you can specify when creating a request of many Journals out of one account to many others at once.'
+      properties:
+        entry_type:
+          type: string
+          enum:
+          - JNLC
+          description: Only supports `JNLC` for now
+        from_account:
+          type: string
+          format: uuid
+          description: The account id that is the originator of the funds being moved. Most likely is your Sweep Firm Account
+        description:
+          type: string
+          description: Journal description, gets returned in the response
+        entries:
+          type: array
+          minItems: 1
+          description: An array of objects describing to what accounts you want to move funds into and how much to move into for each account
+          items:
+            type: object
+            properties:
+              to_account:
+                type: string
+                format: uuid
+                description: The ID of the account that you want to journal funds into
+              amount:
+                type: string
+                description: Journal amount in USD
+            required:
+            - to_account
+            - amount
+      required:
+      - entry_type
+      - from_account
+      - entries
+    JournalStatusEvent:
+      description: 'Represents a change in a Journal''s status, sent over the events streaming api.
+
+        '
+      type: object
+      x-examples:
+        example-1:
+          at: '2021-05-07T10:28:23.163857Z'
+          entry_type: JNLC
+          event_id: 1406
+          journal_id: 2f144d2a-91e6-46ff-8e37-959a701cc58d
+          status_from: ''
+          status_to: queued
+      title: JournalStatusEvent
+      properties:
+        at:
+          type: string
+          minLength: 1
+          description: Timestamp of event
+          format: date-time
+        entry_type:
+          $ref: '#/components/schemas/JournalEntryType'
+        event_id:
+          type: integer
+          description: Monotonically increasing 64bit integer
+        journal_id:
+          type: string
+          description: The UUID of the related Journal
+          format: uuid
+        status_from:
+          $ref: '#/components/schemas/JournalStatus'
+        status_to:
+          $ref: '#/components/schemas/JournalStatus'
+      required:
+      - at
+      - entry_type
+      - event_id
+      - journal_id
+      - status_from
+      - status_to
+    JNLC:
+      example:
+        id: f45g67h8-d1fc-4136-aa4f-cf4460aecdfc
+        entry_type: JNLC
+        from_account: 8fjkjn-4483-4199-840f-6c5fe0b7ca24
+        to_account: 3gtt65jd-6f2a-433c-8c33-17b66b8941fa
+        status: pending
+        net_amount: '115.5'
+      description: Journal information specific to cash transfers. This field is required for `Journal`s with an `entry_type` of `jnlc` (cash transfers), but will be null for those with `jnls` (securities transfers).
+      type: object
+      title: JNLC
+      properties:
+        description:
+          type: string
+          description: ID the amount goes to. Only valid for JNLC journals. Null for JNLS.
+        net_amount:
+          type: string
+          format: decimal
+          description: Only valid for JNLC journals. Null for JNLS.
+        transmitter_name:
+          type: string
+          description: Only valid for JNLC journals. Null for JNLS. Max 255 characters.
+        transmitter_account_number:
+          type: string
+          description: Only valid for JNLC journals. Null for JNLS.max 255 characters
+        transmitter_address:
+          type: string
+          description: Only valid for JNLC journals. Null for JNLS.max 255 characters
+        transmitter_financial_institution:
+          type: string
+          description: Only valid for JNLC journals. Null for JNLS.max 255 characters
+        transmitter_timestamp:
+          type: string
+          format: date-time
+          description: Only valid for JNLC journals. Null for JNLS.
+      required:
+      - net_amount
+      x-examples: {}
+    JNLS:
+      example:
+        id: h7h5g33f-ef01-4458-9a4b-9598727a406s
+        entry_type: JNLS
+        from_account: 8fjkjn-4483-4199-840f-6c5fe0b7ca24
+        to_account: 3gtt65jd-6f2a-433c-8c33-17b66b8941fa
+        status: executed
+        symbol: AAPL
+        qty: '2'
+        price: '128.23'
+      x-examples:
+        example-1:
+          id: h7h5g33f-ef01-4458-9a4b-9598727a406f
+          entry_type: JNLS
+          from_account: 8fjkjn-4483-4199-840f-6c5fe0b7ca24
+          to_account: 3gtt65jd-6f2a-433c-8c33-17b66b8941fa
+          status: executed
+          symbol: AAPL
+          qty: '2'
+          price: '128.23'
+      title: JNLS
+      type: object
+      description: Journal information specific to securities transfers. This field is required for `Journal`s with an `entry_type` of `jnls` (securities transfers), but will be null for those with `jnlc` (cash transfers).
+      properties:
+        symbol:
+          type: string
+          description: Only valid for JNLS journals. Null for JNLC.
+        qty:
+          type: string
+          format: decimal
+          description: Only valid for JNLS journals. Null for JNLC.
+        price:
+          type: string
+          format: decimal
+          description: Only valid for JNLS journals. Null for JNLC.
+      required:
+      - symbol
+      - qty
+      - price
+    BatchJournalResponse:
+      title: BatchJournalResponse
+      description: A Journal object with an extra attribute error_message in the case when a specific account fails to receive a journal.
+      allOf:
+      - $ref: '#/components/schemas/Journal'
+      - type: object
+        properties:
+          error_message:
+            type: string
+            description: Description of why this journal transaction failed
+        required:
+        - error_message
+      x-examples:
+        example-1:
+          error_message: ''
+          id: 56f106e5-25a4-4eee-96fa-25bb05dc86bc
+          entry_type: JNLC
+          from_account: 8f8c8cee-2591-4f83-be12-82c659b5e748
+          to_account: 399f85f1-cbbd-4eaa-a934-70027fb5c1de
+          symbol: ''
+          qty: null
+          price: null
+          status: pending
+          settle_date: null
+          system_date: null
+          net_amount: '1000'
+          description: ''
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

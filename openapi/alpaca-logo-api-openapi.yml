@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Logo API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Logo
+paths:
+  /v1beta1/logos/{crypto_or_stock_symbol}:
+    parameters:
+    - schema:
+        type: string
+      name: crypto_or_stock_symbol
+      in: path
+      required: true
+      description: The crypto or stock symbol to query for. Note, currently all crypto symbols must be appended with "USD", ie "BTCUSD" would be how you query for BTC.
+    get:
+      summary: Get Logo for symbol
+      tags:
+      - Logo
+      responses:
+        '200':
+          description: Returns the requested logo as an image.
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+                description: the requested logo
+        '404':
+          description: No Logo was found for this symbol. This code will only be returned if you set `placeholder` to false. Otherwise we will generate a placeholder image for this symbol
+      operationId: getLogoForSymbol
+      description: Returns logo image resource for provided symbol.
+      parameters:
+      - schema:
+          type: boolean
+          default: true
+        in: query
+        name: placeholder
+        description: If true then the api will generate a placeholder image if no logo was found. Defaults to true
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

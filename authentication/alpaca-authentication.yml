@@ -1,17 +1,22 @@
-generated: '2026-07-11'
-method: derived
+generated: '2026-07-22'
+method: searched
 source: openapi/alpaca-broker-api-openapi.yml, openapi/alpaca-data-api-openapi.yml, openapi/alpaca-oauth-api-openapi.yml,
   openapi/alpaca-trading-api-openapi.yml
+docs: https://docs.alpaca.markets/docs/authentication
 summary:
   types:
   - apiKey
   - http
+  - oauth2
   api_key_in:
   - header
+  oauth2_flows:
+  - authorizationCode
 schemes:
 - name: BasicAuth
   type: http
   scheme: basic
+  note: Broker API — API key as username, API secret as password.
   sources:
   - openapi/alpaca-broker-api-openapi.yml
 - name: API_Key
@@ -30,3 +35,31 @@ schemes:
   - openapi/alpaca-data-api-openapi.yml
   - openapi/alpaca-oauth-api-openapi.yml
   - openapi/alpaca-trading-api-openapi.yml
+- name: ConnectOAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.alpaca.markets/oauth/authorize
+    tokenUrl: https://api.alpaca.markets/oauth/token
+    scopes: [account:write, trading, data]
+  note: >-
+    Alpaca Connect — third-party apps act for Alpaca users on the Trading and Market Data APIs
+    with a Bearer access token; read-only access is the default when no scope is requested.
+    Not declared in the harvested OpenAPI; documented at docs.alpaca.markets. See
+    scopes/alpaca-scopes.yml.
+  sources:
+  - https://docs.alpaca.markets/docs/using-oauth2-and-trading-api
+- name: authx (Broker MCP)
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://authx.alpaca.markets/v1/oauth2/authorize
+    tokenUrl: https://authx.alpaca.markets/v1/oauth2/token
+  note: >-
+    Authorization server fronting the hosted Broker MCP Server (PKCE S256; also client_credentials,
+    jwt-bearer, refresh_token grants). Metadata saved in
+    well-known/alpaca-authx-oauth-authorization-server.json.
+  sources:
+  - https://authx.alpaca.markets/v1/.well-known/oauth-authorization-server
+paper_trading:
+  note: Paper environment uses the same schemes with separate keys against https://paper-api.alpaca.markets.

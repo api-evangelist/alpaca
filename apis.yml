@@ -2,7 +2,20 @@ aid: alpaca
 url: https://raw.githubusercontent.com/api-evangelist/alpaca/refs/heads/main/apis.yml
 name: Alpaca
 kind: company
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/alpaca.png
 tags:
   - Fintech
   - Trading
@@ -12,133 +25,424 @@ tags:
   - Market Data
   - Options
 created: '2026-05-08'
-modified: '2026-05-29'
+modified: '2026-07-22'
 specificationVersion: '0.19'
 description: >-
   Alpaca is an API-first commission-free stock and crypto trading broker offering trading, market data, options, and
   broker-as-a-service APIs. Alpaca publishes its OpenAPI specifications publicly via the alpacahq/alpaca-docs GitHub
   repository, with separate specs for Trading, Broker, Market Data, and OAuth.
 apis:
-  - aid: alpaca:trading-api
-    name: Alpaca Trading API
-    tags:
-      - Trading
-      - Stocks
-      - Options
-      - Crypto
-      - Orders
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.alpaca.markets/v2
-    humanURL: https://docs.alpaca.markets/docs/trading-api
-    description: >-
-      The Alpaca Trading API enables commission-free trading of US-listed equities, options, and crypto. It exposes
-      endpoints for orders, positions, account information, watchlists, calendar, clock, and assets. A paper trading
-      sandbox is available at paper-api.alpaca.markets.
-    properties:
-      - type: Documentation
-        url: https://docs.alpaca.markets/docs/trading-api
-      - type: OpenAPI
-        url: openapi/alpaca-trading-api-openapi.yml
-      - type: AsyncAPI
-        url: asyncapi/alpaca-asyncapi.yml
-      - type: Sandbox
-        url: https://paper-api.alpaca.markets/v2
-    x-features:
-      - Commission-free US equity and options trading
-      - Multi-leg options orders
-      - Crypto trading 24/7
-      - Paper trading environment
-      - Account, positions, orders, watchlists endpoints
-    x-use-cases:
-      - Build automated trading strategies
-      - Power retail trading apps
-      - Backtest with paper trading sandbox
-  - aid: alpaca:market-data-api
-    name: Alpaca Market Data API
-    tags:
-      - Market Data
-      - Stocks
-      - Crypto
-      - Options
-      - Real-time
-      - Historical
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://data.alpaca.markets
-    humanURL: https://docs.alpaca.markets/docs/about-market-data-api
-    description: >-
-      The Alpaca Market Data API delivers real-time and historical pricing data for US stocks (SIP and IEX feeds),
-      options (OPRA), and crypto. Supports REST and WebSocket streaming with bars, quotes, trades, snapshots, and
-      corporate actions endpoints. 7+ years of historical data available.
-    properties:
-      - type: Documentation
-        url: https://docs.alpaca.markets/docs/about-market-data-api
-      - type: OpenAPI
-        url: openapi/alpaca-data-api-openapi.yml
-      - type: AsyncAPI
-        url: asyncapi/alpaca-asyncapi.yml
-    x-features:
-      - Real-time stock quotes via WebSocket
-      - OPRA options market data
-      - Crypto market data 24/7
-      - 7+ years historical OHLCV
-      - SIP and IEX feed support
-    x-use-cases:
-      - Stream live prices into trading bots
-      - Backtest strategies with historical bars
-      - Power chart and ticker UIs
-  - aid: alpaca:broker-api
-    name: Alpaca Broker API
-    tags:
-      - Brokerage
-      - Embedded Finance
-      - White Label
-      - Compliance
-      - Trading
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://broker-api.alpaca.markets/v1
-    humanURL: https://docs.alpaca.markets/docs/about-broker-api
-    description: >-
-      The Alpaca Broker API powers white-label brokerage and embedded finance products. It exposes endpoints for account
-      onboarding, KYC/AML, ACATS transfers, ACH funding, journals, and trading on behalf of end users.
-    properties:
-      - type: Documentation
-        url: https://docs.alpaca.markets/docs/about-broker-api
-      - type: OpenAPI
-        url: openapi/alpaca-broker-api-openapi.yml
-    x-features:
-      - Account onboarding and KYC
-      - ACATS and ACH transfers
-      - Journal between accounts
-      - Trading on behalf of end users
-      - Rebalancing portfolios
-    x-use-cases:
-      - Launch a neo-broker or robo-advisor
-      - Embed trading in fintech apps
-      - Operate a white-label brokerage
-  - aid: alpaca:oauth-api
-    name: Alpaca OAuth API
-    tags:
-      - OAuth
-      - Authentication
-      - Authorization
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.alpaca.markets/oauth
-    humanURL: https://docs.alpaca.markets/docs/oauth-tokens
-    description: >-
-      The Alpaca OAuth API allows third-party applications to authenticate Alpaca users and obtain access tokens for the
-      Trading and Market Data APIs.
-    properties:
-      - type: Documentation
-        url: https://docs.alpaca.markets/docs/oauth-tokens
-      - type: OpenAPI
-        url: openapi/alpaca-oauth-api-openapi.yml
-    x-features:
-      - OAuth 2.0 authorization code flow
-      - Token issuance and refresh
-      - Scope-limited access
-    x-use-cases:
-      - Build apps that act on behalf of Alpaca users
-      - Integrate Alpaca login into third-party tools
+- aid: alpaca:trading-api
+  name: Alpaca Trading API
+  tags:
+  - Trading
+  - Stocks
+  - Options
+  - Crypto
+  - Orders
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.alpaca.markets/v2
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  description: >-
+    The Alpaca Trading API enables commission-free trading of US-listed equities, options, and crypto.
+    It exposes endpoints for orders, positions, account information, watchlists, calendar, clock, and
+    assets. A paper trading sandbox is available at paper-api.alpaca.markets.
+  properties:
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/trading-api
+  - type: OpenAPI
+    url: openapi/alpaca-trading-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Overlay
+    url: overlays/alpaca-trading-api-overlay.yaml
+  - type: Sandbox
+    url: https://paper-api.alpaca.markets/v2
+  x-features:
+  - Commission-free US equity and options trading
+  - Multi-leg options orders
+  - Crypto trading 24/7
+  - Paper trading environment
+  - Account, positions, orders, watchlists endpoints
+  x-use-cases:
+  - Build automated trading strategies
+  - Power retail trading apps
+  - Backtest with paper trading sandbox
+- aid: alpaca:oauth-api
+  name: Alpaca OAuth API
+  tags:
+  - OAuth
+  - Authentication
+  - Authorization
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.alpaca.markets/oauth
+  humanURL: https://docs.alpaca.markets/docs/oauth-tokens
+  description: >-
+    The Alpaca OAuth API allows third-party applications to authenticate Alpaca users and obtain access
+    tokens for the Trading and Market Data APIs.
+  properties:
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/oauth-tokens
+  - type: OpenAPI
+    url: openapi/alpaca-oauth-api-openapi.yml
+  - type: Overlay
+    url: overlays/alpaca-oauth-api-overlay.yaml
+  x-features:
+  - OAuth 2.0 authorization code flow
+  - Token issuance and refresh
+  - Scope-limited access
+  x-use-cases:
+  - Build apps that act on behalf of Alpaca users
+  - Integrate Alpaca login into third-party tools
+- aid: alpaca:alpaca-account-activities-api
+  name: Alpaca Account Activities API
+  description: >-
+    Head to https://alpaca.markets/docs/api-references/trading-api/account-activities/ to view complete
+    documentation on the Account Activities API.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Account Activities
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-account-activities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-account-configurations-api
+  name: Alpaca Account Configurations API
+  description: >-
+    Head to https://alpaca.markets/docs/api-documentation/api-v2/account-configuration/ to view complete
+    documentation on the Account Configurations API.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Account Configurations
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-account-configurations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-accounts-api
+  name: Alpaca Accounts API
+  description: The Accounts API from Alpaca — 14 operation(s) for accounts.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-assets-api
+  name: Alpaca Assets API
+  description: The Assets API from Alpaca — 2 operation(s) for assets.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Assets
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-assets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-calendar-api
+  name: Alpaca Calendar API
+  description: The Calendar API from Alpaca — 2 operation(s) for calendar.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Calendar
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-calendar-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-clock-api
+  name: Alpaca Clock API
+  description: The Clock API from Alpaca — 2 operation(s) for clock.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Clock
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-clock-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-corporate-actions-api
+  name: Alpaca Corporate Actions API
+  description: The Corporate Actions API from Alpaca — 1 operation(s) for corporate actions.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Corporate Actions
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-corporate-actions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-crypto-pricing-data-api-api
+  name: Alpaca Crypto Pricing Data API API
+  description: >-
+    The Crypto Pricing Data API API from Alpaca — 17 operation(s) for crypto pricing data api.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Crypto Pricing Data API
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-crypto-pricing-data-api-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-documents-api
+  name: Alpaca Documents API
+  description: The Documents API from Alpaca — 3 operation(s) for documents.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-events-api
+  name: Alpaca Events API
+  description: The Events API from Alpaca — 4 operation(s) for events.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-funding-api
+  name: Alpaca Funding API
+  description: The Funding API from Alpaca — 7 operation(s) for funding.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Funding
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-funding-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-journals-api
+  name: Alpaca Journals API
+  description: The Journals API from Alpaca — 4 operation(s) for journals.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Journals
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-journals-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-logo-api
+  name: Alpaca Logo API
+  description: The Logo API from Alpaca — 1 operation(s) for logo.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Logo
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-logo-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-news-api
+  name: Alpaca News API
+  description: The News API from Alpaca — 1 operation(s) for news.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - News
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-news-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-orders-api
+  name: Alpaca Orders API
+  description: >-
+    Head to https://alpaca.markets/docs/api-documentation/api-v2/orders/ to view complete documentation
+    on the Orders API.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-portfolio-history-api
+  name: Alpaca Portfolio History API
+  description: >-
+    Head to https://alpaca.markets/docs/api-documentation/api-v2/portfolio-history/ to view complete documentation
+    on the Portfolio History API.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Portfolio History
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-portfolio-history-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-positions-api
+  name: Alpaca Positions API
+  description: >-
+    Head to https://alpaca.markets/docs/api-documentation/api-v2/positions/ to view complete documentation
+    on the Positions API.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Positions
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-positions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-screener-api
+  name: Alpaca Screener API
+  description: The Screener API from Alpaca — 1 operation(s) for screener.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Screener
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-screener-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-stock-pricing-data-api-api
+  name: Alpaca Stock Pricing Data API API
+  description: The Stock Pricing Data API API from Alpaca — 16 operation(s) for stock pricing data api.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Stock Pricing Data API
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-stock-pricing-data-api-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-watchlist-api
+  name: Alpaca Watchlist API
+  description: The Watchlist API from Alpaca — 2 operation(s) for watchlist.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Watchlist
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-watchlist-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-watchlists-api
+  name: Alpaca Watchlists API
+  description: >-
+    Head to https://alpaca.markets/docs/api-documentation/api-v2/watchlist/ to view complete documentation
+    on the Watchlist API.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - Watchlists
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-watchlists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-market-data-api
+  - type: AsyncAPI
+    url: asyncapi/alpaca-asyncapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/about-broker-api
 common:
   - type: AgenticAccess
     url: agentic-access/alpaca-agentic-access.yml
@@ -146,6 +450,60 @@ common:
     url: security/alpaca-domain-security.yml
   - type: Authentication
     url: authentication/alpaca-authentication.yml
+  - type: Packages
+    url: packages/alpaca-packages.yml
+  - type: SDKs
+    url: packages/alpaca-packages.yml
+  - type: WellKnown
+    url: well-known/alpaca-well-known.yml
+  - type: MCPServer
+    url: mcp/alpaca-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/alpaca-tool-crosswalk.yml
+  - type: LLMsTxt
+    url: llms/alpaca-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Sandbox
+    url: sandbox/alpaca-sandbox.yml
+  - type: Conventions
+    url: conventions/alpaca-conventions.yml
+  - type: Idempotency
+    url: conventions/alpaca-conventions.yml
+  - type: ChangeLog
+    url: changelog/alpaca-changelog.yml
+  - type: CLI
+    url: cli/alpaca-cli.yml
+  - type: OAuthScopes
+    url: scopes/alpaca-scopes.yml
+  - type: ErrorCatalog
+    url: errors/alpaca-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/alpaca-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/alpaca-lifecycle.yml
+  - type: Conformance
+    url: conformance/alpaca-conformance.yml
+  - type: Compliance
+    url: https://alpaca.markets/security
+  - type: VulnerabilityDisclosure
+    url: security/alpaca-vulnerability-disclosure.yml
+  - type: Security
+    url: https://alpaca.markets/security
+  - type: TrustCenter
+    url: https://trust.alpaca.markets/
+  - type: DataModel
+    url: data-model/alpaca-data-model.yml
+  - type: Postman
+    url: https://github.com/alpacahq/alpaca-postman
+  - type: APIReference
+    url: https://docs.alpaca.markets/reference
+  - type: GettingStarted
+    url: https://docs.alpaca.markets/docs/getting-started
+  - type: Support
+    url: https://alpaca.markets/support
+  - type: SignUp
+    url: https://app.alpaca.markets/signup
   - type: LinkedIn
     url: https://www.linkedin.com/company/alpacamarkets
   - type: Portal

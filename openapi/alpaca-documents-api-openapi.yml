@@ -1,0 +1,179 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Documents API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Documents
+paths:
+  /v1/accounts/{account_id}/documents:
+    parameters:
+    - $ref: '#/components/parameters/AccountID'
+    get:
+      summary: Return a list of account documents.
+      tags:
+      - Documents
+      description: This endpoint allows you to query all the documents that belong to a certain account. You can filter by date, or type of document.
+      parameters:
+      - name: start_date
+        in: query
+        description: optional date value to filter the list (inclusive).
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        description: optional date value to filter the list (inclusive).
+        schema:
+          type: string
+          format: date
+      - $ref: '#/components/parameters/DocumentType'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Document'
+              examples: {}
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: string
+      operationId: getDocsForAccount
+  /v1/accounts/{account_id}/documents/{document_id}/download:
+    parameters:
+    - $ref: '#/components/parameters/AccountID'
+    - $ref: '#/components/parameters/DocumentID'
+    get:
+      security:
+      - BasicAuth: []
+      summary: Download a document file that belongs to an account.
+      tags:
+      - Documents
+      description: 'This endpoint allows you to download a document identified by the document_id passed in the header. The returned document is in PDF format.
+
+
+        The operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.
+
+        '
+      responses:
+        '301':
+          description: 'Redirect to the pre-signed download link for the document PDF file.
+
+            '
+        '404':
+          description: The document is not found.
+      operationId: downloadDocFromAccount
+  /v1/documents/{document_id}:
+    parameters:
+    - $ref: '#/components/parameters/DocumentID'
+    get:
+      security:
+      - BasicAuth: []
+      summary: Download a document file directly
+      tags:
+      - Documents
+      description: 'The operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.
+
+        '
+      responses:
+        '301':
+          description: 'Redirect to the pre-signed download link for the document PDF file.
+
+            '
+        '404':
+          description: The document was not found.
+      operationId: downloadDocumentById
+components:
+  parameters:
+    DocumentID:
+      name: document_id
+      in: path
+      required: true
+      description: Document identifier.
+      schema:
+        type: string
+        format: uuid
+    AccountID:
+      name: account_id
+      in: path
+      required: true
+      description: Account identifier.
+      schema:
+        type: string
+        format: uuid
+    DocumentType:
+      name: type
+      in: query
+      required: false
+      description: See DocumentType model for reference and explanation of values
+      schema:
+        example: identity_verification
+        type: string
+        enum:
+        - identity_verification
+        - address_verification
+        - date_of_birth_verification
+        - tax_id_verification
+        - account_approval_letter
+        - cip_result
+  schemas:
+    Document:
+      type: array
+      description: ''
+      minItems: 1
+      uniqueItems: true
+      x-examples:
+        example:
+        - document_id: b792e8ae-2cb4-4209-85b9-32be4c2fcdd6
+          document_type: account_statement
+          document_date: '2019-08-24'
+      items:
+        type: object
+        properties:
+          document_id:
+            type: string
+            minLength: 1
+            format: uuid
+          document_type:
+            $ref: '#/components/schemas/DocumentType'
+          document_date:
+            type: string
+            minLength: 1
+            format: date-time
+        required:
+        - document_id
+        - document_type
+        - document_date
+    DocumentType:
+      type: string
+      enum:
+      - identity_verification
+      - address_verification
+      - date_of_birth_verification
+      - tax_id_verification
+      - account_approval_letter
+      - cip_result
+      description: "- identity_verification:\n  identity verification document\n\n- address_verification:\n  address verification document\n\n- date_of_birth_verification:\n  date of birth verification document\n\n- tax_id_verification:\n  tax ID verification document\n\n- account_approval_letter:\n  407 approval letter\n\n- cip_result:\n  initial CIP result\n"
+      example: identity_verification
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

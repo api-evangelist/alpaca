@@ -1,0 +1,287 @@
+openapi: 3.0.0
+info:
+  title: Broker Account Activities Watchlist API
+  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
+  version: 1.0.0
+  contact:
+    name: Alpaca Support
+    email: support@alpaca.markets
+    url: https://alpaca.markets/support
+  termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
+servers:
+- url: https://broker-api.sandbox.alpaca.markets
+  description: Sandbox endpoint
+- url: https://broker-api.alpaca.markets
+  description: Production endpoint
+security:
+- BasicAuth: []
+tags:
+- name: Watchlist
+paths:
+  /v1/trading/accounts/{account_id}/watchlists:
+    parameters:
+    - schema:
+        type: string
+        format: uuid
+      name: account_id
+      in: path
+      required: true
+      description: Unique identifier of an account.
+    get:
+      summary: Retrieve all watchlists
+      tags:
+      - Watchlist
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Watchlist'
+      operationId: getAllWatchlistsForAccount
+      description: Fetch a list of all watchlists currently in an account.
+    post:
+      summary: Create a new watchlist
+      tags:
+      - Watchlist
+      operationId: createWatchlistForAccount
+      description: Returns the watchlist object
+      responses:
+        '200':
+          description: Newly created watchlist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWatchlistRequest'
+  /v1/accounts/{account_id}/watchlists/{watchlist_id}:
+    parameters:
+    - schema:
+        type: string
+        format: uuid
+      name: account_id
+      in: path
+      required: true
+      description: Unique identifier of an account
+    - schema:
+        type: string
+        format: uuid
+      name: watchlist_id
+      in: path
+      required: true
+      description: Unique identifier of a watchlist
+    get:
+      summary: Manage watchlists
+      tags:
+      - Watchlist
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      operationId: getWatchlistForAccountById
+      description: Fetch a single watchlist by identifier.
+    put:
+      summary: Update an existing watchlist
+      tags:
+      - Watchlist
+      operationId: replaceWatchlistForAccountById
+      responses:
+        '200':
+          description: Updated watchlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watchlist'
+      description: Replace entirely the set of securities contained in the watchlist while optionally renaming it. Destructive operation.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWatchlistRequest'
+    delete:
+      summary: Remove a watchlist
+      tags:
+      - Watchlist
+      operationId: deleteWatchlistFromAccountById
+      responses:
+        '200':
+          description: Watchlist deleted.
+      description: Irrevocably delete a watchlist.
+components:
+  schemas:
+    Asset:
+      title: Asset
+      type: object
+      description: Assets are sorted by asset class, exchange and symbol. Some assets are not tradable with Alpaca. These assets will be marked with the flag tradable=false
+      properties:
+        id:
+          type: string
+          example: 904837e3-3b76-47ec-b432-046db621571b
+          format: uuid
+          description: Asset ID
+        class:
+          $ref: '#/components/schemas/AssetClass'
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        symbol:
+          type: string
+          example: AAPL
+          description: The symbol of the asset
+        name:
+          type: string
+          example: Apple Inc. Common Stock
+          description: The official name of the asset
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          description: active or inactive
+          example: active
+        tradable:
+          type: boolean
+          example: true
+          description: Asset is tradable on Alpaca or not
+        marginable:
+          type: boolean
+          example: true
+          description: Asset is marginable or not
+        shortable:
+          type: boolean
+          example: true
+          description: Asset is shortable or not
+        easy_to_borrow:
+          type: boolean
+          example: true
+          description: Asset is easy-to-borrow or not (filtering for easy_to_borrow = True is the best way to check whether the name is currently available to short at Alpaca).
+        fractionable:
+          type: boolean
+          example: true
+          description: Asset is fractionable or not
+        last_close_pct_change:
+          type: string
+          format: decimal
+          description: 'Percent change for the trading day as of last market closure. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
+        last_price:
+          type: string
+          format: decimal
+          description: 'Most recent available price for this asset on the market. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
+        last_close:
+          type: string
+          description: 'Last price of the asset upon market closure on the most recent trading day. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
+          format: decimal
+      required:
+      - id
+      - class
+      - symbol
+    Watchlist:
+      title: Watchlist
+      type: object
+      description: Represents a set of securities observed by a user.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: 'Unique identifier of the watchlist itself.
+
+            '
+        account_id:
+          type: string
+          format: uuid
+          description: 'Unique identifier of the account that owns this watchlist.
+
+            '
+        created_at:
+          type: string
+          format: date-time
+          description: When watchlist was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When watchlist was last updated
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+          description: User friendly Name of watchlist
+        assets:
+          type: array
+          description: The contents of the watchlist, in the order as registered
+          items:
+            $ref: '#/components/schemas/Asset'
+      required:
+      - id
+      - name
+    Exchange:
+      type: string
+      title: Exchange
+      example: NASDAQ
+      description: 'Represents the exchange where an asset is traded.
+
+
+        For Stocks:
+
+        - AMEX
+
+        - ARCA
+
+        - BATS
+
+        - NYSE
+
+        - NASDAQ
+
+        - NYSEARCA
+
+        - OTC
+
+
+        For Crypto:
+
+        - ERSX
+
+        - FTXU'
+      enum:
+      - AMEX
+      - ARCA
+      - BATS
+      - NYSE
+      - NASDAQ
+      - NYSEARCA
+      - OTC
+      - ERSX
+      - FTXU
+    AssetClass:
+      type: string
+      enum:
+      - us_equity
+      - crypto
+    CreateWatchlistRequest:
+      title: CreateWatchlistRequest
+      type: object
+      description: This model represents the fields you can specify when Creating or Updating/Replacing a Watchlist
+      properties:
+        name:
+          type: string
+          description: The watchlist name
+        symbols:
+          type: array
+          description: The new list of symbol names to watch
+          items:
+            type: string
+            example: '["AAPL", "TSLA"]'
+      required:
+      - name
+      - symbols
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
