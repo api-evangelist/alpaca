@@ -444,6 +444,8 @@ apis:
   - type: Documentation
     url: https://docs.alpaca.markets/docs/about-broker-api
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/alpaca/overview
   - type: AgenticAccess
     url: agentic-access/alpaca-agentic-access.yml
   - type: DomainSecurity
