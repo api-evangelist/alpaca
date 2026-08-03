@@ -1,0 +1,194 @@
+{
+  "info": {
+    "_postman_id": "a626dc6a-b40d-47e7-be81-300ddd9e6deb",
+    "name": "Broker Account Activities Portfolio History API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:39.000Z",
+    "updatedAt": "2026-07-28T00:30:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a626dc6a-b40d-47e7-be81-300ddd9e6deb"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "account",
+          "item": [
+            {
+              "name": "portfolio",
+              "item": [
+                {
+                  "name": "history",
+                  "item": [
+                    {
+                      "name": "Account Portfolio History",
+                      "id": "3cf240c8-96f7-4430-af33-0bace7a264f4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/account/portfolio/history?period=<string>&timeframe=<string>&date_end=<date>&extended_hours=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "account",
+                            "portfolio",
+                            "history"
+                          ],
+                          "query": [
+                            {
+                              "description": "The duration of the data in <number> + <unit>, such as 1D, where <unit> can be D for day, W for week, M for month and A for year. Defaults to 1M.",
+                              "key": "period",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D.",
+                              "key": "timeframe",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The date the data is returned up to, in \u201cYYYY-MM-DD\u201d format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)",
+                              "key": "date_end",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "If true, include extended hours in the result. This is effective only for timeframe less than 1D.",
+                              "key": "extended_hours",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Returns timeseries data about equity and profit/loss (P/L) of the account in requested timespan."
+                      },
+                      "response": [
+                        {
+                          "id": "3a776f05-8eba-4574-a277-9e7ceef3575f",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/account/portfolio/history?period=<string>&timeframe=<string>&date_end=<date>&extended_hours=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "account",
+                                "portfolio",
+                                "history"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The duration of the data in <number> + <unit>, such as 1D, where <unit> can be D for day, W for week, M for month and A for year. Defaults to 1M.",
+                                  "key": "period",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D.",
+                                  "key": "timeframe",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The date the data is returned up to, in \u201cYYYY-MM-DD\u201d format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)",
+                                  "key": "date_end",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "description": "If true, include extended hours in the result. This is effective only for timeframe less than 1D.",
+                                  "key": "extended_hours",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"timestamp\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"equity\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"profit_loss\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"profit_loss_pct\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"base_value\": \"<number>\",\n  \"timeframe\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:40.000Z",
+                          "updatedAt": "2026-07-28T00:30:40.000Z",
+                          "uid": "35240-3a776f05-8eba-4574-a277-9e7ceef3575f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:39.000Z",
+                      "updatedAt": "2026-07-28T00:30:39.000Z",
+                      "uid": "35240-3cf240c8-96f7-4430-af33-0bace7a264f4"
+                    }
+                  ],
+                  "id": "2dd96b25-91f8-43d2-bbc0-7cc9f6dff155",
+                  "createdAt": "2026-07-28T00:30:39.000Z",
+                  "updatedAt": "2026-07-28T00:30:39.000Z",
+                  "uid": "35240-2dd96b25-91f8-43d2-bbc0-7cc9f6dff155"
+                }
+              ],
+              "id": "78225f8e-5390-4071-8ce4-246763ce7f9f",
+              "createdAt": "2026-07-28T00:30:39.000Z",
+              "updatedAt": "2026-07-28T00:30:39.000Z",
+              "uid": "35240-78225f8e-5390-4071-8ce4-246763ce7f9f"
+            }
+          ],
+          "id": "527e8d38-f0b0-4bd3-8c1d-3b5318d510af",
+          "createdAt": "2026-07-28T00:30:39.000Z",
+          "updatedAt": "2026-07-28T00:30:39.000Z",
+          "uid": "35240-527e8d38-f0b0-4bd3-8c1d-3b5318d510af"
+        }
+      ],
+      "id": "9a7f3419-97f7-457c-ac43-732ae51bb763",
+      "createdAt": "2026-07-28T00:30:39.000Z",
+      "updatedAt": "2026-07-28T00:30:39.000Z",
+      "uid": "35240-9a7f3419-97f7-457c-ac43-732ae51bb763"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

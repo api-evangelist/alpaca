@@ -1,0 +1,291 @@
+{
+  "info": {
+    "_postman_id": "f5922b85-6c21-4992-b137-23359f89ed7f",
+    "name": "Broker Account Activities Assets API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:18.000Z",
+    "updatedAt": "2026-07-28T00:30:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f5922b85-6c21-4992-b137-23359f89ed7f"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "assets",
+          "item": [
+            {
+              "name": "{symbol_or_asset_id}",
+              "item": [
+                {
+                  "name": "Retrieve an asset by UUID",
+                  "id": "dd5ac435-8fcd-48f5-bbef-3af213c838f4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/assets/:symbol_or_asset_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "assets",
+                        ":symbol_or_asset_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "959ee32e-b667-40fd-bc69-298d8627a47d",
+                          "key": "symbol_or_asset_id",
+                          "value": "<string>",
+                          "description": "(Required) you can use either the asset's Id or the symbol to search"
+                        }
+                      ]
+                    },
+                    "description": "Returns the requested asset, if found"
+                  },
+                  "response": [
+                    {
+                      "id": "7d942ace-c8c9-4f5d-b07d-9f3996081d94",
+                      "name": "Returns asset",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/assets/:symbol_or_asset_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "assets",
+                            ":symbol_or_asset_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "symbol_or_asset_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"us_equity\",\n  \"symbol\": \"<string>\",\n  \"exchange\": \"AMEX\",\n  \"name\": \"<string>\",\n  \"status\": \"inactive\",\n  \"tradable\": \"<boolean>\",\n  \"marginable\": \"<boolean>\",\n  \"shortable\": \"<boolean>\",\n  \"easy_to_borrow\": \"<boolean>\",\n  \"fractionable\": \"<boolean>\",\n  \"last_close_pct_change\": \"<string>\",\n  \"last_price\": \"<string>\",\n  \"last_close\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T00:30:18.000Z",
+                      "updatedAt": "2026-07-28T00:30:18.000Z",
+                      "uid": "35240-7d942ace-c8c9-4f5d-b07d-9f3996081d94"
+                    },
+                    {
+                      "id": "fd5d6b5b-7bd5-411f-8aad-48fe992a3a98",
+                      "name": "Asset not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/assets/:symbol_or_asset_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "assets",
+                            ":symbol_or_asset_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "symbol_or_asset_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T00:30:18.000Z",
+                      "updatedAt": "2026-07-28T00:30:18.000Z",
+                      "uid": "35240-fd5d6b5b-7bd5-411f-8aad-48fe992a3a98"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:18.000Z",
+                  "updatedAt": "2026-07-28T00:30:18.000Z",
+                  "uid": "35240-dd5ac435-8fcd-48f5-bbef-3af213c838f4"
+                }
+              ],
+              "id": "68769e50-5ab8-47da-b2b7-9290c17b0e29",
+              "createdAt": "2026-07-28T00:30:18.000Z",
+              "updatedAt": "2026-07-28T00:30:18.000Z",
+              "uid": "35240-68769e50-5ab8-47da-b2b7-9290c17b0e29"
+            },
+            {
+              "name": "Retrieve all assets",
+              "id": "cd35b7cc-7047-4336-82c5-000700798cbc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/assets?status=all&asset_class=us_equity",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "assets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Asset status to filter by, will default to `all`",
+                      "key": "status",
+                      "value": "all"
+                    },
+                    {
+                      "description": "Asset class to filter by, `us_equity` or `crypto`. Defaults to `us_equity`",
+                      "key": "asset_class",
+                      "value": "us_equity"
+                    }
+                  ]
+                },
+                "description": "Returns all assets"
+              },
+              "response": [
+                {
+                  "id": "eb0f2b36-920f-40e6-ab80-e451128f1e0f",
+                  "name": "An array of asset objects.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/assets?status=all&asset_class=us_equity",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "assets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Asset status to filter by, will default to `all`",
+                          "key": "status",
+                          "value": "all"
+                        },
+                        {
+                          "description": "Asset class to filter by, `us_equity` or `crypto`. Defaults to `us_equity`",
+                          "key": "asset_class",
+                          "value": "us_equity"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"class\": \"crypto\",\n    \"symbol\": \"<string>\",\n    \"exchange\": \"NYSEARCA\",\n    \"name\": \"<string>\",\n    \"status\": \"active\",\n    \"tradable\": \"<boolean>\",\n    \"marginable\": \"<boolean>\",\n    \"shortable\": \"<boolean>\",\n    \"easy_to_borrow\": \"<boolean>\",\n    \"fractionable\": \"<boolean>\",\n    \"last_close_pct_change\": \"<string>\",\n    \"last_price\": \"<string>\",\n    \"last_close\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"class\": \"crypto\",\n    \"symbol\": \"<string>\",\n    \"exchange\": \"NYSEARCA\",\n    \"name\": \"<string>\",\n    \"status\": \"inactive\",\n    \"tradable\": \"<boolean>\",\n    \"marginable\": \"<boolean>\",\n    \"shortable\": \"<boolean>\",\n    \"easy_to_borrow\": \"<boolean>\",\n    \"fractionable\": \"<boolean>\",\n    \"last_close_pct_change\": \"<string>\",\n    \"last_price\": \"<string>\",\n    \"last_close\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T00:30:18.000Z",
+                  "updatedAt": "2026-07-28T00:30:18.000Z",
+                  "uid": "35240-eb0f2b36-920f-40e6-ab80-e451128f1e0f"
+                }
+              ],
+              "createdAt": "2026-07-28T00:30:18.000Z",
+              "updatedAt": "2026-07-28T00:30:18.000Z",
+              "uid": "35240-cd35b7cc-7047-4336-82c5-000700798cbc"
+            }
+          ],
+          "id": "fc69aafb-cfc0-4189-8e49-a721563d8080",
+          "createdAt": "2026-07-28T00:30:18.000Z",
+          "updatedAt": "2026-07-28T00:30:18.000Z",
+          "uid": "35240-fc69aafb-cfc0-4189-8e49-a721563d8080"
+        }
+      ],
+      "id": "58852157-3861-4681-b351-d5bdf0130df3",
+      "createdAt": "2026-07-28T00:30:18.000Z",
+      "updatedAt": "2026-07-28T00:30:18.000Z",
+      "uid": "35240-58852157-3861-4681-b351-d5bdf0130df3"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

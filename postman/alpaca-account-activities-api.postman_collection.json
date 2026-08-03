@@ -1,0 +1,378 @@
+{
+  "info": {
+    "_postman_id": "1d46e1a0-1452-4ee6-97f0-0a76e02f3c42",
+    "name": "Broker Account Activities API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:29:33.000Z",
+    "updatedAt": "2026-07-28T00:29:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1d46e1a0-1452-4ee6-97f0-0a76e02f3c42"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "account",
+          "item": [
+            {
+              "name": "activities",
+              "item": [
+                {
+                  "name": "{activity_type}",
+                  "item": [
+                    {
+                      "name": "Get account activities of one type",
+                      "id": "24eb0d71-f52f-4635-bd71-3811f92fd086",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/account/activities/:activity_type?date=<dateTime>&until=<dateTime>&after=<dateTime>&direction=asc&page_size=<integer>&page_token=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "account",
+                            "activities",
+                            ":activity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "The date for which you want to see activities.",
+                              "key": "date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)",
+                              "key": "after",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "asc or desc (default desc if unspecified.)",
+                              "key": "direction",
+                              "value": "asc"
+                            },
+                            {
+                              "description": "The maximum number of entries to return in the response. (See the section on paging above.)",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The ID of the end of your current page of results. ",
+                              "key": "page_token",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a7b5dc44-89e4-4035-b698-094feb374a28",
+                              "key": "activity_type",
+                              "value": "<string>",
+                              "description": "(Required) The activity type you want to view entries for. A list of valid activity types can be found at the bottom of this page."
+                            }
+                          ]
+                        },
+                        "description": "Returns account activity entries for a specific type of activity."
+                      },
+                      "response": [
+                        {
+                          "id": "f0e3d4c0-69e4-4c0b-918b-09bea533301d",
+                          "name": "returns an array of Account activities",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/account/activities/:activity_type?date=<dateTime>&until=<dateTime>&after=<dateTime>&direction=asc&page_size=<integer>&page_token=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "account",
+                                "activities",
+                                ":activity_type"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The date for which you want to see activities.",
+                                  "key": "date",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)",
+                                  "key": "after",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "asc or desc (default desc if unspecified.)",
+                                  "key": "direction",
+                                  "value": "asc"
+                                },
+                                {
+                                  "description": "The maximum number of entries to return in the response. (See the section on paging above.)",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The ID of the end of your current page of results. ",
+                                  "key": "page_token",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "activity_type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"activity_type\": \"DIVROC\",\n    \"id\": \"<string>\",\n    \"cum_qty\": \"<string>\",\n    \"leaves_qty\": \"<string>\",\n    \"price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"side\": \"<string>\",\n    \"symbol\": \"<string>\",\n    \"transaction_time\": \"<dateTime>\",\n    \"order_id\": \"<uuid>\",\n    \"type\": \"partial_fill\",\n    \"order_status\": \"expired\"\n  },\n  {\n    \"activity_type\": \"JNLC\",\n    \"id\": \"<string>\",\n    \"cum_qty\": \"<string>\",\n    \"leaves_qty\": \"<string>\",\n    \"price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"side\": \"<string>\",\n    \"symbol\": \"<string>\",\n    \"transaction_time\": \"<dateTime>\",\n    \"order_id\": \"<uuid>\",\n    \"type\": \"fill\",\n    \"order_status\": \"stopped\"\n  }\n]",
+                          "createdAt": "2026-07-28T00:29:34.000Z",
+                          "updatedAt": "2026-07-28T00:29:34.000Z",
+                          "uid": "35240-f0e3d4c0-69e4-4c0b-918b-09bea533301d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:29:34.000Z",
+                      "updatedAt": "2026-07-28T00:29:34.000Z",
+                      "uid": "35240-24eb0d71-f52f-4635-bd71-3811f92fd086"
+                    }
+                  ],
+                  "id": "a5cd7327-7b69-4925-905d-d3e0b2169474",
+                  "createdAt": "2026-07-28T00:29:34.000Z",
+                  "updatedAt": "2026-07-28T00:29:34.000Z",
+                  "uid": "35240-a5cd7327-7b69-4925-905d-d3e0b2169474"
+                },
+                {
+                  "name": "Get account activities of one type",
+                  "id": "e6337521-92b3-4580-ae61-ffcac7f4fef8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/account/activities?date=<dateTime>&until=<dateTime>&after=<dateTime>&direction=asc&page_size=<integer>&page_token=<string>&activity_types=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "account",
+                        "activities"
+                      ],
+                      "query": [
+                        {
+                          "description": "The date for which you want to see activities.",
+                          "key": "date",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)",
+                          "key": "until",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)",
+                          "key": "after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "asc or desc (default desc if unspecified.)",
+                          "key": "direction",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "The maximum number of entries to return in the response. (See the section on paging above.)",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The ID of the end of your current page of results. ",
+                          "key": "page_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of the activity types to include in the response. If unspecified, activities of all types will be returned. See ActivityType model for values",
+                          "key": "activity_types",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Returns account activity entries for many types of activities."
+                  },
+                  "response": [
+                    {
+                      "id": "0cba12c5-8ec5-43b1-943f-e16ba77c9158",
+                      "name": "returns an array of Account activities",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/account/activities?date=<dateTime>&until=<dateTime>&after=<dateTime>&direction=asc&page_size=<integer>&page_token=<string>&activity_types=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "account",
+                            "activities"
+                          ],
+                          "query": [
+                            {
+                              "description": "The date for which you want to see activities.",
+                              "key": "date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)",
+                              "key": "after",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "asc or desc (default desc if unspecified.)",
+                              "key": "direction",
+                              "value": "asc"
+                            },
+                            {
+                              "description": "The maximum number of entries to return in the response. (See the section on paging above.)",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The ID of the end of your current page of results. ",
+                              "key": "page_token",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "A comma-separated list of the activity types to include in the response. If unspecified, activities of all types will be returned. See ActivityType model for values",
+                              "key": "activity_types",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"activity_type\": \"DIVROC\",\n    \"id\": \"<string>\",\n    \"cum_qty\": \"<string>\",\n    \"leaves_qty\": \"<string>\",\n    \"price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"side\": \"<string>\",\n    \"symbol\": \"<string>\",\n    \"transaction_time\": \"<dateTime>\",\n    \"order_id\": \"<uuid>\",\n    \"type\": \"partial_fill\",\n    \"order_status\": \"expired\"\n  },\n  {\n    \"activity_type\": \"JNLC\",\n    \"id\": \"<string>\",\n    \"cum_qty\": \"<string>\",\n    \"leaves_qty\": \"<string>\",\n    \"price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"side\": \"<string>\",\n    \"symbol\": \"<string>\",\n    \"transaction_time\": \"<dateTime>\",\n    \"order_id\": \"<uuid>\",\n    \"type\": \"fill\",\n    \"order_status\": \"stopped\"\n  }\n]",
+                      "createdAt": "2026-07-28T00:29:34.000Z",
+                      "updatedAt": "2026-07-28T00:29:34.000Z",
+                      "uid": "35240-0cba12c5-8ec5-43b1-943f-e16ba77c9158"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:29:34.000Z",
+                  "updatedAt": "2026-07-28T00:29:34.000Z",
+                  "uid": "35240-e6337521-92b3-4580-ae61-ffcac7f4fef8"
+                }
+              ],
+              "id": "4faa1ff1-db5d-43de-bdc8-1f6beaf99d7d",
+              "createdAt": "2026-07-28T00:29:34.000Z",
+              "updatedAt": "2026-07-28T00:29:34.000Z",
+              "uid": "35240-4faa1ff1-db5d-43de-bdc8-1f6beaf99d7d"
+            }
+          ],
+          "id": "a2aa5193-9b31-4912-97e1-7f8885f73472",
+          "createdAt": "2026-07-28T00:29:34.000Z",
+          "updatedAt": "2026-07-28T00:29:34.000Z",
+          "uid": "35240-a2aa5193-9b31-4912-97e1-7f8885f73472"
+        }
+      ],
+      "id": "8ace6657-2a2c-45aa-9941-736ec31985d2",
+      "createdAt": "2026-07-28T00:29:34.000Z",
+      "updatedAt": "2026-07-28T00:29:34.000Z",
+      "uid": "35240-8ace6657-2a2c-45aa-9941-736ec31985d2"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

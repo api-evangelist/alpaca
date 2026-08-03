@@ -1,0 +1,279 @@
+{
+  "info": {
+    "_postman_id": "30728a6d-85c2-4290-a376-c0a39cc0ae97",
+    "name": "Broker Account Activities Corporate Actions API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:21.000Z",
+    "updatedAt": "2026-07-28T00:30:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-30728a6d-85c2-4290-a376-c0a39cc0ae97"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "corporate_actions",
+          "item": [
+            {
+              "name": "announcements",
+              "item": [
+                {
+                  "name": "Retrieving Announcements",
+                  "id": "6b9ec985-a63a-4b1b-b9a8-a9e27ead3a1e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/corporate_actions/announcements?ca_types=<string>&since=<date>&until=<date>&symbol=<string>&cusip=<string>&date_type=payable_date",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "corporate_actions",
+                        "announcements"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A comma-delimited list of CorporateActionType values",
+                          "key": "ca_types",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days.",
+                          "key": "since",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "(Required) The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days.",
+                          "key": "until",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "The symbol of the company initiating the announcement.",
+                          "key": "symbol",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The CUSIP of the company initiating the announcement.",
+                          "key": "cusip",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "An emum of possible ways to use the `since` and `until` parameters to search by.\n\nthe types are:\n\n- **declaration_date**: The date of the preliminary announcement details or the date that any subsequent term updates took place.\n- **ex_date**: The date on which any security purchasing activity will not result in a corporate action entitlement. Any selling activity that takes place on or after this date will result in a corporate action entitlement.\n- **record_date**: The date the company checks its records to determine who is shareholder in order to allocate entitlements.\n- **payable_date**: The date that the stock and cash positions will update according to the account positions as of the record date.",
+                          "key": "date_type",
+                          "value": "payable_date"
+                        }
+                      ]
+                    },
+                    "description": "This enables searching for an array of corporate action announcements based on criteria."
+                  },
+                  "response": [
+                    {
+                      "id": "4c03fd31-8cd7-4cdc-81fa-04d5a3867f0a",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/corporate_actions/announcements?ca_types=<string>&since=<date>&until=<date>&symbol=<string>&cusip=<string>&date_type=payable_date",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "corporate_actions",
+                            "announcements"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) A comma-delimited list of CorporateActionType values",
+                              "key": "ca_types",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days.",
+                              "key": "since",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "(Required) The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days.",
+                              "key": "until",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "The symbol of the company initiating the announcement.",
+                              "key": "symbol",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The CUSIP of the company initiating the announcement.",
+                              "key": "cusip",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An emum of possible ways to use the `since` and `until` parameters to search by.\n\nthe types are:\n\n- **declaration_date**: The date of the preliminary announcement details or the date that any subsequent term updates took place.\n- **ex_date**: The date on which any security purchasing activity will not result in a corporate action entitlement. Any selling activity that takes place on or after this date will result in a corporate action entitlement.\n- **record_date**: The date the company checks its records to determine who is shareholder in order to allocate entitlements.\n- **payable_date**: The date that the stock and cash positions will update according to the account positions as of the record date.",
+                              "key": "date_type",
+                              "value": "payable_date"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"corporate_action_id\": \"<string>\",\n    \"ca_type\": \"spinoff\",\n    \"ca_sub_type\": \"reverse_split\",\n    \"initiating_symbol\": \"<string>\",\n    \"initiating_original_cusip\": \"<string>\",\n    \"target_symbol\": \"<string>\",\n    \"target_original_cusip\": \"<string>\",\n    \"declaration_date\": \"<string>\",\n    \"ex_date\": \"<string>\",\n    \"record_date\": \"<string>\",\n    \"payable_date\": \"<string>\",\n    \"cash\": \"<string>\",\n    \"old_rate\": \"<string>\",\n    \"new_rate\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"corporate_action_id\": \"<string>\",\n    \"ca_type\": \"spinoff\",\n    \"ca_sub_type\": \"recapitalization\",\n    \"initiating_symbol\": \"<string>\",\n    \"initiating_original_cusip\": \"<string>\",\n    \"target_symbol\": \"<string>\",\n    \"target_original_cusip\": \"<string>\",\n    \"declaration_date\": \"<string>\",\n    \"ex_date\": \"<string>\",\n    \"record_date\": \"<string>\",\n    \"payable_date\": \"<string>\",\n    \"cash\": \"<string>\",\n    \"old_rate\": \"<string>\",\n    \"new_rate\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T00:30:21.000Z",
+                      "updatedAt": "2026-07-28T00:30:21.000Z",
+                      "uid": "35240-4c03fd31-8cd7-4cdc-81fa-04d5a3867f0a"
+                    },
+                    {
+                      "id": "d2b34d38-3c39-42c7-a0e4-8c4cab8a26f8",
+                      "name": "Malformed input.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/corporate_actions/announcements?ca_types=<string>&since=<date>&until=<date>&symbol=<string>&cusip=<string>&date_type=payable_date",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "corporate_actions",
+                            "announcements"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) A comma-delimited list of CorporateActionType values",
+                              "key": "ca_types",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days.",
+                              "key": "since",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "(Required) The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days.",
+                              "key": "until",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "The symbol of the company initiating the announcement.",
+                              "key": "symbol",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The CUSIP of the company initiating the announcement.",
+                              "key": "cusip",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An emum of possible ways to use the `since` and `until` parameters to search by.\n\nthe types are:\n\n- **declaration_date**: The date of the preliminary announcement details or the date that any subsequent term updates took place.\n- **ex_date**: The date on which any security purchasing activity will not result in a corporate action entitlement. Any selling activity that takes place on or after this date will result in a corporate action entitlement.\n- **record_date**: The date the company checks its records to determine who is shareholder in order to allocate entitlements.\n- **payable_date**: The date that the stock and cash positions will update according to the account positions as of the record date.",
+                              "key": "date_type",
+                              "value": "payable_date"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T00:30:21.000Z",
+                      "updatedAt": "2026-07-28T00:30:21.000Z",
+                      "uid": "35240-d2b34d38-3c39-42c7-a0e4-8c4cab8a26f8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:21.000Z",
+                  "updatedAt": "2026-07-28T00:30:21.000Z",
+                  "uid": "35240-6b9ec985-a63a-4b1b-b9a8-a9e27ead3a1e"
+                }
+              ],
+              "id": "2495fde1-645f-4893-8f94-28f067b30c86",
+              "createdAt": "2026-07-28T00:30:21.000Z",
+              "updatedAt": "2026-07-28T00:30:21.000Z",
+              "uid": "35240-2495fde1-645f-4893-8f94-28f067b30c86"
+            }
+          ],
+          "id": "19f0f009-1434-4bab-b99f-3faf5cfb27b2",
+          "createdAt": "2026-07-28T00:30:21.000Z",
+          "updatedAt": "2026-07-28T00:30:21.000Z",
+          "uid": "35240-19f0f009-1434-4bab-b99f-3faf5cfb27b2"
+        }
+      ],
+      "id": "eeee9446-cee7-4b54-9b46-9e4cab779b2f",
+      "createdAt": "2026-07-28T00:30:21.000Z",
+      "updatedAt": "2026-07-28T00:30:21.000Z",
+      "uid": "35240-eeee9446-cee7-4b54-9b46-9e4cab779b2f"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

@@ -1,0 +1,655 @@
+{
+  "info": {
+    "_postman_id": "f72d6182-36ab-4d87-bf22-52209c2cfe0d",
+    "name": "Broker Account Activities Watchlist API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:43.000Z",
+    "updatedAt": "2026-07-28T00:30:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f72d6182-36ab-4d87-bf22-52209c2cfe0d"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "trading",
+          "item": [
+            {
+              "name": "accounts",
+              "item": [
+                {
+                  "name": "{account_id}",
+                  "item": [
+                    {
+                      "name": "watchlists",
+                      "item": [
+                        {
+                          "name": "Retrieve all watchlists",
+                          "id": "52abdcfb-2d9b-42c3-9641-4ea889bb8282",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/watchlists",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "trading",
+                                "accounts",
+                                ":account_id",
+                                "watchlists"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "fe57c66b-1747-4715-aaec-edc581b04a7a",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of an account."
+                                }
+                              ]
+                            },
+                            "description": "Fetch a list of all watchlists currently in an account."
+                          },
+                          "response": [
+                            {
+                              "id": "7b84901d-a595-4e4d-b179-af919744dd94",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/watchlists",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "watchlists"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"9P\",\n    \"account_id\": \"<uuid>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"assets\": [\n      {\n        \"id\": \"<uuid>\",\n        \"class\": \"crypto\",\n        \"symbol\": \"<string>\",\n        \"exchange\": \"ERSX\",\n        \"name\": \"<string>\",\n        \"status\": \"active\",\n        \"tradable\": \"<boolean>\",\n        \"marginable\": \"<boolean>\",\n        \"shortable\": \"<boolean>\",\n        \"easy_to_borrow\": \"<boolean>\",\n        \"fractionable\": \"<boolean>\",\n        \"last_close_pct_change\": \"<string>\",\n        \"last_price\": \"<string>\",\n        \"last_close\": \"<string>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"class\": \"us_equity\",\n        \"symbol\": \"<string>\",\n        \"exchange\": \"ARCA\",\n        \"name\": \"<string>\",\n        \"status\": \"active\",\n        \"tradable\": \"<boolean>\",\n        \"marginable\": \"<boolean>\",\n        \"shortable\": \"<boolean>\",\n        \"easy_to_borrow\": \"<boolean>\",\n        \"fractionable\": \"<boolean>\",\n        \"last_close_pct_change\": \"<string>\",\n        \"last_price\": \"<string>\",\n        \"last_close\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"5Ix\",\n    \"account_id\": \"<uuid>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"assets\": [\n      {\n        \"id\": \"<uuid>\",\n        \"class\": \"us_equity\",\n        \"symbol\": \"<string>\",\n        \"exchange\": \"NASDAQ\",\n        \"name\": \"<string>\",\n        \"status\": \"active\",\n        \"tradable\": \"<boolean>\",\n        \"marginable\": \"<boolean>\",\n        \"shortable\": \"<boolean>\",\n        \"easy_to_borrow\": \"<boolean>\",\n        \"fractionable\": \"<boolean>\",\n        \"last_close_pct_change\": \"<string>\",\n        \"last_price\": \"<string>\",\n        \"last_close\": \"<string>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"class\": \"crypto\",\n        \"symbol\": \"<string>\",\n        \"exchange\": \"NASDAQ\",\n        \"name\": \"<string>\",\n        \"status\": \"active\",\n        \"tradable\": \"<boolean>\",\n        \"marginable\": \"<boolean>\",\n        \"shortable\": \"<boolean>\",\n        \"easy_to_borrow\": \"<boolean>\",\n        \"fractionable\": \"<boolean>\",\n        \"last_close_pct_change\": \"<string>\",\n        \"last_price\": \"<string>\",\n        \"last_close\": \"<string>\"\n      }\n    ]\n  }\n]",
+                              "createdAt": "2026-07-28T00:30:44.000Z",
+                              "updatedAt": "2026-07-28T00:30:44.000Z",
+                              "uid": "35240-7b84901d-a595-4e4d-b179-af919744dd94"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:44.000Z",
+                          "updatedAt": "2026-07-28T00:30:44.000Z",
+                          "uid": "35240-52abdcfb-2d9b-42c3-9641-4ea889bb8282"
+                        },
+                        {
+                          "name": "Create a new watchlist",
+                          "id": "a9a1dcf8-9fc5-438a-83c0-251aae4bb13c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/watchlists",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "trading",
+                                "accounts",
+                                ":account_id",
+                                "watchlists"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "bc862822-3d29-4591-8d49-2bf51c40c074",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of an account."
+                                }
+                              ]
+                            },
+                            "description": "Returns the watchlist object"
+                          },
+                          "response": [
+                            {
+                              "id": "3bc56ac7-c183-4acc-9433-4f64b8833a26",
+                              "name": "Newly created watchlist",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/watchlists",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "watchlists"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"bbUErNpkf\",\n  \"account_id\": \"<uuid>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"assets\": [\n    {\n      \"id\": \"<uuid>\",\n      \"class\": \"us_equity\",\n      \"symbol\": \"<string>\",\n      \"exchange\": \"OTC\",\n      \"name\": \"<string>\",\n      \"status\": \"active\",\n      \"tradable\": \"<boolean>\",\n      \"marginable\": \"<boolean>\",\n      \"shortable\": \"<boolean>\",\n      \"easy_to_borrow\": \"<boolean>\",\n      \"fractionable\": \"<boolean>\",\n      \"last_close_pct_change\": \"<string>\",\n      \"last_price\": \"<string>\",\n      \"last_close\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"class\": \"crypto\",\n      \"symbol\": \"<string>\",\n      \"exchange\": \"NASDAQ\",\n      \"name\": \"<string>\",\n      \"status\": \"inactive\",\n      \"tradable\": \"<boolean>\",\n      \"marginable\": \"<boolean>\",\n      \"shortable\": \"<boolean>\",\n      \"easy_to_borrow\": \"<boolean>\",\n      \"fractionable\": \"<boolean>\",\n      \"last_close_pct_change\": \"<string>\",\n      \"last_price\": \"<string>\",\n      \"last_close\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T00:30:44.000Z",
+                              "updatedAt": "2026-07-28T00:30:44.000Z",
+                              "uid": "35240-3bc56ac7-c183-4acc-9433-4f64b8833a26"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:44.000Z",
+                          "updatedAt": "2026-07-28T00:30:44.000Z",
+                          "uid": "35240-a9a1dcf8-9fc5-438a-83c0-251aae4bb13c"
+                        }
+                      ],
+                      "id": "25b91feb-1c06-4f49-a546-6a534429acad",
+                      "createdAt": "2026-07-28T00:30:44.000Z",
+                      "updatedAt": "2026-07-28T00:30:44.000Z",
+                      "uid": "35240-25b91feb-1c06-4f49-a546-6a534429acad"
+                    }
+                  ],
+                  "id": "669b9a11-5174-4d66-8cae-c60e75f4ad82",
+                  "createdAt": "2026-07-28T00:30:44.000Z",
+                  "updatedAt": "2026-07-28T00:30:44.000Z",
+                  "uid": "35240-669b9a11-5174-4d66-8cae-c60e75f4ad82"
+                }
+              ],
+              "id": "03e1d68c-7fe0-49d1-864f-f0990fd4b615",
+              "createdAt": "2026-07-28T00:30:44.000Z",
+              "updatedAt": "2026-07-28T00:30:44.000Z",
+              "uid": "35240-03e1d68c-7fe0-49d1-864f-f0990fd4b615"
+            }
+          ],
+          "id": "0aa49c5b-1f6e-4c63-bdbc-0110b5329ddd",
+          "createdAt": "2026-07-28T00:30:44.000Z",
+          "updatedAt": "2026-07-28T00:30:44.000Z",
+          "uid": "35240-0aa49c5b-1f6e-4c63-bdbc-0110b5329ddd"
+        },
+        {
+          "name": "accounts",
+          "item": [
+            {
+              "name": "{account_id}",
+              "item": [
+                {
+                  "name": "watchlists",
+                  "item": [
+                    {
+                      "name": "{watchlist_id}",
+                      "item": [
+                        {
+                          "name": "Manage watchlists",
+                          "id": "4d4fe785-a9e4-4a1b-b082-afcef517c4b3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/watchlists/:watchlist_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "watchlists",
+                                ":watchlist_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6c1ca100-32df-4d02-8b9d-fd23b2733bb3",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of an account"
+                                },
+                                {
+                                  "id": "f3f7a9bf-d08c-4ce4-a496-a7431f1dcafa",
+                                  "key": "watchlist_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of a watchlist"
+                                }
+                              ]
+                            },
+                            "description": "Fetch a single watchlist by identifier."
+                          },
+                          "response": [
+                            {
+                              "id": "a488e2f7-e7e9-43d9-9991-1781bcdbb1c1",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/watchlists/:watchlist_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "watchlists",
+                                    ":watchlist_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "watchlist_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"bbUErNpkf\",\n  \"account_id\": \"<uuid>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"assets\": [\n    {\n      \"id\": \"<uuid>\",\n      \"class\": \"us_equity\",\n      \"symbol\": \"<string>\",\n      \"exchange\": \"OTC\",\n      \"name\": \"<string>\",\n      \"status\": \"active\",\n      \"tradable\": \"<boolean>\",\n      \"marginable\": \"<boolean>\",\n      \"shortable\": \"<boolean>\",\n      \"easy_to_borrow\": \"<boolean>\",\n      \"fractionable\": \"<boolean>\",\n      \"last_close_pct_change\": \"<string>\",\n      \"last_price\": \"<string>\",\n      \"last_close\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"class\": \"crypto\",\n      \"symbol\": \"<string>\",\n      \"exchange\": \"NASDAQ\",\n      \"name\": \"<string>\",\n      \"status\": \"inactive\",\n      \"tradable\": \"<boolean>\",\n      \"marginable\": \"<boolean>\",\n      \"shortable\": \"<boolean>\",\n      \"easy_to_borrow\": \"<boolean>\",\n      \"fractionable\": \"<boolean>\",\n      \"last_close_pct_change\": \"<string>\",\n      \"last_price\": \"<string>\",\n      \"last_close\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T00:30:44.000Z",
+                              "updatedAt": "2026-07-28T00:30:44.000Z",
+                              "uid": "35240-a488e2f7-e7e9-43d9-9991-1781bcdbb1c1"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:44.000Z",
+                          "updatedAt": "2026-07-28T00:30:44.000Z",
+                          "uid": "35240-4d4fe785-a9e4-4a1b-b082-afcef517c4b3"
+                        },
+                        {
+                          "name": "Update an existing watchlist",
+                          "id": "2fdb323a-b05a-4922-b242-34140913d571",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/watchlists/:watchlist_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "watchlists",
+                                ":watchlist_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "8074f0fd-885d-4655-a9a7-cb8c742c73a2",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of an account"
+                                },
+                                {
+                                  "id": "3cbb6fcd-ddf9-4f31-ac9f-6ea01428fff3",
+                                  "key": "watchlist_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of a watchlist"
+                                }
+                              ]
+                            },
+                            "description": "Replace entirely the set of securities contained in the watchlist while optionally renaming it. Destructive operation."
+                          },
+                          "response": [
+                            {
+                              "id": "8eb8e0c1-8bbc-4c6a-a510-3e135604d92f",
+                              "name": "Updated watchlist.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/watchlists/:watchlist_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "watchlists",
+                                    ":watchlist_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "watchlist_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"bbUErNpkf\",\n  \"account_id\": \"<uuid>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"assets\": [\n    {\n      \"id\": \"<uuid>\",\n      \"class\": \"us_equity\",\n      \"symbol\": \"<string>\",\n      \"exchange\": \"OTC\",\n      \"name\": \"<string>\",\n      \"status\": \"active\",\n      \"tradable\": \"<boolean>\",\n      \"marginable\": \"<boolean>\",\n      \"shortable\": \"<boolean>\",\n      \"easy_to_borrow\": \"<boolean>\",\n      \"fractionable\": \"<boolean>\",\n      \"last_close_pct_change\": \"<string>\",\n      \"last_price\": \"<string>\",\n      \"last_close\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"class\": \"crypto\",\n      \"symbol\": \"<string>\",\n      \"exchange\": \"NASDAQ\",\n      \"name\": \"<string>\",\n      \"status\": \"inactive\",\n      \"tradable\": \"<boolean>\",\n      \"marginable\": \"<boolean>\",\n      \"shortable\": \"<boolean>\",\n      \"easy_to_borrow\": \"<boolean>\",\n      \"fractionable\": \"<boolean>\",\n      \"last_close_pct_change\": \"<string>\",\n      \"last_price\": \"<string>\",\n      \"last_close\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T00:30:44.000Z",
+                              "updatedAt": "2026-07-28T00:30:44.000Z",
+                              "uid": "35240-8eb8e0c1-8bbc-4c6a-a510-3e135604d92f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:44.000Z",
+                          "updatedAt": "2026-07-28T00:30:44.000Z",
+                          "uid": "35240-2fdb323a-b05a-4922-b242-34140913d571"
+                        },
+                        {
+                          "name": "Remove a watchlist",
+                          "id": "26ad7179-e387-4921-80e8-317197200a68",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/watchlists/:watchlist_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "watchlists",
+                                ":watchlist_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "11d87581-e35a-47a8-9507-cfd94bd8ea2d",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of an account"
+                                },
+                                {
+                                  "id": "3cbc749e-4d61-4f5c-8ab5-2366199bfaaf",
+                                  "key": "watchlist_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of a watchlist"
+                                }
+                              ]
+                            },
+                            "description": "Irrevocably delete a watchlist."
+                          },
+                          "response": [
+                            {
+                              "id": "2afe8f90-c46a-460d-b735-d688d45508bc",
+                              "name": "Watchlist deleted.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/watchlists/:watchlist_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "watchlists",
+                                    ":watchlist_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "watchlist_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T00:30:44.000Z",
+                              "updatedAt": "2026-07-28T00:30:44.000Z",
+                              "uid": "35240-2afe8f90-c46a-460d-b735-d688d45508bc"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:44.000Z",
+                          "updatedAt": "2026-07-28T00:30:44.000Z",
+                          "uid": "35240-26ad7179-e387-4921-80e8-317197200a68"
+                        }
+                      ],
+                      "id": "70c4fbb5-ddbc-4cf0-b1e7-b40d3672b947",
+                      "createdAt": "2026-07-28T00:30:44.000Z",
+                      "updatedAt": "2026-07-28T00:30:44.000Z",
+                      "uid": "35240-70c4fbb5-ddbc-4cf0-b1e7-b40d3672b947"
+                    }
+                  ],
+                  "id": "e92832aa-4528-4ae7-bf4e-ec0da6bde547",
+                  "createdAt": "2026-07-28T00:30:44.000Z",
+                  "updatedAt": "2026-07-28T00:30:44.000Z",
+                  "uid": "35240-e92832aa-4528-4ae7-bf4e-ec0da6bde547"
+                }
+              ],
+              "id": "b525811a-2ad1-4e4a-9cca-d2f80763ccf9",
+              "createdAt": "2026-07-28T00:30:44.000Z",
+              "updatedAt": "2026-07-28T00:30:44.000Z",
+              "uid": "35240-b525811a-2ad1-4e4a-9cca-d2f80763ccf9"
+            }
+          ],
+          "id": "b039bddc-b3b5-473f-bdd6-4bb9d41202e4",
+          "createdAt": "2026-07-28T00:30:44.000Z",
+          "updatedAt": "2026-07-28T00:30:44.000Z",
+          "uid": "35240-b039bddc-b3b5-473f-bdd6-4bb9d41202e4"
+        }
+      ],
+      "id": "133da85e-bc0c-450f-8b15-cb7029b5d280",
+      "createdAt": "2026-07-28T00:30:44.000Z",
+      "updatedAt": "2026-07-28T00:30:44.000Z",
+      "uid": "35240-133da85e-bc0c-450f-8b15-cb7029b5d280"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

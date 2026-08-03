@@ -1,0 +1,1835 @@
+{
+  "info": {
+    "_postman_id": "ddb927f8-4c4d-47d8-b56b-9aa5597af891",
+    "name": "Broker Account Activities Funding API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:29.000Z",
+    "updatedAt": "2026-07-28T00:30:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ddb927f8-4c4d-47d8-b56b-9aa5597af891"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "accounts",
+          "item": [
+            {
+              "name": "{account_id}",
+              "item": [
+                {
+                  "name": "recipient_banks",
+                  "item": [
+                    {
+                      "name": "{bank_id}",
+                      "item": [
+                        {
+                          "name": "Delete a Bank Relationship for an account",
+                          "id": "d4219d06-2f83-4cd4-8fd0-f8c3e0476060",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks/:bank_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "recipient_banks",
+                                ":bank_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "db3c0910-4be5-4eb7-993f-88d8ff2c4a4f",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Account identifier."
+                                },
+                                {
+                                  "id": "15ce9a03-f2c3-44b2-9d8c-5fb8bb1985c6",
+                                  "key": "bank_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "If successful, deletes Bank Relationship for an account"
+                          },
+                          "response": [
+                            {
+                              "id": "280d222d-0470-4912-b88b-c5dbf79966eb",
+                              "name": "Success (No Content)",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks/:bank_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "recipient_banks",
+                                    ":bank_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "bank_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T00:30:30.000Z",
+                              "updatedAt": "2026-07-28T00:30:30.000Z",
+                              "uid": "35240-280d222d-0470-4912-b88b-c5dbf79966eb"
+                            },
+                            {
+                              "id": "87f073c5-49dd-42c9-bf91-6073c3714f52",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks/:bank_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "recipient_banks",
+                                    ":bank_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "bank_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T00:30:30.000Z",
+                              "updatedAt": "2026-07-28T00:30:30.000Z",
+                              "uid": "35240-87f073c5-49dd-42c9-bf91-6073c3714f52"
+                            },
+                            {
+                              "id": "f72fe0b3-28ce-4f7b-a18c-696b49ec6b30",
+                              "name": "Bank Not Found",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks/:bank_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "recipient_banks",
+                                    ":bank_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "bank_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T00:30:30.000Z",
+                              "updatedAt": "2026-07-28T00:30:30.000Z",
+                              "uid": "35240-f72fe0b3-28ce-4f7b-a18c-696b49ec6b30"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-d4219d06-2f83-4cd4-8fd0-f8c3e0476060"
+                        }
+                      ],
+                      "id": "dc2b5274-c316-494e-96cc-097617a64061",
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-dc2b5274-c316-494e-96cc-097617a64061"
+                    },
+                    {
+                      "name": "Retrieve bank relationships for an account",
+                      "id": "59278336-af6b-4785-81f6-e065befd7897",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks?status=ACTIVE&bank_name=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            ":account_id",
+                            "recipient_banks"
+                          ],
+                          "query": [
+                            {
+                              "key": "status",
+                              "value": "ACTIVE"
+                            },
+                            {
+                              "key": "bank_name",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "316cf821-0db5-4d1f-b518-3e11ba92b11d",
+                              "key": "account_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Account identifier."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves Bank Relationships for an account"
+                      },
+                      "response": [
+                        {
+                          "id": "f6852ada-f264-4dd2-9a10-2dd04b90c4bf",
+                          "name": "Success. Returns the bank relationship model.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks?status=ACTIVE&bank_name=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "recipient_banks"
+                              ],
+                              "query": [
+                                {
+                                  "key": "status",
+                                  "value": "ACTIVE"
+                                },
+                                {
+                                  "key": "bank_name",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"bank_code_type\": \"ABA\",\n    \"account_number\": \"<string>\",\n    \"account_id\": \"<uuid>\",\n    \"status\": \"QUEUED\",\n    \"country\": \"<string>\",\n    \"state_province\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"street_address\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"bank_code_type\": \"BIC\",\n    \"account_number\": \"<string>\",\n    \"account_id\": \"<uuid>\",\n    \"status\": \"CANCELED\",\n    \"country\": \"<string>\",\n    \"state_province\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"street_address\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-f6852ada-f264-4dd2-9a10-2dd04b90c4bf"
+                        },
+                        {
+                          "id": "77f12f43-23e9-4717-9e20-9cde31175421",
+                          "name": "Bad request. The body in the request is not valid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks?status=ACTIVE&bank_name=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "recipient_banks"
+                              ],
+                              "query": [
+                                {
+                                  "key": "status",
+                                  "value": "ACTIVE"
+                                },
+                                {
+                                  "key": "bank_name",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-77f12f43-23e9-4717-9e20-9cde31175421"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-59278336-af6b-4785-81f6-e065befd7897"
+                    },
+                    {
+                      "name": "Create a Bank Relationship for an account",
+                      "id": "756399c3-af0c-4220-b7fe-0cbbe91abca4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"bank_code\": \"<string>\",\n  \"bank_code_type\": \"BIC\",\n  \"account_number\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state_province\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"city\": \"<string>\",\n  \"street_address\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            ":account_id",
+                            "recipient_banks"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f86ae7bd-b911-4778-815e-19e72d82f931",
+                              "key": "account_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Account identifier."
+                            }
+                          ]
+                        },
+                        "description": "If successful, retrieves Bank Relationships for an account"
+                      },
+                      "response": [
+                        {
+                          "id": "5de0317c-8482-43b7-9e4a-5c157ddce5d8",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"bank_code\": \"<string>\",\n  \"bank_code_type\": \"BIC\",\n  \"account_number\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state_province\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"city\": \"<string>\",\n  \"street_address\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "recipient_banks"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"bank_code\": \"<string>\",\n  \"bank_code_type\": \"ABA\",\n  \"account_number\": \"<string>\",\n  \"account_id\": \"<uuid>\",\n  \"status\": \"APPROVED\",\n  \"country\": \"<string>\",\n  \"state_province\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"city\": \"<string>\",\n  \"street_address\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-5de0317c-8482-43b7-9e4a-5c157ddce5d8"
+                        },
+                        {
+                          "id": "93046f34-8b61-4d57-a458-747b0c457947",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"bank_code\": \"<string>\",\n  \"bank_code_type\": \"BIC\",\n  \"account_number\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state_province\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"city\": \"<string>\",\n  \"street_address\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "recipient_banks"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-93046f34-8b61-4d57-a458-747b0c457947"
+                        },
+                        {
+                          "id": "dfc50aeb-c7b6-4895-a977-8b38e5a056b3",
+                          "name": "Conflict",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"bank_code\": \"<string>\",\n  \"bank_code_type\": \"BIC\",\n  \"account_number\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state_province\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"city\": \"<string>\",\n  \"street_address\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/recipient_banks",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "recipient_banks"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-dfc50aeb-c7b6-4895-a977-8b38e5a056b3"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-756399c3-af0c-4220-b7fe-0cbbe91abca4"
+                    }
+                  ],
+                  "id": "ed93d7f1-fe38-4c1a-b5fa-38190441bf55",
+                  "createdAt": "2026-07-28T00:30:30.000Z",
+                  "updatedAt": "2026-07-28T00:30:30.000Z",
+                  "uid": "35240-ed93d7f1-fe38-4c1a-b5fa-38190441bf55"
+                },
+                {
+                  "name": "transfers",
+                  "item": [
+                    {
+                      "name": "{transfer_id}",
+                      "item": [
+                        {
+                          "name": "Request to close a transfer",
+                          "id": "8c65cc3c-29bb-4c02-9551-c671c2132e80",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/transfers/:transfer_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "transfers",
+                                ":transfer_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "23ec25b7-7fb3-407d-8898-3f5f3c080e43",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Account identifier."
+                                },
+                                {
+                                  "id": "dbd99100-acd3-48cb-9b58-5e1563b38f13",
+                                  "key": "transfer_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Tranfer identifier"
+                                }
+                              ]
+                            },
+                            "description": "Request to close a transfer"
+                          },
+                          "response": [
+                            {
+                              "id": "42737e1e-2b2f-4efd-95b2-494ca15f8d8d",
+                              "name": "Success (No Content)",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/transfers/:transfer_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "transfers",
+                                    ":transfer_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "transfer_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T00:30:30.000Z",
+                              "updatedAt": "2026-07-28T00:30:30.000Z",
+                              "uid": "35240-42737e1e-2b2f-4efd-95b2-494ca15f8d8d"
+                            },
+                            {
+                              "id": "4a2ec627-b979-4130-894e-497534726816",
+                              "name": "Resource does not exist.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/transfers/:transfer_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "transfers",
+                                    ":transfer_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "transfer_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:30:30.000Z",
+                              "updatedAt": "2026-07-28T00:30:30.000Z",
+                              "uid": "35240-4a2ec627-b979-4130-894e-497534726816"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-8c65cc3c-29bb-4c02-9551-c671c2132e80"
+                        }
+                      ],
+                      "id": "ff38c6ff-4f6c-4e1c-b7be-60e5bfb4fdbb",
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-ff38c6ff-4f6c-4e1c-b7be-60e5bfb4fdbb"
+                    },
+                    {
+                      "name": "Return a list of transfers for an account.",
+                      "id": "1d7a2673-ec9f-41bd-9b3f-70a025ad2313",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/:account_id/transfers?direction=OUTGOING&limit=<integer>&offset=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            ":account_id",
+                            "transfers"
+                          ],
+                          "query": [
+                            {
+                              "description": "INCOMING or OUTGOING",
+                              "key": "direction",
+                              "value": "OUTGOING"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b8fe5fe3-2f39-4866-a26c-b1f4b5de7aba",
+                              "key": "account_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Account identifier."
+                            }
+                          ]
+                        },
+                        "description": "You can query a list of transfers for an account.\n\n\nYou can filter requested transfers by values such as direction and status.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "bde262c2-f90f-4e72-bec8-3c35b43b0c91",
+                          "name": "Success.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/transfers?direction=OUTGOING&limit=<integer>&offset=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "transfers"
+                              ],
+                              "query": [
+                                {
+                                  "description": "INCOMING or OUTGOING",
+                                  "key": "direction",
+                                  "value": "OUTGOING"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"account_id\": \"<uuid>\",\n    \"type\": \"wire\",\n    \"status\": \"RETURNED\",\n    \"amount\": \"<string>\",\n    \"direction\": \"OUTGOING\",\n    \"created_at\": \"<dateTime>\",\n    \"relationship_id\": \"<uuid>\",\n    \"bank_id\": \"<uuid>\",\n    \"reason\": \"<string>\",\n    \"updated_at\": \"<dateTime>\",\n    \"expires_at\": \"<dateTime>\",\n    \"additional_information\": \"<string>\",\n    \"hold_until\": \"<dateTime>\",\n    \"instant_amount\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"account_id\": \"<uuid>\",\n    \"type\": \"instant_ach\",\n    \"status\": \"COMPLETE\",\n    \"amount\": \"<string>\",\n    \"direction\": \"INCOMING\",\n    \"created_at\": \"<dateTime>\",\n    \"relationship_id\": \"<uuid>\",\n    \"bank_id\": \"<uuid>\",\n    \"reason\": \"<string>\",\n    \"updated_at\": \"<dateTime>\",\n    \"expires_at\": \"<dateTime>\",\n    \"additional_information\": \"<string>\",\n    \"hold_until\": \"<dateTime>\",\n    \"instant_amount\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-bde262c2-f90f-4e72-bec8-3c35b43b0c91"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-1d7a2673-ec9f-41bd-9b3f-70a025ad2313"
+                    },
+                    {
+                      "name": "Request a new transfer",
+                      "id": "b9ac7b77-1e2d-4271-8a41-45f4233d07ba",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"transfer_type\": \"wire\",\n  \"amount\": \"<string>\",\n  \"direction\": \"OUTGOING\",\n  \"timing\": \"immediate\",\n  \"relationship_id\": \"<uuid>\",\n  \"bank_id\": \"<uuid>\",\n  \"additional_information\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/:account_id/transfers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            ":account_id",
+                            "transfers"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ea5c02b7-c923-4fda-b7da-d7dcbda13849",
+                              "key": "account_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Create a new transfer to an account to fund it.\n\nIn the sandbox environment, you can instantly deposit to or withdraw from an account with a virtual money amount. In the production environment, this endpoint is used only for requesting an outgoing (withdrawal) wire transfer at this moment. For the wire transfer (in production), you need to create a bank resource first using the Bank API. For more on how to fund an account in sandbox please check out this tutorial [here](https://alpaca.markets/learn/fund-broker-api/)."
+                      },
+                      "response": [
+                        {
+                          "id": "5c6e116a-3d12-43d2-ab6b-39b1fff729d3",
+                          "name": "Successfully requested a transfer.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"transfer_type\": \"wire\",\n  \"amount\": \"<string>\",\n  \"direction\": \"OUTGOING\",\n  \"timing\": \"immediate\",\n  \"relationship_id\": \"<uuid>\",\n  \"bank_id\": \"<uuid>\",\n  \"additional_information\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/transfers",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "transfers"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"account_id\": \"<uuid>\",\n  \"type\": \"ach\",\n  \"status\": \"QUEUED\",\n  \"amount\": \"<string>\",\n  \"direction\": \"INCOMING\",\n  \"created_at\": \"<dateTime>\",\n  \"relationship_id\": \"<uuid>\",\n  \"bank_id\": \"<uuid>\",\n  \"reason\": \"<string>\",\n  \"updated_at\": \"<dateTime>\",\n  \"expires_at\": \"<dateTime>\",\n  \"additional_information\": \"<string>\",\n  \"hold_until\": \"<dateTime>\",\n  \"instant_amount\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-5c6e116a-3d12-43d2-ab6b-39b1fff729d3"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-b9ac7b77-1e2d-4271-8a41-45f4233d07ba"
+                    }
+                  ],
+                  "id": "a956ab5f-5428-4baf-b73b-2280c30aa351",
+                  "createdAt": "2026-07-28T00:30:30.000Z",
+                  "updatedAt": "2026-07-28T00:30:30.000Z",
+                  "uid": "35240-a956ab5f-5428-4baf-b73b-2280c30aa351"
+                },
+                {
+                  "name": "ach_relationships",
+                  "item": [
+                    {
+                      "name": "{ach_relationship_id}",
+                      "item": [
+                        {
+                          "name": "Delete an existing ACH relationship",
+                          "id": "eb596014-beb5-4959-990b-2860cf4bc7c8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships/:ach_relationship_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "ach_relationships",
+                                ":ach_relationship_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1ab43c17-bfa3-41d3-a851-24bd127e98d7",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Account identifier."
+                                },
+                                {
+                                  "id": "625dde61-fca3-48f3-ab6e-0dcbf1dd7593",
+                                  "key": "ach_relationship_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) ACH relationship identifier"
+                                }
+                              ]
+                            },
+                            "description": "Delete an existing ACH relationship for an account"
+                          },
+                          "response": [
+                            {
+                              "id": "360de03c-c4f9-4efe-be84-a82710c53d05",
+                              "name": "Success (No Content)",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships/:ach_relationship_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "ach_relationships",
+                                    ":ach_relationship_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "ach_relationship_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T00:30:30.000Z",
+                              "updatedAt": "2026-07-28T00:30:30.000Z",
+                              "uid": "35240-360de03c-c4f9-4efe-be84-a82710c53d05"
+                            },
+                            {
+                              "id": "4f2295d8-0d34-4f9c-b7db-d9f5b078e5e3",
+                              "name": "the passed in account_id or relationship_id were invalid",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships/:ach_relationship_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "ach_relationships",
+                                    ":ach_relationship_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "ach_relationship_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T00:30:30.000Z",
+                              "updatedAt": "2026-07-28T00:30:30.000Z",
+                              "uid": "35240-4f2295d8-0d34-4f9c-b7db-d9f5b078e5e3"
+                            },
+                            {
+                              "id": "a10df41f-1381-4e1b-8e00-5e16c39c78a4",
+                              "name": "Resource does not exist.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships/:ach_relationship_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "ach_relationships",
+                                    ":ach_relationship_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "ach_relationship_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:30:30.000Z",
+                              "updatedAt": "2026-07-28T00:30:30.000Z",
+                              "uid": "35240-a10df41f-1381-4e1b-8e00-5e16c39c78a4"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-eb596014-beb5-4959-990b-2860cf4bc7c8"
+                        }
+                      ],
+                      "id": "5fa29b0a-98e5-4d70-96dd-82e27cbdc3f7",
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-5fa29b0a-98e5-4d70-96dd-82e27cbdc3f7"
+                    },
+                    {
+                      "name": "Retrieve ACH Relationships for an account",
+                      "id": "55d7039d-9bf8-4c1c-b6ce-ce6db7da9528",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships?statuses=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            ":account_id",
+                            "ach_relationships"
+                          ],
+                          "query": [
+                            {
+                              "description": "Comma-separated status values",
+                              "key": "statuses",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "643b7425-8d94-4990-afaa-9b078946077a",
+                              "key": "account_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Account identifier."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of ACH Relationships for an account"
+                      },
+                      "response": [
+                        {
+                          "id": "30a1da21-88ad-46e7-82aa-f8746f19743f",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships?statuses=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "ach_relationships"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Comma-separated status values",
+                                  "key": "statuses",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"account_id\": \"<uuid>\",\n    \"status\": \"QUEUED\",\n    \"account_owner_name\": \"<string>\",\n    \"bank_account_type\": \"SAVINGS\",\n    \"bank_account_number\": \"<string>\",\n    \"bank_routing_number\": \"<string>\",\n    \"nickname\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"account_id\": \"<uuid>\",\n    \"status\": \"QUEUED\",\n    \"account_owner_name\": \"<string>\",\n    \"bank_account_type\": \"CHECKING\",\n    \"bank_account_number\": \"<string>\",\n    \"bank_routing_number\": \"<string>\",\n    \"nickname\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-30a1da21-88ad-46e7-82aa-f8746f19743f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-55d7039d-9bf8-4c1c-b6ce-ce6db7da9528"
+                    },
+                    {
+                      "name": "Create an ACH Relationship",
+                      "id": "a56a4fb5-da8b-4856-8ba8-ecb30645ad80",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"SAVINGS\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            ":account_id",
+                            "ach_relationships"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d840ec6b-e47c-4e7b-b4d0-9aa3670ff5e6",
+                              "key": "account_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Account identifier."
+                            }
+                          ]
+                        },
+                        "description": "Create a new ACHRelationship for an account\n\nIf successful, will return 200 code with a newly created ACH Relationship entity."
+                      },
+                      "response": [
+                        {
+                          "id": "ba028000-9536-4a11-ad51-410401cbc3ce",
+                          "name": "returns the newly created ACH Relationship entity.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"SAVINGS\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "ach_relationships"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"account_id\": \"<uuid>\",\n  \"status\": \"CANCEL_REQUESTED\",\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"CHECKING\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-ba028000-9536-4a11-ad51-410401cbc3ce"
+                        },
+                        {
+                          "id": "cab7704e-b6ff-4a7e-8da7-905345e2859d",
+                          "name": "Malformed input.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"SAVINGS\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "ach_relationships"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-cab7704e-b6ff-4a7e-8da7-905345e2859d"
+                        },
+                        {
+                          "id": "0435c26a-23a9-419c-8145-5ddb0ca58a1c",
+                          "name": "Client is not authorized for this operation.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"SAVINGS\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "ach_relationships"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-0435c26a-23a9-419c-8145-5ddb0ca58a1c"
+                        },
+                        {
+                          "id": "1fedd1f2-9b11-4de6-8777-5750c7c261fd",
+                          "name": "The account already has an active relationship.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"SAVINGS\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/ach_relationships",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "ach_relationships"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-1fedd1f2-9b11-4de6-8777-5750c7c261fd"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-a56a4fb5-da8b-4856-8ba8-ecb30645ad80"
+                    }
+                  ],
+                  "id": "5f7e798d-7229-477c-8dfd-2583b1fc550b",
+                  "createdAt": "2026-07-28T00:30:30.000Z",
+                  "updatedAt": "2026-07-28T00:30:30.000Z",
+                  "uid": "35240-5f7e798d-7229-477c-8dfd-2583b1fc550b"
+                }
+              ],
+              "id": "0b1f2da5-833b-4970-a810-c4386aa88693",
+              "createdAt": "2026-07-28T00:30:30.000Z",
+              "updatedAt": "2026-07-28T00:30:30.000Z",
+              "uid": "35240-0b1f2da5-833b-4970-a810-c4386aa88693"
+            }
+          ],
+          "id": "09f03ff9-2941-457a-b530-453188777d45",
+          "createdAt": "2026-07-28T00:30:30.000Z",
+          "updatedAt": "2026-07-28T00:30:30.000Z",
+          "uid": "35240-09f03ff9-2941-457a-b530-453188777d45"
+        },
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "transfers",
+              "item": [
+                {
+                  "name": "status",
+                  "item": [
+                    {
+                      "name": "Subscribe to Transfer Events (SSE)",
+                      "id": "bda6661a-96b8-4d67-ba7c-028e35353937",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/event-stream"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/transfers/status?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "transfers",
+                            "status"
+                          ],
+                          "query": [
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "since_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "until_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to transfer status updates as they get processed by our backoffice, for both end-user and firm accounts.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can\u2019t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will not return any historic data\n- if `until` or `until_id` reached stream will end (status 200)\n\n---\n\nNote for people using the clients generated from this OAS spec. Currently OAS-3 doesn't have full support for representing SSE style responses from an API, so if you are using a generated client and don't specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.\n\nIf you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3."
+                      },
+                      "response": [
+                        {
+                          "id": "d8428d12-916f-4573-98ff-c6960bbda81c",
+                          "name": "Connected. Events will now start streaming as long as you keep the connection open.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/event-stream"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/events/transfers/status?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "events",
+                                "transfers",
+                                "status"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "key": "since_id",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "until_id",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/event-stream"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"account_id\": \"<uuid>\",\n    \"at\": \"<dateTime>\",\n    \"event_id\": \"<integer>\",\n    \"status_from\": \"QUEUED\",\n    \"status_to\": \"SENT_TO_CLEARING\",\n    \"transfer_id\": \"<uuid>\"\n  },\n  {\n    \"account_id\": \"<uuid>\",\n    \"at\": \"<dateTime>\",\n    \"event_id\": \"<integer>\",\n    \"status_from\": \"CANCELED\",\n    \"status_to\": \"APPROVED\",\n    \"transfer_id\": \"<uuid>\"\n  }\n]",
+                          "createdAt": "2026-07-28T00:30:30.000Z",
+                          "updatedAt": "2026-07-28T00:30:30.000Z",
+                          "uid": "35240-d8428d12-916f-4573-98ff-c6960bbda81c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:30.000Z",
+                      "updatedAt": "2026-07-28T00:30:30.000Z",
+                      "uid": "35240-bda6661a-96b8-4d67-ba7c-028e35353937"
+                    }
+                  ],
+                  "id": "3399de89-8c3c-452a-939a-df79440b7f40",
+                  "createdAt": "2026-07-28T00:30:30.000Z",
+                  "updatedAt": "2026-07-28T00:30:30.000Z",
+                  "uid": "35240-3399de89-8c3c-452a-939a-df79440b7f40"
+                }
+              ],
+              "id": "7323fe9a-3f9f-42c6-8b67-8a68da588bb7",
+              "createdAt": "2026-07-28T00:30:30.000Z",
+              "updatedAt": "2026-07-28T00:30:30.000Z",
+              "uid": "35240-7323fe9a-3f9f-42c6-8b67-8a68da588bb7"
+            }
+          ],
+          "id": "30d6f5a4-f501-49c1-b941-e7ec538ec2ca",
+          "createdAt": "2026-07-28T00:30:30.000Z",
+          "updatedAt": "2026-07-28T00:30:30.000Z",
+          "uid": "35240-30d6f5a4-f501-49c1-b941-e7ec538ec2ca"
+        }
+      ],
+      "id": "ab93a803-48ce-4459-af5b-fa02546c55d8",
+      "createdAt": "2026-07-28T00:30:30.000Z",
+      "updatedAt": "2026-07-28T00:30:30.000Z",
+      "uid": "35240-ab93a803-48ce-4459-af5b-fa02546c55d8"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

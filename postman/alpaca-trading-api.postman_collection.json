@@ -1,0 +1,2382 @@
+{
+  "info": {
+    "_postman_id": "7f282e4c-8648-4182-8f4e-4d3709577a24",
+    "name": "Broker Account Activities Trading API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:29:31.000Z",
+    "updatedAt": "2026-07-28T00:29:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7f282e4c-8648-4182-8f4e-4d3709577a24"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "trading",
+          "item": [
+            {
+              "name": "accounts",
+              "item": [
+                {
+                  "name": "{account_id}",
+                  "item": [
+                    {
+                      "name": "positions",
+                      "item": [
+                        {
+                          "name": "{symbol_or_asset_id}",
+                          "item": [
+                            {
+                              "name": "Get an Open Position for account by Symbol or AssetId",
+                              "id": "0f3202af-228c-4803-acab-536c48f0cb1c",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions/:symbol_or_asset_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "positions",
+                                    ":symbol_or_asset_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "3c82659e-6543-4c66-a2b7-7d2e52067939",
+                                      "key": "account_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Account identifier."
+                                    },
+                                    {
+                                      "id": "117d612a-1db1-4a21-84c5-4593ae932c5d",
+                                      "key": "symbol_or_asset_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The symbol or asset_id "
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves the account\u2019s open position for the given symbol or asset_id."
+                              },
+                              "response": [
+                                {
+                                  "id": "28427343-fd36-4526-a411-203f7fa66618",
+                                  "name": "The requested Position object",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions/:symbol_or_asset_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "positions",
+                                        ":symbol_or_asset_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "symbol_or_asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"asset_id\": \"<uuid>\",\n  \"symbol\": \"<string>\",\n  \"exchange\": \"<string>\",\n  \"asset_class\": \"us_equity\",\n  \"avg_entry_price\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"side\": \"long\",\n  \"market_value\": \"<string>\",\n  \"cost_basis\": \"<string>\",\n  \"unrealized_pl\": \"<string>\",\n  \"unrealized_plpc\": \"<string>\",\n  \"unrealized_intraday_pl\": \"<string>\",\n  \"unrealized_intraday_plpc\": \"<string>\",\n  \"current_price\": \"<string>\",\n  \"lastday_price\": \"<string>\",\n  \"change_today\": \"<string>\",\n  \"asset_marginable\": \"<boolean>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-28427343-fd36-4526-a411-203f7fa66618"
+                                },
+                                {
+                                  "id": "f8b18939-0cf2-4125-9c32-1fbfb3b8333a",
+                                  "name": "Account doesn't have a position for this symbol or asset_id ",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions/:symbol_or_asset_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "positions",
+                                        ":symbol_or_asset_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "symbol_or_asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-f8b18939-0cf2-4125-9c32-1fbfb3b8333a"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-0f3202af-228c-4803-acab-536c48f0cb1c"
+                            },
+                            {
+                              "name": "Close a Position for an Account",
+                              "id": "ccf46ba4-b497-4d5d-86f7-20b6f2f6e322",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions/:symbol_or_asset_id?qty=<string>&percentage=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "positions",
+                                    ":symbol_or_asset_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Optional the number of shares to liquidate. Can accept up to 9 decimal points. Cannot work with percentage",
+                                      "key": "qty",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "percentage of position to liquidate. Must be between 0 and 100. Would only sell fractional if position is originally fractional. Can accept up to 9 decimal points. Cannot work with qty",
+                                      "key": "percentage",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "2bb338a8-9190-4543-bc00-0c0136885c1e",
+                                      "key": "account_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Account identifier."
+                                    },
+                                    {
+                                      "id": "06e7e1ab-b78e-4352-a6ff-f8864a0075cb",
+                                      "key": "symbol_or_asset_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The symbol or asset_id "
+                                    }
+                                  ]
+                                },
+                                "description": "Closes (liquidates) the account\u2019s open position for the given symbol. Works for both long and short positions."
+                              },
+                              "response": [
+                                {
+                                  "id": "7faa4d08-4528-4318-980b-472614985289",
+                                  "name": "OK",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions/:symbol_or_asset_id?qty=<string>&percentage=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "positions",
+                                        ":symbol_or_asset_id"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Optional the number of shares to liquidate. Can accept up to 9 decimal points. Cannot work with percentage",
+                                          "key": "qty",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "percentage of position to liquidate. Must be between 0 and 100. Would only sell fractional if position is originally fractional. Can accept up to 9 decimal points. Cannot work with qty",
+                                          "key": "percentage",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "symbol_or_asset_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"symbol\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"crypto\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"trailing_stop\",\n  \"type\": \"stop\",\n  \"side\": \"sell_short_exempt\",\n  \"time_in_force\": \"ioc\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n    },\n    {\n      \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n    }\n  ],\n  \"trail_price\": \"<string>\",\n  \"trail_percent\": \"<string>\",\n  \"hwm\": \"<string>\",\n  \"commission\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-7faa4d08-4528-4318-980b-472614985289"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-ccf46ba4-b497-4d5d-86f7-20b6f2f6e322"
+                            }
+                          ],
+                          "id": "f59b6cbd-1b1c-42a0-a5f1-55c20a4f9c03",
+                          "createdAt": "2026-07-28T00:29:32.000Z",
+                          "updatedAt": "2026-07-28T00:29:32.000Z",
+                          "uid": "35240-f59b6cbd-1b1c-42a0-a5f1-55c20a4f9c03"
+                        },
+                        {
+                          "name": "List open positions for an account",
+                          "id": "ba908cea-9c0b-42b0-b0e2-a323da10515a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "trading",
+                                "accounts",
+                                ":account_id",
+                                "positions"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "bc8fea8e-2511-4285-a8db-ec404389447d",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Account identifier."
+                                }
+                              ]
+                            },
+                            "description": "List open positions for an account"
+                          },
+                          "response": [
+                            {
+                              "id": "74269826-7614-4bab-bc89-e443b4b19ee1",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "positions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"asset_id\": \"<uuid>\",\n    \"symbol\": \"<string>\",\n    \"exchange\": \"<string>\",\n    \"asset_class\": \"us_equity\",\n    \"avg_entry_price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"side\": \"short\",\n    \"market_value\": \"<string>\",\n    \"cost_basis\": \"<string>\",\n    \"unrealized_pl\": \"<string>\",\n    \"unrealized_plpc\": \"<string>\",\n    \"unrealized_intraday_pl\": \"<string>\",\n    \"unrealized_intraday_plpc\": \"<string>\",\n    \"current_price\": \"<string>\",\n    \"lastday_price\": \"<string>\",\n    \"change_today\": \"<string>\",\n    \"asset_marginable\": \"<boolean>\"\n  },\n  {\n    \"asset_id\": \"<uuid>\",\n    \"symbol\": \"<string>\",\n    \"exchange\": \"<string>\",\n    \"asset_class\": \"crypto\",\n    \"avg_entry_price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"side\": \"short\",\n    \"market_value\": \"<string>\",\n    \"cost_basis\": \"<string>\",\n    \"unrealized_pl\": \"<string>\",\n    \"unrealized_plpc\": \"<string>\",\n    \"unrealized_intraday_pl\": \"<string>\",\n    \"unrealized_intraday_plpc\": \"<string>\",\n    \"current_price\": \"<string>\",\n    \"lastday_price\": \"<string>\",\n    \"change_today\": \"<string>\",\n    \"asset_marginable\": \"<boolean>\"\n  }\n]",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-74269826-7614-4bab-bc89-e443b4b19ee1"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:29:32.000Z",
+                          "updatedAt": "2026-07-28T00:29:32.000Z",
+                          "uid": "35240-ba908cea-9c0b-42b0-b0e2-a323da10515a"
+                        },
+                        {
+                          "name": "Close All Positions for an Account",
+                          "id": "c24a0c1c-03de-4f79-a848-6ca3f0748d79",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions?cancel_orders=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "trading",
+                                "accounts",
+                                ":account_id",
+                                "positions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "If true is specified, cancel all open orders before liquidating all positions.",
+                                  "key": "cancel_orders",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e33e91eb-33cc-429d-9dd6-608b7166bab0",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Account identifier."
+                                }
+                              ]
+                            },
+                            "description": "Closes (liquidates) all of the account\u2019s open long and short positions. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request."
+                          },
+                          "response": [
+                            {
+                              "id": "fdac676f-ba62-403e-8145-ee36d3097e8d",
+                              "name": "HTTP 207 Multi-Status with body; an array of objects that include the order id and http status code for each status request.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions?cancel_orders=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "positions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "If true is specified, cancel all open orders before liquidating all positions.",
+                                      "key": "cancel_orders",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Multi-Status (WebDAV) (RFC 4918)",
+                              "code": 207,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"symbol\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"body\": {\n      \"id\": \"<uuid>\",\n      \"symbol\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"crypto\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"trailing_stop\",\n      \"type\": \"market\",\n      \"side\": \"sell\",\n      \"time_in_force\": \"cls\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"accepted_for_bidding\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_price\": \"<string>\",\n      \"trail_percent\": \"<string>\",\n      \"hwm\": \"<string>\",\n      \"commission\": \"<string>\"\n    }\n  },\n  {\n    \"symbol\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"body\": {\n      \"id\": \"<uuid>\",\n      \"symbol\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"simple\",\n      \"order_type\": \"limit\",\n      \"type\": \"limit\",\n      \"side\": \"sell\",\n      \"time_in_force\": \"day\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"expired\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_price\": \"<string>\",\n      \"trail_percent\": \"<string>\",\n      \"hwm\": \"<string>\",\n      \"commission\": \"<string>\"\n    }\n  }\n]",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-fdac676f-ba62-403e-8145-ee36d3097e8d"
+                            },
+                            {
+                              "id": "c6fe74c7-a5f8-48af-bbde-ada915aa72e2",
+                              "name": "Failed to liquidate some positions",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/positions?cancel_orders=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "positions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "If true is specified, cancel all open orders before liquidating all positions.",
+                                      "key": "cancel_orders",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-c6fe74c7-a5f8-48af-bbde-ada915aa72e2"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:29:32.000Z",
+                          "updatedAt": "2026-07-28T00:29:32.000Z",
+                          "uid": "35240-c24a0c1c-03de-4f79-a848-6ca3f0748d79"
+                        }
+                      ],
+                      "id": "95617ef3-5cbe-4e72-a4b1-75ba7b800f45",
+                      "createdAt": "2026-07-28T00:29:32.000Z",
+                      "updatedAt": "2026-07-28T00:29:32.000Z",
+                      "uid": "35240-95617ef3-5cbe-4e72-a4b1-75ba7b800f45"
+                    },
+                    {
+                      "name": "orders",
+                      "item": [
+                        {
+                          "name": "{order_id}",
+                          "item": [
+                            {
+                              "name": "Retrieves a single order for the given order_id.",
+                              "id": "dba3226b-aaff-48fc-a7b1-69ebaf776435",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders",
+                                    ":order_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "ea482fe1-5076-4ecc-9d59-7c2cd4caa418",
+                                      "key": "account_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Account identifier."
+                                    },
+                                    {
+                                      "id": "c8c60ae2-f64b-4a8a-9da4-57f57af30c90",
+                                      "key": "order_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Order identifier."
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves a single order for the given order_id."
+                              },
+                              "response": [
+                                {
+                                  "id": "6255df53-b18c-41d2-95bf-b310715d3d1c",
+                                  "name": "The requested Order object",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"symbol\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"crypto\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"trailing_stop\",\n  \"type\": \"stop\",\n  \"side\": \"sell_short_exempt\",\n  \"time_in_force\": \"ioc\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n    },\n    {\n      \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n    }\n  ],\n  \"trail_price\": \"<string>\",\n  \"trail_percent\": \"<string>\",\n  \"hwm\": \"<string>\",\n  \"commission\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-6255df53-b18c-41d2-95bf-b310715d3d1c"
+                                },
+                                {
+                                  "id": "b668c5dd-8b86-4bc0-b9aa-39a3f2b5a3ba",
+                                  "name": "Malformed input.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-b668c5dd-8b86-4bc0-b9aa-39a3f2b5a3ba"
+                                },
+                                {
+                                  "id": "36283bde-51e1-4fd2-9901-904323c940fa",
+                                  "name": "Resource does not exist.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-36283bde-51e1-4fd2-9901-904323c940fa"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-dba3226b-aaff-48fc-a7b1-69ebaf776435"
+                            },
+                            {
+                              "name": "Replaces a single order with updated parameters",
+                              "id": "ac58458f-213e-44c2-b6b5-717a24e9bed0",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"qty\": \"<string>\",\n  \"time_in_force\": \"day\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail\": \"<string>\",\n  \"client_order_id\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders",
+                                    ":order_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "a032169b-3f21-4452-b204-cae101c5b0d0",
+                                      "key": "account_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Account identifier."
+                                    },
+                                    {
+                                      "id": "aa71eacc-ca2d-43e7-b97d-fbd80c1a8e11",
+                                      "key": "order_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Order identifier."
+                                    }
+                                  ]
+                                },
+                                "description": "Replaces a single order with updated parameters. Each parameter overrides the corresponding attribute of the existing order. The other attributes remain the same as the existing order.\n\nA success return code from a replaced order does NOT guarantee the existing open order has been replaced. If the existing open order is filled before the replacing (new) order reaches the execution venue, the replacing (new) order is rejected, and these events are sent in the trade_updates stream channel found [here in the market data api](https://alpaca.markets/docs/api-references/market-data-api/#order-updates).\n\nWhile an order is being replaced, the account's buying power is reduced by the larger of the two orders that have been placed (the old order being replaced, and the newly placed order to replace it). If you are replacing a buy entry order with a higher limit price than the original order, the buying power is calculated based on the newly placed order. If you are replacing it with a lower limit price, the buying power is calculated based on the old order."
+                              },
+                              "response": [
+                                {
+                                  "id": "21754df7-9708-4f62-ab26-3661fd1abed2",
+                                  "name": "A new Order object with a new order_id",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"qty\": \"<string>\",\n  \"time_in_force\": \"day\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail\": \"<string>\",\n  \"client_order_id\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"symbol\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"crypto\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"trailing_stop\",\n  \"type\": \"stop\",\n  \"side\": \"sell_short_exempt\",\n  \"time_in_force\": \"ioc\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n    },\n    {\n      \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n    }\n  ],\n  \"trail_price\": \"<string>\",\n  \"trail_percent\": \"<string>\",\n  \"hwm\": \"<string>\",\n  \"commission\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-21754df7-9708-4f62-ab26-3661fd1abed2"
+                                },
+                                {
+                                  "id": "e76c20f6-e723-40ae-9635-d42fb39c240d",
+                                  "name": "Malformed input.",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"qty\": \"<string>\",\n  \"time_in_force\": \"day\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail\": \"<string>\",\n  \"client_order_id\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-e76c20f6-e723-40ae-9635-d42fb39c240d"
+                                },
+                                {
+                                  "id": "8fdd3040-88f2-4325-b93f-83289bdd831e",
+                                  "name": "Buying power or shares are not sufficient",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"qty\": \"<string>\",\n  \"time_in_force\": \"day\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail\": \"<string>\",\n  \"client_order_id\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-8fdd3040-88f2-4325-b93f-83289bdd831e"
+                                },
+                                {
+                                  "id": "adb9e515-6ec3-4a75-a8b4-5106564d0d96",
+                                  "name": "Resource does not exist.",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"qty\": \"<string>\",\n  \"time_in_force\": \"day\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail\": \"<string>\",\n  \"client_order_id\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-adb9e515-6ec3-4a75-a8b4-5106564d0d96"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-ac58458f-213e-44c2-b6b5-717a24e9bed0"
+                            },
+                            {
+                              "name": "Attempts to cancel an open order.",
+                              "id": "8070c4a2-c4c6-4292-8173-206803389bca",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders",
+                                    ":order_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "f774d0cc-f1fa-4730-9f83-af1fe3bc0410",
+                                      "key": "account_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Account identifier."
+                                    },
+                                    {
+                                      "id": "94311ff2-0cd3-4bcd-8581-0894f3d0fcfa",
+                                      "key": "order_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Order identifier."
+                                    }
+                                  ]
+                                },
+                                "description": "Attempts to cancel an open order. If the order is no longer cancelable (for example if the status is \"filled\"), the server will respond with status 422, and reject the request.\n\nUpon acceptance of the cancel request, it returns status 204."
+                              },
+                              "response": [
+                                {
+                                  "id": "51af329b-1a23-4de6-aad4-32edd8e492c1",
+                                  "name": "Success (No Content)",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "No Content",
+                                  "code": 204,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-51af329b-1a23-4de6-aad4-32edd8e492c1"
+                                },
+                                {
+                                  "id": "6985c1a2-7b0c-40b1-a37d-c791947eeab6",
+                                  "name": "Malformed input.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-6985c1a2-7b0c-40b1-a37d-c791947eeab6"
+                                },
+                                {
+                                  "id": "39341fbf-7659-4a56-89c5-a8a52eb606b3",
+                                  "name": "Resource does not exist.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders/:order_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "trading",
+                                        "accounts",
+                                        ":account_id",
+                                        "orders",
+                                        ":order_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "order_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T00:29:32.000Z",
+                                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                                  "uid": "35240-39341fbf-7659-4a56-89c5-a8a52eb606b3"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-8070c4a2-c4c6-4292-8173-206803389bca"
+                            }
+                          ],
+                          "id": "2f080143-a15c-490b-9194-fe5b866ae94a",
+                          "createdAt": "2026-07-28T00:29:32.000Z",
+                          "updatedAt": "2026-07-28T00:29:32.000Z",
+                          "uid": "35240-2f080143-a15c-490b-9194-fe5b866ae94a"
+                        },
+                        {
+                          "name": "Retrieves a list of orders for the account, filtered by the supplied query parameters.",
+                          "id": "ef61a95b-509c-46ef-b764-ff72dad90947",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders?status=closed&limit=<integer>&after=<dateTime>&until=<dateTime>&direction=asc&nested=<boolean>&symbols=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "trading",
+                                "accounts",
+                                ":account_id",
+                                "orders"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Order status to be queried. open, closed or all. Defaults to open.",
+                                  "key": "status",
+                                  "value": "closed"
+                                },
+                                {
+                                  "description": "The maximum number of orders in response. Defaults to 50 and max is 500.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The response will include only ones submitted after this timestamp (exclusive.)",
+                                  "key": "after",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The response will include only ones submitted until this timestamp (exclusive.)",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc.",
+                                  "key": "direction",
+                                  "value": "asc"
+                                },
+                                {
+                                  "description": "If true, the result will roll up multi-leg orders under the legs field of primary order.",
+                                  "key": "nested",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "A comma-separated list of symbols to filter by.",
+                                  "key": "symbols",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ca6629e1-e2b3-4ee6-8e75-164d3f9db0b2",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Account identifier."
+                                }
+                              ]
+                            },
+                            "description": "Retrieves a list of orders for the account, filtered by the supplied query parameters.\n\nEndpoint defaults to open orders if no parameters are provided."
+                          },
+                          "response": [
+                            {
+                              "id": "8e9f88ea-d352-443c-bdb9-ce018a1dec87",
+                              "name": "Retrieves a list of orders for the account, filtered by the supplied query parameters.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders?status=closed&limit=<integer>&after=<dateTime>&until=<dateTime>&direction=asc&nested=<boolean>&symbols=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Order status to be queried. open, closed or all. Defaults to open.",
+                                      "key": "status",
+                                      "value": "closed"
+                                    },
+                                    {
+                                      "description": "The maximum number of orders in response. Defaults to 50 and max is 500.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The response will include only ones submitted after this timestamp (exclusive.)",
+                                      "key": "after",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "The response will include only ones submitted until this timestamp (exclusive.)",
+                                      "key": "until",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc.",
+                                      "key": "direction",
+                                      "value": "asc"
+                                    },
+                                    {
+                                      "description": "If true, the result will roll up multi-leg orders under the legs field of primary order.",
+                                      "key": "nested",
+                                      "value": "<boolean>"
+                                    },
+                                    {
+                                      "description": "A comma-separated list of symbols to filter by.",
+                                      "key": "symbols",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"symbol\": \"<string>\",\n    \"client_order_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"submitted_at\": \"<dateTime>\",\n    \"filled_at\": \"<dateTime>\",\n    \"expired_at\": \"<dateTime>\",\n    \"canceled_at\": \"<dateTime>\",\n    \"failed_at\": \"<dateTime>\",\n    \"replaced_at\": \"<dateTime>\",\n    \"replaced_by\": \"<uuid>\",\n    \"replaces\": \"<uuid>\",\n    \"asset_id\": \"<uuid>\",\n    \"asset_class\": \"crypto\",\n    \"notional\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"filled_qty\": \"<string>\",\n    \"filled_avg_price\": \"<string>\",\n    \"order_class\": \"bracket\",\n    \"order_type\": \"stop\",\n    \"type\": \"market\",\n    \"side\": \"buy_minus\",\n    \"time_in_force\": \"gtc\",\n    \"limit_price\": \"<string>\",\n    \"stop_price\": \"<string>\",\n    \"status\": \"replaced\",\n    \"extended_hours\": \"<boolean>\",\n    \"legs\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      }\n    ],\n    \"trail_price\": \"<string>\",\n    \"trail_percent\": \"<string>\",\n    \"hwm\": \"<string>\",\n    \"commission\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"symbol\": \"<string>\",\n    \"client_order_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"submitted_at\": \"<dateTime>\",\n    \"filled_at\": \"<dateTime>\",\n    \"expired_at\": \"<dateTime>\",\n    \"canceled_at\": \"<dateTime>\",\n    \"failed_at\": \"<dateTime>\",\n    \"replaced_at\": \"<dateTime>\",\n    \"replaced_by\": \"<uuid>\",\n    \"replaces\": \"<uuid>\",\n    \"asset_id\": \"<uuid>\",\n    \"asset_class\": \"us_equity\",\n    \"notional\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"filled_qty\": \"<string>\",\n    \"filled_avg_price\": \"<string>\",\n    \"order_class\": \"oto\",\n    \"order_type\": \"stop_limit\",\n    \"type\": \"trailing_stop\",\n    \"side\": \"buy_minus\",\n    \"time_in_force\": \"gtc\",\n    \"limit_price\": \"<string>\",\n    \"stop_price\": \"<string>\",\n    \"status\": \"pending_new\",\n    \"extended_hours\": \"<boolean>\",\n    \"legs\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      }\n    ],\n    \"trail_price\": \"<string>\",\n    \"trail_percent\": \"<string>\",\n    \"hwm\": \"<string>\",\n    \"commission\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-8e9f88ea-d352-443c-bdb9-ce018a1dec87"
+                            },
+                            {
+                              "id": "6a6a5d6c-e958-404a-8356-e18a27038c36",
+                              "name": "Malformed input.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders?status=closed&limit=<integer>&after=<dateTime>&until=<dateTime>&direction=asc&nested=<boolean>&symbols=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Order status to be queried. open, closed or all. Defaults to open.",
+                                      "key": "status",
+                                      "value": "closed"
+                                    },
+                                    {
+                                      "description": "The maximum number of orders in response. Defaults to 50 and max is 500.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The response will include only ones submitted after this timestamp (exclusive.)",
+                                      "key": "after",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "The response will include only ones submitted until this timestamp (exclusive.)",
+                                      "key": "until",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc.",
+                                      "key": "direction",
+                                      "value": "asc"
+                                    },
+                                    {
+                                      "description": "If true, the result will roll up multi-leg orders under the legs field of primary order.",
+                                      "key": "nested",
+                                      "value": "<boolean>"
+                                    },
+                                    {
+                                      "description": "A comma-separated list of symbols to filter by.",
+                                      "key": "symbols",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-6a6a5d6c-e958-404a-8356-e18a27038c36"
+                            },
+                            {
+                              "id": "d21feb3a-0375-4317-bb0d-cc8cfa2a5158",
+                              "name": "Resource does not exist.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders?status=closed&limit=<integer>&after=<dateTime>&until=<dateTime>&direction=asc&nested=<boolean>&symbols=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Order status to be queried. open, closed or all. Defaults to open.",
+                                      "key": "status",
+                                      "value": "closed"
+                                    },
+                                    {
+                                      "description": "The maximum number of orders in response. Defaults to 50 and max is 500.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The response will include only ones submitted after this timestamp (exclusive.)",
+                                      "key": "after",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "The response will include only ones submitted until this timestamp (exclusive.)",
+                                      "key": "until",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc.",
+                                      "key": "direction",
+                                      "value": "asc"
+                                    },
+                                    {
+                                      "description": "If true, the result will roll up multi-leg orders under the legs field of primary order.",
+                                      "key": "nested",
+                                      "value": "<boolean>"
+                                    },
+                                    {
+                                      "description": "A comma-separated list of symbols to filter by.",
+                                      "key": "symbols",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-d21feb3a-0375-4317-bb0d-cc8cfa2a5158"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:29:32.000Z",
+                          "updatedAt": "2026-07-28T00:29:32.000Z",
+                          "uid": "35240-ef61a95b-509c-46ef-b764-ff72dad90947"
+                        },
+                        {
+                          "name": "Create an order for an account.",
+                          "id": "68cfb3ce-e96b-4a9b-8c17-f9b81b659709",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"symbol\": \"<string>\",\n  \"side\": \"cross_short\",\n  \"type\": \"market\",\n  \"time_in_force\": \"day\",\n  \"qty\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"trail_percent\": \"<string>\",\n  \"extended_hours\": \"<boolean>\",\n  \"client_order_id\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"take_profit\": {\n    \"limit_price\": \"<string>\"\n  },\n  \"stop_loss\": {\n    \"stop_price\": \"<string>\",\n    \"limit_price\": \"<string>\"\n  },\n  \"commission\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "trading",
+                                "accounts",
+                                ":account_id",
+                                "orders"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9f5b84f9-b0d2-467d-912e-35f23ccddd9a",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Account identifier."
+                                }
+                              ]
+                            },
+                            "description": "Create an order for an account."
+                          },
+                          "response": [
+                            {
+                              "id": "a64a29fb-351b-4fa6-b1bc-79b6c2a413ad",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"side\": \"cross_short\",\n  \"type\": \"market\",\n  \"time_in_force\": \"day\",\n  \"qty\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"trail_percent\": \"<string>\",\n  \"extended_hours\": \"<boolean>\",\n  \"client_order_id\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"take_profit\": {\n    \"limit_price\": \"<string>\"\n  },\n  \"stop_loss\": {\n    \"stop_price\": \"<string>\",\n    \"limit_price\": \"<string>\"\n  },\n  \"commission\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"symbol\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"crypto\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"trailing_stop\",\n  \"type\": \"stop\",\n  \"side\": \"sell_short_exempt\",\n  \"time_in_force\": \"ioc\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n    },\n    {\n      \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n    }\n  ],\n  \"trail_price\": \"<string>\",\n  \"trail_percent\": \"<string>\",\n  \"hwm\": \"<string>\",\n  \"commission\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-a64a29fb-351b-4fa6-b1bc-79b6c2a413ad"
+                            },
+                            {
+                              "id": "cf58cf4a-5f1c-4b09-9a11-b4e275077464",
+                              "name": "Malformed input.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"side\": \"cross_short\",\n  \"type\": \"market\",\n  \"time_in_force\": \"day\",\n  \"qty\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"trail_percent\": \"<string>\",\n  \"extended_hours\": \"<boolean>\",\n  \"client_order_id\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"take_profit\": {\n    \"limit_price\": \"<string>\"\n  },\n  \"stop_loss\": {\n    \"stop_price\": \"<string>\",\n    \"limit_price\": \"<string>\"\n  },\n  \"commission\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-cf58cf4a-5f1c-4b09-9a11-b4e275077464"
+                            },
+                            {
+                              "id": "da41d393-44d4-4f76-b8c6-1ae601a00429",
+                              "name": "Request is forbidden",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"side\": \"cross_short\",\n  \"type\": \"market\",\n  \"time_in_force\": \"day\",\n  \"qty\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"trail_percent\": \"<string>\",\n  \"extended_hours\": \"<boolean>\",\n  \"client_order_id\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"take_profit\": {\n    \"limit_price\": \"<string>\"\n  },\n  \"stop_loss\": {\n    \"stop_price\": \"<string>\",\n    \"limit_price\": \"<string>\"\n  },\n  \"commission\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-da41d393-44d4-4f76-b8c6-1ae601a00429"
+                            },
+                            {
+                              "id": "4d2c5b3e-fe4b-4e6d-ac3a-ab9393460e35",
+                              "name": "Resource does not exist.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"side\": \"cross_short\",\n  \"type\": \"market\",\n  \"time_in_force\": \"day\",\n  \"qty\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"trail_percent\": \"<string>\",\n  \"extended_hours\": \"<boolean>\",\n  \"client_order_id\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"take_profit\": {\n    \"limit_price\": \"<string>\"\n  },\n  \"stop_loss\": {\n    \"stop_price\": \"<string>\",\n    \"limit_price\": \"<string>\"\n  },\n  \"commission\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-4d2c5b3e-fe4b-4e6d-ac3a-ab9393460e35"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:29:32.000Z",
+                          "updatedAt": "2026-07-28T00:29:32.000Z",
+                          "uid": "35240-68cfb3ce-e96b-4a9b-8c17-f9b81b659709"
+                        },
+                        {
+                          "name": "Attempts to cancel all open orders. A response will be provided for each order that is attempted to be cancelled.",
+                          "id": "11833396-344f-442d-ba94-eef271bb2f8b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "trading",
+                                "accounts",
+                                ":account_id",
+                                "orders"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3815a112-2911-4e7b-bb1c-24fe4b18fe1c",
+                                  "key": "account_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Account identifier."
+                                }
+                              ]
+                            },
+                            "description": "Attempts to cancel all open orders. A response will be provided for each order that is attempted to be cancelled."
+                          },
+                          "response": [
+                            {
+                              "id": "a891e5d9-6583-4224-a91e-72eceab3ecd6",
+                              "name": "HTTP 207 Multi-Status with body, which is an array of objects that include the order id, http status code and an order object for each cancellation request.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Multi-Status (WebDAV) (RFC 4918)",
+                              "code": 207,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"status\": \"<integer>\",\n    \"body\": {\n      \"id\": \"<uuid>\",\n      \"symbol\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"crypto\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"simple\",\n      \"order_type\": \"limit\",\n      \"type\": \"trailing_stop\",\n      \"side\": \"cross\",\n      \"time_in_force\": \"gtc\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"pending_new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_price\": \"<string>\",\n      \"trail_percent\": \"<string>\",\n      \"hwm\": \"<string>\",\n      \"commission\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"status\": \"<integer>\",\n    \"body\": {\n      \"id\": \"<uuid>\",\n      \"symbol\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"crypto\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"oco\",\n      \"order_type\": \"limit\",\n      \"type\": \"market\",\n      \"side\": \"undisclosed\",\n      \"time_in_force\": \"day\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"filled\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_price\": \"<string>\",\n      \"trail_percent\": \"<string>\",\n      \"hwm\": \"<string>\",\n      \"commission\": \"<string>\"\n    }\n  }\n]",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-a891e5d9-6583-4224-a91e-72eceab3ecd6"
+                            },
+                            {
+                              "id": "c976a101-dc85-43a6-b686-b1991b76d7c6",
+                              "name": "Malformed input.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-c976a101-dc85-43a6-b686-b1991b76d7c6"
+                            },
+                            {
+                              "id": "595b3ac8-4e27-44e8-9c1d-a51cc4f31831",
+                              "name": "Resource does not exist.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/trading/accounts/:account_id/orders",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "trading",
+                                    "accounts",
+                                    ":account_id",
+                                    "orders"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<number>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:29:32.000Z",
+                              "updatedAt": "2026-07-28T00:29:32.000Z",
+                              "uid": "35240-595b3ac8-4e27-44e8-9c1d-a51cc4f31831"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:29:32.000Z",
+                          "updatedAt": "2026-07-28T00:29:32.000Z",
+                          "uid": "35240-11833396-344f-442d-ba94-eef271bb2f8b"
+                        }
+                      ],
+                      "id": "a8539bfb-47b1-4e2a-98d9-a2836042de2c",
+                      "createdAt": "2026-07-28T00:29:32.000Z",
+                      "updatedAt": "2026-07-28T00:29:32.000Z",
+                      "uid": "35240-a8539bfb-47b1-4e2a-98d9-a2836042de2c"
+                    }
+                  ],
+                  "id": "59c8d88e-510b-49df-8a52-c58c628f9d32",
+                  "createdAt": "2026-07-28T00:29:32.000Z",
+                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                  "uid": "35240-59c8d88e-510b-49df-8a52-c58c628f9d32"
+                }
+              ],
+              "id": "2a80b6f4-b749-4161-97d2-23004dfa91b0",
+              "createdAt": "2026-07-28T00:29:32.000Z",
+              "updatedAt": "2026-07-28T00:29:32.000Z",
+              "uid": "35240-2a80b6f4-b749-4161-97d2-23004dfa91b0"
+            }
+          ],
+          "id": "38814686-edd9-4e1b-89e6-cef5c3d2e54b",
+          "createdAt": "2026-07-28T00:29:32.000Z",
+          "updatedAt": "2026-07-28T00:29:32.000Z",
+          "uid": "35240-38814686-edd9-4e1b-89e6-cef5c3d2e54b"
+        },
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "trades",
+              "item": [
+                {
+                  "name": "Subscribe to Trade Events (SSE)",
+                  "id": "35638f9b-a773-4049-82f2-13d813d11505",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/event-stream"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/events/trades?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "events",
+                        "trades"
+                      ],
+                      "query": [
+                        {
+                          "description": "Format: YYYY-MM-DD",
+                          "key": "since",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Format: YYYY-MM-DD",
+                          "key": "until",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "since_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "until_id",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to events related to trade updates. Most market trades sent during market hours are filled instantly; you can listen to limit order updates through this endpoint.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can\u2019t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will not return any historic data\n- if `until` or `until_id` reached stream will end (status 200)\n\n---\n\nNote for people using the clients generated from this OAS spec. Currently OAS-3 doesn't have full support for representing SSE style responses from an API, so if you are using a generated client and don't specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.\n\nIf you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3."
+                  },
+                  "response": [
+                    {
+                      "id": "7cbeb354-c6c8-4677-82d5-f84d8010a43b",
+                      "name": "Connected. Events will now start streaming as long as you keep the connection open.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/event-stream"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/trades?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "trades"
+                          ],
+                          "query": [
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "since_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "until_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/event-stream"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"account_id\": \"<uuid>\",\n    \"at\": \"<dateTime>\",\n    \"event\": \"calculated\",\n    \"event_id\": \"<long>\",\n    \"execution_id\": \"<uuid>\",\n    \"order\": {\n      \"id\": \"<uuid>\",\n      \"symbol\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"stop_limit\",\n      \"type\": \"trailing_stop\",\n      \"side\": \"sell_short\",\n      \"time_in_force\": \"gtc\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"done_for_day\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_price\": \"<string>\",\n      \"trail_percent\": \"<string>\",\n      \"hwm\": \"<string>\",\n      \"commission\": \"<string>\"\n    },\n    \"timestamp\": \"<dateTime>\"\n  },\n  {\n    \"account_id\": \"<uuid>\",\n    \"at\": \"<dateTime>\",\n    \"event\": \"order_cancel_rejected\",\n    \"event_id\": \"<long>\",\n    \"execution_id\": \"<uuid>\",\n    \"order\": {\n      \"id\": \"<uuid>\",\n      \"symbol\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"oco\",\n      \"order_type\": \"market\",\n      \"type\": \"limit\",\n      \"side\": \"undisclosed\",\n      \"time_in_force\": \"cls\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"canceled\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_price\": \"<string>\",\n      \"trail_percent\": \"<string>\",\n      \"hwm\": \"<string>\",\n      \"commission\": \"<string>\"\n    },\n    \"timestamp\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-07-28T00:29:32.000Z",
+                      "updatedAt": "2026-07-28T00:29:32.000Z",
+                      "uid": "35240-7cbeb354-c6c8-4677-82d5-f84d8010a43b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:29:32.000Z",
+                  "updatedAt": "2026-07-28T00:29:32.000Z",
+                  "uid": "35240-35638f9b-a773-4049-82f2-13d813d11505"
+                }
+              ],
+              "id": "159fd70a-05c0-4c0a-95b2-0ea84556fe92",
+              "createdAt": "2026-07-28T00:29:32.000Z",
+              "updatedAt": "2026-07-28T00:29:32.000Z",
+              "uid": "35240-159fd70a-05c0-4c0a-95b2-0ea84556fe92"
+            }
+          ],
+          "id": "db31047b-4759-49da-bea7-9da09fa4e406",
+          "createdAt": "2026-07-28T00:29:32.000Z",
+          "updatedAt": "2026-07-28T00:29:32.000Z",
+          "uid": "35240-db31047b-4759-49da-bea7-9da09fa4e406"
+        }
+      ],
+      "id": "de64a9f0-9686-4d41-bafe-bf4ac7a752a5",
+      "createdAt": "2026-07-28T00:29:32.000Z",
+      "updatedAt": "2026-07-28T00:29:32.000Z",
+      "uid": "35240-de64a9f0-9686-4d41-bafe-bf4ac7a752a5"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

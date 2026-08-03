@@ -1,0 +1,177 @@
+{
+  "info": {
+    "_postman_id": "56fd4e89-3359-4af1-b265-8044f717f768",
+    "name": "Broker Account Activities Screener API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:41.000Z",
+    "updatedAt": "2026-07-28T00:30:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-56fd4e89-3359-4af1-b265-8044f717f768"
+  },
+  "item": [
+    {
+      "name": "v1beta1",
+      "item": [
+        {
+          "name": "screener",
+          "item": [
+            {
+              "name": "{market_type}",
+              "item": [
+                {
+                  "name": "movers",
+                  "item": [
+                    {
+                      "name": "Get Top Market Movers by Market type",
+                      "id": "fd28ad1e-d4ac-4d98-9d02-c65ca4f29bd2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/screener/:market_type/movers?top=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "screener",
+                            ":market_type",
+                            "movers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of top market movers to fetch (gainers and losers). Will return number top for each. By default 10 gainers and 10 losers.",
+                              "key": "top",
+                              "value": "10"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "56158ffa-725f-4703-8959-41da99b18599",
+                              "key": "market_type",
+                              "value": "stocks",
+                              "description": "(Required) Screen specific market (stocks or crypto)"
+                            }
+                          ]
+                        },
+                        "description": "Returns top market movers for stocks. By default will return top 5 market gainers and losers."
+                      },
+                      "response": [
+                        {
+                          "id": "47fdd442-d460-4f0f-aeec-e717a321cbf2",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/screener/:market_type/movers?top=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "screener",
+                                ":market_type",
+                                "movers"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Number of top market movers to fetch (gainers and losers). Will return number top for each. By default 10 gainers and 10 losers.",
+                                  "key": "top",
+                                  "value": "10"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "market_type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"gainers\": [\n    {\n      \"symbol\": \"<string>\",\n      \"percent_change\": \"<number>\",\n      \"change\": \"<number>\",\n      \"price\": \"<number>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"percent_change\": \"<number>\",\n      \"change\": \"<number>\",\n      \"price\": \"<number>\"\n    }\n  ],\n  \"losers\": [\n    {\n      \"symbol\": \"<string>\",\n      \"percent_change\": \"<number>\",\n      \"change\": \"<number>\",\n      \"price\": \"<number>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"percent_change\": \"<number>\",\n      \"change\": \"<number>\",\n      \"price\": \"<number>\"\n    }\n  ],\n  \"market_type\": \"crypto\",\n  \"last_updated\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:41.000Z",
+                          "updatedAt": "2026-07-28T00:30:41.000Z",
+                          "uid": "35240-47fdd442-d460-4f0f-aeec-e717a321cbf2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:41.000Z",
+                      "updatedAt": "2026-07-28T00:30:41.000Z",
+                      "uid": "35240-fd28ad1e-d4ac-4d98-9d02-c65ca4f29bd2"
+                    }
+                  ],
+                  "id": "c4f60383-bb6a-4293-a53e-a85a3dece025",
+                  "createdAt": "2026-07-28T00:30:41.000Z",
+                  "updatedAt": "2026-07-28T00:30:41.000Z",
+                  "uid": "35240-c4f60383-bb6a-4293-a53e-a85a3dece025"
+                }
+              ],
+              "id": "eee38ace-3d68-4e96-911a-4097639224f2",
+              "createdAt": "2026-07-28T00:30:41.000Z",
+              "updatedAt": "2026-07-28T00:30:41.000Z",
+              "uid": "35240-eee38ace-3d68-4e96-911a-4097639224f2"
+            }
+          ],
+          "id": "b4778dac-2ac3-44fb-b9f1-593d2e4dc0f5",
+          "createdAt": "2026-07-28T00:30:41.000Z",
+          "updatedAt": "2026-07-28T00:30:41.000Z",
+          "uid": "35240-b4778dac-2ac3-44fb-b9f1-593d2e4dc0f5"
+        }
+      ],
+      "id": "361f5009-cc06-4a51-80dd-15e9fd3b9dbc",
+      "createdAt": "2026-07-28T00:30:41.000Z",
+      "updatedAt": "2026-07-28T00:30:41.000Z",
+      "uid": "35240-361f5009-cc06-4a51-80dd-15e9fd3b9dbc"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

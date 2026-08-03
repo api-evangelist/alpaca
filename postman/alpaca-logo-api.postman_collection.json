@@ -1,0 +1,213 @@
+{
+  "info": {
+    "_postman_id": "d8cf6de5-2e1f-4e33-830b-36aea210681b",
+    "name": "Broker Account Activities Logo API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:31.000Z",
+    "updatedAt": "2026-07-28T00:30:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d8cf6de5-2e1f-4e33-830b-36aea210681b"
+  },
+  "item": [
+    {
+      "name": "v1beta1",
+      "item": [
+        {
+          "name": "logos",
+          "item": [
+            {
+              "name": "{crypto_or_stock_symbol}",
+              "item": [
+                {
+                  "name": "Get Logo for symbol",
+                  "id": "58c1988e-a609-4870-81bc-8bbf78b75456",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "image/*"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1beta1/logos/:crypto_or_stock_symbol?placeholder=true",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1beta1",
+                        "logos",
+                        ":crypto_or_stock_symbol"
+                      ],
+                      "query": [
+                        {
+                          "description": "If true then the api will generate a placeholder image if no logo was found. Defaults to true",
+                          "key": "placeholder",
+                          "value": "true"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9e1ed6b6-42d1-4cf5-8233-6ddffbdb8443",
+                          "key": "crypto_or_stock_symbol",
+                          "value": "<string>",
+                          "description": "(Required) The crypto or stock symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                        }
+                      ]
+                    },
+                    "description": "Returns logo image resource for provided symbol."
+                  },
+                  "response": [
+                    {
+                      "id": "a79d39b7-6fd3-4246-aaee-ac8ce7e091a8",
+                      "name": "Returns the requested logo as an image.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "image/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/logos/:crypto_or_stock_symbol?placeholder=true",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "logos",
+                            ":crypto_or_stock_symbol"
+                          ],
+                          "query": [
+                            {
+                              "description": "If true then the api will generate a placeholder image if no logo was found. Defaults to true",
+                              "key": "placeholder",
+                              "value": "true"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "crypto_or_stock_symbol"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "image/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<binary>",
+                      "createdAt": "2026-07-28T00:30:32.000Z",
+                      "updatedAt": "2026-07-28T00:30:32.000Z",
+                      "uid": "35240-a79d39b7-6fd3-4246-aaee-ac8ce7e091a8"
+                    },
+                    {
+                      "id": "8635e0af-5ba4-4d27-9b60-010ead37376e",
+                      "name": "No Logo was found for this symbol. This code will only be returned if you set `placeholder` to false. Otherwise we will generate a placeholder image for this symbol",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/logos/:crypto_or_stock_symbol?placeholder=true",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "logos",
+                            ":crypto_or_stock_symbol"
+                          ],
+                          "query": [
+                            {
+                              "description": "If true then the api will generate a placeholder image if no logo was found. Defaults to true",
+                              "key": "placeholder",
+                              "value": "true"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "crypto_or_stock_symbol"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T00:30:32.000Z",
+                      "updatedAt": "2026-07-28T00:30:32.000Z",
+                      "uid": "35240-8635e0af-5ba4-4d27-9b60-010ead37376e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:32.000Z",
+                  "updatedAt": "2026-07-28T00:30:32.000Z",
+                  "uid": "35240-58c1988e-a609-4870-81bc-8bbf78b75456"
+                }
+              ],
+              "id": "9bf98b66-117e-49cc-91f3-0b5440ff4cb1",
+              "createdAt": "2026-07-28T00:30:32.000Z",
+              "updatedAt": "2026-07-28T00:30:32.000Z",
+              "uid": "35240-9bf98b66-117e-49cc-91f3-0b5440ff4cb1"
+            }
+          ],
+          "id": "c69792c0-2950-420b-8121-263e69fcf465",
+          "createdAt": "2026-07-28T00:30:32.000Z",
+          "updatedAt": "2026-07-28T00:30:32.000Z",
+          "uid": "35240-c69792c0-2950-420b-8121-263e69fcf465"
+        }
+      ],
+      "id": "f70241b6-c6a1-4cdb-8ef7-8b8176837ada",
+      "createdAt": "2026-07-28T00:30:32.000Z",
+      "updatedAt": "2026-07-28T00:30:32.000Z",
+      "uid": "35240-f70241b6-c6a1-4cdb-8ef7-8b8176837ada"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

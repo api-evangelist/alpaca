@@ -1,0 +1,212 @@
+{
+  "info": {
+    "_postman_id": "98f6a174-2d43-4bc3-877a-28eca95682d5",
+    "name": "Broker Account Activities News API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:32.000Z",
+    "updatedAt": "2026-07-28T00:30:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-98f6a174-2d43-4bc3-877a-28eca95682d5"
+  },
+  "item": [
+    {
+      "name": "v1beta1",
+      "item": [
+        {
+          "name": "news",
+          "item": [
+            {
+              "name": "News API",
+              "id": "f565b018-c90d-4518-b164-495f828d3011",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1beta1/news?start=<dateTime>&end=<dateTime>&symbols=<string>&limit=<integer>&sort=DESC&include_content=<boolean>&exclude_contentless=<boolean>&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1beta1",
+                    "news"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Sort articles by updated date. Options: DESC, ASC",
+                      "key": "sort",
+                      "value": "DESC"
+                    },
+                    {
+                      "description": "Boolean indicator to include content for news articles (if available)",
+                      "key": "include_content",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Boolean indicator to exclude news articles that do not contain content ",
+                      "key": "exclude_contentless",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Returns latest news articles across stocks and crypto. By default returns latest 10 news articles."
+              },
+              "response": [
+                {
+                  "id": "90f64007-6b18-418e-a9c8-26266c60558c",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1beta1/news?start=<dateTime>&end=<dateTime>&symbols=<string>&limit=<integer>&sort=DESC&include_content=<boolean>&exclude_contentless=<boolean>&page_token=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1beta1",
+                        "news"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                          "key": "start",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                          "key": "end",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                          "key": "symbols",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort articles by updated date. Options: DESC, ASC",
+                          "key": "sort",
+                          "value": "DESC"
+                        },
+                        {
+                          "description": "Boolean indicator to include content for news articles (if available)",
+                          "key": "include_content",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Boolean indicator to exclude news articles that do not contain content ",
+                          "key": "exclude_contentless",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                          "key": "page_token",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"news\": [\n    {\n      \"id\": \"<long>\",\n      \"headline\": \"<string>\",\n      \"author\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"summary\": \"<string>\",\n      \"content\": \"<string>\",\n      \"images\": [\n        {\n          \"size\": \"thumb\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"size\": \"thumb\",\n          \"url\": \"<uri>\"\n        }\n      ],\n      \"symbols\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"source\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"headline\": \"<string>\",\n      \"author\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"summary\": \"<string>\",\n      \"content\": \"<string>\",\n      \"images\": [\n        {\n          \"size\": \"large\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"size\": \"small\",\n          \"url\": \"<uri>\"\n        }\n      ],\n      \"symbols\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"source\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"next_page_token\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:30:33.000Z",
+                  "updatedAt": "2026-07-28T00:30:33.000Z",
+                  "uid": "35240-90f64007-6b18-418e-a9c8-26266c60558c"
+                }
+              ],
+              "createdAt": "2026-07-28T00:30:33.000Z",
+              "updatedAt": "2026-07-28T00:30:33.000Z",
+              "uid": "35240-f565b018-c90d-4518-b164-495f828d3011"
+            }
+          ],
+          "id": "f448b223-ce90-4180-8bad-f51ffb67896f",
+          "createdAt": "2026-07-28T00:30:33.000Z",
+          "updatedAt": "2026-07-28T00:30:33.000Z",
+          "uid": "35240-f448b223-ce90-4180-8bad-f51ffb67896f"
+        }
+      ],
+      "id": "fc11e24b-d539-4aa3-a4ea-dc2af91299ed",
+      "createdAt": "2026-07-28T00:30:33.000Z",
+      "updatedAt": "2026-07-28T00:30:33.000Z",
+      "uid": "35240-fc11e24b-d539-4aa3-a4ea-dc2af91299ed"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

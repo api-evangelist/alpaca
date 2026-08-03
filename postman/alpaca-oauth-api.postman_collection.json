@@ -1,0 +1,724 @@
+{
+  "info": {
+    "_postman_id": "8f90cc0c-a50c-4d9a-900b-d2174e97dff4",
+    "name": "Broker Account Activities OAuth API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:29:32.000Z",
+    "updatedAt": "2026-07-28T00:29:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8f90cc0c-a50c-4d9a-900b-d2174e97dff4"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "oauth",
+          "item": [
+            {
+              "name": "clients",
+              "item": [
+                {
+                  "name": "{client_id}",
+                  "item": [
+                    {
+                      "name": "Get an OAuth client",
+                      "id": "20cb2567-1744-40c7-ae0f-3723fecab44e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/oauth/clients/:client_id?response_type=code&redirect_uri=<string>&scope=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "oauth",
+                            "clients",
+                            ":client_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "code or token",
+                              "key": "response_type",
+                              "value": "code"
+                            },
+                            {
+                              "description": "Redirect URI of the OAuth flow",
+                              "key": "redirect_uri",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Requested scopes by the OAuth flow",
+                              "key": "scope",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a0893363-3af6-4251-93d8-34b6e530068a",
+                              "key": "client_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "The endpoint returns the details of OAuth client to display in the authorization page.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "800d7ead-d9be-4c7c-b251-f5aa5348631a",
+                          "name": "Success.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/oauth/clients/:client_id?response_type=code&redirect_uri=<string>&scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "oauth",
+                                "clients",
+                                ":client_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "code or token",
+                                  "key": "response_type",
+                                  "value": "code"
+                                },
+                                {
+                                  "description": "Redirect URI of the OAuth flow",
+                                  "key": "redirect_uri",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Requested scopes by the OAuth flow",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "client_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"client_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"url\": \"<string>\",\n  \"terms_of_use\": \"<string>\",\n  \"privacy_policy\": \"<string>\",\n  \"status\": \"ACTIVE\",\n  \"redirect_uri\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"live_trading_approved\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T00:29:33.000Z",
+                          "updatedAt": "2026-07-28T00:29:33.000Z",
+                          "uid": "35240-800d7ead-d9be-4c7c-b251-f5aa5348631a"
+                        },
+                        {
+                          "id": "52a05ba3-1235-46e7-a41f-1df7f05be582",
+                          "name": "Client does not exist or you do not have access to the client.\n",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/oauth/clients/:client_id?response_type=code&redirect_uri=<string>&scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "oauth",
+                                "clients",
+                                ":client_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "code or token",
+                                  "key": "response_type",
+                                  "value": "code"
+                                },
+                                {
+                                  "description": "Redirect URI of the OAuth flow",
+                                  "key": "redirect_uri",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Requested scopes by the OAuth flow",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "client_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T00:29:33.000Z",
+                          "updatedAt": "2026-07-28T00:29:33.000Z",
+                          "uid": "35240-52a05ba3-1235-46e7-a41f-1df7f05be582"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:29:33.000Z",
+                      "updatedAt": "2026-07-28T00:29:33.000Z",
+                      "uid": "35240-20cb2567-1744-40c7-ae0f-3723fecab44e"
+                    }
+                  ],
+                  "id": "546c1b79-a51a-413a-bf7b-0eac91689da0",
+                  "createdAt": "2026-07-28T00:29:33.000Z",
+                  "updatedAt": "2026-07-28T00:29:33.000Z",
+                  "uid": "35240-546c1b79-a51a-413a-bf7b-0eac91689da0"
+                }
+              ],
+              "id": "7018af93-4f9a-4555-ad56-995c50abcd0f",
+              "createdAt": "2026-07-28T00:29:33.000Z",
+              "updatedAt": "2026-07-28T00:29:33.000Z",
+              "uid": "35240-7018af93-4f9a-4555-ad56-995c50abcd0f"
+            },
+            {
+              "name": "token",
+              "item": [
+                {
+                  "name": "Issue an OAuth token.",
+                  "id": "34d8aa68-542d-4855-bb7e-4e411d483446",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/oauth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "oauth",
+                        "token"
+                      ]
+                    },
+                    "description": "The operation issues an OAuth code which can be used in the OAuth code flow.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "ea299344-ecfb-4aa3-8700-1ea08887d9ba",
+                      "name": "Success.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/oauth/token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "oauth",
+                            "token"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"Bearer\",\n  \"scope\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T00:29:33.000Z",
+                      "updatedAt": "2026-07-28T00:29:33.000Z",
+                      "uid": "35240-ea299344-ecfb-4aa3-8700-1ea08887d9ba"
+                    },
+                    {
+                      "id": "19e88d18-8cba-433f-9f40-43baf735966d",
+                      "name": "Client does not exists, you do not have access to the client, or \u201cclient_secret\u201d is incorrect.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/oauth/token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "oauth",
+                            "token"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T00:29:33.000Z",
+                      "updatedAt": "2026-07-28T00:29:33.000Z",
+                      "uid": "35240-19e88d18-8cba-433f-9f40-43baf735966d"
+                    },
+                    {
+                      "id": "ff295cb9-6c1a-4183-8c48-7e91a3df2f43",
+                      "name": "Redirect URI or scope is invalid.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/oauth/token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "oauth",
+                            "token"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T00:29:33.000Z",
+                      "updatedAt": "2026-07-28T00:29:33.000Z",
+                      "uid": "35240-ff295cb9-6c1a-4183-8c48-7e91a3df2f43"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:29:33.000Z",
+                  "updatedAt": "2026-07-28T00:29:33.000Z",
+                  "uid": "35240-34d8aa68-542d-4855-bb7e-4e411d483446"
+                }
+              ],
+              "id": "6502091e-f79b-4146-b325-31d40fa1bd77",
+              "createdAt": "2026-07-28T00:29:33.000Z",
+              "updatedAt": "2026-07-28T00:29:33.000Z",
+              "uid": "35240-6502091e-f79b-4146-b325-31d40fa1bd77"
+            },
+            {
+              "name": "authorize",
+              "item": [
+                {
+                  "name": "Authorize an OAuth Token",
+                  "id": "73a43c7d-5683-46f3-ad8d-b1d3971de782",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/oauth/authorize",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "oauth",
+                        "authorize"
+                      ]
+                    },
+                    "description": "The operation issues an OAuth code which can be used in the OAuth code flow.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "b2a0b4b1-35d0-4946-988b-61da2cbbaab5",
+                      "name": "Successfully issued a code.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/oauth/authorize",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "oauth",
+                            "authorize"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T00:29:33.000Z",
+                      "updatedAt": "2026-07-28T00:29:33.000Z",
+                      "uid": "35240-b2a0b4b1-35d0-4946-988b-61da2cbbaab5"
+                    },
+                    {
+                      "id": "12abb430-bfb4-4537-a270-37df696ecaa9",
+                      "name": "Client does not exists, you do not have access to the client, or \u201cclient_secret\u201d is incorrect.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/oauth/authorize",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "oauth",
+                            "authorize"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T00:29:33.000Z",
+                      "updatedAt": "2026-07-28T00:29:33.000Z",
+                      "uid": "35240-12abb430-bfb4-4537-a270-37df696ecaa9"
+                    },
+                    {
+                      "id": "b01dbc16-2400-441f-a84b-79a234707464",
+                      "name": "Redirect URI or scope is invalid.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/oauth/authorize",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "oauth",
+                            "authorize"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T00:29:33.000Z",
+                      "updatedAt": "2026-07-28T00:29:33.000Z",
+                      "uid": "35240-b01dbc16-2400-441f-a84b-79a234707464"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:29:33.000Z",
+                  "updatedAt": "2026-07-28T00:29:33.000Z",
+                  "uid": "35240-73a43c7d-5683-46f3-ad8d-b1d3971de782"
+                }
+              ],
+              "id": "37019b86-7fc2-40c8-8899-034d07c68b6a",
+              "createdAt": "2026-07-28T00:29:33.000Z",
+              "updatedAt": "2026-07-28T00:29:33.000Z",
+              "uid": "35240-37019b86-7fc2-40c8-8899-034d07c68b6a"
+            }
+          ],
+          "id": "7ce3b1e9-43af-4ddf-b46e-085a55a55804",
+          "createdAt": "2026-07-28T00:29:33.000Z",
+          "updatedAt": "2026-07-28T00:29:33.000Z",
+          "uid": "35240-7ce3b1e9-43af-4ddf-b46e-085a55a55804"
+        }
+      ],
+      "id": "7e0422a8-9671-463d-b663-a5bad846f1b3",
+      "createdAt": "2026-07-28T00:29:33.000Z",
+      "updatedAt": "2026-07-28T00:29:33.000Z",
+      "uid": "35240-7e0422a8-9671-463d-b663-a5bad846f1b3"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

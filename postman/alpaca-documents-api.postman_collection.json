@@ -1,0 +1,583 @@
+{
+  "info": {
+    "_postman_id": "334fbded-12d4-4878-902e-253cc7249a06",
+    "name": "Broker Account Activities Documents API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:27.000Z",
+    "updatedAt": "2026-07-28T00:30:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-334fbded-12d4-4878-902e-253cc7249a06"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "accounts",
+          "item": [
+            {
+              "name": "{account_id}",
+              "item": [
+                {
+                  "name": "documents",
+                  "item": [
+                    {
+                      "name": "{document_id}",
+                      "item": [
+                        {
+                          "name": "download",
+                          "item": [
+                            {
+                              "name": "Download a document file that belongs to an account.",
+                              "id": "f40823d1-f0dd-4fb3-9dd9-8ab1e7a9842a",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "basic",
+                                  "basic": [
+                                    {
+                                      "key": "username",
+                                      "value": "{{basicAuthUsername}}",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "password",
+                                      "value": "{{basicAuthPassword}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/accounts/:account_id/documents/:document_id/download",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "accounts",
+                                    ":account_id",
+                                    "documents",
+                                    ":document_id",
+                                    "download"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "a4c62da4-352a-4160-9e78-a96aed37b6b7",
+                                      "key": "account_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Account identifier."
+                                    },
+                                    {
+                                      "id": "e36d3394-c6c5-4853-b702-bb74ae06c182",
+                                      "key": "document_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Document identifier."
+                                    }
+                                  ]
+                                },
+                                "description": "This endpoint allows you to download a document identified by the document_id passed in the header. The returned document is in PDF format.\n\nThe operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.\n"
+                              },
+                              "response": [
+                                {
+                                  "id": "9beb4038-a6d2-4e4d-ae6d-c9c6ad127a4d",
+                                  "name": "Redirect to the pre-signed download link for the document PDF file.\n",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/accounts/:account_id/documents/:document_id/download",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "accounts",
+                                        ":account_id",
+                                        "documents",
+                                        ":document_id",
+                                        "download"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "document_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Moved Permanently",
+                                  "code": 301,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T00:30:28.000Z",
+                                  "updatedAt": "2026-07-28T00:30:28.000Z",
+                                  "uid": "35240-9beb4038-a6d2-4e4d-ae6d-c9c6ad127a4d"
+                                },
+                                {
+                                  "id": "a300b355-be90-4020-b485-8a35621fe451",
+                                  "name": "The document is not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/accounts/:account_id/documents/:document_id/download",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "accounts",
+                                        ":account_id",
+                                        "documents",
+                                        ":document_id",
+                                        "download"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "document_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T00:30:28.000Z",
+                                  "updatedAt": "2026-07-28T00:30:28.000Z",
+                                  "uid": "35240-a300b355-be90-4020-b485-8a35621fe451"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:30:28.000Z",
+                              "updatedAt": "2026-07-28T00:30:28.000Z",
+                              "uid": "35240-f40823d1-f0dd-4fb3-9dd9-8ab1e7a9842a"
+                            }
+                          ],
+                          "id": "2cf80b86-ba9b-4485-bc85-3256177ea81c",
+                          "createdAt": "2026-07-28T00:30:28.000Z",
+                          "updatedAt": "2026-07-28T00:30:28.000Z",
+                          "uid": "35240-2cf80b86-ba9b-4485-bc85-3256177ea81c"
+                        }
+                      ],
+                      "id": "a0ca469d-4fd8-4322-8dee-60ba6375e7c8",
+                      "createdAt": "2026-07-28T00:30:28.000Z",
+                      "updatedAt": "2026-07-28T00:30:28.000Z",
+                      "uid": "35240-a0ca469d-4fd8-4322-8dee-60ba6375e7c8"
+                    },
+                    {
+                      "name": "Return a list of account documents.",
+                      "id": "21acd445-92bd-4c2f-ac3c-2c4d4ec26ac8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/:account_id/documents?start_date=<date>&end_date=<date>&type=tax_id_verification",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            ":account_id",
+                            "documents"
+                          ],
+                          "query": [
+                            {
+                              "description": "optional date value to filter the list (inclusive).",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "optional date value to filter the list (inclusive).",
+                              "key": "end_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "See DocumentType model for reference and explanation of values",
+                              "key": "type",
+                              "value": "tax_id_verification"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "ed66f9c5-7b01-4280-9822-dce24a2cf124",
+                              "key": "account_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Account identifier."
+                            }
+                          ]
+                        },
+                        "description": "This endpoint allows you to query all the documents that belong to a certain account. You can filter by date, or type of document."
+                      },
+                      "response": [
+                        {
+                          "id": "6e120713-4466-43e9-83df-5bec4c1b4f08",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/documents?start_date=<date>&end_date=<date>&type=tax_id_verification",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "documents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "optional date value to filter the list (inclusive).",
+                                  "key": "start_date",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "description": "optional date value to filter the list (inclusive).",
+                                  "key": "end_date",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "description": "See DocumentType model for reference and explanation of values",
+                                  "key": "type",
+                                  "value": "tax_id_verification"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  [\n    {\n      \"document_id\": \"<uuid>\",\n      \"document_type\": \"cip_result\",\n      \"document_date\": \"<dateTime>\"\n    }\n  ],\n  [\n    {\n      \"document_id\": \"<uuid>\",\n      \"document_type\": \"cip_result\",\n      \"document_date\": \"<dateTime>\"\n    }\n  ]\n]",
+                          "createdAt": "2026-07-28T00:30:28.000Z",
+                          "updatedAt": "2026-07-28T00:30:28.000Z",
+                          "uid": "35240-6e120713-4466-43e9-83df-5bec4c1b4f08"
+                        },
+                        {
+                          "id": "9466f13e-625e-4cb7-bc9b-162c1b2c94ef",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/accounts/:account_id/documents?start_date=<date>&end_date=<date>&type=tax_id_verification",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "accounts",
+                                ":account_id",
+                                "documents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "optional date value to filter the list (inclusive).",
+                                  "key": "start_date",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "description": "optional date value to filter the list (inclusive).",
+                                  "key": "end_date",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "description": "See DocumentType model for reference and explanation of values",
+                                  "key": "type",
+                                  "value": "tax_id_verification"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T00:30:28.000Z",
+                          "updatedAt": "2026-07-28T00:30:28.000Z",
+                          "uid": "35240-9466f13e-625e-4cb7-bc9b-162c1b2c94ef"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:28.000Z",
+                      "updatedAt": "2026-07-28T00:30:28.000Z",
+                      "uid": "35240-21acd445-92bd-4c2f-ac3c-2c4d4ec26ac8"
+                    }
+                  ],
+                  "id": "cf9f8383-9091-4f41-8fef-66fa1fae4838",
+                  "createdAt": "2026-07-28T00:30:28.000Z",
+                  "updatedAt": "2026-07-28T00:30:28.000Z",
+                  "uid": "35240-cf9f8383-9091-4f41-8fef-66fa1fae4838"
+                }
+              ],
+              "id": "bab68a8e-a2c8-4421-a1ca-1620fdab20ce",
+              "createdAt": "2026-07-28T00:30:28.000Z",
+              "updatedAt": "2026-07-28T00:30:28.000Z",
+              "uid": "35240-bab68a8e-a2c8-4421-a1ca-1620fdab20ce"
+            }
+          ],
+          "id": "c2d0482b-63e0-41a7-b384-02d1894e7d91",
+          "createdAt": "2026-07-28T00:30:28.000Z",
+          "updatedAt": "2026-07-28T00:30:28.000Z",
+          "uid": "35240-c2d0482b-63e0-41a7-b384-02d1894e7d91"
+        },
+        {
+          "name": "documents",
+          "item": [
+            {
+              "name": "{document_id}",
+              "item": [
+                {
+                  "name": "Download a document file directly",
+                  "id": "fb5463e1-7b32-4fe0-b6f7-10738052f86f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents/:document_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents",
+                        ":document_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4c066ae6-0007-4c63-a8ba-28007e436ef4",
+                          "key": "document_id",
+                          "value": "<uuid>",
+                          "description": "(Required) Document identifier."
+                        }
+                      ]
+                    },
+                    "description": "The operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "28fa24c7-bb69-4719-ae7e-7f48e8db3c97",
+                      "name": "Redirect to the pre-signed download link for the document PDF file.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/documents/:document_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "documents",
+                            ":document_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Moved Permanently",
+                      "code": 301,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T00:30:28.000Z",
+                      "updatedAt": "2026-07-28T00:30:28.000Z",
+                      "uid": "35240-28fa24c7-bb69-4719-ae7e-7f48e8db3c97"
+                    },
+                    {
+                      "id": "18c78937-6c04-4cba-b767-5307f2de5824",
+                      "name": "The document was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/documents/:document_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "documents",
+                            ":document_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T00:30:28.000Z",
+                      "updatedAt": "2026-07-28T00:30:28.000Z",
+                      "uid": "35240-18c78937-6c04-4cba-b767-5307f2de5824"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:28.000Z",
+                  "updatedAt": "2026-07-28T00:30:28.000Z",
+                  "uid": "35240-fb5463e1-7b32-4fe0-b6f7-10738052f86f"
+                }
+              ],
+              "id": "682c7d71-4aee-46f1-8ecd-659f75e8c2bf",
+              "createdAt": "2026-07-28T00:30:28.000Z",
+              "updatedAt": "2026-07-28T00:30:28.000Z",
+              "uid": "35240-682c7d71-4aee-46f1-8ecd-659f75e8c2bf"
+            }
+          ],
+          "id": "95f3e1f5-889a-4e58-9759-659a5ad142a1",
+          "createdAt": "2026-07-28T00:30:28.000Z",
+          "updatedAt": "2026-07-28T00:30:28.000Z",
+          "uid": "35240-95f3e1f5-889a-4e58-9759-659a5ad142a1"
+        }
+      ],
+      "id": "1dfda2fa-46b6-4fc9-948c-87469c22cdd5",
+      "createdAt": "2026-07-28T00:30:28.000Z",
+      "updatedAt": "2026-07-28T00:30:28.000Z",
+      "uid": "35240-1dfda2fa-46b6-4fc9-948c-87469c22cdd5"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

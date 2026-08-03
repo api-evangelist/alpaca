@@ -1,0 +1,590 @@
+{
+  "info": {
+    "_postman_id": "9c8a18c2-687a-4b6e-838f-64b83e6edbbf",
+    "name": "Broker Account Activities Events API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:28.000Z",
+    "updatedAt": "2026-07-28T00:30:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9c8a18c2-687a-4b6e-838f-64b83e6edbbf"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "accounts",
+              "item": [
+                {
+                  "name": "status",
+                  "item": [
+                    {
+                      "name": "Subscribe to account status events (SSE).",
+                      "id": "8b3585ea-80c1-40e3-b95d-ddf89f419a61",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/event-stream"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/accounts/status?since=<date>&until=<date>&since_id=<integer>&until_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "accounts",
+                            "status"
+                          ],
+                          "query": [
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "since",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "until",
+                              "value": "<date>"
+                            },
+                            {
+                              "key": "since_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "until_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "Events API provide event push as well as historical queries via SSE (server sent events).\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can\u2019t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will not return any historic data\n- if `until` or `until_id` reached stream will end (status 200)\n\n---\n\nNote for people using the clients generated from this OAS spec. Currently OAS-3 doesn't have full support for representing SSE style responses from an API, so if you are using a generated client and don't specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.\n\nIf you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "bddaab8f-1cfd-46a5-bf4d-19d4452605a5",
+                          "name": "Connected. Events will now start streaming as long as you keep the connection open.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/event-stream"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/events/accounts/status?since=<date>&until=<date>&since_id=<integer>&until_id=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "events",
+                                "accounts",
+                                "status"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "since",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "until",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "key": "since_id",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "until_id",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/event-stream"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"account_id\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"status_from\": \"DISABLE_PENDING\",\n    \"status_to\": \"KYC_SUBMITTED\",\n    \"reason\": \"<string>\",\n    \"at\": \"<string>\",\n    \"event_id\": \"<integer>\",\n    \"kyc_result\": {\n      \"reject\": {},\n      \"accept\": {},\n      \"indeterminate\": {},\n      \"addidional_information\": \"<string>\"\n    }\n  },\n  {\n    \"account_id\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"status_from\": \"ONBOARDING\",\n    \"status_to\": \"AML_REVIEW\",\n    \"reason\": \"<string>\",\n    \"at\": \"<string>\",\n    \"event_id\": \"<integer>\",\n    \"kyc_result\": {\n      \"reject\": {},\n      \"accept\": {},\n      \"indeterminate\": {},\n      \"addidional_information\": \"<string>\"\n    }\n  }\n]",
+                          "createdAt": "2026-07-28T00:30:29.000Z",
+                          "updatedAt": "2026-07-28T00:30:29.000Z",
+                          "uid": "35240-bddaab8f-1cfd-46a5-bf4d-19d4452605a5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:29.000Z",
+                      "updatedAt": "2026-07-28T00:30:29.000Z",
+                      "uid": "35240-8b3585ea-80c1-40e3-b95d-ddf89f419a61"
+                    }
+                  ],
+                  "id": "5b9173b7-0252-41ae-bd3c-85aace5563df",
+                  "createdAt": "2026-07-28T00:30:29.000Z",
+                  "updatedAt": "2026-07-28T00:30:29.000Z",
+                  "uid": "35240-5b9173b7-0252-41ae-bd3c-85aace5563df"
+                }
+              ],
+              "id": "25470c7d-f46d-490b-a951-99dceb761193",
+              "createdAt": "2026-07-28T00:30:29.000Z",
+              "updatedAt": "2026-07-28T00:30:29.000Z",
+              "uid": "35240-25470c7d-f46d-490b-a951-99dceb761193"
+            },
+            {
+              "name": "journals",
+              "item": [
+                {
+                  "name": "status",
+                  "item": [
+                    {
+                      "name": "Subscribe to journal events (SSE).",
+                      "id": "062400fe-ff18-475d-94bd-01c0e2a469f7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/event-stream"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/journals/status?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "journals",
+                            "status"
+                          ],
+                          "query": [
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "since_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "until_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to journal status updates as they get processed by our backoffice.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can\u2019t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will not return any historic data\n- if `until` or `until_id` reached stream will end (status 200)\n\n---\n\nNote for people using the clients generated from this OAS spec. Currently OAS-3 doesn't have full support for representing SSE style responses from an API, so if you are using a generated client and don't specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.\n\nIf you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3."
+                      },
+                      "response": [
+                        {
+                          "id": "e012f907-3c49-4aa5-a89a-f294080c0721",
+                          "name": "Connected. Events will now start streaming as long as you keep the connection open.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/event-stream"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/events/journals/status?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "events",
+                                "journals",
+                                "status"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "key": "since_id",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "until_id",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/event-stream"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"at\": \"<dateTime>\",\n    \"entry_type\": \"JNLC\",\n    \"event_id\": \"<integer>\",\n    \"journal_id\": \"<uuid>\",\n    \"status_from\": \"rejected\",\n    \"status_to\": \"executed\"\n  },\n  {\n    \"at\": \"<dateTime>\",\n    \"entry_type\": \"JNLC\",\n    \"event_id\": \"<integer>\",\n    \"journal_id\": \"<uuid>\",\n    \"status_from\": \"rejected\",\n    \"status_to\": \"pending\"\n  }\n]",
+                          "createdAt": "2026-07-28T00:30:29.000Z",
+                          "updatedAt": "2026-07-28T00:30:29.000Z",
+                          "uid": "35240-e012f907-3c49-4aa5-a89a-f294080c0721"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:29.000Z",
+                      "updatedAt": "2026-07-28T00:30:29.000Z",
+                      "uid": "35240-062400fe-ff18-475d-94bd-01c0e2a469f7"
+                    }
+                  ],
+                  "id": "dba24922-2162-47b0-b88f-bb0a8452f9f1",
+                  "createdAt": "2026-07-28T00:30:29.000Z",
+                  "updatedAt": "2026-07-28T00:30:29.000Z",
+                  "uid": "35240-dba24922-2162-47b0-b88f-bb0a8452f9f1"
+                }
+              ],
+              "id": "371803d6-ccb8-44d5-af44-5b8410c78361",
+              "createdAt": "2026-07-28T00:30:29.000Z",
+              "updatedAt": "2026-07-28T00:30:29.000Z",
+              "uid": "35240-371803d6-ccb8-44d5-af44-5b8410c78361"
+            },
+            {
+              "name": "transfers",
+              "item": [
+                {
+                  "name": "status",
+                  "item": [
+                    {
+                      "name": "Subscribe to Transfer Events (SSE)",
+                      "id": "75517e34-f2e9-445c-9670-4d7a5d75fdf5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/event-stream"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/transfers/status?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "transfers",
+                            "status"
+                          ],
+                          "query": [
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "since_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "until_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to transfer status updates as they get processed by our backoffice, for both end-user and firm accounts.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can\u2019t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will not return any historic data\n- if `until` or `until_id` reached stream will end (status 200)\n\n---\n\nNote for people using the clients generated from this OAS spec. Currently OAS-3 doesn't have full support for representing SSE style responses from an API, so if you are using a generated client and don't specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.\n\nIf you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3."
+                      },
+                      "response": [
+                        {
+                          "id": "eff05ef9-ea25-49df-9de4-d28a124efcd2",
+                          "name": "Connected. Events will now start streaming as long as you keep the connection open.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/event-stream"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/events/transfers/status?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "events",
+                                "transfers",
+                                "status"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "key": "since_id",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "until_id",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/event-stream"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"account_id\": \"<uuid>\",\n    \"at\": \"<dateTime>\",\n    \"event_id\": \"<integer>\",\n    \"status_from\": \"APPROVAL_PENDING\",\n    \"status_to\": \"QUEUED\",\n    \"transfer_id\": \"<uuid>\"\n  },\n  {\n    \"account_id\": \"<uuid>\",\n    \"at\": \"<dateTime>\",\n    \"event_id\": \"<integer>\",\n    \"status_from\": \"RETURNED\",\n    \"status_to\": \"QUEUED\",\n    \"transfer_id\": \"<uuid>\"\n  }\n]",
+                          "createdAt": "2026-07-28T00:30:29.000Z",
+                          "updatedAt": "2026-07-28T00:30:29.000Z",
+                          "uid": "35240-eff05ef9-ea25-49df-9de4-d28a124efcd2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:29.000Z",
+                      "updatedAt": "2026-07-28T00:30:29.000Z",
+                      "uid": "35240-75517e34-f2e9-445c-9670-4d7a5d75fdf5"
+                    }
+                  ],
+                  "id": "8c53a36f-1cc8-492c-9257-4f688419bb40",
+                  "createdAt": "2026-07-28T00:30:29.000Z",
+                  "updatedAt": "2026-07-28T00:30:29.000Z",
+                  "uid": "35240-8c53a36f-1cc8-492c-9257-4f688419bb40"
+                }
+              ],
+              "id": "520a6a5d-1da4-450c-97f4-1390cf77cb1c",
+              "createdAt": "2026-07-28T00:30:29.000Z",
+              "updatedAt": "2026-07-28T00:30:29.000Z",
+              "uid": "35240-520a6a5d-1da4-450c-97f4-1390cf77cb1c"
+            },
+            {
+              "name": "trades",
+              "item": [
+                {
+                  "name": "Subscribe to Trade Events (SSE)",
+                  "id": "1c611fd7-a84b-4adb-9d48-e587dcfc6713",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/event-stream"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/events/trades?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "events",
+                        "trades"
+                      ],
+                      "query": [
+                        {
+                          "description": "Format: YYYY-MM-DD",
+                          "key": "since",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Format: YYYY-MM-DD",
+                          "key": "until",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "since_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "until_id",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to events related to trade updates. Most market trades sent during market hours are filled instantly; you can listen to limit order updates through this endpoint.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can\u2019t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will not return any historic data\n- if `until` or `until_id` reached stream will end (status 200)\n\n---\n\nNote for people using the clients generated from this OAS spec. Currently OAS-3 doesn't have full support for representing SSE style responses from an API, so if you are using a generated client and don't specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.\n\nIf you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3."
+                  },
+                  "response": [
+                    {
+                      "id": "20c44541-590f-4bce-8e9b-37c6f9f8d37f",
+                      "name": "Connected. Events will now start streaming as long as you keep the connection open.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/event-stream"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/trades?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "trades"
+                          ],
+                          "query": [
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "since_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "until_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/event-stream"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"account_id\": \"<uuid>\",\n    \"at\": \"<dateTime>\",\n    \"event\": \"rejected\",\n    \"event_id\": \"<long>\",\n    \"execution_id\": \"<uuid>\",\n    \"order\": {\n      \"id\": \"<uuid>\",\n      \"symbol\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"crypto\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"oto\",\n      \"order_type\": \"stop\",\n      \"type\": \"market\",\n      \"side\": \"undisclosed\",\n      \"time_in_force\": \"opg\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_price\": \"<string>\",\n      \"trail_percent\": \"<string>\",\n      \"hwm\": \"<string>\",\n      \"commission\": \"<string>\"\n    },\n    \"timestamp\": \"<dateTime>\"\n  },\n  {\n    \"account_id\": \"<uuid>\",\n    \"at\": \"<dateTime>\",\n    \"event\": \"fill\",\n    \"event_id\": \"<long>\",\n    \"execution_id\": \"<uuid>\",\n    \"order\": {\n      \"id\": \"<uuid>\",\n      \"symbol\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"crypto\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"simple\",\n      \"order_type\": \"stop_limit\",\n      \"type\": \"trailing_stop\",\n      \"side\": \"cross_short\",\n      \"time_in_force\": \"opg\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"pending_cancel\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_price\": \"<string>\",\n      \"trail_percent\": \"<string>\",\n      \"hwm\": \"<string>\",\n      \"commission\": \"<string>\"\n    },\n    \"timestamp\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-07-28T00:30:29.000Z",
+                      "updatedAt": "2026-07-28T00:30:29.000Z",
+                      "uid": "35240-20c44541-590f-4bce-8e9b-37c6f9f8d37f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:29.000Z",
+                  "updatedAt": "2026-07-28T00:30:29.000Z",
+                  "uid": "35240-1c611fd7-a84b-4adb-9d48-e587dcfc6713"
+                }
+              ],
+              "id": "21b2c268-61aa-42bb-bad3-a7aa497e7e45",
+              "createdAt": "2026-07-28T00:30:29.000Z",
+              "updatedAt": "2026-07-28T00:30:29.000Z",
+              "uid": "35240-21b2c268-61aa-42bb-bad3-a7aa497e7e45"
+            }
+          ],
+          "id": "d43557a3-15e9-488a-bb34-9d4f744fda4b",
+          "createdAt": "2026-07-28T00:30:29.000Z",
+          "updatedAt": "2026-07-28T00:30:29.000Z",
+          "uid": "35240-d43557a3-15e9-488a-bb34-9d4f744fda4b"
+        }
+      ],
+      "id": "934d7cb6-5ec0-4ba0-8e1b-a2a46d1e7cf5",
+      "createdAt": "2026-07-28T00:30:29.000Z",
+      "updatedAt": "2026-07-28T00:30:29.000Z",
+      "uid": "35240-934d7cb6-5ec0-4ba0-8e1b-a2a46d1e7cf5"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

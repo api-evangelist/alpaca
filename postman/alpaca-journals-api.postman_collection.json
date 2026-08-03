@@ -1,0 +1,891 @@
+{
+  "info": {
+    "_postman_id": "ab089a0c-dbe2-4fb7-8217-4a3b1593b3b9",
+    "name": "Broker Account Activities Journals API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:30.000Z",
+    "updatedAt": "2026-07-28T00:30:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ab089a0c-dbe2-4fb7-8217-4a3b1593b3b9"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "journals",
+              "item": [
+                {
+                  "name": "status",
+                  "item": [
+                    {
+                      "name": "Subscribe to journal events (SSE).",
+                      "id": "abb6581f-38a9-4535-93ab-ca5848a800d3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/event-stream"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/journals/status?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "journals",
+                            "status"
+                          ],
+                          "query": [
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Format: YYYY-MM-DD",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "since_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "until_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to journal status updates as they get processed by our backoffice.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can\u2019t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will not return any historic data\n- if `until` or `until_id` reached stream will end (status 200)\n\n---\n\nNote for people using the clients generated from this OAS spec. Currently OAS-3 doesn't have full support for representing SSE style responses from an API, so if you are using a generated client and don't specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.\n\nIf you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3."
+                      },
+                      "response": [
+                        {
+                          "id": "1d7136fe-ff89-44da-8997-3d3bfce6a26e",
+                          "name": "Connected. Events will now start streaming as long as you keep the connection open.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/event-stream"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/events/journals/status?since=<dateTime>&until=<dateTime>&since_id=<integer>&until_id=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "events",
+                                "journals",
+                                "status"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Format: YYYY-MM-DD",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "key": "since_id",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "until_id",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/event-stream"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"at\": \"<dateTime>\",\n    \"entry_type\": \"JNLS\",\n    \"event_id\": \"<integer>\",\n    \"journal_id\": \"<uuid>\",\n    \"status_from\": \"canceled\",\n    \"status_to\": \"canceled\"\n  },\n  {\n    \"at\": \"<dateTime>\",\n    \"entry_type\": \"JNLS\",\n    \"event_id\": \"<integer>\",\n    \"journal_id\": \"<uuid>\",\n    \"status_from\": \"pending\",\n    \"status_to\": \"executed\"\n  }\n]",
+                          "createdAt": "2026-07-28T00:30:31.000Z",
+                          "updatedAt": "2026-07-28T00:30:31.000Z",
+                          "uid": "35240-1d7136fe-ff89-44da-8997-3d3bfce6a26e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:31.000Z",
+                      "updatedAt": "2026-07-28T00:30:31.000Z",
+                      "uid": "35240-abb6581f-38a9-4535-93ab-ca5848a800d3"
+                    }
+                  ],
+                  "id": "ab1ad35d-3473-4ef7-bb0b-01fdf2615347",
+                  "createdAt": "2026-07-28T00:30:31.000Z",
+                  "updatedAt": "2026-07-28T00:30:31.000Z",
+                  "uid": "35240-ab1ad35d-3473-4ef7-bb0b-01fdf2615347"
+                }
+              ],
+              "id": "8c865b98-8dce-419a-8d8e-be8c91ee1769",
+              "createdAt": "2026-07-28T00:30:31.000Z",
+              "updatedAt": "2026-07-28T00:30:31.000Z",
+              "uid": "35240-8c865b98-8dce-419a-8d8e-be8c91ee1769"
+            }
+          ],
+          "id": "aac9aa7b-1f8f-4012-a8a1-46d8bca2fb92",
+          "createdAt": "2026-07-28T00:30:31.000Z",
+          "updatedAt": "2026-07-28T00:30:31.000Z",
+          "uid": "35240-aac9aa7b-1f8f-4012-a8a1-46d8bca2fb92"
+        },
+        {
+          "name": "journals",
+          "item": [
+            {
+              "name": "{journal_id}",
+              "item": [
+                {
+                  "name": "Cancel a pending journal.",
+                  "id": "f7ebd25f-60db-45db-ad4c-3305d08b2742",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/journals/:journal_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "journals",
+                        ":journal_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "8a4b659d-6176-431f-856a-4ee7978bb6ab",
+                          "key": "journal_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "You can only delete a journal if the journal is still in a pending state, if a journal is executed you will not be able to delete. The alternative is to create a mirror journal entry to reverse the flow of funds."
+                  },
+                  "response": [
+                    {
+                      "id": "8d9b46ed-ba03-4c09-b388-160627a1fde7",
+                      "name": "The cancel request succeeded. (No-content)\n",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/journals/:journal_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "journals",
+                            ":journal_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journal_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T00:30:31.000Z",
+                      "updatedAt": "2026-07-28T00:30:31.000Z",
+                      "uid": "35240-8d9b46ed-ba03-4c09-b388-160627a1fde7"
+                    },
+                    {
+                      "id": "f3bf3221-182f-4314-b372-c11451b991da",
+                      "name": "The journal is not found.\n",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/journals/:journal_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "journals",
+                            ":journal_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journal_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T00:30:31.000Z",
+                      "updatedAt": "2026-07-28T00:30:31.000Z",
+                      "uid": "35240-f3bf3221-182f-4314-b372-c11451b991da"
+                    },
+                    {
+                      "id": "60f94b3a-5678-42d0-8153-dbfb797d151d",
+                      "name": "The journal is not in the pending status.\n",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/journals/:journal_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "journals",
+                            ":journal_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journal_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T00:30:31.000Z",
+                      "updatedAt": "2026-07-28T00:30:31.000Z",
+                      "uid": "35240-60f94b3a-5678-42d0-8153-dbfb797d151d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:31.000Z",
+                  "updatedAt": "2026-07-28T00:30:31.000Z",
+                  "uid": "35240-f7ebd25f-60db-45db-ad4c-3305d08b2742"
+                }
+              ],
+              "id": "5b8fbc89-3102-4d35-bafa-1b2510254f7d",
+              "createdAt": "2026-07-28T00:30:31.000Z",
+              "updatedAt": "2026-07-28T00:30:31.000Z",
+              "uid": "35240-5b8fbc89-3102-4d35-bafa-1b2510254f7d"
+            },
+            {
+              "name": "batch",
+              "item": [
+                {
+                  "name": "Create a Batch Journal Transaction (One-to-Many)",
+                  "id": "afb04e34-b285-48e8-8a3e-e854a5e50487",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"entry_type\": \"JNLC\",\n  \"from_account\": \"<uuid>\",\n  \"entries\": [\n    {\n      \"to_account\": \"<uuid>\",\n      \"amount\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/journals/batch",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "journals",
+                        "batch"
+                      ]
+                    },
+                    "description": "You can create a batch of journal requests by using this endpoint. This is enabled on JNLC type Journals for now only.\n\nEvery single request must be valid for the entire batch operation to succeed.\n\nIn the case of a successful request, the response will contain an array of journal objects with an extra attribute error_message in the case when a specific account fails to receive a journal."
+                  },
+                  "response": [
+                    {
+                      "id": "53ca3d47-506e-424e-b952-5328700df6fc",
+                      "name": "an array of journal objects with an extra attribute error_message in the case when a specific account fails to receive a journal.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"entry_type\": \"JNLC\",\n  \"from_account\": \"<uuid>\",\n  \"entries\": [\n    {\n      \"to_account\": \"<uuid>\",\n      \"amount\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/journals/batch",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "journals",
+                            "batch"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"entry_type\": \"JNLC\",\n    \"error_message\": \"<string>\",\n    \"from_account\": \"<uuid>\",\n    \"id\": \"<uuid>\",\n    \"price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"settle_date\": \"<date>\",\n    \"symbol\": \"<string>\",\n    \"to_account\": \"<uuid>\",\n    \"status\": \"queued\"\n  },\n  {\n    \"entry_type\": \"JNLS\",\n    \"error_message\": \"<string>\",\n    \"from_account\": \"<uuid>\",\n    \"id\": \"<uuid>\",\n    \"price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"settle_date\": \"<date>\",\n    \"symbol\": \"<string>\",\n    \"to_account\": \"<uuid>\",\n    \"status\": \"pending\"\n  }\n]",
+                      "createdAt": "2026-07-28T00:30:31.000Z",
+                      "updatedAt": "2026-07-28T00:30:31.000Z",
+                      "uid": "35240-53ca3d47-506e-424e-b952-5328700df6fc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:31.000Z",
+                  "updatedAt": "2026-07-28T00:30:31.000Z",
+                  "uid": "35240-afb04e34-b285-48e8-8a3e-e854a5e50487"
+                }
+              ],
+              "id": "260d4e44-a4cb-46f4-b302-34cd8997d131",
+              "createdAt": "2026-07-28T00:30:31.000Z",
+              "updatedAt": "2026-07-28T00:30:31.000Z",
+              "uid": "35240-260d4e44-a4cb-46f4-b302-34cd8997d131"
+            },
+            {
+              "name": "Return a list of requested journals.",
+              "id": "c5c3fe38-d888-401f-93f3-7fb41cb82d9b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/journals?after=<date>&before=<date>&status=deleted&entry_type=JNLS&to_account=<uuid>&from_account=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "journals"
+                  ],
+                  "query": [
+                    {
+                      "description": "By journal creation date. Format: 2020-01-01",
+                      "key": "after",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "By journal creation date. Format: 2020-01-01",
+                      "key": "before",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "See the JournalStatus model for more info",
+                      "key": "status",
+                      "value": "deleted"
+                    },
+                    {
+                      "description": "JNLC or JNLS",
+                      "key": "entry_type",
+                      "value": "JNLS"
+                    },
+                    {
+                      "description": "The account id that received the journal",
+                      "key": "to_account",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "The account id that initiated the journal",
+                      "key": "from_account",
+                      "value": "<uuid>"
+                    }
+                  ]
+                },
+                "description": "Returns an array of journal objects."
+              },
+              "response": [
+                {
+                  "id": "419ed44a-9a0f-4623-ae14-41e1f968e6a1",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/journals?after=<date>&before=<date>&status=deleted&entry_type=JNLS&to_account=<uuid>&from_account=<uuid>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "journals"
+                      ],
+                      "query": [
+                        {
+                          "description": "By journal creation date. Format: 2020-01-01",
+                          "key": "after",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "By journal creation date. Format: 2020-01-01",
+                          "key": "before",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "See the JournalStatus model for more info",
+                          "key": "status",
+                          "value": "deleted"
+                        },
+                        {
+                          "description": "JNLC or JNLS",
+                          "key": "entry_type",
+                          "value": "JNLS"
+                        },
+                        {
+                          "description": "The account id that received the journal",
+                          "key": "to_account",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "description": "The account id that initiated the journal",
+                          "key": "from_account",
+                          "value": "<uuid>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"entry_type\": \"JNLC\",\n    \"from_account\": \"<uuid>\",\n    \"id\": \"<uuid>\",\n    \"price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"settle_date\": \"<date>\",\n    \"symbol\": \"<string>\",\n    \"to_account\": \"<uuid>\",\n    \"status\": \"executed\"\n  },\n  {\n    \"entry_type\": \"JNLS\",\n    \"from_account\": \"<uuid>\",\n    \"id\": \"<uuid>\",\n    \"price\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"settle_date\": \"<date>\",\n    \"symbol\": \"<string>\",\n    \"to_account\": \"<uuid>\",\n    \"status\": \"pending\"\n  }\n]",
+                  "createdAt": "2026-07-28T00:30:31.000Z",
+                  "updatedAt": "2026-07-28T00:30:31.000Z",
+                  "uid": "35240-419ed44a-9a0f-4623-ae14-41e1f968e6a1"
+                }
+              ],
+              "createdAt": "2026-07-28T00:30:31.000Z",
+              "updatedAt": "2026-07-28T00:30:31.000Z",
+              "uid": "35240-c5c3fe38-d888-401f-93f3-7fb41cb82d9b"
+            },
+            {
+              "name": "Create a Journal.",
+              "id": "9c9aeab6-bd3c-47c6-9f2d-0417331114ec",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to_account\": \"<uuid>\",\n  \"from_account\": \"<uuid>\",\n  \"entry_type\": \"JNLC\",\n  \"amount\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"description\": \"<string>\",\n  \"transmitter_name\": \"<string>\",\n  \"transmitter_account_number\": \"<string>\",\n  \"transmitter_address\": \"<string>\",\n  \"transmitter_financial_institution\": \"<string>\",\n  \"transmitter_timestamp\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/journals",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "journals"
+                  ]
+                },
+                "description": "A journal can be JNLC (move cash) or JNLS (move shares), dictated by `entry_type`. Generally, journal requests are subject to approval and starts from the `pending` status. The status changes are propagated through the Event API. Under certain conditions agreed for the partner, such journal transactions that meet the criteria are executed right away.\n"
+              },
+              "response": [
+                {
+                  "id": "50a6102d-7283-49ce-9bb8-15397d6ff519",
+                  "name": "The New Journal object",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"to_account\": \"<uuid>\",\n  \"from_account\": \"<uuid>\",\n  \"entry_type\": \"JNLC\",\n  \"amount\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"description\": \"<string>\",\n  \"transmitter_name\": \"<string>\",\n  \"transmitter_account_number\": \"<string>\",\n  \"transmitter_address\": \"<string>\",\n  \"transmitter_financial_institution\": \"<string>\",\n  \"transmitter_timestamp\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/journals",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "journals"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"entry_type\": \"JNLC\",\n  \"from_account\": \"<uuid>\",\n  \"id\": \"<uuid>\",\n  \"price\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"settle_date\": \"<date>\",\n  \"symbol\": \"<string>\",\n  \"to_account\": \"<uuid>\",\n  \"status\": \"queued\"\n}",
+                  "createdAt": "2026-07-28T00:30:31.000Z",
+                  "updatedAt": "2026-07-28T00:30:31.000Z",
+                  "uid": "35240-50a6102d-7283-49ce-9bb8-15397d6ff519"
+                },
+                {
+                  "id": "9ecf4c02-86d8-4daa-b20d-02054bbed966",
+                  "name": "One of the parameters is invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"to_account\": \"<uuid>\",\n  \"from_account\": \"<uuid>\",\n  \"entry_type\": \"JNLC\",\n  \"amount\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"description\": \"<string>\",\n  \"transmitter_name\": \"<string>\",\n  \"transmitter_account_number\": \"<string>\",\n  \"transmitter_address\": \"<string>\",\n  \"transmitter_financial_institution\": \"<string>\",\n  \"transmitter_timestamp\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/journals",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "journals"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T00:30:31.000Z",
+                  "updatedAt": "2026-07-28T00:30:31.000Z",
+                  "uid": "35240-9ecf4c02-86d8-4daa-b20d-02054bbed966"
+                },
+                {
+                  "id": "5e14d222-aec1-499c-9e73-b2fd0a1b2c6b",
+                  "name": "The amount requested to move is not available.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"to_account\": \"<uuid>\",\n  \"from_account\": \"<uuid>\",\n  \"entry_type\": \"JNLC\",\n  \"amount\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"description\": \"<string>\",\n  \"transmitter_name\": \"<string>\",\n  \"transmitter_account_number\": \"<string>\",\n  \"transmitter_address\": \"<string>\",\n  \"transmitter_financial_institution\": \"<string>\",\n  \"transmitter_timestamp\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/journals",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "journals"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T00:30:31.000Z",
+                  "updatedAt": "2026-07-28T00:30:31.000Z",
+                  "uid": "35240-5e14d222-aec1-499c-9e73-b2fd0a1b2c6b"
+                },
+                {
+                  "id": "c3cbb711-49bd-421e-8bea-2333f343dd0a",
+                  "name": "One of the account is not found.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"to_account\": \"<uuid>\",\n  \"from_account\": \"<uuid>\",\n  \"entry_type\": \"JNLC\",\n  \"amount\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"description\": \"<string>\",\n  \"transmitter_name\": \"<string>\",\n  \"transmitter_account_number\": \"<string>\",\n  \"transmitter_address\": \"<string>\",\n  \"transmitter_financial_institution\": \"<string>\",\n  \"transmitter_timestamp\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/journals",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "journals"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T00:30:31.000Z",
+                  "updatedAt": "2026-07-28T00:30:31.000Z",
+                  "uid": "35240-c3cbb711-49bd-421e-8bea-2333f343dd0a"
+                }
+              ],
+              "createdAt": "2026-07-28T00:30:31.000Z",
+              "updatedAt": "2026-07-28T00:30:31.000Z",
+              "uid": "35240-9c9aeab6-bd3c-47c6-9f2d-0417331114ec"
+            }
+          ],
+          "id": "e7482f77-3a9d-402e-9e4c-4a7b7422bf43",
+          "createdAt": "2026-07-28T00:30:31.000Z",
+          "updatedAt": "2026-07-28T00:30:31.000Z",
+          "uid": "35240-e7482f77-3a9d-402e-9e4c-4a7b7422bf43"
+        }
+      ],
+      "id": "d07c9c5e-533e-4af0-a287-2ae63f9a7d44",
+      "createdAt": "2026-07-28T00:30:31.000Z",
+      "updatedAt": "2026-07-28T00:30:31.000Z",
+      "uid": "35240-d07c9c5e-533e-4af0-a287-2ae63f9a7d44"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

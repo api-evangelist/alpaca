@@ -1,0 +1,269 @@
+{
+  "info": {
+    "_postman_id": "318e7fa0-83f9-4ca0-890d-661b9e7264cd",
+    "name": "Broker Account Activities Calendar API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:19.000Z",
+    "updatedAt": "2026-07-28T00:30:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-318e7fa0-83f9-4ca0-890d-661b9e7264cd"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "calendar",
+          "item": [
+            {
+              "name": "Query market calendar",
+              "id": "7a3a79ef-ab97-403d-ac7a-82135f494115",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/calendar?start=<date>&end=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "calendar"
+                  ],
+                  "query": [
+                    {
+                      "description": "The first date to retrieve data for. (Inclusive) in YYYY-MM-DD format",
+                      "key": "start",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "The last date to retrieve data for. (Inclusive) in YYYY-MM-DD format",
+                      "key": "end",
+                      "value": "<date>"
+                    }
+                  ]
+                },
+                "description": "The calendar API serves the full list of market days from 1970 to 2029. It can also be queried by specifying a start and/or end time to narrow down the results. In addition to the dates, the response also contains the specific open and close times for the market days, taking into account early closures."
+              },
+              "response": [
+                {
+                  "id": "b30d327e-3833-46ab-902d-16535d2220d6",
+                  "name": "Returns the calendar object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/calendar?start=<date>&end=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "calendar"
+                      ],
+                      "query": [
+                        {
+                          "description": "The first date to retrieve data for. (Inclusive) in YYYY-MM-DD format",
+                          "key": "start",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "The last date to retrieve data for. (Inclusive) in YYYY-MM-DD format",
+                          "key": "end",
+                          "value": "<date>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"date\": \"<date>\",\n    \"open\": \"<string>\",\n    \"close\": \"<string>\",\n    \"session_open\": \"<string>\",\n    \"session_close\": \"<string>\"\n  },\n  {\n    \"date\": \"<date>\",\n    \"open\": \"<string>\",\n    \"close\": \"<string>\",\n    \"session_open\": \"<string>\",\n    \"session_close\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T00:30:19.000Z",
+                  "updatedAt": "2026-07-28T00:30:19.000Z",
+                  "uid": "35240-b30d327e-3833-46ab-902d-16535d2220d6"
+                }
+              ],
+              "createdAt": "2026-07-28T00:30:19.000Z",
+              "updatedAt": "2026-07-28T00:30:19.000Z",
+              "uid": "35240-7a3a79ef-ab97-403d-ac7a-82135f494115"
+            }
+          ],
+          "id": "a563bb33-b891-4060-9113-bef1c7039fba",
+          "createdAt": "2026-07-28T00:30:19.000Z",
+          "updatedAt": "2026-07-28T00:30:19.000Z",
+          "uid": "35240-a563bb33-b891-4060-9113-bef1c7039fba"
+        }
+      ],
+      "id": "bb7fd63b-f692-4c9e-83a6-a452413fe914",
+      "createdAt": "2026-07-28T00:30:19.000Z",
+      "updatedAt": "2026-07-28T00:30:19.000Z",
+      "uid": "35240-bb7fd63b-f692-4c9e-83a6-a452413fe914"
+    },
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "calendar",
+          "item": [
+            {
+              "name": "Get Market Calendar info",
+              "id": "34695f08-38af-4caf-8f68-835f4f6c4c19",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/calendar?start=<dateTime>&end=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "calendar"
+                  ],
+                  "query": [
+                    {
+                      "description": "The first date to retrieve data for (inclusive)",
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The last date to retrieve data for (inclusive)",
+                      "key": "end",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                },
+                "description": "Returns the market calendar."
+              },
+              "response": [
+                {
+                  "id": "e22798b5-8e30-4f2a-ae73-d9f66efb4e86",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/calendar?start=<dateTime>&end=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "calendar"
+                      ],
+                      "query": [
+                        {
+                          "description": "The first date to retrieve data for (inclusive)",
+                          "key": "start",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "The last date to retrieve data for (inclusive)",
+                          "key": "end",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"date\": \"<string>\",\n    \"open\": \"<string>\",\n    \"close\": \"<string>\",\n    \"session_open\": \"<string>\",\n    \"session_close\": \"<string>\"\n  },\n  {\n    \"date\": \"<string>\",\n    \"open\": \"<string>\",\n    \"close\": \"<string>\",\n    \"session_open\": \"<string>\",\n    \"session_close\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T00:30:19.000Z",
+                  "updatedAt": "2026-07-28T00:30:19.000Z",
+                  "uid": "35240-e22798b5-8e30-4f2a-ae73-d9f66efb4e86"
+                }
+              ],
+              "createdAt": "2026-07-28T00:30:19.000Z",
+              "updatedAt": "2026-07-28T00:30:19.000Z",
+              "uid": "35240-34695f08-38af-4caf-8f68-835f4f6c4c19"
+            }
+          ],
+          "id": "9f044d2b-986a-48ff-b7ec-7cd6de98214c",
+          "createdAt": "2026-07-28T00:30:19.000Z",
+          "updatedAt": "2026-07-28T00:30:19.000Z",
+          "uid": "35240-9f044d2b-986a-48ff-b7ec-7cd6de98214c"
+        }
+      ],
+      "id": "2d024bc8-383d-45fb-8521-3cc31b2927ab",
+      "createdAt": "2026-07-28T00:30:19.000Z",
+      "updatedAt": "2026-07-28T00:30:19.000Z",
+      "uid": "35240-2d024bc8-383d-45fb-8521-3cc31b2927ab"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}

@@ -1,0 +1,2253 @@
+{
+  "info": {
+    "_postman_id": "d104e30c-5c1e-4433-8131-18bb366757b7",
+    "name": "Broker Account Activities Crypto Pricing Data API API",
+    "description": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:30:26.000Z",
+    "updatedAt": "2026-07-28T00:30:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d104e30c-5c1e-4433-8131-18bb366757b7"
+  },
+  "item": [
+    {
+      "name": "v1beta1",
+      "item": [
+        {
+          "name": "crypto",
+          "item": [
+            {
+              "name": "trades",
+              "item": [
+                {
+                  "name": "latest",
+                  "item": [
+                    {
+                      "name": "Get Latest Trade data for multiple Crypto symbols",
+                      "id": "8cfbd46d-c185-4f70-865a-42828e7cc90a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/trades/latest?symbols=<string>&exchange=ERSX",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            "trades",
+                            "latest"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                              "key": "symbols",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchange",
+                              "value": "ERSX"
+                            }
+                          ]
+                        },
+                        "description": "Provides latest trade data for a list of given crypto symbols. "
+                      },
+                      "response": [
+                        {
+                          "id": "9f16fd3c-55e8-489d-b25c-0c4af1d94f8e",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/trades/latest?symbols=<string>&exchange=ERSX",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                "trades",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                                  "key": "symbols",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchange",
+                                  "value": "ERSX"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"trades\": {\n    \"quis1ec\": {\n      \"x\": \"<string>\",\n      \"i\": \"<long>\",\n      \"t\": \"<dateTime>\",\n      \"p\": \"<number>\",\n      \"s\": \"<number>\",\n      \"c\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"z\": \"<string>\",\n      \"tks\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T00:30:27.000Z",
+                          "updatedAt": "2026-07-28T00:30:27.000Z",
+                          "uid": "35240-9f16fd3c-55e8-489d-b25c-0c4af1d94f8e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-8cfbd46d-c185-4f70-865a-42828e7cc90a"
+                    }
+                  ],
+                  "id": "9732873b-94a7-4a9f-a665-306df52954dc",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-9732873b-94a7-4a9f-a665-306df52954dc"
+                },
+                {
+                  "name": "Get Trade data for multiple crypto symbols",
+                  "id": "b6b0cc88-f524-4afd-b004-504f8733ecd0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1beta1/crypto/trades?start=<dateTime>&end=<dateTime>&exchanges=<string>&limit=<integer>&page_token=<string>&symbols=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1beta1",
+                        "crypto",
+                        "trades"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                          "key": "start",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                          "key": "end",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                          "key": "exchanges",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                          "key": "page_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                          "key": "symbols",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "The Multi Trades API provides historical trade data for a list of given crypto symbols on a specified date. Returns trades for the queried crypto symbols.\n\nReturned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for them."
+                  },
+                  "response": [
+                    {
+                      "id": "5528885f-3a01-4459-b7a6-7590ea3bb802",
+                      "name": "Successful response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/trades?start=<dateTime>&end=<dateTime>&exchanges=<string>&limit=<integer>&page_token=<string>&symbols=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            "trades"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchanges",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                              "key": "page_token",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                              "key": "symbols",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"trades\": {\n    \"in6\": [\n      {\n        \"x\": \"<string>\",\n        \"i\": \"<long>\",\n        \"t\": \"<dateTime>\",\n        \"p\": \"<number>\",\n        \"s\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"z\": \"<string>\",\n        \"tks\": \"<string>\"\n      },\n      {\n        \"x\": \"<string>\",\n        \"i\": \"<long>\",\n        \"t\": \"<dateTime>\",\n        \"p\": \"<number>\",\n        \"s\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"z\": \"<string>\",\n        \"tks\": \"<string>\"\n      }\n    ],\n    \"occaecat_1a4\": [\n      {\n        \"x\": \"<string>\",\n        \"i\": \"<long>\",\n        \"t\": \"<dateTime>\",\n        \"p\": \"<number>\",\n        \"s\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"z\": \"<string>\",\n        \"tks\": \"<string>\"\n      },\n      {\n        \"x\": \"<string>\",\n        \"i\": \"<long>\",\n        \"t\": \"<dateTime>\",\n        \"p\": \"<number>\",\n        \"s\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"z\": \"<string>\",\n        \"tks\": \"<string>\"\n      }\n    ],\n    \"elitd4\": [\n      {\n        \"x\": \"<string>\",\n        \"i\": \"<long>\",\n        \"t\": \"<dateTime>\",\n        \"p\": \"<number>\",\n        \"s\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"z\": \"<string>\",\n        \"tks\": \"<string>\"\n      },\n      {\n        \"x\": \"<string>\",\n        \"i\": \"<long>\",\n        \"t\": \"<dateTime>\",\n        \"p\": \"<number>\",\n        \"s\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"z\": \"<string>\",\n        \"tks\": \"<string>\"\n      }\n    ],\n    \"aliquip_e\": [\n      {\n        \"x\": \"<string>\",\n        \"i\": \"<long>\",\n        \"t\": \"<dateTime>\",\n        \"p\": \"<number>\",\n        \"s\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"z\": \"<string>\",\n        \"tks\": \"<string>\"\n      },\n      {\n        \"x\": \"<string>\",\n        \"i\": \"<long>\",\n        \"t\": \"<dateTime>\",\n        \"p\": \"<number>\",\n        \"s\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"z\": \"<string>\",\n        \"tks\": \"<string>\"\n      }\n    ]\n  },\n  \"next_page_token\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T00:30:27.000Z",
+                      "updatedAt": "2026-07-28T00:30:27.000Z",
+                      "uid": "35240-5528885f-3a01-4459-b7a6-7590ea3bb802"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-b6b0cc88-f524-4afd-b004-504f8733ecd0"
+                }
+              ],
+              "id": "0d1e07b1-def0-412e-818a-3f60a57ea705",
+              "createdAt": "2026-07-28T00:30:26.000Z",
+              "updatedAt": "2026-07-28T00:30:26.000Z",
+              "uid": "35240-0d1e07b1-def0-412e-818a-3f60a57ea705"
+            },
+            {
+              "name": "{symbol}",
+              "item": [
+                {
+                  "name": "trades",
+                  "item": [
+                    {
+                      "name": "latest",
+                      "item": [
+                        {
+                          "name": "Latest Trades",
+                          "id": "dbd06a98-ccf6-422b-b838-f216c0f1a246",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/trades/latest?exchange=ERSX",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                ":symbol",
+                                "trades",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchange",
+                                  "value": "ERSX"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f0ae58d0-ddf9-4a00-b06b-ddfffacbf8eb",
+                                  "key": "symbol",
+                                  "value": "<string>",
+                                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                                }
+                              ]
+                            },
+                            "description": "The Latest Trades API provides the latest historical trade data for a given crypto symbol. Returns trades for the queried crypto symbol."
+                          },
+                          "response": [
+                            {
+                              "id": "d9601002-6864-4c97-9349-80370915db25",
+                              "name": "Successful response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/trades/latest?exchange=ERSX",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1beta1",
+                                    "crypto",
+                                    ":symbol",
+                                    "trades",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                      "key": "exchange",
+                                      "value": "ERSX"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "symbol"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"symbol\": \"<string>\",\n  \"trade\": {\n    \"x\": \"<string>\",\n    \"i\": \"<long>\",\n    \"t\": \"<dateTime>\",\n    \"p\": \"<number>\",\n    \"s\": \"<number>\",\n    \"c\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"z\": \"<string>\",\n    \"tks\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T00:30:27.000Z",
+                              "updatedAt": "2026-07-28T00:30:27.000Z",
+                              "uid": "35240-d9601002-6864-4c97-9349-80370915db25"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:26.000Z",
+                          "updatedAt": "2026-07-28T00:30:26.000Z",
+                          "uid": "35240-dbd06a98-ccf6-422b-b838-f216c0f1a246"
+                        }
+                      ],
+                      "id": "3e1e7fe2-1b5f-4b74-8df3-c3840cfda801",
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-3e1e7fe2-1b5f-4b74-8df3-c3840cfda801"
+                    },
+                    {
+                      "name": "Get Trade data for a crypto symbol",
+                      "id": "787818f5-9b76-40c9-9426-3d45d64f66e8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/trades?start=<dateTime>&end=<dateTime>&exchanges=<string>&limit=<integer>&page_token=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            ":symbol",
+                            "trades"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchanges",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                              "key": "page_token",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "5ce95be0-5a6c-4107-8f68-b8c70ec76a78",
+                              "key": "symbol",
+                              "value": "<string>",
+                              "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                            }
+                          ]
+                        },
+                        "description": "The Trades API provides historical trade data for a given crypto symbol on a specified date. Returns trades for the queried crypto symbol"
+                      },
+                      "response": [
+                        {
+                          "id": "1218e544-ab04-4e5c-aed0-93ea4d46ff1e",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/trades?start=<dateTime>&end=<dateTime>&exchanges=<string>&limit=<integer>&page_token=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                ":symbol",
+                                "trades"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                                  "key": "start",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                                  "key": "end",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchanges",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                                  "key": "page_token",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "symbol"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"trades\": [\n    {\n      \"x\": \"<string>\",\n      \"i\": \"<long>\",\n      \"t\": \"<dateTime>\",\n      \"p\": \"<number>\",\n      \"s\": \"<number>\",\n      \"c\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"z\": \"<string>\",\n      \"tks\": \"<string>\"\n    },\n    {\n      \"x\": \"<string>\",\n      \"i\": \"<long>\",\n      \"t\": \"<dateTime>\",\n      \"p\": \"<number>\",\n      \"s\": \"<number>\",\n      \"c\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"z\": \"<string>\",\n      \"tks\": \"<string>\"\n    }\n  ],\n  \"symbol\": \"<string>\",\n  \"next_page_token\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:27.000Z",
+                          "updatedAt": "2026-07-28T00:30:27.000Z",
+                          "uid": "35240-1218e544-ab04-4e5c-aed0-93ea4d46ff1e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-787818f5-9b76-40c9-9426-3d45d64f66e8"
+                    }
+                  ],
+                  "id": "f3deb630-447f-4e07-a543-89aedc6a217a",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-f3deb630-447f-4e07-a543-89aedc6a217a"
+                },
+                {
+                  "name": "bars",
+                  "item": [
+                    {
+                      "name": "latest",
+                      "item": [
+                        {
+                          "name": "Get Latest Bar data for a Crypto symbol",
+                          "id": "6f6a47b9-5b5e-474b-957b-c5f626a343a5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/bars/latest?exchange=ERSX",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                ":symbol",
+                                "bars",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchange",
+                                  "value": "ERSX"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2d82331e-2b52-45c3-a64d-4da55ac2933e",
+                                  "key": "symbol",
+                                  "value": "<string>",
+                                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                                }
+                              ]
+                            },
+                            "description": "Gets latest historical bar data for the requested crypto symbol for a specific exchange"
+                          },
+                          "response": [
+                            {
+                              "id": "27653c2e-6fe8-47dd-957b-acff49d3230f",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/bars/latest?exchange=ERSX",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1beta1",
+                                    "crypto",
+                                    ":symbol",
+                                    "bars",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                      "key": "exchange",
+                                      "value": "ERSX"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "symbol"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"symbol\": \"<string>\",\n  \"bar\": {\n    \"t\": \"<dateTime>\",\n    \"o\": \"<number>\",\n    \"h\": \"<number>\",\n    \"l\": \"<number>\",\n    \"c\": \"<number>\",\n    \"v\": \"<number>\",\n    \"x\": \"FTXU\",\n    \"n\": \"<long>\",\n    \"vw\": \"<number>\"\n  }\n}",
+                              "createdAt": "2026-07-28T00:30:27.000Z",
+                              "updatedAt": "2026-07-28T00:30:27.000Z",
+                              "uid": "35240-27653c2e-6fe8-47dd-957b-acff49d3230f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:26.000Z",
+                          "updatedAt": "2026-07-28T00:30:26.000Z",
+                          "uid": "35240-6f6a47b9-5b5e-474b-957b-c5f626a343a5"
+                        }
+                      ],
+                      "id": "6ced48c9-06bf-4195-ac17-9eae5f49d84c",
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-6ced48c9-06bf-4195-ac17-9eae5f49d84c"
+                    },
+                    {
+                      "name": "Get Bar data for a crypto symbol",
+                      "id": "1097688d-22d2-44e6-961c-8c43baba87de",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/bars?start=<dateTime>&end=<dateTime>&timeframe=<string>&exchanges=<string>&limit=<integer>&page_token=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            ":symbol",
+                            "bars"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour.",
+                              "key": "timeframe",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchanges",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                              "key": "page_token",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "8da55aa7-6883-4b39-80f0-b474bbb04f5e",
+                              "key": "symbol",
+                              "value": "<string>",
+                              "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                            }
+                          ]
+                        },
+                        "description": "The Bars API returns aggregate historical data for the requested securities.. Returns bars for the queried crypto symbol"
+                      },
+                      "response": [
+                        {
+                          "id": "0ebca3bf-cad3-490f-ac99-d4d7a9e96c28",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/bars?start=<dateTime>&end=<dateTime>&timeframe=<string>&exchanges=<string>&limit=<integer>&page_token=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                ":symbol",
+                                "bars"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                                  "key": "start",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                                  "key": "end",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour.",
+                                  "key": "timeframe",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchanges",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                                  "key": "page_token",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "symbol"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"bars\": [\n    {\n      \"t\": \"<dateTime>\",\n      \"o\": \"<number>\",\n      \"h\": \"<number>\",\n      \"l\": \"<number>\",\n      \"c\": \"<number>\",\n      \"v\": \"<number>\",\n      \"x\": \"FTXU\",\n      \"n\": \"<long>\",\n      \"vw\": \"<number>\"\n    }\n  ],\n  \"symbol\": \"<string>\",\n  \"next_page_token\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:27.000Z",
+                          "updatedAt": "2026-07-28T00:30:27.000Z",
+                          "uid": "35240-0ebca3bf-cad3-490f-ac99-d4d7a9e96c28"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-1097688d-22d2-44e6-961c-8c43baba87de"
+                    }
+                  ],
+                  "id": "0736d0d3-cddc-4884-8428-e5bf75fa4e84",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-0736d0d3-cddc-4884-8428-e5bf75fa4e84"
+                },
+                {
+                  "name": "quotes",
+                  "item": [
+                    {
+                      "name": "latest",
+                      "item": [
+                        {
+                          "name": "Latest Quote",
+                          "id": "af5ad54e-071f-4227-8ba6-fcdf6edec0d7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/quotes/latest?exchange=ERSX",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                ":symbol",
+                                "quotes",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchange",
+                                  "value": "ERSX"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7d1ec714-deec-4d68-8f48-56f3dcc24ba2",
+                                  "key": "symbol",
+                                  "value": "<string>",
+                                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                                }
+                              ]
+                            },
+                            "description": "Returns latest quote for the queried crypto symbol"
+                          },
+                          "response": [
+                            {
+                              "id": "d43eb6ae-1cee-4738-b9ad-d9fd6c532911",
+                              "name": "Successful response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/quotes/latest?exchange=ERSX",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1beta1",
+                                    "crypto",
+                                    ":symbol",
+                                    "quotes",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                      "key": "exchange",
+                                      "value": "ERSX"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "symbol"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"quote\": {\n    \"t\": \"<dateTime>\",\n    \"ax\": \"<string>\",\n    \"ap\": \"<number>\",\n    \"as\": \"<number>\",\n    \"bx\": \"<string>\",\n    \"bp\": \"<number>\",\n    \"bs\": \"<number>\",\n    \"c\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"x\": \"<string>\",\n    \"z\": \"<string>\"\n  },\n  \"symbol\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T00:30:27.000Z",
+                              "updatedAt": "2026-07-28T00:30:27.000Z",
+                              "uid": "35240-d43eb6ae-1cee-4738-b9ad-d9fd6c532911"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:26.000Z",
+                          "updatedAt": "2026-07-28T00:30:26.000Z",
+                          "uid": "35240-af5ad54e-071f-4227-8ba6-fcdf6edec0d7"
+                        }
+                      ],
+                      "id": "2056e29b-2da2-4ee1-bd7c-0dafe491ac76",
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-2056e29b-2da2-4ee1-bd7c-0dafe491ac76"
+                    },
+                    {
+                      "name": "Get Quotes for crypto symbol",
+                      "id": "2520603d-5f2b-4b16-bae4-3379b9f03356",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/quotes?start=<dateTime>&end=<dateTime>&exchanges=<string>&limit=<integer>&page_token=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            ":symbol",
+                            "quotes"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchanges",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                              "key": "page_token",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "fdf5b93a-2fd5-4ef3-9fdd-cb0afb3d2547",
+                              "key": "symbol",
+                              "value": "<string>",
+                              "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                            }
+                          ]
+                        },
+                        "description": "The Quotes API provides quotes for a given crypto symbol at a specified date. Returns quotes for the queried crypto symbol"
+                      },
+                      "response": [
+                        {
+                          "id": "a83bced2-be27-4b0b-b27d-521929c22b9d",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/quotes?start=<dateTime>&end=<dateTime>&exchanges=<string>&limit=<integer>&page_token=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                ":symbol",
+                                "quotes"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                                  "key": "start",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                                  "key": "end",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchanges",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                                  "key": "page_token",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "symbol"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"quotes\": [\n    {\n      \"t\": \"<dateTime>\",\n      \"ax\": \"<string>\",\n      \"ap\": \"<number>\",\n      \"as\": \"<number>\",\n      \"bx\": \"<string>\",\n      \"bp\": \"<number>\",\n      \"bs\": \"<number>\",\n      \"c\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"x\": \"<string>\",\n      \"z\": \"<string>\"\n    }\n  ],\n  \"symbol\": \"<string>\",\n  \"next_page_token\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T00:30:27.000Z",
+                          "updatedAt": "2026-07-28T00:30:27.000Z",
+                          "uid": "35240-a83bced2-be27-4b0b-b27d-521929c22b9d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-2520603d-5f2b-4b16-bae4-3379b9f03356"
+                    }
+                  ],
+                  "id": "483250e8-8f19-4c0b-bba2-9f97cc82c233",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-483250e8-8f19-4c0b-bba2-9f97cc82c233"
+                },
+                {
+                  "name": "snapshot",
+                  "item": [
+                    {
+                      "name": "Get a Snapshot for a crypto symbol",
+                      "id": "4ea5fd79-7325-415e-8c5f-8f672c908f03",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/snapshot?exchange=ERSX",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            ":symbol",
+                            "snapshot"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchange",
+                              "value": "ERSX"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e5e62c24-fb29-472d-b4c2-97231d289a48",
+                              "key": "symbol",
+                              "value": "<string>",
+                              "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                            }
+                          ]
+                        },
+                        "description": "The Snapshot API returns the latest trade, latest quote, minute bar daily bar, and previous daily bar data for a given crypto symbol."
+                      },
+                      "response": [
+                        {
+                          "id": "9ff94bc3-7f79-4f6b-8146-32a6871dfbba",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/snapshot?exchange=ERSX",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                ":symbol",
+                                "snapshot"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchange",
+                                  "value": "ERSX"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "symbol"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"latestTrade\": {\n    \"x\": \"<string>\",\n    \"i\": \"<long>\",\n    \"t\": \"<dateTime>\",\n    \"p\": \"<number>\",\n    \"s\": \"<number>\",\n    \"c\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"z\": \"<string>\",\n    \"tks\": \"<string>\"\n  },\n  \"latestQuote\": {\n    \"t\": \"<dateTime>\",\n    \"ax\": \"<string>\",\n    \"ap\": \"<number>\",\n    \"as\": \"<number>\",\n    \"bx\": \"<string>\",\n    \"bp\": \"<number>\",\n    \"bs\": \"<number>\",\n    \"c\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"x\": \"<string>\",\n    \"z\": \"<string>\"\n  },\n  \"minuteBar\": {\n    \"t\": \"<dateTime>\",\n    \"o\": \"<number>\",\n    \"h\": \"<number>\",\n    \"l\": \"<number>\",\n    \"c\": \"<number>\",\n    \"v\": \"<number>\",\n    \"x\": \"ERSX\",\n    \"n\": \"<long>\",\n    \"vw\": \"<number>\"\n  },\n  \"dailyBar\": {\n    \"t\": \"<dateTime>\",\n    \"o\": \"<number>\",\n    \"h\": \"<number>\",\n    \"l\": \"<number>\",\n    \"c\": \"<number>\",\n    \"v\": \"<number>\",\n    \"x\": \"CBSE\",\n    \"n\": \"<long>\",\n    \"vw\": \"<number>\"\n  },\n  \"prevDailyBar\": {\n    \"t\": \"<dateTime>\",\n    \"o\": \"<number>\",\n    \"h\": \"<number>\",\n    \"l\": \"<number>\",\n    \"c\": \"<number>\",\n    \"v\": \"<number>\",\n    \"x\": \"FTXU\",\n    \"n\": \"<long>\",\n    \"vw\": \"<number>\"\n  }\n}",
+                          "createdAt": "2026-07-28T00:30:27.000Z",
+                          "updatedAt": "2026-07-28T00:30:27.000Z",
+                          "uid": "35240-9ff94bc3-7f79-4f6b-8146-32a6871dfbba"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-4ea5fd79-7325-415e-8c5f-8f672c908f03"
+                    }
+                  ],
+                  "id": "8e17594a-52a4-4841-9bac-ad786d1c5056",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-8e17594a-52a4-4841-9bac-ad786d1c5056"
+                },
+                {
+                  "name": "xbbo",
+                  "item": [
+                    {
+                      "name": "latest",
+                      "item": [
+                        {
+                          "name": "Get Latest XBBO for a single crypto symbol",
+                          "id": "d7f31955-2e14-4c16-9bd6-09c4edd4e28d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/xbbo/latest?exchanges=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                ":symbol",
+                                "xbbo",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchanges",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "37e1b60a-2f64-407b-be68-253167abd771",
+                                  "key": "symbol",
+                                  "value": "<string>",
+                                  "description": "(Required) The crypto symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+                                }
+                              ]
+                            },
+                            "description": "Returns the XBBO for a crypto symbol that calculates the Best Bid and Offer across multiple exchanges. If exchanges is not specified then only the exchanges that can be traded on Alpaca are included in the calculation."
+                          },
+                          "response": [
+                            {
+                              "id": "5d1f0549-8c90-41d2-9d15-9660975befc8",
+                              "name": "Successful response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1beta1/crypto/:symbol/xbbo/latest?exchanges=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1beta1",
+                                    "crypto",
+                                    ":symbol",
+                                    "xbbo",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                      "key": "exchanges",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "symbol"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"symbol\": \"<string>\",\n  \"xbbo\": {\n    \"t\": \"<dateTime>\",\n    \"ax\": \"<string>\",\n    \"ap\": \"<number>\",\n    \"as\": \"<number>\",\n    \"bx\": \"<string>\",\n    \"bp\": \"<number>\",\n    \"bs\": \"<number>\"\n  }\n}",
+                              "createdAt": "2026-07-28T00:30:27.000Z",
+                              "updatedAt": "2026-07-28T00:30:27.000Z",
+                              "uid": "35240-5d1f0549-8c90-41d2-9d15-9660975befc8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:30:26.000Z",
+                          "updatedAt": "2026-07-28T00:30:26.000Z",
+                          "uid": "35240-d7f31955-2e14-4c16-9bd6-09c4edd4e28d"
+                        }
+                      ],
+                      "id": "acde0806-5aa0-409c-921b-6f1dc9404b6c",
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-acde0806-5aa0-409c-921b-6f1dc9404b6c"
+                    }
+                  ],
+                  "id": "48dea670-f76a-49d2-beed-f8fa2c3bd27c",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-48dea670-f76a-49d2-beed-f8fa2c3bd27c"
+                }
+              ],
+              "id": "ed5de3bf-dd46-4529-abfb-72a06b3ebff3",
+              "createdAt": "2026-07-28T00:30:26.000Z",
+              "updatedAt": "2026-07-28T00:30:26.000Z",
+              "uid": "35240-ed5de3bf-dd46-4529-abfb-72a06b3ebff3"
+            },
+            {
+              "name": "bars",
+              "item": [
+                {
+                  "name": "latest",
+                  "item": [
+                    {
+                      "name": "Get Latest Bars for multiple Crypto symbols",
+                      "id": "04b4a13a-eacb-4c65-a985-78a08d3305fa",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/bars/latest?symbols=<string>&exchange=ERSX",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            "bars",
+                            "latest"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                              "key": "symbols",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchange",
+                              "value": "ERSX"
+                            }
+                          ]
+                        },
+                        "description": "returns latest historical data for the requested crypto symbols for a specific exchange"
+                      },
+                      "response": [
+                        {
+                          "id": "63e9d225-a242-4733-b876-4b784cc98f0a",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/bars/latest?symbols=<string>&exchange=ERSX",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                "bars",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                                  "key": "symbols",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchange",
+                                  "value": "ERSX"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"bars\": {\n    \"est5c3\": {\n      \"t\": \"<dateTime>\",\n      \"o\": \"<number>\",\n      \"h\": \"<number>\",\n      \"l\": \"<number>\",\n      \"c\": \"<number>\",\n      \"v\": \"<number>\",\n      \"x\": \"CBSE\",\n      \"n\": \"<long>\",\n      \"vw\": \"<number>\"\n    },\n    \"sed_e2\": {\n      \"t\": \"<dateTime>\",\n      \"o\": \"<number>\",\n      \"h\": \"<number>\",\n      \"l\": \"<number>\",\n      \"c\": \"<number>\",\n      \"v\": \"<number>\",\n      \"x\": \"FTXU\",\n      \"n\": \"<long>\",\n      \"vw\": \"<number>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T00:30:27.000Z",
+                          "updatedAt": "2026-07-28T00:30:27.000Z",
+                          "uid": "35240-63e9d225-a242-4733-b876-4b784cc98f0a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-04b4a13a-eacb-4c65-a985-78a08d3305fa"
+                    }
+                  ],
+                  "id": "ee95c9bf-2902-4899-9736-f2af8e450f1c",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-ee95c9bf-2902-4899-9736-f2af8e450f1c"
+                },
+                {
+                  "name": "Get Bars for multiple Crypto symbols",
+                  "id": "49d5ae23-02e6-4758-a22c-a790dcbe46c2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1beta1/crypto/bars?symbols=<string>&start=<dateTime>&end=<dateTime>&timeframe=<string>&page_token=<string>&limit=<integer>&exchanges=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1beta1",
+                        "crypto",
+                        "bars"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                          "key": "symbols",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                          "key": "start",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                          "key": "end",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour.",
+                          "key": "timeframe",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                          "key": "page_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                          "key": "exchanges",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "returns aggregate historical data for the requested crypto symbols.\n\nReturned results are sorted by symbol first then by Bar timestamp. This means that you are likely to see only one symbol in your first response if there are enough Bars for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Bars were found for them."
+                  },
+                  "response": [
+                    {
+                      "id": "2e47f2c0-1ac3-4c8f-9011-6eba2c917bcb",
+                      "name": "Successful response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/bars?symbols=<string>&start=<dateTime>&end=<dateTime>&timeframe=<string>&page_token=<string>&limit=<integer>&exchanges=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            "bars"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                              "key": "symbols",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour.",
+                              "key": "timeframe",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                              "key": "page_token",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchanges",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"bars\": {\n    \"ad_12c\": [\n      {\n        \"t\": \"<dateTime>\",\n        \"o\": \"<number>\",\n        \"h\": \"<number>\",\n        \"l\": \"<number>\",\n        \"c\": \"<number>\",\n        \"v\": \"<number>\",\n        \"x\": \"ERSX\",\n        \"n\": \"<long>\",\n        \"vw\": \"<number>\"\n      },\n      {\n        \"t\": \"<dateTime>\",\n        \"o\": \"<number>\",\n        \"h\": \"<number>\",\n        \"l\": \"<number>\",\n        \"c\": \"<number>\",\n        \"v\": \"<number>\",\n        \"x\": \"ERSX\",\n        \"n\": \"<long>\",\n        \"vw\": \"<number>\"\n      }\n    ],\n    \"mollit916\": [\n      {\n        \"t\": \"<dateTime>\",\n        \"o\": \"<number>\",\n        \"h\": \"<number>\",\n        \"l\": \"<number>\",\n        \"c\": \"<number>\",\n        \"v\": \"<number>\",\n        \"x\": \"FTXU\",\n        \"n\": \"<long>\",\n        \"vw\": \"<number>\"\n      },\n      {\n        \"t\": \"<dateTime>\",\n        \"o\": \"<number>\",\n        \"h\": \"<number>\",\n        \"l\": \"<number>\",\n        \"c\": \"<number>\",\n        \"v\": \"<number>\",\n        \"x\": \"FTXU\",\n        \"n\": \"<long>\",\n        \"vw\": \"<number>\"\n      }\n    ],\n    \"incididunt_6\": [\n      {\n        \"t\": \"<dateTime>\",\n        \"o\": \"<number>\",\n        \"h\": \"<number>\",\n        \"l\": \"<number>\",\n        \"c\": \"<number>\",\n        \"v\": \"<number>\",\n        \"x\": \"ERSX\",\n        \"n\": \"<long>\",\n        \"vw\": \"<number>\"\n      },\n      {\n        \"t\": \"<dateTime>\",\n        \"o\": \"<number>\",\n        \"h\": \"<number>\",\n        \"l\": \"<number>\",\n        \"c\": \"<number>\",\n        \"v\": \"<number>\",\n        \"x\": \"CBSE\",\n        \"n\": \"<long>\",\n        \"vw\": \"<number>\"\n      }\n    ]\n  },\n  \"next_page_token\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T00:30:27.000Z",
+                      "updatedAt": "2026-07-28T00:30:27.000Z",
+                      "uid": "35240-2e47f2c0-1ac3-4c8f-9011-6eba2c917bcb"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-49d5ae23-02e6-4758-a22c-a790dcbe46c2"
+                }
+              ],
+              "id": "392eec37-cf3b-4881-ad93-cc36dae35636",
+              "createdAt": "2026-07-28T00:30:26.000Z",
+              "updatedAt": "2026-07-28T00:30:26.000Z",
+              "uid": "35240-392eec37-cf3b-4881-ad93-cc36dae35636"
+            },
+            {
+              "name": "quotes",
+              "item": [
+                {
+                  "name": "latest",
+                  "item": [
+                    {
+                      "name": "Get Latest Quotes for multiple Crypto symbols",
+                      "id": "c13b4af2-8a6d-4b9c-a7d7-2378c93734bf",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/quotes/latest?symbols=<string>&exchange=ERSX",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            "quotes",
+                            "latest"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                              "key": "symbols",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchange",
+                              "value": "ERSX"
+                            }
+                          ]
+                        },
+                        "description": "Provides latest quotes for a list of given crypto symbols."
+                      },
+                      "response": [
+                        {
+                          "id": "f250ebbb-3933-4d6c-b80b-2d052487ef14",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/quotes/latest?symbols=<string>&exchange=ERSX",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                "quotes",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                                  "key": "symbols",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchange",
+                                  "value": "ERSX"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"quotes\": {\n    \"amet_2\": {\n      \"t\": \"<dateTime>\",\n      \"ax\": \"<string>\",\n      \"ap\": \"<number>\",\n      \"as\": \"<number>\",\n      \"bx\": \"<string>\",\n      \"bp\": \"<number>\",\n      \"bs\": \"<number>\",\n      \"c\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"x\": \"<string>\",\n      \"z\": \"<string>\"\n    },\n    \"deserunt_1d\": {\n      \"t\": \"<dateTime>\",\n      \"ax\": \"<string>\",\n      \"ap\": \"<number>\",\n      \"as\": \"<number>\",\n      \"bx\": \"<string>\",\n      \"bp\": \"<number>\",\n      \"bs\": \"<number>\",\n      \"c\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"x\": \"<string>\",\n      \"z\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T00:30:27.000Z",
+                          "updatedAt": "2026-07-28T00:30:27.000Z",
+                          "uid": "35240-f250ebbb-3933-4d6c-b80b-2d052487ef14"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-c13b4af2-8a6d-4b9c-a7d7-2378c93734bf"
+                    }
+                  ],
+                  "id": "9303fa9f-5be1-4e8c-8eb6-f6e17926bb3f",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-9303fa9f-5be1-4e8c-8eb6-f6e17926bb3f"
+                },
+                {
+                  "name": "Get Quotes for multiple crypto symbols",
+                  "id": "759ba565-a356-43f6-a75a-0398d42e4171",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1beta1/crypto/quotes?start=<dateTime>&end=<dateTime>&exchanges=<string>&limit=<integer>&page_token=<string>&symbols=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1beta1",
+                        "crypto",
+                        "quotes"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                          "key": "start",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                          "key": "end",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                          "key": "exchanges",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                          "key": "page_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                          "key": "symbols",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "The Multi Quotes API provides quotes for a list of given crypto symbols at a specified date. Returns quotes for each of  the queried crypto symbols.\n\nReturned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them."
+                  },
+                  "response": [
+                    {
+                      "id": "befb38ba-c9e1-496f-bf68-1ccbedaf64e6",
+                      "name": "Successful response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/quotes?start=<dateTime>&end=<dateTime>&exchanges=<string>&limit=<integer>&page_token=<string>&symbols=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            "quotes"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchanges",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.",
+                              "key": "page_token",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                              "key": "symbols",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"quotes\": {\n    \"enima34\": [\n      {\n        \"t\": \"<dateTime>\",\n        \"ax\": \"<string>\",\n        \"ap\": \"<number>\",\n        \"as\": \"<number>\",\n        \"bx\": \"<string>\",\n        \"bp\": \"<number>\",\n        \"bs\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"x\": \"<string>\",\n        \"z\": \"<string>\"\n      },\n      {\n        \"t\": \"<dateTime>\",\n        \"ax\": \"<string>\",\n        \"ap\": \"<number>\",\n        \"as\": \"<number>\",\n        \"bx\": \"<string>\",\n        \"bp\": \"<number>\",\n        \"bs\": \"<number>\",\n        \"c\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"x\": \"<string>\",\n        \"z\": \"<string>\"\n      }\n    ]\n  },\n  \"next_page_token\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T00:30:27.000Z",
+                      "updatedAt": "2026-07-28T00:30:27.000Z",
+                      "uid": "35240-befb38ba-c9e1-496f-bf68-1ccbedaf64e6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-759ba565-a356-43f6-a75a-0398d42e4171"
+                }
+              ],
+              "id": "bc6b2525-e12f-43dc-a7af-4752ffaef83b",
+              "createdAt": "2026-07-28T00:30:26.000Z",
+              "updatedAt": "2026-07-28T00:30:26.000Z",
+              "uid": "35240-bc6b2525-e12f-43dc-a7af-4752ffaef83b"
+            },
+            {
+              "name": "snapshots",
+              "item": [
+                {
+                  "name": "Get Snapshots for multiple crypto symbols",
+                  "id": "8553c02d-fbb0-4e80-8153-e32bf6c9331f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1beta1/crypto/snapshots?exchange=ERSX&symbols=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1beta1",
+                        "crypto",
+                        "snapshots"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                          "key": "exchange",
+                          "value": "ERSX"
+                        },
+                        {
+                          "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                          "key": "symbols",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "The Multi Snapshot API returns the latest trade, latest quote, minute bar daily bar, and previous daily bar data for list of given crypto symbols."
+                  },
+                  "response": [
+                    {
+                      "id": "d0382a77-68af-48d3-a0e1-336327ebc8fb",
+                      "name": "Successful response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/snapshots?exchange=ERSX&symbols=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            "snapshots"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Which crypto exchange to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchange",
+                              "value": "ERSX"
+                            },
+                            {
+                              "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                              "key": "symbols",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"voluptate_3b\": {\n    \"latestTrade\": {\n      \"x\": \"<string>\",\n      \"i\": \"<long>\",\n      \"t\": \"<dateTime>\",\n      \"p\": \"<number>\",\n      \"s\": \"<number>\",\n      \"c\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"z\": \"<string>\",\n      \"tks\": \"<string>\"\n    },\n    \"latestQuote\": {\n      \"t\": \"<dateTime>\",\n      \"ax\": \"<string>\",\n      \"ap\": \"<number>\",\n      \"as\": \"<number>\",\n      \"bx\": \"<string>\",\n      \"bp\": \"<number>\",\n      \"bs\": \"<number>\",\n      \"c\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"x\": \"<string>\",\n      \"z\": \"<string>\"\n    },\n    \"minuteBar\": {\n      \"t\": \"<dateTime>\",\n      \"o\": \"<number>\",\n      \"h\": \"<number>\",\n      \"l\": \"<number>\",\n      \"c\": \"<number>\",\n      \"v\": \"<number>\",\n      \"x\": \"ERSX\",\n      \"n\": \"<long>\",\n      \"vw\": \"<number>\"\n    },\n    \"dailyBar\": {\n      \"t\": \"<dateTime>\",\n      \"o\": \"<number>\",\n      \"h\": \"<number>\",\n      \"l\": \"<number>\",\n      \"c\": \"<number>\",\n      \"v\": \"<number>\",\n      \"x\": \"FTXU\",\n      \"n\": \"<long>\",\n      \"vw\": \"<number>\"\n    },\n    \"prevDailyBar\": {\n      \"t\": \"<dateTime>\",\n      \"o\": \"<number>\",\n      \"h\": \"<number>\",\n      \"l\": \"<number>\",\n      \"c\": \"<number>\",\n      \"v\": \"<number>\",\n      \"x\": \"FTXU\",\n      \"n\": \"<long>\",\n      \"vw\": \"<number>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T00:30:27.000Z",
+                      "updatedAt": "2026-07-28T00:30:27.000Z",
+                      "uid": "35240-d0382a77-68af-48d3-a0e1-336327ebc8fb"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-8553c02d-fbb0-4e80-8153-e32bf6c9331f"
+                }
+              ],
+              "id": "1e8843ae-73b4-48d2-ae68-64e90804a0e6",
+              "createdAt": "2026-07-28T00:30:26.000Z",
+              "updatedAt": "2026-07-28T00:30:26.000Z",
+              "uid": "35240-1e8843ae-73b4-48d2-ae68-64e90804a0e6"
+            },
+            {
+              "name": "xbbos",
+              "item": [
+                {
+                  "name": "latest",
+                  "item": [
+                    {
+                      "name": "Get Latest XBBO for multiple crypto symbols",
+                      "id": "57aba617-f20a-4cb4-a123-04fc4263d03a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/xbbos/latest?symbols=<string>&exchanges=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            "xbbos",
+                            "latest"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                              "key": "symbols",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                              "key": "exchanges",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Returns the latest XBBO for a given list crypto symbols that calculates the Best Bid and Offer across multiple exchanges. If exchanges is not specified then only the exchanges that can be traded on Alpaca are included in the calculation."
+                      },
+                      "response": [
+                        {
+                          "id": "a7489b84-ee17-4263-be0a-b2388d971d85",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/xbbos/latest?symbols=<string>&exchanges=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                "xbbos",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH",
+                                  "key": "symbols",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "A comma separated list of which crypto exchanges to pull the data from. Alpaca currently supports `ERSX`, `CBSE`, and `FTXU`",
+                                  "key": "exchanges",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"xbbos\": {\n    \"id69\": {\n      \"t\": \"<dateTime>\",\n      \"ax\": \"<string>\",\n      \"ap\": \"<number>\",\n      \"as\": \"<number>\",\n      \"bx\": \"<string>\",\n      \"bp\": \"<number>\",\n      \"bs\": \"<number>\"\n    },\n    \"ad58\": {\n      \"t\": \"<dateTime>\",\n      \"ax\": \"<string>\",\n      \"ap\": \"<number>\",\n      \"as\": \"<number>\",\n      \"bx\": \"<string>\",\n      \"bp\": \"<number>\",\n      \"bs\": \"<number>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T00:30:27.000Z",
+                          "updatedAt": "2026-07-28T00:30:27.000Z",
+                          "uid": "35240-a7489b84-ee17-4263-be0a-b2388d971d85"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-57aba617-f20a-4cb4-a123-04fc4263d03a"
+                    }
+                  ],
+                  "id": "02034c36-1a4b-42e4-82eb-8d5359aeec84",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-02034c36-1a4b-42e4-82eb-8d5359aeec84"
+                }
+              ],
+              "id": "b6706c85-0f26-4981-998e-fc96dde95b88",
+              "createdAt": "2026-07-28T00:30:26.000Z",
+              "updatedAt": "2026-07-28T00:30:26.000Z",
+              "uid": "35240-b6706c85-0f26-4981-998e-fc96dde95b88"
+            },
+            {
+              "name": "meta",
+              "item": [
+                {
+                  "name": "spreads",
+                  "item": [
+                    {
+                      "name": "Get list of crypto spreads per exchange",
+                      "id": "c9037e16-2927-488a-bc4f-7a46c756d5e4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1beta1/crypto/meta/spreads",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1beta1",
+                            "crypto",
+                            "meta",
+                            "spreads"
+                          ]
+                        },
+                        "description": "Get list of crypto spreads for the different exchanges Alpaca supports in basis points."
+                      },
+                      "response": [
+                        {
+                          "id": "e7f86552-2c83-432d-a7da-3f60ff0baa9d",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1beta1/crypto/meta/spreads",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1beta1",
+                                "crypto",
+                                "meta",
+                                "spreads"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"spreads\": {\n    \"ullamco_083\": \"<integer>\",\n    \"exercitation_1f3\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-07-28T00:30:27.000Z",
+                          "updatedAt": "2026-07-28T00:30:27.000Z",
+                          "uid": "35240-e7f86552-2c83-432d-a7da-3f60ff0baa9d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:30:26.000Z",
+                      "updatedAt": "2026-07-28T00:30:26.000Z",
+                      "uid": "35240-c9037e16-2927-488a-bc4f-7a46c756d5e4"
+                    }
+                  ],
+                  "id": "a6e77f09-1ea4-4272-8ea6-a7e39a1bb266",
+                  "createdAt": "2026-07-28T00:30:26.000Z",
+                  "updatedAt": "2026-07-28T00:30:26.000Z",
+                  "uid": "35240-a6e77f09-1ea4-4272-8ea6-a7e39a1bb266"
+                }
+              ],
+              "id": "9d4a3f2b-07c3-4b96-8c3c-42b776dc9bfd",
+              "createdAt": "2026-07-28T00:30:26.000Z",
+              "updatedAt": "2026-07-28T00:30:26.000Z",
+              "uid": "35240-9d4a3f2b-07c3-4b96-8c3c-42b776dc9bfd"
+            }
+          ],
+          "id": "f5a56b3c-a977-4619-bfcb-0515321343b4",
+          "createdAt": "2026-07-28T00:30:26.000Z",
+          "updatedAt": "2026-07-28T00:30:26.000Z",
+          "uid": "35240-f5a56b3c-a977-4619-bfcb-0515321343b4"
+        }
+      ],
+      "id": "5b6f127b-fbc2-47d0-88d8-eb8ebc39bcbc",
+      "createdAt": "2026-07-28T00:30:26.000Z",
+      "updatedAt": "2026-07-28T00:30:26.000Z",
+      "uid": "35240-5b6f127b-fbc2-47d0-88d8-eb8ebc39bcbc"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://broker-api.sandbox.alpaca.markets"
+    }
+  ]
+}
