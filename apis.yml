@@ -26,7 +26,7 @@ tags:
   - Options
 created: '2026-05-08'
 modified: '2026-07-22'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 description: >-
   Alpaca is an API-first commission-free stock and crypto trading broker offering trading, market data, options, and
   broker-as-a-service APIs. Alpaca publishes its OpenAPI specifications publicly via the alpacahq/alpaca-docs GitHub
