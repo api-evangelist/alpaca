@@ -1,0 +1,157 @@
+{
+  "item": [
+    {
+      "id": "d94aa739-8608-4b40-956d-85bcc60f086b",
+      "name": "Screener",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "235eeb95-0862-4173-9e4f-edaf45682341",
+          "name": "Get Top Market Movers by Market type",
+          "request": {
+            "name": "Get Top Market Movers by Market type",
+            "description": {
+              "content": "Returns top market movers for stocks. By default will return top 5 market gainers and losers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "screener",
+                ":market_type",
+                "movers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "10",
+                  "description": "Number of top market movers to fetch (gainers and losers). Will return number top for each. By default 10 gainers and 10 losers."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "market_type",
+                  "description": "(Required) Screen specific market (stocks or crypto)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbb60be7-b248-4be2-9aae-1dbcfb28340a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "screener",
+                    ":market_type",
+                    "movers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "top",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "market_type",
+                      "description": "(Required) Screen specific market (stocks or crypto)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"gainers\": [\n    {\n      \"symbol\": \"AGRI\",\n      \"percent_change\": 145.56,\n      \"change\": 2.46,\n      \"price\": 4.15\n    },\n    {\n      \"symbol\": \"GRCYW\",\n      \"percent_change\": 85.63,\n      \"change\": 0.03,\n      \"price\": 0.0594\n    }\n  ],\n  \"losers\": [\n    {\n      \"symbol\": \"MTACW\",\n      \"percent_change\": -63.07,\n      \"change\": -0.26,\n      \"price\": 0.1502\n    },\n    {\n      \"symbol\": \"TIG\",\n      \"percent_change\": -51.21,\n      \"change\": -3.61,\n      \"price\": 3.435\n    }\n  ],\n  \"market_type\": \"stocks\",\n  \"last_updated\": \"2022-03-10T17:53:30.088309839Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "787ec364-15d4-4bd2-b892-0e2b8c676f4c",
+    "name": "Broker Account Activities Screener API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

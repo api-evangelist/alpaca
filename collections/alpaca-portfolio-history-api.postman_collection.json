@@ -1,0 +1,171 @@
+{
+  "item": [
+    {
+      "id": "b3126c0b-debe-489a-8201-f149ff793d4e",
+      "name": "Portfolio History",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/portfolio-history/ to view complete documentation on the Portfolio History API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a646ab33-849f-4d92-9fc6-dafe9d29bd78",
+          "name": "Account Portfolio History",
+          "request": {
+            "name": "Account Portfolio History",
+            "description": {
+              "content": "Returns timeseries data about equity and profit/loss (P/L) of the account in requested timespan.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "portfolio",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "The duration of the data in <number> + <unit>, such as 1D, where <unit> can be D for day, W for week, M for month and A for year. Defaults to 1M."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_end",
+                  "value": "<date>",
+                  "description": "The date the data is returned up to, in “YYYY-MM-DD” format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)"
+                },
+                {
+                  "disabled": false,
+                  "key": "extended_hours",
+                  "value": "<string>",
+                  "description": "If true, include extended hours in the result. This is effective only for timeframe less than 1D."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c500b2de-e6e6-46bc-9b27-0b90323c88af",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "portfolio",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_end",
+                      "value": "2022-05-15"
+                    },
+                    {
+                      "key": "extended_hours",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": [\n    5122,\n    9727\n  ],\n  \"equity\": [\n    2706.348159505136,\n    7439.065351405108\n  ],\n  \"profit_loss\": [\n    4946.373110916072,\n    5505.789083176284\n  ],\n  \"profit_loss_pct\": [\n    5848.099938822306,\n    8562.318158319446\n  ],\n  \"base_value\": 2246.168171864222,\n  \"timeframe\": \"15Min\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "409d0d3d-13b9-4ea3-8159-13898ae8692e",
+    "name": "Broker Account Activities Portfolio History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "item": [
+    {
+      "id": "52d90d7b-d5ab-4d25-bf42-3195f2fcd625",
+      "name": "Clock",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70e2d01f-5e31-4a49-a0aa-f584d5b6c534",
+          "name": "Query market clock",
+          "request": {
+            "name": "Query market clock",
+            "description": {
+              "content": "The Clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "clock"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fcb8d584-ba64-4b3e-b664-219aa9546b3b",
+              "name": "The current market's timestamp",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2022-02-16T13:06:05.210563128-05:00\",\n  \"is_open\": true,\n  \"next_open\": \"1979-03-29T20:40:29.351Z\",\n  \"next_close\": \"1993-02-11T22:16:22.404Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38634407-0749-47f9-9eaf-bb702dafc854",
+          "name": "Get Market Clock info",
+          "request": {
+            "name": "Get Market Clock info",
+            "description": {
+              "content": "The clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close.\n\nReturns the market clock.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "clock"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73df0fa0-83ad-4c46-bf69-229ac60c0f34",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "clock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"1992-11-17T14:09:17.081Z\",\n  \"is_open\": true,\n  \"next_open\": \"1965-06-16T16:11:47.035Z\",\n  \"next_close\": \"2010-07-13T19:03:08.296Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d8e86a52-87b5-4f27-8cf9-a54fc9f82d44",
+    "name": "Broker Account Activities Clock API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Watchlist API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Watchlist",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/watchlists",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account."
+              }
+            ]
+          },
+          "docs": "Fetch a list of all watchlists currently in an account."
+        },
+        {
+          "info": {
+            "name": "Create a new watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/:account_id/watchlists",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the watchlist object"
+        },
+        {
+          "info": {
+            "name": "Manage watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account"
+              },
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of a watchlist"
+              }
+            ]
+          },
+          "docs": "Fetch a single watchlist by identifier."
+        },
+        {
+          "info": {
+            "name": "Update an existing watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account"
+              },
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of a watchlist"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace entirely the set of securities contained in the watchlist while optionally renaming it. Destructive operation."
+        },
+        {
+          "info": {
+            "name": "Remove a watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of an account"
+              },
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of a watchlist"
+              }
+            ]
+          },
+          "docs": "Irrevocably delete a watchlist."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

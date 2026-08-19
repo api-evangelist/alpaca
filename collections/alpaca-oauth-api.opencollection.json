@@ -1,102 +1,88 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "OAuth API",
+    "name": "Broker Account Activities OAuth API",
     "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
   },
   "items": [
     {
       "info": {
-        "name": "Stock Pricing Data API",
+        "name": "OAuth",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Bars",
+            "name": "Get an OAuth client",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://data.alpaca.markets/v2/v2/stocks/:symbol/bars",
-            "headers": [
-              {
-                "name": "Apca-Api-Key-Id",
-                "value": "{{APCA_API_KEY_ID}}"
-              },
-              {
-                "name": "Apca-Api-Secret-Key",
-                "value": "{{APCA_API_SECRET_KEY}}"
-              }
-            ],
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/oauth/clients/:client_id",
             "params": [
               {
-                "name": "symbol",
+                "name": "client_id",
                 "value": "",
                 "type": "path"
               },
               {
-                "name": "start",
-                "value": "2020-04-01T0:00:00Z",
+                "name": "response_type",
+                "value": "",
                 "type": "query",
-                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                "description": "code or token"
               },
               {
-                "name": "end",
-                "value": "2021-08-26T11:00:00Z",
+                "name": "redirect_uri",
+                "value": "",
                 "type": "query",
-                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                "description": "Redirect URI of the OAuth flow"
               },
               {
-                "name": "timeframe",
-                "value": "1Min",
+                "name": "scope",
+                "value": "",
                 "type": "query",
-                "description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+                "description": "Requested scopes by the OAuth flow"
               }
             ]
           },
-          "docs": "The bars API returns aggregate historical data for the requested securities"
+          "docs": "The endpoint returns the details of OAuth client to display in the authorization page.\n"
         },
         {
           "info": {
-            "name": "Trades",
+            "name": "Issue an OAuth token.",
             "type": "http"
           },
           "http": {
-            "method": "GET",
-            "url": "https://data.alpaca.markets/v2/v2/stocks/:symbol/trades",
-            "headers": [
-              {
-                "name": "Apca-Api-Key-Id",
-                "value": "{{APCA_API_KEY_ID}}"
-              },
-              {
-                "name": "Apca-Api-Secret-Key",
-                "value": "{{APCA_API_SECRET_KEY}}"
-              }
-            ],
-            "params": [
-              {
-                "name": "start",
-                "value": "2020-04-01T0:00:00Z",
-                "type": "query",
-                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
-              },
-              {
-                "name": "end",
-                "value": "2021-08-26T11:00:00Z",
-                "type": "query",
-                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
-              },
-              {
-                "name": "symbol",
-                "value": "AAPL",
-                "type": "path",
-                "description": "The symbol to query for"
-              }
-            ]
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/oauth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
           },
-          "docs": "The Trades API provides historcial trade data for a given ticker symbol on a specified date. Returns trades for the queried stock signal."
+          "docs": "The operation issues an OAuth code which can be used in the OAuth code flow.\n"
+        },
+        {
+          "info": {
+            "name": "Authorize an OAuth Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/oauth/authorize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The operation issues an OAuth code which can be used in the OAuth code flow.\n"
         }
       ]
     }

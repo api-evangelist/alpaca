@@ -1,0 +1,579 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Stock Pricing Data API API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stock Pricing Data API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bar data for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/bars",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "timeframe",
+                "value": "",
+                "type": "query",
+                "description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "adjustment",
+                "value": "",
+                "type": "query",
+                "description": "specifies the corporate action adjustment(s) for bars data"
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Multi Bars API returns aggregate historical data for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Bar timestamp. This means that you are likely to see only one symbol in your first response if there are enough Bars for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Bars were found for them"
+        },
+        {
+          "info": {
+            "name": "Get Latest Bar data for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/bars/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Bars API returns aggregate historical data for the requested security. Returns the latest bar data for the queried stock symbols."
+        },
+        {
+          "info": {
+            "name": "Bars",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/:symbol/bars",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "timeframe",
+                "value": "",
+                "type": "query",
+                "description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              },
+              {
+                "name": "adjustment",
+                "value": "",
+                "type": "query",
+                "description": "specifies the corporate action adjustment(s) for bars data"
+              }
+            ]
+          },
+          "docs": "The Bars API returns aggregate historical data for the requested security. Returns bars for the queried stock symbol."
+        },
+        {
+          "info": {
+            "name": "Get Latest Bars for Symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/:symbol/bars/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Bars API returns aggregate historical data for the requested security. Returns the latest bar data for the queried stock symbol."
+        },
+        {
+          "info": {
+            "name": "Get Trade data for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/trades",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Multi Trades API provides historical trade data for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for"
+        },
+        {
+          "info": {
+            "name": "Get Latest Trades data for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/trades/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "Returns the latest trades data for the queried stock symbols."
+        },
+        {
+          "info": {
+            "name": "Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/:symbol/trades",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Trades API provides historical trade data for a given ticker symbol on a specified date. Returns trades for the queried stock signal."
+        },
+        {
+          "info": {
+            "name": "Latest Trade",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/:symbol/trades/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Latest Trade API provides the latest trade data for a given ticker symbol."
+        },
+        {
+          "info": {
+            "name": "Get Quotes for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/quotes",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Multi Quotes API provides NBBO quotes for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them."
+        },
+        {
+          "info": {
+            "name": "Get Latest Quotes for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/quotes/latest",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "Returns the latest quotes data for the queried stock symbols."
+        },
+        {
+          "info": {
+            "name": "Get Quotes for stock symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/:symbol/quotes",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Quotes API provides NBBO quotes for a single given ticker symbol at a specified date. Returns quotes (NBBOs) for the querried stock symbol."
+        },
+        {
+          "info": {
+            "name": "Get Latest Quote for stock symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/:symbol/quotes/latest",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Latest Quote API provides the latest quote data for a given ticker symbol."
+        },
+        {
+          "info": {
+            "name": "Get Snapshots for multiple stock symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/snapshots",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of stock ticker symbols to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Snapshot API for multiple tickers provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for the given ticker symbols."
+        },
+        {
+          "info": {
+            "name": "Get a Snapshot for a stock symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/:symbol/snapshot",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The stock ticker symbol to query for."
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+              }
+            ]
+          },
+          "docs": "The Snapshot API for one ticker provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for a given ticker symbol. This endpoint returns the snapshot for the requested security."
+        },
+        {
+          "info": {
+            "name": "Get List of supported exchanges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/meta/exchanges"
+          },
+          "docs": "Returns a json object representing the exchanges we support. The keys are the short form codes you will see in our responses and the values are their respective full names."
+        },
+        {
+          "info": {
+            "name": "Get list of Conditions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/stocks/meta/conditions/:type",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "either \"trade\" or \"quote\""
+              },
+              {
+                "name": "tape",
+                "value": "",
+                "type": "query",
+                "description": "What kind of conditions to retrieve, \"A\" and \"B\" return CTS, where \"C\" will give you UTP "
+              }
+            ]
+          },
+          "docs": "Each feed/exchange uses its own set of codes to identify trade and quote conditions, so the same condition may have a different code depending on the originator of the data.\n\nSee [Our documentation](https://alpaca.markets/docs/market-data/#conditions) for more information"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1164 @@
+{
+  "item": [
+    {
+      "id": "cebf8378-b152-41c4-8998-671b98f0220c",
+      "name": "Watchlists",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/watchlist/ to view complete documentation on the Watchlist API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c2cfb944-634b-4ee7-b21c-2e5d01a0da3d",
+          "name": "Watchlists",
+          "request": {
+            "name": "Watchlists",
+            "description": {
+              "content": "Returns the list of watchlists registered under the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "652d764f-988a-4aff-914a-e8e07a556a92",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"3174d6df-7726-44b4-a5bd-7fda5ae6e009\",\n    \"account_id\": \"abe25343-a7ba-4255-bdeb-f7e013e9ee5d\",\n    \"created_at\": \"2022-01-31T21:49:05.14628Z\",\n    \"updated_at\": \"2022-01-31T21:49:05.14628Z\",\n    \"name\": \"Primary Watchlist\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a19514a1-3573-43b3-861e-0db77e00a580",
+          "name": "Watchlist",
+          "request": {
+            "name": "Watchlist",
+            "description": {
+              "content": "Create a new watchlist with initial set of assets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f8f9a056-8772-4777-b174-4a37c666c789",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"bdca7fdd-b24b-2081-877f-0289001458d7\",\n  \"account_id\": \"d27b541e-309d-873d-4722-cab8f180b6f4\",\n  \"created_at\": \"1979-03-13T18:19:43.744Z\",\n  \"updated_at\": \"1959-06-06T22:07:02.473Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"7e2592ca-6149-9149-fe0a-4fab049e0083\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": true,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": false\n    },\n    {\n      \"id\": \"91f975e2-1411-fe66-040b-e12a8a6706d5\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b367ee06-e98b-4bee-ad72-08b25e41dfd5",
+          "name": "Get Watchlist by ID",
+          "request": {
+            "name": "Get Watchlist by ID",
+            "description": {
+              "content": "Returns a watchlist identified by the ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) watchlist id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d14df9b1-ac0c-435e-a417-3b18bdef375c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) watchlist id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"37442823-79a4-32eb-8efc-6ddd2a4a9ce2\",\n  \"account_id\": \"73ed5840-5a53-bb48-e94d-8de6ffcf1d5e\",\n  \"created_at\": \"1953-04-28T17:34:25.629Z\",\n  \"updated_at\": \"1957-07-17T02:13:22.902Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"769a897a-304c-bd8c-1c0d-4992c71a6647\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": true,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"03b7de4e-b33f-ce91-45aa-66983c75516e\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d987aaf1-b06b-44ad-938a-d911579d7fd4",
+          "name": "Update Watchlist By Id",
+          "request": {
+            "name": "Update Watchlist By Id",
+            "description": {
+              "content": "Update the name and/or content of watchlist",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) watchlist id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c566a9c4-2616-4a74-b3d0-7edafd80d3c2",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) watchlist id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"37442823-79a4-32eb-8efc-6ddd2a4a9ce2\",\n  \"account_id\": \"73ed5840-5a53-bb48-e94d-8de6ffcf1d5e\",\n  \"created_at\": \"1953-04-28T17:34:25.629Z\",\n  \"updated_at\": \"1957-07-17T02:13:22.902Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"769a897a-304c-bd8c-1c0d-4992c71a6647\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": true,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"03b7de4e-b33f-ce91-45aa-66983c75516e\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e41d36c2-06f4-45e4-b5ca-3ed8043cbe62",
+          "name": "Add Asset to Watchlist",
+          "request": {
+            "name": "Add Asset to Watchlist",
+            "description": {
+              "content": "Append an asset for the symbol to the end of watchlist asset list",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) watchlist id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b716c36-d69f-4640-abe2-c8896a43c869",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) watchlist id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"AAPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"37442823-79a4-32eb-8efc-6ddd2a4a9ce2\",\n  \"account_id\": \"73ed5840-5a53-bb48-e94d-8de6ffcf1d5e\",\n  \"created_at\": \"1953-04-28T17:34:25.629Z\",\n  \"updated_at\": \"1957-07-17T02:13:22.902Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"769a897a-304c-bd8c-1c0d-4992c71a6647\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": true,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"03b7de4e-b33f-ce91-45aa-66983c75516e\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea8f2a88-19e6-438a-81ee-4b8aade8d27c",
+          "name": "Delete Watchlist By Id",
+          "request": {
+            "name": "Delete Watchlist By Id",
+            "description": {
+              "content": "Delete a watchlist. This is a permanent deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) watchlist id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4fcedb8-b7e4-45c4-afe0-fc5a95cc8cf4",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) watchlist id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a1aea7d-6ba7-407f-875f-64686eb165a0",
+          "name": "Get Watchlist by Name",
+          "request": {
+            "name": "Get Watchlist by Name",
+            "description": {
+              "content": "Returns a watchlist by name",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists:by_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) name of the watchlist"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48f5b8e7-dbdd-463d-a7e5-53ee11b918d1",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists:by_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"37442823-79a4-32eb-8efc-6ddd2a4a9ce2\",\n  \"account_id\": \"73ed5840-5a53-bb48-e94d-8de6ffcf1d5e\",\n  \"created_at\": \"1953-04-28T17:34:25.629Z\",\n  \"updated_at\": \"1957-07-17T02:13:22.902Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"769a897a-304c-bd8c-1c0d-4992c71a6647\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": true,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"03b7de4e-b33f-ce91-45aa-66983c75516e\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a7f44cb-88e1-473e-850f-122684abba03",
+          "name": "Update Watchlist By Name",
+          "request": {
+            "name": "Update Watchlist By Name",
+            "description": {
+              "content": "Update the name and/or content of watchlist",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists:by_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) name of the watchlist"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "97223b31-6611-407b-951b-e686ba6ff4cb",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists:by_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"symbols\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"37442823-79a4-32eb-8efc-6ddd2a4a9ce2\",\n  \"account_id\": \"73ed5840-5a53-bb48-e94d-8de6ffcf1d5e\",\n  \"created_at\": \"1953-04-28T17:34:25.629Z\",\n  \"updated_at\": \"1957-07-17T02:13:22.902Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"769a897a-304c-bd8c-1c0d-4992c71a6647\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": true,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"03b7de4e-b33f-ce91-45aa-66983c75516e\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50f11fca-2c64-4081-b90f-aa4f5b2062a4",
+          "name": "Add Asset to Watchlist By Name",
+          "request": {
+            "name": "Add Asset to Watchlist By Name",
+            "description": {
+              "content": "Append an asset for the symbol to the end of watchlist asset list",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists:by_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) name of the watchlist"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "893d7cbb-4402-4267-ad53-25d9603914cd",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists:by_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"AAPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"37442823-79a4-32eb-8efc-6ddd2a4a9ce2\",\n  \"account_id\": \"73ed5840-5a53-bb48-e94d-8de6ffcf1d5e\",\n  \"created_at\": \"1953-04-28T17:34:25.629Z\",\n  \"updated_at\": \"1957-07-17T02:13:22.902Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"769a897a-304c-bd8c-1c0d-4992c71a6647\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": true,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"03b7de4e-b33f-ce91-45aa-66983c75516e\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddc2baab-a6ab-4dde-ab92-617bb61edce2",
+          "name": "Delete Watchlist By Name",
+          "request": {
+            "name": "Delete Watchlist By Name",
+            "description": {
+              "content": "Delete a watchlist. This is a permanent deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists:by_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) name of the watchlist"
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e943cabc-b707-44a4-ac49-213007b209dc",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists:by_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c81eb3f5-4a8e-46f0-b475-e839ec1c3473",
+          "name": "Symbol from Watchlist",
+          "request": {
+            "name": "Symbol from Watchlist",
+            "description": {
+              "content": "Delete one entry for an asset by symbol name",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "watchlists",
+                ":watchlist_id",
+                ":symbol"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "watchlist_id",
+                  "description": "(Required) Watchlist ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) symbol name to remove from the watchlist content"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c31fe2b-08c3-4221-ad82-ff551d8cd718",
+              "name": "Returns the updated watchlist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "watchlists",
+                    ":watchlist_id",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "watchlist_id",
+                      "description": "(Required) Watchlist ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) symbol name to remove from the watchlist content"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"37442823-79a4-32eb-8efc-6ddd2a4a9ce2\",\n  \"account_id\": \"73ed5840-5a53-bb48-e94d-8de6ffcf1d5e\",\n  \"created_at\": \"1953-04-28T17:34:25.629Z\",\n  \"updated_at\": \"1957-07-17T02:13:22.902Z\",\n  \"name\": \"string\",\n  \"assets\": [\n    {\n      \"id\": \"769a897a-304c-bd8c-1c0d-4992c71a6647\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": false,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": true,\n      \"fractionable\": true\n    },\n    {\n      \"id\": \"03b7de4e-b33f-ce91-45aa-66983c75516e\",\n      \"class\": \"us_equity\",\n      \"exchange\": \"NYSE\",\n      \"symbol\": \"AAPL\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"tradable\": true,\n      \"marginable\": false,\n      \"shortable\": false,\n      \"easy_to_borrow\": false,\n      \"fractionable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "19aa49b4-e067-401c-b86d-a778171de881",
+    "name": "Broker Account Activities Watchlists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

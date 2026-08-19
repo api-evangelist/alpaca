@@ -1,0 +1,207 @@
+{
+  "item": [
+    {
+      "id": "b48a90dd-eb64-4fd7-b526-2ffbd5c04374",
+      "name": "News",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cbb6a234-3c12-4a1f-9d0b-60d159a8818d",
+          "name": "News API",
+          "request": {
+            "name": "News API",
+            "description": {
+              "content": "Returns latest news articles across stocks and crypto. By default returns latest 10 news articles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta1",
+                "news"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort articles by updated date. Options: DESC, ASC"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_content",
+                  "value": "<boolean>",
+                  "description": "Boolean indicator to include content for news articles (if available)"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_contentless",
+                  "value": "<boolean>",
+                  "description": "Boolean indicator to exclude news articles that do not contain content "
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb6810ec-fc1f-47eb-b4a7-fe141e0c76e0",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta1",
+                    "news"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "BTCUSD,ETHUSD"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "include_content",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "exclude_contentless",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"news\": [\n    {\n      \"id\": 24843171,\n      \"headline\": \"Apple Leader in Phone Sales in China for Second Straight Month in November With 23.6% Share, According to Market Research Data\",\n      \"author\": \"Charles Gross\",\n      \"created_at\": \"2021-12-31T11:08:42Z\",\n      \"updated_at\": \"2021-12-31T11:08:43Z\",\n      \"summary\": \"This headline-only article is meant to show you why a stock is moving, the most difficult aspect of stock trading\",\n      \"content\": \"<p>This headline-only article is meant to show you why a stock is moving, the most difficult aspect of stock trading....</p>\",\n      \"url\": \"https://www.benzinga.com/news/21/12/24843171/apple-leader-in-phone-sales-in-china-for-second-straight-month-in-november-with-23-6-share-according\",\n      \"images\": [],\n      \"symbols\": [\n        \"AAPL\"\n      ],\n      \"source\": \"benzinga\"\n    }\n  ],\n  \"next_page_token\": \"MTY0MDk0ODkyMzAwMDAwMDAwMHwyNDg0MzE3MQ==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "80522405-cee7-4066-a2e5-bf9727ee66a4",
+    "name": "Broker Account Activities News API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

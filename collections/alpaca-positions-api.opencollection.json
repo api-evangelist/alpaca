@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Positions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Positions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "All Open Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/positions"
+          },
+          "docs": "The positions API provides information about an account’s current open positions. The response will include information such as cost basis, shares traded, and market value, which will be updated live as price information is updated. Once a position is closed, it will no longer be queryable through this API\n\nRetrieves a list of the account’s open positions"
+        },
+        {
+          "info": {
+            "name": "All Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/positions",
+            "params": [
+              {
+                "name": "cancel_orders",
+                "value": "",
+                "type": "query",
+                "description": "If true is specified, cancel all open orders before liquidating all positions."
+              }
+            ]
+          },
+          "docs": "Closes (liquidates) all of the account’s open long and short positions. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request."
+        },
+        {
+          "info": {
+            "name": "Open Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/positions/:symbol_or_asset_id",
+            "params": [
+              {
+                "name": "symbol_or_asset_id",
+                "value": "",
+                "type": "path",
+                "description": "symbol or assetId"
+              }
+            ]
+          },
+          "docs": "Retrieves the account’s open position for the given symbol or assetId."
+        },
+        {
+          "info": {
+            "name": "Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/positions/:symbol_or_asset_id",
+            "params": [
+              {
+                "name": "symbol_or_asset_id",
+                "value": "",
+                "type": "path",
+                "description": "symbol or assetId"
+              },
+              {
+                "name": "qty",
+                "value": "",
+                "type": "query",
+                "description": "the number of shares to liquidate. Can accept up to 9 decimal points. Cannot work with percentage"
+              },
+              {
+                "name": "percentage",
+                "value": "",
+                "type": "query",
+                "description": "percentage of position to liquidate. Must be between 0 and 100. Would only sell fractional if position is originally fractional. Can accept up to 9 decimal points. Cannot work with qty"
+              }
+            ]
+          },
+          "docs": "Closes (liquidates) the account’s open position for the given symbol. Works for both long and short positions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

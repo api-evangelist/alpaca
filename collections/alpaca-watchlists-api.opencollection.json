@@ -1,0 +1,244 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Watchlists API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Watchlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists"
+          },
+          "docs": "Returns the list of watchlists registered under the account."
+        },
+        {
+          "info": {
+            "name": "Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new watchlist with initial set of assets."
+        },
+        {
+          "info": {
+            "name": "Get Watchlist by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "watchlist id"
+              }
+            ]
+          },
+          "docs": "Returns a watchlist identified by the ID."
+        },
+        {
+          "info": {
+            "name": "Add Asset to Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "watchlist id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append an asset for the symbol to the end of watchlist asset list"
+        },
+        {
+          "info": {
+            "name": "Update Watchlist By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "watchlist id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the name and/or content of watchlist"
+        },
+        {
+          "info": {
+            "name": "Delete Watchlist By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "watchlist id"
+              }
+            ]
+          },
+          "docs": "Delete a watchlist. This is a permanent deletion."
+        },
+        {
+          "info": {
+            "name": "Get Watchlist by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists:by_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name of the watchlist"
+              }
+            ]
+          },
+          "docs": "Returns a watchlist by name"
+        },
+        {
+          "info": {
+            "name": "Add Asset to Watchlist By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists:by_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name of the watchlist"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append an asset for the symbol to the end of watchlist asset list"
+        },
+        {
+          "info": {
+            "name": "Update Watchlist By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists:by_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name of the watchlist"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the name and/or content of watchlist"
+        },
+        {
+          "info": {
+            "name": "Delete Watchlist By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists:by_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name of the watchlist"
+              }
+            ]
+          },
+          "docs": "Delete a watchlist. This is a permanent deletion."
+        },
+        {
+          "info": {
+            "name": "Symbol from Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/watchlists/:watchlist_id/:symbol",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Watchlist ID"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "symbol name to remove from the watchlist content"
+              }
+            ]
+          },
+          "docs": "Delete one entry for an asset by symbol name"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

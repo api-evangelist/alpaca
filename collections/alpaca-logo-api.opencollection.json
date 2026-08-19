@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Logo API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logo",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Logo for symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1beta1/logos/:crypto_or_stock_symbol",
+            "params": [
+              {
+                "name": "crypto_or_stock_symbol",
+                "value": "",
+                "type": "path",
+                "description": "The crypto or stock symbol to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD\" would be how you query for BTC."
+              },
+              {
+                "name": "placeholder",
+                "value": "",
+                "type": "query",
+                "description": "If true then the api will generate a placeholder image if no logo was found. Defaults to true"
+              }
+            ]
+          },
+          "docs": "Returns logo image resource for provided symbol."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

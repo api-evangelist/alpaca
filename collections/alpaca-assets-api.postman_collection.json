@@ -1,0 +1,294 @@
+{
+  "item": [
+    {
+      "id": "066beb9b-66d0-422a-b412-1100bfdbb116",
+      "name": "Assets",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e9df57b7-d02b-4259-bd20-6df36f6187ed",
+          "name": "Retrieve all assets",
+          "request": {
+            "name": "Retrieve all assets",
+            "description": {
+              "content": "Returns all assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "all",
+                  "description": "Asset status to filter by, will default to `all`"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset_class",
+                  "value": "us_equity",
+                  "description": "Asset class to filter by, `us_equity` or `crypto`. Defaults to `us_equity`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae2a0c25-3740-48e3-a8e3-acb56a9a0a7a",
+              "name": "An array of asset objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "all"
+                    },
+                    {
+                      "key": "asset_class",
+                      "value": "us_equity"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"904837e3-3b76-47ec-b432-046db621571b\",\n    \"class\": \"us_equity\",\n    \"symbol\": \"AAPL\",\n    \"exchange\": \"NASDAQ\",\n    \"name\": \"Apple Inc. Common Stock\",\n    \"status\": \"active\",\n    \"tradable\": true,\n    \"marginable\": true,\n    \"shortable\": true,\n    \"easy_to_borrow\": true,\n    \"fractionable\": true,\n    \"last_close_pct_change\": \"string\",\n    \"last_price\": \"string\",\n    \"last_close\": \"string\"\n  },\n  {\n    \"id\": \"904837e3-3b76-47ec-b432-046db621571b\",\n    \"class\": \"us_equity\",\n    \"symbol\": \"AAPL\",\n    \"exchange\": \"NASDAQ\",\n    \"name\": \"Apple Inc. Common Stock\",\n    \"status\": \"active\",\n    \"tradable\": true,\n    \"marginable\": true,\n    \"shortable\": true,\n    \"easy_to_borrow\": true,\n    \"fractionable\": true,\n    \"last_close_pct_change\": \"string\",\n    \"last_price\": \"string\",\n    \"last_close\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df6a2e43-c773-4a56-bafb-a2391426d680",
+          "name": "Retrieve an asset by UUID",
+          "request": {
+            "name": "Retrieve an asset by UUID",
+            "description": {
+              "content": "Returns the requested asset, if found",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "assets",
+                ":symbol_or_asset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol_or_asset_id",
+                  "description": "(Required) you can use either the asset's Id or the symbol to search"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96b25187-5ace-44c4-9834-5c12734699e4",
+              "name": "Returns asset",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    ":symbol_or_asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol_or_asset_id",
+                      "description": "(Required) you can use either the asset's Id or the symbol to search"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"904837e3-3b76-47ec-b432-046db621571b\",\n  \"class\": \"us_equity\",\n  \"symbol\": \"AAPL\",\n  \"exchange\": \"NASDAQ\",\n  \"name\": \"Apple Inc. Common Stock\",\n  \"status\": \"active\",\n  \"tradable\": true,\n  \"marginable\": true,\n  \"shortable\": true,\n  \"easy_to_borrow\": true,\n  \"fractionable\": true,\n  \"last_close_pct_change\": \"string\",\n  \"last_price\": \"string\",\n  \"last_close\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d682396c-8004-4ceb-af76-c595880a855f",
+              "name": "Asset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    ":symbol_or_asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol_or_asset_id",
+                      "description": "(Required) you can use either the asset's Id or the symbol to search"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "be9a6c84-a3f0-4a50-81bc-a0f1a02e1448",
+    "name": "Broker Account Activities Assets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "item": [
+    {
+      "id": "96871afe-3157-40ba-a9fc-5f32c3064e36",
+      "name": "Corporate Actions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a595ba90-deef-401b-8dd3-c6ef05ac5811",
+          "name": "Retrieving Announcements",
+          "request": {
+            "name": "Retrieving Announcements",
+            "description": {
+              "content": "This enables searching for an array of corporate action announcements based on criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "corporate_actions",
+                "announcements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ca_types",
+                  "value": "<string>",
+                  "description": "(Required) A comma-delimited list of CorporateActionType values"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<date>",
+                  "description": "(Required) The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<date>",
+                  "description": "(Required) The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "The symbol of the company initiating the announcement."
+                },
+                {
+                  "disabled": false,
+                  "key": "cusip",
+                  "value": "<string>",
+                  "description": "The CUSIP of the company initiating the announcement."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_type",
+                  "value": "<string>",
+                  "description": "An emum of possible ways to use the `since` and `until` parameters to search by.\n\nthe types are:\n\n- **declaration_date**: The date of the preliminary announcement details or the date that any subsequent term updates took place.\n- **ex_date**: The date on which any security purchasing activity will not result in a corporate action entitlement. Any selling activity that takes place on or after this date will result in a corporate action entitlement.\n- **record_date**: The date the company checks its records to determine who is shareholder in order to allocate entitlements.\n- **payable_date**: The date that the stock and cash positions will update according to the account positions as of the record date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13581b02-689b-45fc-97cc-aa1bfcacbe58",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "corporate_actions",
+                    "announcements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ca_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cusip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"corporate_action_id\": \"string\",\n    \"ca_type\": \"dividend\",\n    \"ca_sub_type\": \"until_split\",\n    \"initiating_symbol\": \"string\",\n    \"initiating_original_cusip\": \"string\",\n    \"target_symbol\": \"string\",\n    \"target_original_cusip\": \"string\",\n    \"declaration_date\": \"string\",\n    \"ex_date\": \"string\",\n    \"record_date\": \"string\",\n    \"payable_date\": \"string\",\n    \"cash\": \"string\",\n    \"old_rate\": \"string\",\n    \"new_rate\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"corporate_action_id\": \"string\",\n    \"ca_type\": \"dividend\",\n    \"ca_sub_type\": \"merger_update\",\n    \"initiating_symbol\": \"string\",\n    \"initiating_original_cusip\": \"string\",\n    \"target_symbol\": \"string\",\n    \"target_original_cusip\": \"str\",\n    \"declaration_date\": \"string\",\n    \"ex_date\": \"string\",\n    \"record_date\": \"string\",\n    \"payable_date\": \"string\",\n    \"cash\": \"string\",\n    \"old_rate\": \"string\",\n    \"new_rate\": \"str\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "712dae87-2536-4670-8077-a11ec006657b",
+              "name": "Malformed input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "corporate_actions",
+                    "announcements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ca_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cusip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3323.105892290613,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0a50fb40-acd7-4345-8f15-15fae5e97638",
+    "name": "Broker Account Activities Corporate Actions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

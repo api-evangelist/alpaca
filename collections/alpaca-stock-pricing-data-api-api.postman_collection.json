@@ -1,0 +1,2047 @@
+{
+  "item": [
+    {
+      "id": "64916c7a-8584-4bab-ac96-ace9874129c3",
+      "name": "Stock Pricing Data API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ee80c0c3-cad9-47ab-82cd-2049b3d462d7",
+          "name": "Get Bar data for multiple stock symbols",
+          "request": {
+            "name": "Get Bar data for multiple stock symbols",
+            "description": {
+              "content": "The Multi Bars API returns aggregate historical data for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Bar timestamp. This means that you are likely to see only one symbol in your first response if there are enough Bars for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Bars were found for them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "bars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "adjustment",
+                  "value": "<string>",
+                  "description": "specifies the corporate action adjustment(s) for bars data"
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ccaeca5-40db-4d42-b2e7-db87ca557b90",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "bars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adjustment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bars\": {\n    \"AAPL\": [\n      {\n        \"t\": \"2022-02-28T05:00:00Z\",\n        \"o\": 163.02,\n        \"h\": 165.42,\n        \"l\": 162.43,\n        \"c\": 165.12,\n        \"v\": 90552883,\n        \"n\": 743379,\n        \"vw\": 164.274348\n      }\n    ],\n    \"TSLA\": [\n      {\n        \"t\": \"2022-02-28T05:00:00Z\",\n        \"o\": 815.72,\n        \"h\": 876.86,\n        \"l\": 814.7075,\n        \"c\": 870.43,\n        \"v\": 32122773,\n        \"n\": 848700,\n        \"vw\": 855.748243\n      }\n    ]\n  },\n  \"next_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97387981-1cd5-4362-a675-62ec23ca97cb",
+          "name": "Get Latest Bar data for multiple stock symbols",
+          "request": {
+            "name": "Get Latest Bar data for multiple stock symbols",
+            "description": {
+              "content": "The Bars API returns aggregate historical data for the requested security. Returns the latest bar data for the queried stock symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "bars",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9db154cf-4b65-493f-861c-c83e78f79e1a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "bars",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bars\": {\n    \"AAPL\": {\n      \"t\": \"2022-03-10T20:01:00Z\",\n      \"o\": 158.715,\n      \"h\": 158.73,\n      \"l\": 158.61,\n      \"c\": 158.615,\n      \"v\": 1211,\n      \"n\": 21,\n      \"vw\": 158.680756\n    },\n    \"TSLA\": {\n      \"t\": \"2022-03-10T20:01:00Z\",\n      \"o\": 834.27,\n      \"h\": 834.27,\n      \"l\": 832.46,\n      \"c\": 832.46,\n      \"v\": 1257,\n      \"n\": 48,\n      \"vw\": 833.55574\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6180081-8c99-48ac-a2c3-3c8ff7057e3c",
+          "name": "Bars",
+          "request": {
+            "name": "Bars",
+            "description": {
+              "content": "The Bars API returns aggregate historical data for the requested security. Returns bars for the queried stock symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "bars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "(Required) Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                },
+                {
+                  "disabled": false,
+                  "key": "adjustment",
+                  "value": "<string>",
+                  "description": "specifies the corporate action adjustment(s) for bars data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The stock ticker symbol to query for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23b4a504-a47c-4c54-a97e-0d06a2b27a1c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "bars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    },
+                    {
+                      "key": "adjustment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The stock ticker symbol to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bars\": [\n    {\n      \"t\": \"2021-02-01T16:01:00Z\",\n      \"o\": 133.32,\n      \"h\": 133.74,\n      \"l\": 133.31,\n      \"c\": 133.5,\n      \"v\": 9876\n    },\n    {\n      \"t\": \"2021-02-01T16:02:00Z\",\n      \"o\": 133.5,\n      \"h\": 133.58,\n      \"l\": 133.44,\n      \"c\": 133.58,\n      \"v\": 3567\n    }\n  ],\n  \"symbol\": \"AAPL\",\n  \"next_page_token\": \"MjAyMS0wMi0wMVQxNDowMjowMFo7MQ==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "562496dd-0703-4398-a363-20f27a4cc9e3",
+          "name": "Get Latest Bars for Symbol",
+          "request": {
+            "name": "Get Latest Bars for Symbol",
+            "description": {
+              "content": "The Bars API returns aggregate historical data for the requested security. Returns the latest bar data for the queried stock symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "bars",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The stock ticker symbol to query for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75450df4-1a0c-4191-91a4-fbc0eb903a95",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "bars",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The stock ticker symbol to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"AAPL\",\n  \"bar\": {\n    \"t\": \"2022-03-10T19:26:00Z\",\n    \"o\": 158.035,\n    \"h\": 158.21,\n    \"l\": 158.035,\n    \"c\": 158.21,\n    \"v\": 800,\n    \"n\": 15,\n    \"vw\": 158.113144\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "580460a0-4a20-443a-9a78-687a2dd815cc",
+          "name": "Get Trade data for multiple stock symbols",
+          "request": {
+            "name": "Get Trade data for multiple stock symbols",
+            "description": {
+              "content": "The Multi Trades API provides historical trade data for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89d6845b-f14b-4a2e-a21e-6e1c6d1c7208",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trades\": {\n    \"SPY\": [\n      {\n        \"t\": \"2021-02-06T13:04:56.334320128Z\",\n        \"x\": \"C\",\n        \"p\": 387.62,\n        \"s\": 100,\n        \"c\": [\n          \" \",\n          \"T\"\n        ],\n        \"i\": 52983525029461,\n        \"z\": \"B\"\n      },\n      {\n        \"t\": \"2021-02-06T13:09:42.325484032Z\",\n        \"x\": \"C\",\n        \"p\": 387.69,\n        \"s\": 100,\n        \"c\": [\n          \" \",\n          \"T\"\n        ],\n        \"i\": 52983525033813,\n        \"z\": \"B\"\n      }\n    ]\n  },\n  \"next_page_token\": \"MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4869dc8-d970-4ae5-b8f6-7f22d0f324fb",
+          "name": "Get Latest Trades data for multiple stock symbols",
+          "request": {
+            "name": "Get Latest Trades data for multiple stock symbols",
+            "description": {
+              "content": "Returns the latest trades data for the queried stock symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "trades",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21d109f7-2967-455d-bc28-7bb5b36e6722",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "trades",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trades\": {\n    \"TSLA\": {\n      \"t\": \"2022-03-11T17:24:55.143671726Z\",\n      \"x\": \"V\",\n      \"p\": 801.83,\n      \"s\": 100,\n      \"c\": [\n        \"@\"\n      ],\n      \"i\": 9924,\n      \"z\": \"C\"\n    },\n    \"AAPL\": {\n      \"t\": \"2022-03-11T17:24:56.321817175Z\",\n      \"x\": \"V\",\n      \"p\": 155.105,\n      \"s\": 300,\n      \"c\": [\n        \"@\"\n      ],\n      \"i\": 7741,\n      \"z\": \"C\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "480b121d-79fd-44cb-93e3-13515494fc07",
+          "name": "Trades",
+          "request": {
+            "name": "Trades",
+            "description": {
+              "content": "The Trades API provides historical trade data for a given ticker symbol on a specified date. Returns trades for the queried stock signal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "778923a0-20d9-42bb-a9fe-db8d9fb04663",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trades\": [\n    {\n      \"t\": \"2021-02-06T13:04:56.334320128Z\",\n      \"x\": \"C\",\n      \"p\": 387.62,\n      \"s\": 100,\n      \"c\": [\n        \" \",\n        \"T\"\n      ],\n      \"i\": 52983525029461,\n      \"z\": \"B\"\n    },\n    {\n      \"t\": \"2021-02-06T13:09:42.325484032Z\",\n      \"x\": \"C\",\n      \"p\": 387.69,\n      \"s\": 100,\n      \"c\": [\n        \" \",\n        \"T\"\n      ],\n      \"i\": 52983525033813,\n      \"z\": \"B\"\n    }\n  ],\n  \"symbol\": \"SPY\",\n  \"next_page_token\": \"MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f08cf0ea-283a-4947-8355-a20844c61d57",
+          "name": "Latest Trade",
+          "request": {
+            "name": "Latest Trade",
+            "description": {
+              "content": "The Latest Trade API provides the latest trade data for a given ticker symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "trades",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "222a69c8-d3de-4d01-9bcd-03970e203c7b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "trades",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"AAPL\",\n  \"trade\": {\n    \"t\": \"2022-02-01T17:46:51.111055251Z\",\n    \"x\": \"V\",\n    \"p\": 173.06,\n    \"s\": 100,\n    \"c\": [\n      \"@\"\n    ],\n    \"i\": 6519,\n    \"z\": \"C\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2516a8bd-55e0-48dd-a6a6-bf6af7473401",
+          "name": "Get Quotes for multiple stock symbols",
+          "request": {
+            "name": "Get Quotes for multiple stock symbols",
+            "description": {
+              "content": "The Multi Quotes API provides NBBO quotes for multiple given ticker symbols over a specified time period.\n\nReturned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.\n\nIn these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45275096-1976-4a79-beca-d419c9c283eb",
+              "name": "Successful response\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": {\n    \"AAPL\": [\n      {\n        \"t\": \"2022-03-11T13:13:49.975594385Z\",\n        \"ax\": \"V\",\n        \"ap\": 159.97,\n        \"as\": 1,\n        \"bx\": \"V\",\n        \"bp\": 0,\n        \"bs\": 0,\n        \"c\": [\n          \"R\"\n        ],\n        \"z\": \"C\"\n      }\n    ]\n  },\n  \"next_page_token\": \"QUFQTHwyMDIyLTAzLTExVDEzOjEzOjQ5Ljk3NTU5NDM4NVp8MDFEQzVERDY=\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b154d70b-80ae-4dc8-a0b3-7ab1b73aaaf7",
+          "name": "Get Latest Quotes for multiple stock symbols",
+          "request": {
+            "name": "Get Latest Quotes for multiple stock symbols",
+            "description": {
+              "content": "Returns the latest quotes data for the queried stock symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "quotes",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "798620f1-a099-42e3-af52-1df65be35990",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "quotes",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": {\n    \"AAPL\": {\n      \"t\": \"2022-03-11T18:40:13.514830169Z\",\n      \"ax\": \"V\",\n      \"ap\": 156.47,\n      \"as\": 3,\n      \"bx\": \"V\",\n      \"bp\": 156.45,\n      \"bs\": 1,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    },\n    \"TSLA\": {\n      \"t\": \"2022-03-11T18:40:12.416216587Z\",\n      \"ax\": \"V\",\n      \"ap\": 850,\n      \"as\": 1,\n      \"bx\": \"V\",\n      \"bp\": 798,\n      \"bs\": 2,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d0e7f80-ccc0-467f-8675-8b6b0dcb7751",
+          "name": "Get Quotes for stock symbol",
+          "request": {
+            "name": "Get Quotes for stock symbol",
+            "description": {
+              "content": "The Quotes API provides NBBO quotes for a single given ticker symbol at a specified date. Returns quotes (NBBOs) for the querried stock symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8be200e-e360-4254-a90d-d8145f6cd75f",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": [\n    {\n      \"t\": \"2022-02-01T09:00:00.000448Z\",\n      \"ax\": \"K\",\n      \"ap\": 175,\n      \"as\": 1,\n      \"bx\": \"Q\",\n      \"bp\": 174.96,\n      \"bs\": 4,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    },\n    {\n      \"t\": \"2022-02-01T09:00:00.000448Z\",\n      \"ax\": \"K\",\n      \"ap\": 175,\n      \"as\": 12,\n      \"bx\": \"Q\",\n      \"bp\": 174.96,\n      \"bs\": 4,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    }\n  ],\n  \"symbol\": \"AAPL\",\n  \"next_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cad8187b-81ee-4b4b-99c2-954be41221b9",
+          "name": "Get Latest Quote for stock symbol",
+          "request": {
+            "name": "Get Latest Quote for stock symbol",
+            "description": {
+              "content": "The Latest Quote API provides the latest quote data for a given ticker symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "quotes",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3d8516d-9ede-4e21-8ba3-1d5d0838c71b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "quotes",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"AAPL\",\n  \"quote\": {\n    \"t\": \"2022-02-01T17:51:03.204726425Z\",\n    \"ax\": \"V\",\n    \"ap\": 173.24,\n    \"as\": 4,\n    \"bx\": \"V\",\n    \"bp\": 173.21,\n    \"bs\": 4,\n    \"c\": [\n      \"R\"\n    ],\n    \"z\": \"C\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bd3cd11-b30e-4ab6-9da1-90b8668ea687",
+          "name": "Get Snapshots for multiple stock symbols",
+          "request": {
+            "name": "Get Snapshots for multiple stock symbols",
+            "description": {
+              "content": "The Snapshot API for multiple tickers provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for the given ticker symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) The comma-separated list of stock ticker symbols to query for."
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0979b22-f7a2-4ed0-83fe-5c82026cc515",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbols",
+                      "value": "AAPL,TSLA"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AAPL\": {\n    \"latestTrade\": {\n      \"t\": \"2022-03-11T19:08:43.947998695Z\",\n      \"x\": \"V\",\n      \"p\": 156.055,\n      \"s\": 100,\n      \"c\": [\n        \"@\"\n      ],\n      \"i\": 10593,\n      \"z\": \"C\"\n    },\n    \"latestQuote\": {\n      \"t\": \"2022-03-11T19:09:06.125564144Z\",\n      \"ax\": \"V\",\n      \"ap\": 157.2,\n      \"as\": 5,\n      \"bx\": \"V\",\n      \"bp\": 156.08,\n      \"bs\": 1,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    },\n    \"minuteBar\": {\n      \"t\": \"2022-03-11T19:08:00Z\",\n      \"o\": 156.02,\n      \"h\": 156.1,\n      \"l\": 156.02,\n      \"c\": 156.055,\n      \"v\": 4483,\n      \"n\": 26,\n      \"vw\": 156.055956\n    },\n    \"dailyBar\": {\n      \"t\": \"2022-03-11T05:00:00Z\",\n      \"o\": 158.94,\n      \"h\": 159.25,\n      \"l\": 154.76,\n      \"c\": 156.055,\n      \"v\": 1180799,\n      \"n\": 10408,\n      \"vw\": 156.545239\n    },\n    \"prevDailyBar\": {\n      \"t\": \"2022-03-10T05:00:00Z\",\n      \"o\": 160.23,\n      \"h\": 160.38,\n      \"l\": 155.98,\n      \"c\": 158.52,\n      \"v\": 1889292,\n      \"n\": 17072,\n      \"vw\": 157.845202\n    }\n  },\n  \"TSLA\": {\n    \"latestTrade\": {\n      \"t\": \"2022-03-11T19:08:59.479520429Z\",\n      \"x\": \"V\",\n      \"p\": 796.95,\n      \"s\": 100,\n      \"c\": [\n        \"@\"\n      ],\n      \"i\": 13647,\n      \"z\": \"C\"\n    },\n    \"latestQuote\": {\n      \"t\": \"2022-03-11T19:09:06.159593323Z\",\n      \"ax\": \"V\",\n      \"ap\": 850,\n      \"as\": 1,\n      \"bx\": \"V\",\n      \"bp\": 796.49,\n      \"bs\": 1,\n      \"c\": [\n        \"R\"\n      ],\n      \"z\": \"C\"\n    },\n    \"minuteBar\": {\n      \"t\": \"2022-03-11T19:08:00Z\",\n      \"o\": 796.78,\n      \"h\": 797.4,\n      \"l\": 796.78,\n      \"c\": 796.95,\n      \"v\": 2139,\n      \"n\": 46,\n      \"vw\": 797.116889\n    },\n    \"dailyBar\": {\n      \"t\": \"2022-03-11T05:00:00Z\",\n      \"o\": 840.38,\n      \"h\": 843.055,\n      \"l\": 795.33,\n      \"c\": 796.95,\n      \"v\": 466980,\n      \"n\": 13232,\n      \"vw\": 811.369454\n    },\n    \"prevDailyBar\": {\n      \"t\": \"2022-03-10T05:00:00Z\",\n      \"o\": 851.5,\n      \"h\": 853.355,\n      \"l\": 810.76,\n      \"c\": 838.21,\n      \"v\": 578475,\n      \"n\": 16118,\n      \"vw\": 828.766436\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0df8a7a-76a0-4968-ac93-d08f32f1452d",
+          "name": "Get a Snapshot for a stock symbol",
+          "request": {
+            "name": "Get a Snapshot for a stock symbol",
+            "description": {
+              "content": "The Snapshot API for one ticker provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for a given ticker symbol. This endpoint returns the snapshot for the requested security.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                ":symbol",
+                "snapshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to query for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ade3204-91bd-4958-96cc-dc194637f6a5",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    ":symbol",
+                    "snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed",
+                      "value": "sip"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to query for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"AAPL\",\n  \"latestTrade\": {\n    \"t\": \"2021-05-11T20:00:00.435997104Z\",\n    \"x\": \"Q\",\n    \"p\": 125.91,\n    \"s\": 5589631,\n    \"c\": [\n      \"@\",\n      \"M\"\n    ],\n    \"i\": 179430,\n    \"z\": \"C\"\n  },\n  \"latestQuote\": {\n    \"t\": \"2021-05-11T22:05:02.307304704Z\",\n    \"ax\": \"P\",\n    \"ap\": 125.68,\n    \"as\": 12,\n    \"bx\": \"P\",\n    \"bp\": 125.6,\n    \"bs\": 4,\n    \"c\": [\n      \"R\"\n    ]\n  },\n  \"minuteBar\": {\n    \"t\": \"2021-05-11T22:02:00Z\",\n    \"o\": 125.66,\n    \"h\": 125.66,\n    \"l\": 125.66,\n    \"c\": 125.66,\n    \"v\": 396\n  },\n  \"dailyBar\": {\n    \"t\": \"2021-05-11T04:00:00Z\",\n    \"o\": 123.5,\n    \"h\": 126.27,\n    \"l\": 122.77,\n    \"c\": 125.91,\n    \"v\": 125863164\n  },\n  \"prevDailyBar\": {\n    \"t\": \"2021-05-10T04:00:00Z\",\n    \"o\": 129.41,\n    \"h\": 129.54,\n    \"l\": 126.81,\n    \"c\": 126.85,\n    \"v\": 79569305\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04ed8cad-c653-4cf9-bb9b-7d955edc7935",
+          "name": "Get List of supported exchanges",
+          "request": {
+            "name": "Get List of supported exchanges",
+            "description": {
+              "content": "Returns a json object representing the exchanges we support. The keys are the short form codes you will see in our responses and the values are their respective full names.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "meta",
+                "exchanges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76a7eec5-048d-43f9-9fb1-6e2e76e706b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "meta",
+                    "exchanges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Z\": \"Cboe BZ\",\n  \"I\": \"International Securities Exchange\",\n  \"M\": \"Chicago Stock Exchange\",\n  \"U\": \"Members Exchange\",\n  \"L\": \"Long Term Stock Exchange\",\n  \"W\": \"CBOE\",\n  \"X\": \"NASDAQ OMX PSX\",\n  \"B\": \"NASDAQ OMX BX\",\n  \"D\": \"FINRA ADF\",\n  \"J\": \"Cboe EDGA\",\n  \"P\": \"NYSE Arca\",\n  \"Q\": \"NASDAQ OMX\",\n  \"S\": \"NASDAQ Small Cap\",\n  \"V\": \"IEX\",\n  \"A\": \"NYSE American (AMEX)\",\n  \"E\": \"Market Independent\",\n  \"N\": \"New York Stock Exchange\",\n  \"T\": \"NASDAQ Int\",\n  \"Y\": \"Cboe BYX\",\n  \"C\": \"National Stock Exchange\",\n  \"H\": \"MIAX\",\n  \"K\": \"Cboe EDGX\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c09191b4-c149-416e-8399-26f057c02e16",
+          "name": "Get list of Conditions",
+          "request": {
+            "name": "Get list of Conditions",
+            "description": {
+              "content": "Each feed/exchange uses its own set of codes to identify trade and quote conditions, so the same condition may have a different code depending on the originator of the data.\n\nSee [Our documentation](https://alpaca.markets/docs/market-data/#conditions) for more information",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "stocks",
+                "meta",
+                "conditions",
+                ":type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tape",
+                  "value": "<string>",
+                  "description": "(Required) What kind of conditions to retrieve, \"A\" and \"B\" return CTS, where \"C\" will give you UTP "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) either \"trade\" or \"quote\""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a86d7c03-2c2a-49cd-b934-4bcf04715d7f",
+              "name": "OK\n\nResponse is a JSON object mapping a condition to a plain text description",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "stocks",
+                    "meta",
+                    "conditions",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tape",
+                      "value": "A"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) either \"trade\" or \"quote\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"4\": \"Derivatively Priced\",\n  \"5\": \"Market Center Reopening Trade\",\n  \"6\": \"Market Center Closing Trade\",\n  \"7\": \"Qualified Contingent Trade\",\n  \"8\": \"Reserved\",\n  \"9\": \"Corrected Consolidated Close Price as per Listing Market\",\n  \"F\": \"Inter-market Sweep Order\",\n  \"O\": \"Market Center Opening Trade\",\n  \" \": \"Regular Sale\",\n  \"B\": \"Average Price Trade\",\n  \"C\": \"Cash Trade (Same Day Clearing)\",\n  \"E\": \"Automatic Execution\",\n  \"M\": \"Market Center Official Close\",\n  \"T\": \"Extended Hours Trade\",\n  \"U\": \"Extended Hours Sold (Out Of Sequence)\",\n  \"I\": \"Odd Lot Trade\",\n  \"K\": \"Rule 127 (NYSE only) or Rule 155 (NYSE MKT only)\",\n  \"R\": \"Seller\",\n  \"X\": \"Cross Trade\",\n  \"Z\": \"Sold (Out Of Sequence)\",\n  \"N\": \"Next Day Trade (Next Day Clearing)\",\n  \"P\": \"Prior Reference Price\",\n  \"Q\": \"Market Center Official Open\",\n  \"V\": \"Contingent Trade\",\n  \"H\": \"Price Variation Trade\",\n  \"L\": \"Sold Last (Late Reporting)\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8096220c-6e9e-4121-9273-13fd79f0c38f",
+    "name": "Broker Account Activities Stock Pricing Data API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

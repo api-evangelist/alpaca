@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Screener API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Screener",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Top Market Movers by Market type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1beta1/screener/:market_type/movers",
+            "params": [
+              {
+                "name": "market_type",
+                "value": "",
+                "type": "path",
+                "description": "Screen specific market (stocks or crypto)"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "Number of top market movers to fetch (gainers and losers). Will return number top for each. By default 10 gainers and 10 losers."
+              }
+            ]
+          },
+          "docs": "Returns top market movers for stocks. By default will return top 5 market gainers and losers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

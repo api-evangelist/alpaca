@@ -1,0 +1,292 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Funding API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Funding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve bank relationships for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/recipient_banks",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bank_name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves Bank Relationships for an account"
+        },
+        {
+          "info": {
+            "name": "Create a Bank Relationship for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/recipient_banks",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If successful, retrieves Bank Relationships for an account"
+        },
+        {
+          "info": {
+            "name": "Delete a Bank Relationship for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/recipient_banks/:bank_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "bank_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "If successful, deletes Bank Relationship for an account"
+        },
+        {
+          "info": {
+            "name": "Return a list of transfers for an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/transfers",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "INCOMING or OUTGOING"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "You can query a list of transfers for an account.\n\n\nYou can filter requested transfers by values such as direction and status.\n"
+        },
+        {
+          "info": {
+            "name": "Request a new transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/transfers",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new transfer to an account to fund it.\n\nIn the sandbox environment, you can instantly deposit to or withdraw from an account with a virtual money amount. In the production environment, this endpoint is used only for requesting an outgoing (withdrawal) wire transfer at this moment. For the wire transfer (in production), you need to create a bank resource first using the Bank API. For more on how to fund an account in sandbox please check out this tutorial [here](https://alpaca.markets/le"
+        },
+        {
+          "info": {
+            "name": "Request to close a transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/transfers/:transfer_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "path",
+                "description": "Tranfer identifier"
+              }
+            ]
+          },
+          "docs": "Request to close a transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve ACH Relationships for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/ach_relationships",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated status values"
+              }
+            ]
+          },
+          "docs": "Returns a list of ACH Relationships for an account"
+        },
+        {
+          "info": {
+            "name": "Create an ACH Relationship",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/ach_relationships",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new ACHRelationship for an account\n\nIf successful, will return 200 code with a newly created ACH Relationship entity."
+        },
+        {
+          "info": {
+            "name": "Delete an existing ACH relationship",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/ach_relationships/:ach_relationship_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "ach_relationship_id",
+                "value": "",
+                "type": "path",
+                "description": "ACH relationship identifier"
+              }
+            ]
+          },
+          "docs": "Delete an existing ACH relationship for an account"
+        },
+        {
+          "info": {
+            "name": "Subscribe to Transfer Events (SSE)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/events/transfers/status",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "since_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to transfer status updates as they get processed by our backoffice, for both end-user and firm accounts.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can’t be used at the same time\nBehavior:\n- if `since` or"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

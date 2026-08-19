@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Calendar API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Calendar",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query market calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/calendar",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The first date to retrieve data for. (Inclusive) in YYYY-MM-DD format"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The last date to retrieve data for. (Inclusive) in YYYY-MM-DD format"
+              }
+            ]
+          },
+          "docs": "The calendar API serves the full list of market days from 1970 to 2029. It can also be queried by specifying a start and/or end time to narrow down the results. In addition to the dates, the response also contains the specific open and close times for the market days, taking into account early closures."
+        },
+        {
+          "info": {
+            "name": "Get Market Calendar info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/calendar",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The first date to retrieve data for (inclusive)"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The last date to retrieve data for (inclusive)"
+              }
+            ]
+          },
+          "docs": "Returns the market calendar."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

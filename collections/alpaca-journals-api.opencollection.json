@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Journals API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Journals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to journal events (SSE).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/events/journals/status",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Format: YYYY-MM-DD"
+              },
+              {
+                "name": "since_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The Events API provides event push as well as historical queries via SSE (server sent events).\n\nYou can listen to journal status updates as they get processed by our backoffice.\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can’t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will no"
+        },
+        {
+          "info": {
+            "name": "Return a list of requested journals.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/journals",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "By journal creation date. Format: 2020-01-01"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "By journal creation date. Format: 2020-01-01"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "See the JournalStatus model for more info"
+              },
+              {
+                "name": "entry_type",
+                "value": "",
+                "type": "query",
+                "description": "JNLC or JNLS"
+              },
+              {
+                "name": "to_account",
+                "value": "",
+                "type": "query",
+                "description": "The account id that received the journal"
+              },
+              {
+                "name": "from_account",
+                "value": "",
+                "type": "query",
+                "description": "The account id that initiated the journal"
+              }
+            ]
+          },
+          "docs": "Returns an array of journal objects."
+        },
+        {
+          "info": {
+            "name": "Create a Journal.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/journals",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A journal can be JNLC (move cash) or JNLS (move shares), dictated by `entry_type`. Generally, journal requests are subject to approval and starts from the `pending` status. The status changes are propagated through the Event API. Under certain conditions agreed for the partner, such journal transactions that meet the criteria are executed right away.\n"
+        },
+        {
+          "info": {
+            "name": "Cancel a pending journal.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/journals/:journal_id",
+            "params": [
+              {
+                "name": "journal_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "You can only delete a journal if the journal is still in a pending state, if a journal is executed you will not be able to delete. The alternative is to create a mirror journal entry to reverse the flow of funds."
+        },
+        {
+          "info": {
+            "name": "Create a Batch Journal Transaction (One-to-Many)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/journals/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You can create a batch of journal requests by using this endpoint. This is enabled on JNLC type Journals for now only.\n\nEvery single request must be valid for the entire batch operation to succeed.\n\nIn the case of a successful request, the response will contain an array of journal objects with an extra attribute error_message in the case when a specific account fails to receive a journal."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

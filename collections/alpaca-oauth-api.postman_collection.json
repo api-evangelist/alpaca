@@ -1,48 +1,28 @@
 {
   "item": [
     {
-      "id": "7c0c489b-5f7a-418e-8612-c2902b36660c",
+      "id": "5cd3ec46-e9c6-4091-882f-f798ad8fb6fe",
       "name": "OAuth",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
-      "item": [],
-      "event": []
-    },
-    {
-      "id": "a8a550dc-6356-40bb-ae29-9b2034b02f47",
-      "name": "Crypto Pricing Data API",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
-      "item": [],
-      "event": []
-    },
-    {
-      "id": "52f5f6aa-56f2-49d5-9bf4-e2d64502c101",
-      "name": "Stock Pricing Data API",
       "description": {
         "content": "",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "cde4d5d6-7092-416f-b02f-196559a72da2",
-          "name": "Bars",
+          "id": "d9feecba-8776-4ebc-aa35-cce09aff9348",
+          "name": "Get an OAuth client",
           "request": {
-            "name": "Bars",
+            "name": "Get an OAuth client",
             "description": {
-              "content": "The bars API returns aggregate historical data for the requested securities",
+              "content": "The endpoint returns the details of OAuth client to display in the authorization page.\n",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "v2",
-                "stocks",
-                ":symbol",
-                "bars"
+                "v1",
+                "oauth",
+                "clients",
+                ":client_id"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -50,46 +30,34 @@
               "query": [
                 {
                   "disabled": false,
-                  "key": "start",
+                  "key": "response_type",
                   "value": "<string>",
-                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+                  "description": "code or token"
                 },
                 {
                   "disabled": false,
-                  "key": "end",
+                  "key": "redirect_uri",
                   "value": "<string>",
-                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+                  "description": "Redirect URI of the OAuth flow"
                 },
                 {
                   "disabled": false,
-                  "key": "timeframe",
+                  "key": "scope",
                   "value": "<string>",
-                  "description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+                  "description": "Requested scopes by the OAuth flow"
                 }
               ],
               "variable": [
                 {
                   "disabled": false,
                   "type": "any",
-                  "value": "<string>",
-                  "key": "symbol",
-                  "description": "(Required) The symbol to query for"
+                  "value": "<uuid>",
+                  "key": "client_id",
+                  "description": "(Required) "
                 }
               ]
             },
             "header": [
-              {
-                "disabled": false,
-                "key": "Apca-Api-Key-Id",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "disabled": false,
-                "key": "Apca-Api-Secret-Key",
-                "value": "<string>",
-                "description": ""
-              },
               {
                 "key": "Accept",
                 "value": "application/json"
@@ -100,55 +68,51 @@
           },
           "response": [
             {
-              "id": "c63a536c-4536-4041-b63a-b0050cbadfcb",
-              "name": "Successful response",
+              "id": "d254f5c3-3afb-424a-8ee5-84ab1a66f901",
+              "name": "Success.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "v2",
-                    "stocks",
-                    ":symbol",
-                    "bars"
+                    "v1",
+                    "oauth",
+                    "clients",
+                    ":client_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
-                      "key": "start",
-                      "value": "2020-04-01T0:00:00Z"
+                      "key": "response_type",
+                      "value": "token"
                     },
                     {
-                      "key": "end",
-                      "value": "2021-08-26T11:00:00Z"
+                      "key": "redirect_uri",
+                      "value": "https://example.com/authorize"
                     },
                     {
-                      "key": "timeframe",
-                      "value": "1Min"
+                      "key": "scope",
+                      "value": "general"
                     }
                   ],
                   "variable": [
                     {
                       "disabled": false,
                       "type": "any",
-                      "value": "<string>",
-                      "key": "symbol",
-                      "description": "(Required) The symbol to query for"
+                      "value": "<uuid>",
+                      "key": "client_id",
+                      "description": "(Required) "
                     }
                   ]
                 },
                 "header": [
                   {
-                    "disabled": false,
-                    "key": "Apca-Api-Key-Id",
-                    "value": "{{APCA_API_KEY_ID}}",
-                    "description": ""
-                  },
-                  {
-                    "disabled": false,
-                    "key": "Apca-Api-Secret-Key",
-                    "value": "{{APCA_API_SECRET_KEY}}",
-                    "description": ""
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
                   },
                   {
                     "key": "Accept",
@@ -166,7 +130,74 @@
                   "value": "application/json"
                 }
               ],
-              "body": "\"\"",
+              "body": "{\n  \"client_id\": \"7a3c52a910e1dc2abbb14da2b6b8e711\",\n  \"name\": \"TradingApp\",\n  \"description\": \"Sample description\",\n  \"url\": \"http://test.com\",\n  \"terms_of_use\": \"\",\n  \"privacy_policy\": \"\",\n  \"status\": \"ACTIVE\",\n  \"redirect_uri\": [\n    \"http://localhost\"\n  ],\n  \"live_trading_approved\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35362286-579e-4240-a180-9cd7579d44c1",
+              "name": "Client does not exist or you do not have access to the client.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "clients",
+                    ":client_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "response_type",
+                      "value": "token"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "https://example.com/authorize"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "general"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "client_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -177,124 +208,89 @@
           }
         },
         {
-          "id": "23615fe4-86dc-4e85-b246-d59da43b12d9",
-          "name": "Trades",
+          "id": "036ebadb-5fe4-45f4-886d-7d3ac6bda069",
+          "name": "Issue an OAuth token.",
           "request": {
-            "name": "Trades",
+            "name": "Issue an OAuth token.",
             "description": {
-              "content": "The Trades API provides historcial trade data for a given ticker symbol on a specified date. Returns trades for the queried stock signal.",
+              "content": "The operation issues an OAuth code which can be used in the OAuth code flow.\n",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "v2",
-                "stocks",
-                ":symbol",
-                "trades"
+                "v1",
+                "oauth",
+                "token"
               ],
               "host": [
                 "{{baseUrl}}"
               ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "start",
-                  "value": "<string>",
-                  "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
-                },
-                {
-                  "disabled": false,
-                  "key": "end",
-                  "value": "<string>",
-                  "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "symbol",
-                  "description": "(Required) The symbol to query for"
-                }
-              ]
+              "query": [],
+              "variable": []
             },
             "header": [
               {
-                "disabled": false,
-                "key": "Apca-Api-Key-Id",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "disabled": false,
-                "key": "Apca-Api-Secret-Key",
-                "value": "<string>",
-                "description": ""
+                "key": "Content-Type",
+                "value": "application/json"
               },
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
           },
           "response": [
             {
-              "id": "a1506072-1ff2-4d24-a1e3-c081b37bcb34",
-              "name": "Successful response",
+              "id": "d8f1cce3-ff06-46c6-b54a-f44f854f0e4d",
+              "name": "Success.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "v2",
-                    "stocks",
-                    ":symbol",
-                    "trades"
+                    "v1",
+                    "oauth",
+                    "token"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
-                    {
-                      "key": "start",
-                      "value": "2020-04-01T0:00:00Z"
-                    },
-                    {
-                      "key": "end",
-                      "value": "2021-08-26T11:00:00Z"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "symbol",
-                      "description": "(Required) The symbol to query for"
-                    }
-                  ]
+                  "query": [],
+                  "variable": []
                 },
                 "header": [
                   {
-                    "disabled": false,
-                    "key": "Apca-Api-Key-Id",
-                    "value": "{{APCA_API_KEY_ID}}",
-                    "description": ""
-                  },
-                  {
-                    "disabled": false,
-                    "key": "Apca-Api-Secret-Key",
-                    "value": "{{APCA_API_SECRET_KEY}}",
-                    "description": ""
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"7a3c52a910e1dc2abbb14da2b6b8e711\",\n  \"client_secret\": \"bbb14da2b6b8e7117a3c52a910e1dc2a\",\n  \"redirect_uri\": \"http://localhost\",\n  \"scope\": \"general\",\n  \"account_id\": \"0d18ae51-3c94-4511-b209-101e1666416b\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
               },
               "status": "OK",
               "code": 200,
@@ -304,7 +300,322 @@
                   "value": "application/json"
                 }
               ],
-              "body": "\"\"",
+              "body": "{\n  \"access_token\": \"87586f14-c3f4-4912-b107-f75bc17ff87a\",\n  \"token_type\": \"Bearer\",\n  \"scope\": \"general\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebb876f0-7965-4ae1-86a4-8d71dffbec7b",
+              "name": "Client does not exists, you do not have access to the client, or “client_secret” is incorrect.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"7a3c52a910e1dc2abbb14da2b6b8e711\",\n  \"client_secret\": \"bbb14da2b6b8e7117a3c52a910e1dc2a\",\n  \"redirect_uri\": \"http://localhost\",\n  \"scope\": \"general\",\n  \"account_id\": \"0d18ae51-3c94-4511-b209-101e1666416b\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80344b3c-a26e-4394-acd3-9c98d711dd01",
+              "name": "Redirect URI or scope is invalid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"7a3c52a910e1dc2abbb14da2b6b8e711\",\n  \"client_secret\": \"bbb14da2b6b8e7117a3c52a910e1dc2a\",\n  \"redirect_uri\": \"http://localhost\",\n  \"scope\": \"general\",\n  \"account_id\": \"0d18ae51-3c94-4511-b209-101e1666416b\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ccfce37-1bf2-427e-af19-d99c598dbf2b",
+          "name": "Authorize an OAuth Token",
+          "request": {
+            "name": "Authorize an OAuth Token",
+            "description": {
+              "content": "The operation issues an OAuth code which can be used in the OAuth code flow.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "oauth",
+                "authorize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"account_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "30135898-ea56-456a-8587-8943c5d1bfab",
+              "name": "Successfully issued a code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"7a3c52a910e1dc2abbb14da2b6b8e711\",\n  \"client_secret\": \"bbb14da2b6b8e7117a3c52a910e1dc2a\",\n  \"redirect_uri\": \"http://localhost\",\n  \"scope\": \"general\",\n  \"account_id\": \"0d18ae51-3c94-4511-b209-101e1666416b\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"client_id\": \"string\",\n  \"redirect_uri\": \"string\",\n  \"scope\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "363ea663-fca7-496b-a0da-becb7aa5c160",
+              "name": "Client does not exists, you do not have access to the client, or “client_secret” is incorrect.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"7a3c52a910e1dc2abbb14da2b6b8e711\",\n  \"client_secret\": \"bbb14da2b6b8e7117a3c52a910e1dc2a\",\n  \"redirect_uri\": \"http://localhost\",\n  \"scope\": \"general\",\n  \"account_id\": \"0d18ae51-3c94-4511-b209-101e1666416b\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f208e60-7cd3-43e9-b27c-f5e8dc4b577b",
+              "name": "Redirect URI or scope is invalid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"7a3c52a910e1dc2abbb14da2b6b8e711\",\n  \"client_secret\": \"bbb14da2b6b8e7117a3c52a910e1dc2a\",\n  \"redirect_uri\": \"http://localhost\",\n  \"scope\": \"general\",\n  \"account_id\": \"0d18ae51-3c94-4511-b209-101e1666416b\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -322,16 +633,29 @@
   "variable": [
     {
       "type": "string",
-      "value": "https://data.alpaca.markets/v2",
+      "value": "https://broker-api.sandbox.alpaca.markets",
       "key": "baseUrl"
     }
   ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
   "info": {
-    "_postman_id": "7625e0fe-9376-4fc3-841c-013d5b3eb82d",
-    "name": "OAuth API",
+    "_postman_id": "76df57de-948e-4b68-bbcb-e66937ee225c",
+    "name": "Broker Account Activities OAuth API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "The OAuth API allows you to request market data and manage portfolios on behalf of your end-users. \n\nFor more information, visit https://alpaca.markets/docs/build-apps_services-with-alpaca/oauth-guide/.\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
       "type": "text/plain"
     }
   }

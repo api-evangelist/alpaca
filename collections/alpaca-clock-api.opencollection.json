@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Clock API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clock",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query market clock",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/clock"
+          },
+          "docs": "The Clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close."
+        },
+        {
+          "info": {
+            "name": "Get Market Clock info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/clock"
+          },
+          "docs": "The clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close.\n\nReturns the market clock."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

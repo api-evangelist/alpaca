@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Activities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account activities of one type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/account/activities",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date for which you want to see activities."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "asc or desc (default desc if unspecified.)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return in the response. (See the section on paging above.)"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the end of your current page of results. "
+              },
+              {
+                "name": "activity_types",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of the activity types to include in the response. If unspecified, activities of all types will be returned. See ActivityType model for values"
+              }
+            ]
+          },
+          "docs": "Returns account activity entries for many types of activities."
+        },
+        {
+          "info": {
+            "name": "Get account activities of one type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/account/activities/:activity_type",
+            "params": [
+              {
+                "name": "activity_type",
+                "value": "",
+                "type": "path",
+                "description": "The activity type you want to view entries for. A list of valid activity types can be found at the bottom of this page."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date for which you want to see activities."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "asc or desc (default desc if unspecified.)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return in the response. (See the section on paging above.)"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the end of your current page of results. "
+              }
+            ]
+          },
+          "docs": "Returns account activity entries for a specific type of activity."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

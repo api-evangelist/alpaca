@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Assets API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/assets",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Asset status to filter by, will default to `all`"
+              },
+              {
+                "name": "asset_class",
+                "value": "",
+                "type": "query",
+                "description": "Asset class to filter by, `us_equity` or `crypto`. Defaults to `us_equity`"
+              }
+            ]
+          },
+          "docs": "Returns all assets"
+        },
+        {
+          "info": {
+            "name": "Retrieve an asset by UUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/assets/:symbol_or_asset_id",
+            "params": [
+              {
+                "name": "symbol_or_asset_id",
+                "value": "",
+                "type": "path",
+                "description": "you can use either the asset's Id or the symbol to search"
+              }
+            ]
+          },
+          "docs": "Returns the requested asset, if found"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

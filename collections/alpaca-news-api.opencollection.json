@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities News API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "News",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "News API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1beta1/news",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with \"USD\", ie \"BTCUSD,ETHUSD\" would get both BTC and ETH"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return. Must be in range 1-10000, defaults to 1000."
+              },
+              {
+                "name": "sort",
+                "value": "DESC",
+                "type": "query",
+                "description": "Sort articles by updated date. Options: DESC, ASC"
+              },
+              {
+                "name": "include_content",
+                "value": "",
+                "type": "query",
+                "description": "Boolean indicator to include content for news articles (if available)"
+              },
+              {
+                "name": "exclude_contentless",
+                "value": "",
+                "type": "query",
+                "description": "Boolean indicator to exclude news articles that do not contain content "
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows."
+              }
+            ]
+          },
+          "docs": "Returns latest news articles across stocks and crypto. By default returns latest 10 news articles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,230 @@
+{
+  "item": [
+    {
+      "id": "4f693f8c-6314-4441-ad25-6f2fddd2ea16",
+      "name": "Account Configurations",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/account-configuration/ to view complete documentation on the Account Configurations API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "339a7f95-dd35-45da-b420-63b2694b8ee8",
+          "name": "Account Configurations",
+          "request": {
+            "name": "Account Configurations",
+            "description": {
+              "content": "gets the current account configuration values",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "configurations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c868ca6-fe6a-42f8-afd1-5a58fb26e7db",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "configurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dtbp_check\": \"entry\",\n  \"trade_confirm_email\": \"string\",\n  \"suspend_trade\": true,\n  \"no_shorting\": true,\n  \"fractional_trading\": false,\n  \"max_margin_multiplier\": \"string\",\n  \"pdt_check\": \"entry\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33f1c837-4a63-46d2-be26-dad9dafe55ee",
+          "name": "Account Configurations",
+          "request": {
+            "name": "Account Configurations",
+            "description": {
+              "content": "Updates and returns the current account configuration values",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "configurations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dtbp_check\": \"<string>\",\n  \"trade_confirm_email\": \"<string>\",\n  \"suspend_trade\": \"<boolean>\",\n  \"no_shorting\": \"<boolean>\",\n  \"fractional_trading\": \"<boolean>\",\n  \"max_margin_multiplier\": \"<string>\",\n  \"pdt_check\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1721d478-4da4-45fd-96c7-2240eb94ed37",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "configurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dtbp_check\": \"<string>\",\n  \"trade_confirm_email\": \"<string>\",\n  \"suspend_trade\": \"<boolean>\",\n  \"no_shorting\": \"<boolean>\",\n  \"fractional_trading\": \"<boolean>\",\n  \"max_margin_multiplier\": \"<string>\",\n  \"pdt_check\": \"entry\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dtbp_check\": \"<string>\",\n  \"trade_confirm_email\": \"<string>\",\n  \"suspend_trade\": \"<boolean>\",\n  \"no_shorting\": \"<boolean>\",\n  \"fractional_trading\": \"<boolean>\",\n  \"max_margin_multiplier\": \"<string>\",\n  \"pdt_check\": \"entry\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "00520a08-87b2-4aa7-b3cf-b7d10cfb91d6",
+    "name": "Broker Account Activities Account Configurations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

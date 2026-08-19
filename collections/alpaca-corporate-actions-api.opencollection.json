@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Corporate Actions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Corporate Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieving Announcements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/corporate_actions/announcements",
+            "params": [
+              {
+                "name": "ca_types",
+                "value": "",
+                "type": "query",
+                "description": "A comma-delimited list of CorporateActionType values"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "The symbol of the company initiating the announcement."
+              },
+              {
+                "name": "cusip",
+                "value": "",
+                "type": "query",
+                "description": "The CUSIP of the company initiating the announcement."
+              },
+              {
+                "name": "date_type",
+                "value": "",
+                "type": "query",
+                "description": "An emum of possible ways to use the `since` and `until` parameters to search by.\n\nthe types are:\n\n- **declaration_date**: The date of the preliminary announcement details or the date that any subsequent term updates took place.\n- **ex_date**: The date on which any security purchasing activity will not result in a corporate action entitlement. Any selling activity that takes place on or after this date will result in a corporate action entitlement.\n- **record_date**: The date the company checks its records to determine who is shareholder in order to allocate entitlements.\n- **payable_date**: The date that the stock and cash positions will update according to the account positions as of the record date."
+              }
+            ]
+          },
+          "docs": "This enables searching for an array of corporate action announcements based on criteria."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

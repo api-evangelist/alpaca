@@ -1,0 +1,880 @@
+{
+  "item": [
+    {
+      "id": "ae0f5b72-5ead-4926-8144-d7ffd2776fd0",
+      "name": "Orders",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/orders/ to view complete documentation on the Orders API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c3edbf9-0aee-439e-b6c3-b63862bc0f31",
+          "name": "Order",
+          "request": {
+            "name": "Order",
+            "description": {
+              "content": "Places a new order for the given account. An order request may be rejected if the account is not authorized for trading, or if the tradable balance is insufficient to fill the order..",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"<string>\",\n  \"side\": \"<string>\",\n  \"time_in_force\": \"<string>\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"<string>\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"<string>\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"<string>\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"<string>\",\n      \"side\": \"<string>\",\n      \"time_in_force\": \"<string>\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"<string>\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"<string>\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"<string>\",\n      \"side\": \"<string>\",\n      \"time_in_force\": \"<string>\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"<string>\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"<string>\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"<string>\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "88a97139-6ed9-458f-ae6a-f7f2c8a9dbfc",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10073e3b-7e07-4267-9667-c45d8a37ecf5",
+              "name": "Forbidden\n\nBuying power or shares is not sufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7536050f-c9bc-4694-a4b7-cbb8c4baf7c0",
+              "name": "Unprocessable\n\nInput parameters are not recognized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84cb544f-c6fc-4f56-ae81-03fa9fa9e7a0",
+          "name": "All Orders",
+          "request": {
+            "name": "All Orders",
+            "description": {
+              "content": "Retrieves a list of orders for the account, filtered by the supplied query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Order status to be queried. open, closed or all. Defaults to open."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of orders in response. Defaults to 50 and max is 500."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The response will include only ones submitted after this timestamp (exclusive.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<string>",
+                  "description": "The response will include only ones submitted until this timestamp (exclusive.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+                },
+                {
+                  "disabled": false,
+                  "key": "nested",
+                  "value": "<boolean>",
+                  "description": "If true, the result will roll up multi-leg orders under the legs field of primary order."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "A comma-separated list of symbols to filter by (ex. “AAPL,TSLA,MSFT”). A currency pair is required for crypto orders (ex. “BTCUSD,BCHUSD,LTCUSD,ETCUSD”)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72daca99-d4f7-4495-bb6b-2acbc38fa4ad",
+              "name": "Successful response\n\nAn array of Order objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nested",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"symbol\": \"<string>\",\n    \"notional\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"type\": \"stop\",\n    \"side\": \"buy\",\n    \"time_in_force\": \"day\",\n    \"id\": \"<string>\",\n    \"client_order_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"submitted_at\": \"<dateTime>\",\n    \"filled_at\": \"<dateTime>\",\n    \"expired_at\": \"<dateTime>\",\n    \"canceled_at\": \"<dateTime>\",\n    \"failed_at\": \"<dateTime>\",\n    \"replaced_at\": \"<dateTime>\",\n    \"replaced_by\": \"<uuid>\",\n    \"replaces\": \"<uuid>\",\n    \"asset_id\": \"<uuid>\",\n    \"asset_class\": \"us_equity\",\n    \"filled_qty\": \"<string>\",\n    \"filled_avg_price\": \"<string>\",\n    \"order_class\": \"bracket\",\n    \"order_type\": \"<string>\",\n    \"limit_price\": \"<string>\",\n    \"stop_price\": \"<string>\",\n    \"status\": \"new\",\n    \"extended_hours\": \"<boolean>\",\n    \"legs\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      }\n    ],\n    \"trail_percent\": \"<string>\",\n    \"trail_price\": \"<string>\",\n    \"hwm\": \"<string>\"\n  },\n  {\n    \"symbol\": \"<string>\",\n    \"notional\": \"<string>\",\n    \"qty\": \"<string>\",\n    \"type\": \"stop\",\n    \"side\": \"buy\",\n    \"time_in_force\": \"day\",\n    \"id\": \"<string>\",\n    \"client_order_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"submitted_at\": \"<dateTime>\",\n    \"filled_at\": \"<dateTime>\",\n    \"expired_at\": \"<dateTime>\",\n    \"canceled_at\": \"<dateTime>\",\n    \"failed_at\": \"<dateTime>\",\n    \"replaced_at\": \"<dateTime>\",\n    \"replaced_by\": \"<uuid>\",\n    \"replaces\": \"<uuid>\",\n    \"asset_id\": \"<uuid>\",\n    \"asset_class\": \"us_equity\",\n    \"filled_qty\": \"<string>\",\n    \"filled_avg_price\": \"<string>\",\n    \"order_class\": \"bracket\",\n    \"order_type\": \"<string>\",\n    \"limit_price\": \"<string>\",\n    \"stop_price\": \"<string>\",\n    \"status\": \"new\",\n    \"extended_hours\": \"<boolean>\",\n    \"legs\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n      }\n    ],\n    \"trail_percent\": \"<string>\",\n    \"trail_price\": \"<string>\",\n    \"hwm\": \"<string>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67abce97-b7c9-4a32-bc71-1cba150dbfbd",
+          "name": "All Orders",
+          "request": {
+            "name": "All Orders",
+            "description": {
+              "content": "Attempts to cancel all open orders. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a773849-c7fe-46cd-9a95-e13c453e439c",
+              "name": "Multi-Status with body.\n\nan array of objects that include the order id and http status code for each status request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"efcc94bc-6f76-e4fb-391b-1b7f85dc27b1\",\n    \"status\": 200\n  },\n  {\n    \"id\": \"33e71dc9-d64c-e588-23ae-33b4cd6c6ab6\",\n    \"status\": 200\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c369252-16df-4530-9097-07c4ed87ac5f",
+              "name": "Failed to cancel order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31ef4146-d852-41b5-8c66-df03701a2771",
+          "name": "Order by Order ID",
+          "request": {
+            "name": "Order by Order ID",
+            "description": {
+              "content": "Retrieves a single order for the given order_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nested",
+                  "value": "<boolean>",
+                  "description": "If true, the result will roll up multi-leg orders under the legs field of primary order."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) order id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76f0b6f8-c7d0-4157-b5fd-e07ef06d7d5b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nested",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbbb5d52-e53b-41e8-9b5f-b1652e72c4cf",
+          "name": "Order",
+          "request": {
+            "name": "Order",
+            "description": {
+              "content": "Replaces a single order with updated parameters. Each parameter overrides the corresponding attribute of the existing order. The other attributes remain the same as the existing order.\n\nA success return code from a replaced order does NOT guarantee the existing open order has been replaced. If the existing open order is filled before the replacing (new) order reaches the execution venue, the replacing (new) order is rejected, and these events are sent in the trade_updates stream channel. \n\nWhile an order is being replaced, buying power is reduced by the larger of the two orders that have been placed (the old order being replaced, and the newly placed order to replace it). If you are replacing a buy entry order with a higher limit price than the original order, the buying power is calculated based on the newly placed order. If you are replacing it with a lower limit price, the buying power is calculated based on the old order.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) order id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qty\": \"<string>\",\n  \"time_in_force\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail\": \"<string>\",\n  \"client_order_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "548aa8b4-c01c-48f8-892a-84b2ce29a06b",
+              "name": "Successful response\n\nThe new Order object with the new order ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"qty\": \"<string>\",\n  \"time_in_force\": \"day\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"trail\": \"<string>\",\n  \"client_order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"qty\": \"<string>\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"submitted_at\": \"<dateTime>\",\n  \"filled_at\": \"<dateTime>\",\n  \"expired_at\": \"<dateTime>\",\n  \"canceled_at\": \"<dateTime>\",\n  \"failed_at\": \"<dateTime>\",\n  \"replaced_at\": \"<dateTime>\",\n  \"replaced_by\": \"<uuid>\",\n  \"replaces\": \"<uuid>\",\n  \"asset_id\": \"<uuid>\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"<string>\",\n  \"filled_avg_price\": \"<string>\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"<string>\",\n  \"limit_price\": \"<string>\",\n  \"stop_price\": \"<string>\",\n  \"status\": \"new\",\n  \"extended_hours\": \"<boolean>\",\n  \"legs\": [\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"notional\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"<string>\",\n      \"client_order_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"submitted_at\": \"<dateTime>\",\n      \"filled_at\": \"<dateTime>\",\n      \"expired_at\": \"<dateTime>\",\n      \"canceled_at\": \"<dateTime>\",\n      \"failed_at\": \"<dateTime>\",\n      \"replaced_at\": \"<dateTime>\",\n      \"replaced_by\": \"<uuid>\",\n      \"replaces\": \"<uuid>\",\n      \"asset_id\": \"<uuid>\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"<string>\",\n      \"filled_avg_price\": \"<string>\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"<string>\",\n      \"limit_price\": \"<string>\",\n      \"stop_price\": \"<string>\",\n      \"status\": \"new\",\n      \"extended_hours\": \"<boolean>\",\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"<string>\",\n      \"trail_price\": \"<string>\",\n      \"hwm\": \"<string>\"\n    }\n  ],\n  \"trail_percent\": \"<string>\",\n  \"trail_price\": \"<string>\",\n  \"hwm\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8ca4a9c-823a-4728-9f40-650803ddefc2",
+          "name": "Order by Order ID",
+          "request": {
+            "name": "Order by Order ID",
+            "description": {
+              "content": "Attempts to cancel an Open Order. If the order is no longer cancelable, the request will be rejected with status 422; otherwise accepted with return status 204.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) order id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16e7ef5e-bab3-4f45-bf55-06b15f5a1035",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "beb41827-5585-4bc0-8208-d85be9fa071f",
+              "name": "The order status is not cancelable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "69409709-959f-41eb-8ea6-8a1533376f30",
+    "name": "Broker Account Activities Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

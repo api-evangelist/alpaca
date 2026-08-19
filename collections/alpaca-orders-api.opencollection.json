@@ -1,0 +1,173 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Orders API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "All Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/orders",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Order status to be queried. open, closed or all. Defaults to open."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of orders in response. Defaults to 50 and max is 500."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The response will include only ones submitted after this timestamp (exclusive.)"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The response will include only ones submitted until this timestamp (exclusive.)"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+              },
+              {
+                "name": "nested",
+                "value": "",
+                "type": "query",
+                "description": "If true, the result will roll up multi-leg orders under the legs field of primary order."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of symbols to filter by (ex. “AAPL,TSLA,MSFT”). A currency pair is required for crypto orders (ex. “BTCUSD,BCHUSD,LTCUSD,ETCUSD”)."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of orders for the account, filtered by the supplied query parameters."
+        },
+        {
+          "info": {
+            "name": "Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Places a new order for the given account. An order request may be rejected if the account is not authorized for trading, or if the tradable balance is insufficient to fill the order.."
+        },
+        {
+          "info": {
+            "name": "All Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/orders"
+          },
+          "docs": "Attempts to cancel all open orders. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request."
+        },
+        {
+          "info": {
+            "name": "Order by Order ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "order id"
+              },
+              {
+                "name": "nested",
+                "value": "",
+                "type": "query",
+                "description": "If true, the result will roll up multi-leg orders under the legs field of primary order."
+              }
+            ]
+          },
+          "docs": "Retrieves a single order for the given order_id."
+        },
+        {
+          "info": {
+            "name": "Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "order id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces a single order with updated parameters. Each parameter overrides the corresponding attribute of the existing order. The other attributes remain the same as the existing order.\n\nA success return code from a replaced order does NOT guarantee the existing open order has been replaced. If the existing open order is filled before the replacing (new) order reaches the execution venue, the replacing (new) order is rejected, and these events are sent in the trade_updates stream channel. \n\nWhile"
+        },
+        {
+          "info": {
+            "name": "Order by Order ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "order id"
+              }
+            ]
+          },
+          "docs": "Attempts to cancel an Open Order. If the order is no longer cancelable, the request will be rejected with status 422; otherwise accepted with return status 204."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

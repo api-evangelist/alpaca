@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Documents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return a list of account documents.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/documents",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "optional date value to filter the list (inclusive)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "optional date value to filter the list (inclusive)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "See DocumentType model for reference and explanation of values"
+              }
+            ]
+          },
+          "docs": "This endpoint allows you to query all the documents that belong to a certain account. You can filter by date, or type of document."
+        },
+        {
+          "info": {
+            "name": "Download a document file that belongs to an account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/accounts/:account_id/documents/:document_id/download",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier."
+              },
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Document identifier."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This endpoint allows you to download a document identified by the document_id passed in the header. The returned document is in PDF format.\n\nThe operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.\n"
+        },
+        {
+          "info": {
+            "name": "Download a document file directly",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v1/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Document identifier."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "The operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

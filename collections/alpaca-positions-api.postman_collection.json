@@ -1,0 +1,480 @@
+{
+  "item": [
+    {
+      "id": "a789de78-e888-4849-b02e-3526b728f859",
+      "name": "Positions",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-documentation/api-v2/positions/ to view complete documentation on the Positions API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a9b6b2f-0732-46cf-9d82-24a5d35d66b1",
+          "name": "All Open Positions",
+          "request": {
+            "name": "All Open Positions",
+            "description": {
+              "content": "The positions API provides information about an account’s current open positions. The response will include information such as cost basis, shares traded, and market value, which will be updated live as price information is updated. Once a position is closed, it will no longer be queryable through this API\n\nRetrieves a list of the account’s open positions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad2a1a33-9c04-43d8-9801-a7d71d305a1d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"asset_id\": \"e4d2f75a-3818-e630-afbd-df92cf1e514f\",\n    \"symbol\": \"AAPL\",\n    \"exchange\": \"NYSE\",\n    \"asset_class\": \"us_equity\",\n    \"avg_entry_price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"market_value\": \"string\",\n    \"cost_basis\": \"string\",\n    \"unrealized_pl\": \"string\",\n    \"unrealized_plpc\": \"string\",\n    \"unrealized_intraday_pl\": \"string\",\n    \"unrealized_intraday_plpc\": \"string\",\n    \"current_price\": \"string\",\n    \"lastday_price\": \"string\",\n    \"change_today\": \"string\",\n    \"asset_marginable\": true,\n    \"qty_available\": \"string\"\n  },\n  {\n    \"asset_id\": \"2851343f-6394-e6d2-5c5c-5f632e5ec7ae\",\n    \"symbol\": \"AAPL\",\n    \"exchange\": \"NYSE\",\n    \"asset_class\": \"us_equity\",\n    \"avg_entry_price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"market_value\": \"string\",\n    \"cost_basis\": \"string\",\n    \"unrealized_pl\": \"string\",\n    \"unrealized_plpc\": \"string\",\n    \"unrealized_intraday_pl\": \"string\",\n    \"unrealized_intraday_plpc\": \"string\",\n    \"current_price\": \"string\",\n    \"lastday_price\": \"string\",\n    \"change_today\": \"string\",\n    \"asset_marginable\": true,\n    \"qty_available\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df9f159c-c065-4d51-b4cc-8043e419faea",
+          "name": "All Positions",
+          "request": {
+            "name": "All Positions",
+            "description": {
+              "content": "Closes (liquidates) all of the account’s open long and short positions. A response will be provided for each order that is attempted to be cancelled. If an order is no longer cancelable, the server will respond with status 500 and reject the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cancel_orders",
+                  "value": "<boolean>",
+                  "description": "If true is specified, cancel all open orders before liquidating all positions."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e20a7f8-6c52-490c-a3c8-b0fe1e308a77",
+              "name": "Multi-Status with body.\n\nan array of PositionClosed responses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cancel_orders",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"symbol\": \"string\",\n    \"status\": \"string\",\n    \"body\": {\n      \"symbol\": \"str\",\n      \"notional\": \"string\",\n      \"qty\": \"string\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"string\",\n      \"client_order_id\": \"string\",\n      \"created_at\": \"1988-08-04T01:00:05.733Z\",\n      \"updated_at\": \"1968-04-22T19:25:43.468Z\",\n      \"submitted_at\": \"1947-02-22T17:35:47.795Z\",\n      \"filled_at\": \"1949-12-12T04:54:55.604Z\",\n      \"expired_at\": \"1955-03-15T04:53:22.707Z\",\n      \"canceled_at\": \"2009-08-11T20:26:09.921Z\",\n      \"failed_at\": \"2013-06-29T19:27:29.784Z\",\n      \"replaced_at\": \"2006-07-01T07:10:00.003Z\",\n      \"replaced_by\": \"8aa4f9fe-b198-3174-f36f-c514afad764a\",\n      \"replaces\": \"1f39439e-82bb-03e0-0a3f-b5710008f4fd\",\n      \"asset_id\": \"f1af7416-7019-313f-7474-935919a030cd\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"string\",\n      \"filled_avg_price\": \"string\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"string\",\n      \"limit_price\": \"string\",\n      \"stop_price\": \"string\",\n      \"status\": \"new\",\n      \"extended_hours\": true,\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"string\",\n      \"trail_price\": \"string\",\n      \"hwm\": \"string\"\n    }\n  },\n  {\n    \"symbol\": \"string\",\n    \"status\": \"string\",\n    \"body\": {\n      \"symbol\": \"string\",\n      \"notional\": \"string\",\n      \"qty\": \"string\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"string\",\n      \"client_order_id\": \"string\",\n      \"created_at\": \"2002-04-29T13:09:15.964Z\",\n      \"updated_at\": \"1964-06-17T00:40:15.425Z\",\n      \"submitted_at\": \"1970-02-23T18:49:44.868Z\",\n      \"filled_at\": \"1998-02-13T02:35:37.753Z\",\n      \"expired_at\": \"2025-02-25T01:59:19.661Z\",\n      \"canceled_at\": \"1988-03-25T14:35:33.657Z\",\n      \"failed_at\": \"1947-02-14T20:20:04.513Z\",\n      \"replaced_at\": \"1992-02-06T19:45:06.410Z\",\n      \"replaced_by\": \"0d1b338f-20c4-cb1b-28f3-73031229d5c0\",\n      \"replaces\": \"2b6305a6-1090-6269-2f8b-320676055b23\",\n      \"asset_id\": \"f3824ed6-f573-9834-454f-caf7af353652\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"string\",\n      \"filled_avg_price\": \"string\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"string\",\n      \"limit_price\": \"string\",\n      \"stop_price\": \"string\",\n      \"status\": \"new\",\n      \"extended_hours\": true,\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"string\",\n      \"trail_price\": \"string\",\n      \"hwm\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb980703-580f-45dc-842a-5dd8972fb459",
+              "name": "Failed to liquidate",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cancel_orders",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c60d7d5-47b1-445f-b4da-08daa3ced9a9",
+          "name": "Open Position",
+          "request": {
+            "name": "Open Position",
+            "description": {
+              "content": "Retrieves the account’s open position for the given symbol or assetId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "positions",
+                ":symbol_or_asset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol_or_asset_id",
+                  "description": "(Required) symbol or assetId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a541386-9538-4ecc-939c-bcf3e3419b1d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions",
+                    ":symbol_or_asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol_or_asset_id",
+                      "description": "(Required) symbol or assetId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset_id\": \"a93416fa-0fef-4604-b30f-06b7536f2ac7\",\n  \"symbol\": \"AAPL\",\n  \"exchange\": \"NYSE\",\n  \"asset_class\": \"us_equity\",\n  \"avg_entry_price\": \"string\",\n  \"qty\": \"string\",\n  \"side\": \"string\",\n  \"market_value\": \"string\",\n  \"cost_basis\": \"string\",\n  \"unrealized_pl\": \"string\",\n  \"unrealized_plpc\": \"string\",\n  \"unrealized_intraday_pl\": \"string\",\n  \"unrealized_intraday_plpc\": \"string\",\n  \"current_price\": \"string\",\n  \"lastday_price\": \"string\",\n  \"change_today\": \"string\",\n  \"asset_marginable\": true,\n  \"qty_available\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1f4d741-a079-4bcd-b84c-129a1f332fd9",
+          "name": "Position",
+          "request": {
+            "name": "Position",
+            "description": {
+              "content": "Closes (liquidates) the account’s open position for the given symbol. Works for both long and short positions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "positions",
+                ":symbol_or_asset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "qty",
+                  "value": "<number>",
+                  "description": "the number of shares to liquidate. Can accept up to 9 decimal points. Cannot work with percentage"
+                },
+                {
+                  "disabled": false,
+                  "key": "percentage",
+                  "value": "<number>",
+                  "description": "percentage of position to liquidate. Must be between 0 and 100. Would only sell fractional if position is originally fractional. Can accept up to 9 decimal points. Cannot work with qty"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol_or_asset_id",
+                  "description": "(Required) symbol or assetId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3120df8-f4cc-4e94-90e1-189bc0a6f2c5",
+              "name": "Successful response\n\nReturns the order created to close out this position",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "positions",
+                    ":symbol_or_asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "qty",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "percentage",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol_or_asset_id",
+                      "description": "(Required) symbol or assetId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"symbol\": \"string\",\n  \"notional\": \"string\",\n  \"qty\": \"string\",\n  \"type\": \"stop\",\n  \"side\": \"buy\",\n  \"time_in_force\": \"day\",\n  \"id\": \"string\",\n  \"client_order_id\": \"string\",\n  \"created_at\": \"1967-12-21T07:48:57.364Z\",\n  \"updated_at\": \"1976-08-26T04:01:48.468Z\",\n  \"submitted_at\": \"1953-11-11T05:46:56.796Z\",\n  \"filled_at\": \"2008-02-15T04:03:04.153Z\",\n  \"expired_at\": \"1951-03-26T02:40:03.005Z\",\n  \"canceled_at\": \"1987-04-14T15:02:09.826Z\",\n  \"failed_at\": \"1956-07-24T09:49:49.717Z\",\n  \"replaced_at\": \"1980-04-30T13:21:11.871Z\",\n  \"replaced_by\": \"5f1794d9-bedc-977c-c118-af4ba8df7458\",\n  \"replaces\": \"e8e8af60-feb9-e6f5-d7be-0a88c128353f\",\n  \"asset_id\": \"90c81673-3f23-67a1-c865-fafb9f3bed4b\",\n  \"asset_class\": \"us_equity\",\n  \"filled_qty\": \"string\",\n  \"filled_avg_price\": \"string\",\n  \"order_class\": \"bracket\",\n  \"order_type\": \"string\",\n  \"limit_price\": \"string\",\n  \"stop_price\": \"string\",\n  \"status\": \"new\",\n  \"extended_hours\": false,\n  \"legs\": [\n    {\n      \"symbol\": \"string\",\n      \"notional\": \"string\",\n      \"qty\": \"string\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"string\",\n      \"client_order_id\": \"string\",\n      \"created_at\": \"1976-04-09T22:28:26.929Z\",\n      \"updated_at\": \"2024-06-02T23:52:41.190Z\",\n      \"submitted_at\": \"2022-07-18T07:43:07.180Z\",\n      \"filled_at\": \"1982-04-27T19:49:28.056Z\",\n      \"expired_at\": \"1960-04-27T20:19:29.462Z\",\n      \"canceled_at\": \"1972-02-14T09:26:52.203Z\",\n      \"failed_at\": \"2025-05-30T21:08:01.743Z\",\n      \"replaced_at\": \"1974-04-16T09:50:04.771Z\",\n      \"replaced_by\": \"0e194a80-3fdd-ded1-08c5-0c542a6626d4\",\n      \"replaces\": \"5a93bf96-30fb-9333-981a-43bdf6e379fd\",\n      \"asset_id\": \"f3bd481f-3022-2c44-c137-91c94d43e928\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"string\",\n      \"filled_avg_price\": \"string\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"string\",\n      \"limit_price\": \"string\",\n      \"stop_price\": \"string\",\n      \"status\": \"new\",\n      \"extended_hours\": true,\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"string\",\n      \"trail_price\": \"string\",\n      \"hwm\": \"string\"\n    },\n    {\n      \"symbol\": \"string\",\n      \"notional\": \"string\",\n      \"qty\": \"string\",\n      \"type\": \"stop\",\n      \"side\": \"buy\",\n      \"time_in_force\": \"day\",\n      \"id\": \"string\",\n      \"client_order_id\": \"string\",\n      \"created_at\": \"1969-07-06T00:08:42.086Z\",\n      \"updated_at\": \"1975-12-29T03:58:37.161Z\",\n      \"submitted_at\": \"2005-05-23T05:57:32.088Z\",\n      \"filled_at\": \"1949-08-28T04:30:12.968Z\",\n      \"expired_at\": \"1955-10-26T19:26:55.308Z\",\n      \"canceled_at\": \"1965-11-04T14:31:06.041Z\",\n      \"failed_at\": \"2003-08-23T07:22:48.127Z\",\n      \"replaced_at\": \"1998-01-06T06:09:27.015Z\",\n      \"replaced_by\": \"b5ba77c5-efcb-dbf0-d558-03bb35325a29\",\n      \"replaces\": \"a055d336-dd11-8b27-2a82-0a7e4ab6e65d\",\n      \"asset_id\": \"4ec42c92-b8a2-7202-687d-de0619699f73\",\n      \"asset_class\": \"us_equity\",\n      \"filled_qty\": \"string\",\n      \"filled_avg_price\": \"string\",\n      \"order_class\": \"bracket\",\n      \"order_type\": \"string\",\n      \"limit_price\": \"string\",\n      \"stop_price\": \"string\",\n      \"status\": \"new\",\n      \"extended_hours\": false,\n      \"legs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Order detected>\"\n        }\n      ],\n      \"trail_percent\": \"string\",\n      \"trail_price\": \"string\",\n      \"hwm\": \"string\"\n    }\n  ],\n  \"trail_percent\": \"string\",\n  \"trail_price\": \"string\",\n  \"hwm\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b19225d0-9ff8-430c-b8b5-1516a168a7db",
+    "name": "Broker Account Activities Positions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

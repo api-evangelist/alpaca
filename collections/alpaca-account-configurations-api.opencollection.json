@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broker Account Activities Account Configurations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Configurations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Account Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/account/configurations"
+          },
+          "docs": "gets the current account configuration values"
+        },
+        {
+          "info": {
+            "name": "Account Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://broker-api.sandbox.alpaca.markets/v2/account/configurations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates and returns the current account configuration values"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

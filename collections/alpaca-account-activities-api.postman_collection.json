@@ -1,0 +1,361 @@
+{
+  "item": [
+    {
+      "id": "53c56db6-ce81-498e-8708-4f70ebb67372",
+      "name": "Account Activities",
+      "description": {
+        "content": "Head to https://alpaca.markets/docs/api-references/trading-api/account-activities/ to view complete documentation on the Account Activities API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40218491-f31c-4837-b2e6-c9267afb1670",
+          "name": "Get account activities of one type",
+          "request": {
+            "name": "Get account activities of one type",
+            "description": {
+              "content": "Returns account activity entries for many types of activities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "description": "The date for which you want to see activities."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<dateTime>",
+                  "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "asc or desc (default desc if unspecified.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The maximum number of entries to return in the response. (See the section on paging above.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The ID of the end of your current page of results. "
+                },
+                {
+                  "disabled": false,
+                  "key": "activity_types",
+                  "value": "<string>",
+                  "description": "A comma-separated list of the activity types to include in the response. If unspecified, activities of all types will be returned. See ActivityType model for values"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0f63ecc-9a71-41f5-9a8e-4f3ff6ebf514",
+              "name": "returns an array of Account activities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "activity_types",
+                      "value": "FILL"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"activity_type\": \"OPXRC\",\n    \"id\": \"string\",\n    \"cum_qty\": \"string\",\n    \"leaves_qty\": \"string\",\n    \"price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"symbol\": \"AAPL\",\n    \"transaction_time\": \"2019-11-05T04:49:38.412Z\",\n    \"order_id\": \"64286115-ae41-c78d-0fb1-07b03f23a30a\",\n    \"type\": \"fill\",\n    \"order_status\": \"new\"\n  },\n  {\n    \"activity_type\": \"ACATC\",\n    \"id\": \"string\",\n    \"cum_qty\": \"string\",\n    \"leaves_qty\": \"string\",\n    \"price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"symbol\": \"AAPL\",\n    \"transaction_time\": \"1966-12-03T11:31:22.688Z\",\n    \"order_id\": \"cf51ac41-417b-9825-9e7a-e7ffe5df2c4e\",\n    \"type\": \"fill\",\n    \"order_status\": \"new\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5517a407-d635-4d6c-8010-0a6453221d70",
+          "name": "Get account activities of one type",
+          "request": {
+            "name": "Get account activities of one type",
+            "description": {
+              "content": "Returns account activity entries for a specific type of activity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account",
+                "activities",
+                ":activity_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "description": "The date for which you want to see activities."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "The response will contain only activities submitted before this date. (Cannot be used with date.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<dateTime>",
+                  "description": "The response will contain only activities submitted after this date. (Cannot be used with date.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "asc or desc (default desc if unspecified.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The maximum number of entries to return in the response. (See the section on paging above.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The ID of the end of your current page of results. "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "activity_type",
+                  "description": "(Required) The activity type you want to view entries for. A list of valid activity types can be found at the bottom of this page."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b3c4816-10a8-478f-b231-21f7367a2185",
+              "name": "returns an array of Account activities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account",
+                    "activities",
+                    ":activity_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "activity_type",
+                      "description": "(Required) The activity type you want to view entries for. A list of valid activity types can be found at the bottom of this page."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"activity_type\": \"OPXRC\",\n    \"id\": \"string\",\n    \"cum_qty\": \"string\",\n    \"leaves_qty\": \"string\",\n    \"price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"symbol\": \"AAPL\",\n    \"transaction_time\": \"2019-11-05T04:49:38.412Z\",\n    \"order_id\": \"64286115-ae41-c78d-0fb1-07b03f23a30a\",\n    \"type\": \"fill\",\n    \"order_status\": \"new\"\n  },\n  {\n    \"activity_type\": \"ACATC\",\n    \"id\": \"string\",\n    \"cum_qty\": \"string\",\n    \"leaves_qty\": \"string\",\n    \"price\": \"string\",\n    \"qty\": \"string\",\n    \"side\": \"string\",\n    \"symbol\": \"AAPL\",\n    \"transaction_time\": \"1966-12-03T11:31:22.688Z\",\n    \"order_id\": \"cf51ac41-417b-9825-9e7a-e7ffe5df2c4e\",\n    \"type\": \"fill\",\n    \"order_status\": \"new\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5558f837-1edf-42f3-aa8e-6ed39230217a",
+    "name": "Broker Account Activities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}

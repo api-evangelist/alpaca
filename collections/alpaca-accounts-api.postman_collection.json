@@ -1,0 +1,3456 @@
+{
+  "item": [
+    {
+      "id": "12a61fde-3941-4f40-825f-32378c0fe4ac",
+      "name": "Accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75fcd84e-d3c4-467b-908c-f2da1b2b23f3",
+          "name": "Get all accounts",
+          "request": {
+            "name": "Get all accounts",
+            "description": {
+              "content": "Retrieves all accounts found by the query'",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Pass space-delimited tokens. The response will contain accounts that match with each of the tokens (logical AND). A match means the token is present in either the account’s associated account number, phone number, name, or e-mail address (logical OR)."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "See the AccountStatus model for values"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+                },
+                {
+                  "disabled": false,
+                  "key": "entities",
+                  "value": "<string>",
+                  "description": "Comma-delimited entity names to include in the response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9564160f-3511-4ca3-b1e2-f22735558351",
+              "name": "The response is a list of Account model up to 1000 items\nper query order by created_at. To scroll the result,\nplease use the created_after parameter.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "entities",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"dd9c8a59-ba4b-dfc3-65cd-d59e5de3c955\",\n    \"account_number\": \"string\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\",\n    \"created_at\": \"1954-12-14T08:08:35.432Z\",\n    \"last_equity\": \"string\",\n    \"crypto_status\": \"ACTIVE\",\n    \"kyc_results\": {\n      \"reject\": {},\n      \"accept\": {},\n      \"indeterminate\": {},\n      \"addidional_information\": \"string\"\n    },\n    \"account_type\": \"trading\"\n  },\n  {\n    \"id\": \"ce7081d4-892d-6886-5204-d58a61d3de98\",\n    \"account_number\": \"string\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\",\n    \"created_at\": \"1979-01-22T10:40:49.702Z\",\n    \"last_equity\": \"string\",\n    \"crypto_status\": \"ACTIVE\",\n    \"kyc_results\": {\n      \"reject\": {},\n      \"accept\": {},\n      \"indeterminate\": {},\n      \"addidional_information\": \"string\"\n    },\n    \"account_type\": \"trading\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2fa0bb77-1e5f-4c65-94ed-b1e203c2d02a",
+          "name": "Create an account",
+          "request": {
+            "name": "Create an account",
+            "description": {
+              "content": "Submit an account application with KYC information. This will create a trading account for the end user. The account status may or may not be ACTIVE immediately and you will receive account status updates on the event API. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contact\": {\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\",\n    \"street_address\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\"\n  },\n  \"identity\": {\n    \"given_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"country_of_tax_residence\": \"<string>\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"<string>\",\n    \"tax_id_type\": \"<string>\",\n    \"country_of_citizenship\": \"<string>\",\n    \"country_of_birth\": \"<string>\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": \"<boolean>\",\n    \"is_affiliated_exchange_or_finra\": \"<boolean>\",\n    \"is_politically_exposed\": \"<boolean>\",\n    \"immediate_family_exposed\": \"<boolean>\",\n    \"employment_status\": \"<string>\",\n    \"employer_name\": \"<string>\",\n    \"employer_address\": \"<string>\",\n    \"employment_position\": \"<string>\",\n    \"context\": [\n      {\n        \"context_type\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"company_street_address\": \"<string>\",\n        \"company_city\": \"<string>\",\n        \"company_state\": \"<string>\",\n        \"company_country\": \"<string>\",\n        \"company_compliance_email\": \"<string>\",\n        \"given_name\": \"<string>\",\n        \"family_name\": \"<string>\"\n      },\n      {\n        \"context_type\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"company_street_address\": \"<string>\",\n        \"company_city\": \"<string>\",\n        \"company_state\": \"<string>\",\n        \"company_country\": \"<string>\",\n        \"company_compliance_email\": \"<string>\",\n        \"given_name\": \"<string>\",\n        \"family_name\": \"<string>\"\n      }\n    ]\n  },\n  \"agreements\": [\n    {\n      \"agreement\": \"<string>\",\n      \"signed_at\": \"<dateTime>\",\n      \"ip_address\": \"<ipv4>\",\n      \"revision\": \"<string>\"\n    },\n    {\n      \"agreement\": \"<string>\",\n      \"signed_at\": \"<dateTime>\",\n      \"ip_address\": \"<ipv4>\",\n      \"revision\": \"<string>\"\n    }\n  ],\n  \"documents\": [\n    {\n      \"document_type\": \"<string>\",\n      \"content\": \"<base64>\",\n      \"mime_type\": \"<string>\",\n      \"document_sub_type\": \"<string>\"\n    },\n    {\n      \"document_type\": \"<string>\",\n      \"content\": \"<base64>\",\n      \"mime_type\": \"<string>\",\n      \"document_sub_type\": \"<string>\"\n    }\n  ],\n  \"trusted_contact\": {\n    \"given_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\",\n    \"street_address\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ed72231-326b-4736-80d5-1f214798005c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact\": {\n    \"email_address\": \"john.doe@example.com\",\n    \"phone_number\": \"+15556667788\",\n    \"street_address\": [\n      \"20 N San Mateo Dr\",\n      \"20 N San Mateo Dr\"\n    ],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"agreements\": [\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    },\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    }\n  ],\n  \"documents\": [\n    {\n      \"document_type\": \"identity_verification\",\n      \"document_sub_type\": \"passport\",\n      \"content\": \"/9j/Cg==\",\n      \"mime_type\": \"image/jpeg\"\n    },\n    {\n      \"document_type\": \"identity_verification\",\n      \"document_sub_type\": \"passport\",\n      \"content\": \"/9j/Cg==\",\n      \"mime_type\": \"image/jpeg\"\n    }\n  ],\n  \"trusted_contact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3a7ef815-73bb-9d62-0263-1847e2326efd\",\n  \"account_number\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"currency\": \"USD\",\n  \"created_at\": \"2021-11-29T16:08:44.359Z\",\n  \"last_equity\": \"string\",\n  \"crypto_status\": \"ACTIVE\",\n  \"kyc_results\": {\n    \"reject\": {},\n    \"accept\": {},\n    \"indeterminate\": {},\n    \"addidional_information\": \"string\"\n  },\n  \"account_type\": \"trading\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e37b88d1-8aca-45a9-9fd2-89c25573428d",
+              "name": "The post body is not well formed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact\": {\n    \"email_address\": \"john.doe@example.com\",\n    \"phone_number\": \"+15556667788\",\n    \"street_address\": [\n      \"20 N San Mateo Dr\",\n      \"20 N San Mateo Dr\"\n    ],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"agreements\": [\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    },\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    }\n  ],\n  \"documents\": [\n    {\n      \"document_type\": \"identity_verification\",\n      \"document_sub_type\": \"passport\",\n      \"content\": \"/9j/Cg==\",\n      \"mime_type\": \"image/jpeg\"\n    },\n    {\n      \"document_type\": \"identity_verification\",\n      \"document_sub_type\": \"passport\",\n      \"content\": \"/9j/Cg==\",\n      \"mime_type\": \"image/jpeg\"\n    }\n  ],\n  \"trusted_contact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e06faa9-2ee9-4894-9eb3-abea0c1876fc",
+              "name": "There is already an existing account registered with the same email address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact\": {\n    \"email_address\": \"john.doe@example.com\",\n    \"phone_number\": \"+15556667788\",\n    \"street_address\": [\n      \"20 N San Mateo Dr\",\n      \"20 N San Mateo Dr\"\n    ],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"agreements\": [\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    },\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    }\n  ],\n  \"documents\": [\n    {\n      \"document_type\": \"identity_verification\",\n      \"document_sub_type\": \"passport\",\n      \"content\": \"/9j/Cg==\",\n      \"mime_type\": \"image/jpeg\"\n    },\n    {\n      \"document_type\": \"identity_verification\",\n      \"document_sub_type\": \"passport\",\n      \"content\": \"/9j/Cg==\",\n      \"mime_type\": \"image/jpeg\"\n    }\n  ],\n  \"trusted_contact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0ed3d3ae-6974-4aa6-a445-a4c886979e2f",
+              "name": "One of the input values is not a valid value.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact\": {\n    \"email_address\": \"john.doe@example.com\",\n    \"phone_number\": \"+15556667788\",\n    \"street_address\": [\n      \"20 N San Mateo Dr\",\n      \"20 N San Mateo Dr\"\n    ],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"agreements\": [\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    },\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    }\n  ],\n  \"documents\": [\n    {\n      \"document_type\": \"identity_verification\",\n      \"document_sub_type\": \"passport\",\n      \"content\": \"/9j/Cg==\",\n      \"mime_type\": \"image/jpeg\"\n    },\n    {\n      \"document_type\": \"identity_verification\",\n      \"document_sub_type\": \"passport\",\n      \"content\": \"/9j/Cg==\",\n      \"mime_type\": \"image/jpeg\"\n    }\n  ],\n  \"trusted_contact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e4ed5d5-3362-43ab-81d1-cec2624894e6",
+          "name": "Get an account by Id.",
+          "request": {
+            "name": "Get an account by Id.",
+            "description": {
+              "content": "You can query a specific account that you submitted to Alpaca by passing into the query the account_id associated with the account you’re retrieving.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da288773-5ccd-457a-9d91-16c40aeb7f3d",
+              "name": "Will return an AccountExtended if an account with account_id exists, otherwise will throw an error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"547dc099-74c4-2e21-7eab-faf8b2e995fa\",\n  \"account_number\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"currency\": \"USD\",\n  \"last_equity\": \"string\",\n  \"created_at\": \"1999-01-03T08:51:09.385Z\",\n  \"account_type\": \"trading\",\n  \"crypto_status\": \"ACTIVE\",\n  \"kyc_result\": {\n    \"reject\": {},\n    \"accept\": {},\n    \"indeterminate\": {},\n    \"addidional_information\": \"string\"\n  },\n  \"contact\": {\n    \"email_address\": \"john.doe@example.com\",\n    \"phone_number\": \"+15556667788\",\n    \"street_address\": [\n      \"20 N San Mateo Dr\",\n      \"20 N San Mateo Dr\"\n    ],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"agreements\": [\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    },\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    }\n  ],\n  \"documents\": [\n    {\n      \"id\": \"c8795a1c-dd62-d07a-105e-a4b246f1aa2b\",\n      \"document_type\": \"identity_verification\",\n      \"created_at\": \"1959-04-28T14:53:53.427Z\",\n      \"document_sub_type\": \"string\",\n      \"mime_type\": \"string\"\n    },\n    {\n      \"id\": \"6dbb784e-b63d-9055-578f-87943e758153\",\n      \"document_type\": \"identity_verification\",\n      \"created_at\": \"2001-11-01T00:20:48.460Z\",\n      \"document_sub_type\": \"string\",\n      \"mime_type\": \"string\"\n    }\n  ],\n  \"trusted_contact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  },\n  \"account_name\": \"string\",\n  \"custodial_account_type\": \"UGMA\",\n  \"minor_identity\": {\n    \"given_name\": \"string\",\n    \"family_name\": \"string\",\n    \"date_of_birth\": \"2014-07-16\",\n    \"country_of_tax_residence\": \"string\",\n    \"state\": \"string\",\n    \"email\": \"Dhj@Len.xkod\",\n    \"tax_id\": \"string\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"string\",\n    \"country_of_birth\": \"string\"\n  },\n  \"trading_configurations\": {\n    \"dtbp_check\": \"both\",\n    \"trade_confirm_email\": \"none\",\n    \"suspend_trade\": false,\n    \"no_shorting\": true,\n    \"fractional_trading\": false,\n    \"max_margin_multiplier\": \"string\",\n    \"pdt_check\": \"entry\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86be3b04-c942-45ae-9ee6-b002b0a2e0bb",
+          "name": "Update an account",
+          "request": {
+            "name": "Update an account",
+            "description": {
+              "content": "This operation updates account information.\n\nIf all parameters are valid and updates have been made, it returns with status code 200. The response is the account model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contact\": {\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\",\n    \"street_address\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\"\n  },\n  \"identity\": {\n    \"given_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"country_of_tax_residence\": \"<string>\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"<string>\",\n    \"tax_id_type\": \"<string>\",\n    \"country_of_citizenship\": \"<string>\",\n    \"country_of_birth\": \"<string>\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": \"<boolean>\",\n    \"is_affiliated_exchange_or_finra\": \"<boolean>\",\n    \"is_politically_exposed\": \"<boolean>\",\n    \"immediate_family_exposed\": \"<boolean>\",\n    \"employment_status\": \"<string>\",\n    \"employer_name\": \"<string>\",\n    \"employer_address\": \"<string>\",\n    \"employment_position\": \"<string>\",\n    \"context\": [\n      {\n        \"context_type\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"company_street_address\": \"<string>\",\n        \"company_city\": \"<string>\",\n        \"company_state\": \"<string>\",\n        \"company_country\": \"<string>\",\n        \"company_compliance_email\": \"<string>\",\n        \"given_name\": \"<string>\",\n        \"family_name\": \"<string>\"\n      },\n      {\n        \"context_type\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"company_street_address\": \"<string>\",\n        \"company_city\": \"<string>\",\n        \"company_state\": \"<string>\",\n        \"company_country\": \"<string>\",\n        \"company_compliance_email\": \"<string>\",\n        \"given_name\": \"<string>\",\n        \"family_name\": \"<string>\"\n      }\n    ]\n  },\n  \"trustedContact\": {\n    \"given_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\",\n    \"street_address\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f9263f67-1e5a-49f3-8a52-25792f6b8a0e",
+              "name": "If all parameters are valid and updates have been made, it returns with status code 200. The response is the account model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact\": {\n    \"email_address\": \"john.doe@example.com\",\n    \"phone_number\": \"+15556667788\",\n    \"street_address\": [\n      \"20 N San Mateo Dr\",\n      \"20 N San Mateo Dr\"\n    ],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"trustedContact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"6de8b001-6cac-66bb-ba0b-bf21bcf539e1\",\n  \"account_number\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"currency\": \"USD\",\n  \"last_equity\": \"string\",\n  \"created_at\": \"2004-11-26T01:25:04.401Z\",\n  \"account_type\": \"trading\",\n  \"crypto_status\": \"ACTIVE\",\n  \"kyc_result\": {\n    \"reject\": {},\n    \"accept\": {},\n    \"indeterminate\": {},\n    \"addidional_information\": \"string\"\n  },\n  \"contact\": {\n    \"email_address\": \"john.doe@example.com\",\n    \"phone_number\": \"+15556667788\",\n    \"street_address\": [\n      \"20 N San Mateo Dr\",\n      \"20 N San Mateo Dr\"\n    ],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"agreements\": [\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    },\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2019-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\",\n      \"revision\": \"<string>\"\n    }\n  ],\n  \"documents\": [\n    {\n      \"id\": \"bcee46e8-88a4-1191-a007-0249ccfd5592\",\n      \"document_type\": \"identity_verification\",\n      \"created_at\": \"1994-01-19T12:49:18.641Z\",\n      \"document_sub_type\": \"string\",\n      \"mime_type\": \"string\"\n    },\n    {\n      \"id\": \"29ddb3dd-c8a4-ba8e-1e6b-e83759c6f8ba\",\n      \"document_type\": \"identity_verification\",\n      \"created_at\": \"1957-12-03T18:57:15.470Z\",\n      \"document_sub_type\": \"string\",\n      \"mime_type\": \"string\"\n    }\n  ],\n  \"trusted_contact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  },\n  \"account_name\": \"string\",\n  \"custodial_account_type\": \"UGMA\",\n  \"minor_identity\": {\n    \"given_name\": \"string\",\n    \"family_name\": \"string\",\n    \"date_of_birth\": \"2007-04-03\",\n    \"country_of_tax_residence\": \"string\",\n    \"state\": \"string\",\n    \"email\": \"EQxH6wp0ygojZ@Xqzp.goa\",\n    \"tax_id\": \"string\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"string\",\n    \"country_of_birth\": \"string\"\n  },\n  \"trading_configurations\": {\n    \"dtbp_check\": \"both\",\n    \"trade_confirm_email\": \"none\",\n    \"suspend_trade\": false,\n    \"no_shorting\": true,\n    \"fractional_trading\": true,\n    \"max_margin_multiplier\": \"string\",\n    \"pdt_check\": \"entry\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66895211-be55-4fa8-9588-83a07767e61a",
+              "name": "The post body is not well formed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact\": {\n    \"email_address\": \"john.doe@example.com\",\n    \"phone_number\": \"+15556667788\",\n    \"street_address\": [\n      \"20 N San Mateo Dr\",\n      \"20 N San Mateo Dr\"\n    ],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"trustedContact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24784e5e-2b16-4aed-b857-b83a6d6e9dea",
+              "name": "​ The request body contains an attribute that is not permitted to be updated or you are attempting to set an invalid value.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact\": {\n    \"email_address\": \"john.doe@example.com\",\n    \"phone_number\": \"+15556667788\",\n    \"street_address\": [\n      \"20 N San Mateo Dr\",\n      \"20 N San Mateo Dr\"\n    ],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"annual_income_min\": \"<number>\",\n    \"annual_income_max\": \"<number>\",\n    \"liquid_net_worth_min\": \"<number>\",\n    \"liquid_net_worth_max\": \"<number>\",\n    \"total_net_worth_min\": \"<number>\",\n    \"total_net_worth_max\": \"<number>\",\n    \"extra\": \"<object>\"\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"trustedContact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29081b74-46b7-4fd7-9479-0da5bf6f9c02",
+          "name": "Request to close an account",
+          "request": {
+            "name": "Request to close an account",
+            "description": {
+              "content": "This operation closes an active account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ab98a04-a8af-4f64-b58b-2df4be762d4f",
+              "name": "No content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f72b75c5-8af7-417b-ba7e-67a292658c11",
+          "name": "Upload a document to an already existing account",
+          "request": {
+            "name": "Upload a document to an already existing account",
+            "description": {
+              "content": "Upload a document to be attached to an account.\n\nDocuments are binary objects whose contents are encoded in base64. Each encoded content size is limited to 10MB if you use Alpaca for KYCaaS. If you perform your own KYC there are no document size limitations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "documents",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"document_type\": \"<string>\",\n  \"content\": \"<base64>\",\n  \"mime_type\": \"<string>\",\n  \"document_sub_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc1af352-cbdd-48ae-a8b9-03630e122179",
+              "name": "Success (No Content)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "documents",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"document_type\": \"identity_verification\",\n  \"document_sub_type\": \"passport\",\n  \"content\": \"/9j/Cg==\",\n  \"mime_type\": \"image/jpeg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d1e77206-c58e-4ff1-b43c-537219bfa77f",
+              "name": "Bad Request. The body in the request is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "documents",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"document_type\": \"identity_verification\",\n  \"document_sub_type\": \"passport\",\n  \"content\": \"/9j/Cg==\",\n  \"mime_type\": \"image/jpeg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f776ff72-d2bb-4d06-83f5-0e28c6c14511",
+              "name": "Not Found. No account was found for this account_id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "documents",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"document_type\": \"identity_verification\",\n  \"document_sub_type\": \"passport\",\n  \"content\": \"/9j/Cg==\",\n  \"mime_type\": \"image/jpeg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ace1096a-be5c-4dac-a5a3-c074a3adca7b",
+          "name": "Retrieve bank relationships for an account",
+          "request": {
+            "name": "Retrieve bank relationships for an account",
+            "description": {
+              "content": "Retrieves Bank Relationships for an account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "recipient_banks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "bank_name",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "890605a5-022b-4a41-97e5-6ce27843db46",
+              "name": "Success. Returns the bank relationship model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "recipient_banks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "bank_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"61e69015-8549-4bfd-b9c3-01e75843f47d\",\n    \"created_at\": \"2021-03-16T18:38:01.942282Z\",\n    \"updated_at\": \"2021-03-16T18:38:01.942282Z\",\n    \"name\": \"string\",\n    \"bank_code\": \"string\",\n    \"bank_code_type\": \"BIC\",\n    \"account_number\": \"string\",\n    \"account_id\": \"809d9d8f-a131-ab6f-95df-7b4faeb72f99\",\n    \"status\": \"APPROVED\",\n    \"country\": \"string\",\n    \"state_province\": \"string\",\n    \"postal_code\": \"string\",\n    \"city\": \"string\",\n    \"street_address\": \"string\"\n  },\n  {\n    \"id\": \"61e69015-8549-4bfd-b9c3-01e75843f47d\",\n    \"created_at\": \"2021-03-16T18:38:01.942282Z\",\n    \"updated_at\": \"2021-03-16T18:38:01.942282Z\",\n    \"name\": \"string\",\n    \"bank_code\": \"string\",\n    \"bank_code_type\": \"ABA\",\n    \"account_number\": \"string\",\n    \"account_id\": \"fed8467e-38ff-1900-ae3d-18e4af2778b4\",\n    \"status\": \"CANCELED\",\n    \"country\": \"string\",\n    \"state_province\": \"string\",\n    \"postal_code\": \"string\",\n    \"city\": \"string\",\n    \"street_address\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1066a587-95e8-4d0e-8ba5-404b6e89da50",
+              "name": "Bad request. The body in the request is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "recipient_banks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "bank_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "674505d0-ddd9-418d-8458-dc13deb569c4",
+          "name": "Create a Bank Relationship for an account",
+          "request": {
+            "name": "Create a Bank Relationship for an account",
+            "description": {
+              "content": "If successful, retrieves Bank Relationships for an account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "recipient_banks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"bank_code\": \"<string>\",\n  \"bank_code_type\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state_province\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"city\": \"<string>\",\n  \"street_address\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fac5c27-ce71-4326-bf21-38287b32a80f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "recipient_banks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"bank_code\": \"<string>\",\n  \"bank_code_type\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state_province\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"city\": \"<string>\",\n  \"street_address\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"61e69015-8549-4bfd-b9c3-01e75843f47d\",\n  \"created_at\": \"2021-03-16T18:38:01.942282Z\",\n  \"updated_at\": \"2021-03-16T18:38:01.942282Z\",\n  \"name\": \"string\",\n  \"bank_code\": \"string\",\n  \"bank_code_type\": \"BIC\",\n  \"account_number\": \"string\",\n  \"account_id\": \"04d34a41-9b0f-2086-9ec2-516dc34e906c\",\n  \"status\": \"QUEUED\",\n  \"country\": \"string\",\n  \"state_province\": \"string\",\n  \"postal_code\": \"string\",\n  \"city\": \"string\",\n  \"street_address\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f60f1cd-ac3a-4daf-a94b-9b9014c2933c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "recipient_banks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"bank_code\": \"<string>\",\n  \"bank_code_type\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state_province\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"city\": \"<string>\",\n  \"street_address\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f9a625f3-86af-4049-becb-4195dc5159c4",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "recipient_banks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"bank_code\": \"<string>\",\n  \"bank_code_type\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state_province\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"city\": \"<string>\",\n  \"street_address\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e4e47ab-02e0-4bd9-9630-019b36bc2412",
+          "name": "Delete a Bank Relationship for an account",
+          "request": {
+            "name": "Delete a Bank Relationship for an account",
+            "description": {
+              "content": "If successful, deletes Bank Relationship for an account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "recipient_banks",
+                ":bank_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bank_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47ed1e1d-de72-4045-9e2e-cfaa57c6ed48",
+              "name": "Success (No Content)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "recipient_banks",
+                    ":bank_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "bank_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4aaf88be-fdf5-4078-898f-b24638d9ca06",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "recipient_banks",
+                    ":bank_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "bank_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d79abe24-bc55-42c9-9f4f-c740bd3fabfc",
+              "name": "Bank Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "recipient_banks",
+                    ":bank_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "bank_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c50008c9-42cd-443a-84ad-7556212a36bf",
+          "name": "Return a list of transfers for an account.",
+          "request": {
+            "name": "Return a list of transfers for an account.",
+            "description": {
+              "content": "You can query a list of transfers for an account.\n\n\nYou can filter requested transfers by values such as direction and status.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "INCOMING or OUTGOING"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7702315-e912-47f1-8acb-dfb524df4860",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"497f6eca-6276-4993-bfeb-53cbbbba6f08\",\n    \"relationship_id\": \"81412018-ffa2-43f9-a3eb-d39f1c5e0f87\",\n    \"bank_id\": \"f1ae96de-94c1-468e-93a3-6b7213930ca8\",\n    \"account_id\": \"449e7a5c-69d3-4b8a-aaaf-5c9b713ebc65\",\n    \"type\": \"ach\",\n    \"status\": \"QUEUED\",\n    \"reason\": \"string\",\n    \"amount\": \"string\",\n    \"direction\": \"INCOMING\",\n    \"created_at\": \"2019-08-24T14:15:22Z\",\n    \"updated_at\": \"2019-08-24T14:15:22Z\",\n    \"expires_at\": \"2019-08-24T14:15:22Z\",\n    \"additional_information\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c2717e3-3ea8-4fd5-9180-2476e98ddd64",
+          "name": "Request a new transfer",
+          "request": {
+            "name": "Request a new transfer",
+            "description": {
+              "content": "Create a new transfer to an account to fund it.\n\nIn the sandbox environment, you can instantly deposit to or withdraw from an account with a virtual money amount. In the production environment, this endpoint is used only for requesting an outgoing (withdrawal) wire transfer at this moment. For the wire transfer (in production), you need to create a bank resource first using the Bank API. For more on how to fund an account in sandbox please check out this tutorial [here](https://alpaca.markets/learn/fund-broker-api/).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transfer_type\": \"<string>\",\n  \"amount\": \"<decimal>\",\n  \"direction\": \"<string>\",\n  \"timing\": \"<string>\",\n  \"relationship_id\": \"<uuid>\",\n  \"bank_id\": \"<uuid>\",\n  \"additional_information\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d7037847-56ef-45e8-b0e4-649e0cacc387",
+              "name": "Successfully requested a transfer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transfer_type\": \"ach\",\n  \"amount\": \"<decimal>\",\n  \"direction\": \"INCOMING\",\n  \"timing\": \"immediate\",\n  \"relationship_id\": \"<uuid>\",\n  \"bank_id\": \"<uuid>\",\n  \"additional_information\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"6616611d-bdd0-4697-d2d2-1f8059b1fe04\",\n  \"account_id\": \"582975d3-f630-7381-1723-583e503bd843\",\n  \"type\": \"ach\",\n  \"status\": \"QUEUED\",\n  \"amount\": \"string\",\n  \"direction\": \"INCOMING\",\n  \"created_at\": \"2004-06-24T20:54:27.400Z\",\n  \"relationship_id\": \"5c88fa92-3583-ae46-c169-a9fe73d7adc8\",\n  \"bank_id\": \"937561df-3960-be9d-bfcb-97406d928c2f\",\n  \"reason\": \"string\",\n  \"updated_at\": \"2018-12-01T05:51:57.858Z\",\n  \"expires_at\": \"2000-01-20T00:32:28.136Z\",\n  \"additional_information\": \"string\",\n  \"hold_until\": \"1988-01-08T10:25:28.784Z\",\n  \"instant_amount\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "870a56ff-c809-4209-b878-52494f722835",
+          "name": "Request to close a transfer",
+          "request": {
+            "name": "Request to close a transfer",
+            "description": {
+              "content": "Request to close a transfer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "transfers",
+                ":transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transfer_id",
+                  "description": "(Required) Tranfer identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "782b0d24-8bcc-4e65-b79c-d4f7b1201cb7",
+              "name": "Success (No Content)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "transfers",
+                    ":transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transfer_id",
+                      "description": "(Required) Tranfer identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b142bb6f-6a4a-49ee-bd57-491c888d93db",
+              "name": "Resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "transfers",
+                    ":transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transfer_id",
+                      "description": "(Required) Tranfer identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 817.7942016257367,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba38d245-d493-44bd-a90d-f0abcc6d6e73",
+          "name": "Retrieve account activities",
+          "request": {
+            "name": "Retrieve account activities",
+            "description": {
+              "content": "Returns an array of Activities\n\nNotes:\n* Pagination is handled using the `page_token` and `page_size` parameters.\n* `page_token` represents the ID of the end of your current page of results.\n  for example if in your first response the id of the last Activiy item returned in the array was `20220203000000000::045b3b8d-c566-4bef-b741-2bf598dd6ae7`, you'd pass that value as `page_token` to get the next page of results\n\n* If specified with a `direction` of `desc`, for example, the results will end before the activity with the specified ID.\n* If specified with a `direction` of `asc`, results will begin with the activity immediately after the one specified.\n* `page_size` is the maximum number of entries to return in the response.\n* If `date` is not specified, the default and maximum value is 100.\n* If `date` is specified, the default behavior is to return all results, and there is no maximum page size.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<uuid>",
+                  "description": "id of a single account to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<string>",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<string>",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported. Cannot be used with date."
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of entries to return in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The Activity ID of the end of your current page of results. "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6dcba445-7d49-464d-8bd4-fd457ae681cb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"20220208125959696::88b5f678-fef5-447b-af15-f21e367e6d8c\",\n    \"activity_type\": \"SPIN\",\n    \"account_id\": \"c8f1ef5d-edc0-4f23-9ee4-378f19cb92a4\",\n    \"transaction_time\": \"2021-05-10T14:01:04.650275Z\",\n    \"type\": \"fill\",\n    \"price\": \"3.1415\",\n    \"qty\": \"0.38921\",\n    \"side\": \"buy\",\n    \"symbol\": \"AAPL\",\n    \"leaves_qty\": \"0.5123\",\n    \"order_id\": \"fe060a1b-5b45-4eba-ba46-c3a3345d8255\",\n    \"cum_qty\": \"0.9723\",\n    \"order_status\": \"filled\"\n  },\n  {\n    \"id\": \"20220208125959696::88b5f678-fef5-447b-af15-f21e367e6d8c\",\n    \"activity_type\": \"DIV\",\n    \"account_id\": \"c8f1ef5d-edc0-4f23-9ee4-378f19cb92a4\",\n    \"transaction_time\": \"2021-05-10T14:01:04.650275Z\",\n    \"type\": \"fill\",\n    \"price\": \"3.1415\",\n    \"qty\": \"0.38921\",\n    \"side\": \"buy\",\n    \"symbol\": \"AAPL\",\n    \"leaves_qty\": \"0.5123\",\n    \"order_id\": \"fe060a1b-5b45-4eba-ba46-c3a3345d8255\",\n    \"cum_qty\": \"0.9723\",\n    \"order_status\": \"filled\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e8f2306-ce02-4a5f-8dfe-4b7c3979df2e",
+          "name": "Retrieve specific account activities",
+          "request": {
+            "name": "Retrieve specific account activities",
+            "description": {
+              "content": "Retrieves an Array of Activies by type\n\nNotes:\n* Pagination is handled using the `page_token` and `page_size` parameters.\n* `page_token` represents the ID of the end of your current page of results.\n  for example if in your first response the id of the last Activiy item returned in the array was `20220203000000000::045b3b8d-c566-4bef-b741-2bf598dd6ae7`, you'd pass that value as `page_token` to get the next page of results\n\n* If specified with a `direction` of `desc`, for example, the results will end before the activity with the specified ID.\n* If specified with a `direction` of `asc`, results will begin with the activity immediately after the one specified.\n* `page_size` is the maximum number of entries to return in the response.\n* If `date` is not specified, the default and maximum value is 100.\n* If `date` is specified, the default behavior is to return all results, and there is no maximum page size.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                "activities",
+                ":activity_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<uuid>",
+                  "description": "id of a single account to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<dateTime>",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of entries to return in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The ID of the end of your current page of results"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "activity_type",
+                  "description": "(Required) see ActivityType model for details about what the different types mean"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19798b28-d7c5-4eea-9da7-fc0df58f865b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    "activities",
+                    ":activity_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "activity_type",
+                      "description": "(Required) see ActivityType model for details about what the different types mean"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"20220208125959696::88b5f678-fef5-447b-af15-f21e367e6d8c\",\n    \"activity_type\": \"SPIN\",\n    \"account_id\": \"c8f1ef5d-edc0-4f23-9ee4-378f19cb92a4\",\n    \"transaction_time\": \"2021-05-10T14:01:04.650275Z\",\n    \"type\": \"fill\",\n    \"price\": \"3.1415\",\n    \"qty\": \"0.38921\",\n    \"side\": \"buy\",\n    \"symbol\": \"AAPL\",\n    \"leaves_qty\": \"0.5123\",\n    \"order_id\": \"fe060a1b-5b45-4eba-ba46-c3a3345d8255\",\n    \"cum_qty\": \"0.9723\",\n    \"order_status\": \"filled\"\n  },\n  {\n    \"id\": \"20220208125959696::88b5f678-fef5-447b-af15-f21e367e6d8c\",\n    \"activity_type\": \"DIV\",\n    \"account_id\": \"c8f1ef5d-edc0-4f23-9ee4-378f19cb92a4\",\n    \"transaction_time\": \"2021-05-10T14:01:04.650275Z\",\n    \"type\": \"fill\",\n    \"price\": \"3.1415\",\n    \"qty\": \"0.38921\",\n    \"side\": \"buy\",\n    \"symbol\": \"AAPL\",\n    \"leaves_qty\": \"0.5123\",\n    \"order_id\": \"fe060a1b-5b45-4eba-ba46-c3a3345d8255\",\n    \"cum_qty\": \"0.9723\",\n    \"order_status\": \"filled\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48470fe3-5a64-4078-8b78-4cf722cafcc4",
+          "name": "Retrieve ACH Relationships for an account",
+          "request": {
+            "name": "Retrieve ACH Relationships for an account",
+            "description": {
+              "content": "Returns a list of ACH Relationships for an account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "ach_relationships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>",
+                  "description": "Comma-separated status values"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c696507-0b50-46e3-9910-aabc334fb997",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "ach_relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"61e69015-8549-4bfd-b9c3-01e75843f47d\",\n    \"created_at\": \"2021-03-16T18:38:01.942282Z\",\n    \"updated_at\": \"2021-03-16T18:38:01.942282Z\",\n    \"account_id\": \"c33b361b-bb72-9dcb-00e7-f061103c37ab\",\n    \"status\": \"QUEUED\",\n    \"account_owner_name\": \"st\",\n    \"bank_account_type\": \"CHECKING\",\n    \"bank_account_number\": \"string\",\n    \"bank_routing_number\": \"string\",\n    \"nickname\": \"string\"\n  },\n  {\n    \"id\": \"61e69015-8549-4bfd-b9c3-01e75843f47d\",\n    \"created_at\": \"2021-03-16T18:38:01.942282Z\",\n    \"updated_at\": \"2021-03-16T18:38:01.942282Z\",\n    \"account_id\": \"e14552ef-d24b-785a-1a8d-b93eb98d049a\",\n    \"status\": \"PENDING\",\n    \"account_owner_name\": \"string\",\n    \"bank_account_type\": \"CHECKING\",\n    \"bank_account_number\": \"string\",\n    \"bank_routing_number\": \"string\",\n    \"nickname\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31200898-db65-4d05-af72-acae1d3e1bc6",
+          "name": "Create an ACH Relationship",
+          "request": {
+            "name": "Create an ACH Relationship",
+            "description": {
+              "content": "Create a new ACHRelationship for an account\n\nIf successful, will return 200 code with a newly created ACH Relationship entity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "ach_relationships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"<string>\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "402d28c2-7b5d-4c64-b31e-1b4d7e34ff92",
+              "name": "returns the newly created ACH Relationship entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "ach_relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"<string>\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"61e69015-8549-4bfd-b9c3-01e75843f47d\",\n  \"created_at\": \"2021-03-16T18:38:01.942282Z\",\n  \"updated_at\": \"2021-03-16T18:38:01.942282Z\",\n  \"account_id\": \"2c391b03-9eef-6420-1ea1-532390cd2620\",\n  \"status\": \"PENDING\",\n  \"account_owner_name\": \"string\",\n  \"bank_account_type\": \"SAVINGS\",\n  \"bank_account_number\": \"string\",\n  \"bank_routing_number\": \"string\",\n  \"nickname\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af6759b1-5609-4c9e-a833-8b23c362df10",
+              "name": "Malformed input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "ach_relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"<string>\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 817.7942016257367,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0e322d3-ee80-40f9-919b-f5c99c342202",
+              "name": "Client is not authorized for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "ach_relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"<string>\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 817.7942016257367,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "452b0524-8bf3-4939-abea-304ef8d4cd11",
+              "name": "The account already has an active relationship.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "ach_relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_owner_name\": \"<string>\",\n  \"bank_account_type\": \"<string>\",\n  \"bank_account_number\": \"<string>\",\n  \"bank_routing_number\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"processor_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 817.7942016257367,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d240645d-cd14-46d7-a6ce-da67fd061fe0",
+          "name": "Delete an existing ACH relationship",
+          "request": {
+            "name": "Delete an existing ACH relationship",
+            "description": {
+              "content": "Delete an existing ACH relationship for an account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "ach_relationships",
+                ":ach_relationship_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "ach_relationship_id",
+                  "description": "(Required) ACH relationship identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bfb28c35-d4ce-4a53-94bf-3f1ec3e66fc5",
+              "name": "Success (No Content)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "ach_relationships",
+                    ":ach_relationship_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "ach_relationship_id",
+                      "description": "(Required) ACH relationship identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ff5af34-2116-43a4-af10-5bc74bc36316",
+              "name": "the passed in account_id or relationship_id were invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "ach_relationships",
+                    ":ach_relationship_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "ach_relationship_id",
+                      "description": "(Required) ACH relationship identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "082a1df3-6036-4a08-8da7-b33c1ba1dc2b",
+              "name": "Resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "ach_relationships",
+                    ":ach_relationship_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "ach_relationship_id",
+                      "description": "(Required) ACH relationship identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 817.7942016257367,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "924312ac-946c-46e0-935f-c18e022ef7e1",
+          "name": "Retrieve trading details for an account.",
+          "request": {
+            "name": "Retrieve trading details for an account.",
+            "description": {
+              "content": "As a broker you can view more trading details about your users.\n\nThe response is a Trading Account model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "trading",
+                "accounts",
+                ":account_id",
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "account_id",
+                  "description": "(Required) Account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7ca0013-f355-443d-bfd3-7cd79dca92da",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "trading",
+                    "accounts",
+                    ":account_id",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "account_id",
+                      "description": "(Required) Account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c8f1ef5d-edc0-4f23-9ee4-378f19cb92a4\",\n  \"account_number\": \"927584925\",\n  \"status\": \"ACTIVE\",\n  \"currency\": \"USD\",\n  \"created_at\": \"2021-03-01T13:28:49.270232Z\",\n  \"last_equity\": \"12345.6789\",\n  \"equity\": \"12345.6789\",\n  \"cash\": \"12345.6789\",\n  \"buying_power\": \"12345.6789\",\n  \"regt_buying_power\": \"12345.6789\",\n  \"daytrading_buying_power\": \"12345.6789\",\n  \"cash_withdrawable\": \"12345.6789\",\n  \"cash_transferable\": \"12345.6789\",\n  \"pending_transfer_out\": \"12345.6789\",\n  \"portfolio_value\": \"12345.6789\",\n  \"pattern_day_trader\": false,\n  \"trading_blocked\": false,\n  \"transfers_blocked\": false,\n  \"account_blocked\": false,\n  \"trade_suspended_by_user\": false,\n  \"multiplier\": \"2\",\n  \"shorting_enabled\": false,\n  \"long_market_value\": \"12345.6789\",\n  \"short_market_value\": \"0\",\n  \"initial_margin\": \"12345.6789\",\n  \"maintenance_margin\": \"12345.6789\",\n  \"last_maintenance_margin\": \"12345.6789\",\n  \"sma\": \"12345.6789\",\n  \"daytrade_count\": 0,\n  \"previous_close\": \"2021-04-01T19:00:00-04:00\",\n  \"last_long_market_value\": \"12345.6789\",\n  \"last_short_market_value\": \"0\",\n  \"last_cash\": \"12345.6789\",\n  \"last_initial_margin\": \"12345.6789\",\n  \"last_regt_buying_power\": \"12345.6789\",\n  \"last_daytrading_buying_power\": \"12345.6789\",\n  \"last_buying_power\": \"12345.6789\",\n  \"last_daytrade_count\": 0,\n  \"clearing_broker\": \"Velox\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbb8b8e8-91d0-44fb-a020-893a3f0ee23a",
+          "name": "Subscribe to account status events (SSE).",
+          "request": {
+            "name": "Subscribe to account status events (SSE).",
+            "description": {
+              "content": "Events API provide event push as well as historical queries via SSE (server sent events).\n\nHistorical events are streamed immediately if queried, and updates are pushed as events occur.\n\nQuery Params Rules:\n- `since` required if `until` specified\n- `since_id` required if `until_id` specified\n- `since` and `since_id` can’t be used at the same time\nBehavior:\n- if `since` or `since_id` not specified this will not return any historic data\n- if `until` or `until_id` reached stream will end (status 200)\n\n---\n\nNote for people using the clients generated from this OAS spec. Currently OAS-3 doesn't have full support for representing SSE style responses from an API, so if you are using a generated client and don't specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.\n\nIf you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "events",
+                "accounts",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<date>",
+                  "description": "Format: YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<date>",
+                  "description": "Format: YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "since_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "until_id",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d23e9c54-0c9f-4e9e-bbc3-92d354b681f3",
+              "name": "Connected. Events will now start streaming as long as you keep the connection open.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events",
+                    "accounts",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "since_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "until_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/event-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/event-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73beaf0a-d045-4350-a806-3e850b1a6b5b",
+          "name": "Get account",
+          "request": {
+            "name": "Get account",
+            "description": {
+              "content": "Returns the account associated with the API key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b59818b-286d-46c2-8f12-21465170e4e3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"16dd842f-3b79-f634-120f-7c3912a4bbcf\",\n  \"status\": \"ACTIVE\",\n  \"account_number\": \"string\",\n  \"currency\": \"USD\",\n  \"cash\": \"string\",\n  \"portfolio_value\": \"string\",\n  \"pattern_day_trader\": false,\n  \"trade_suspended_by_user\": true,\n  \"trading_blocked\": true,\n  \"transfers_blocked\": true,\n  \"account_blocked\": true,\n  \"created_at\": \"2001-03-05T12:13:02.796Z\",\n  \"shorting_enabled\": true,\n  \"long_market_value\": \"string\",\n  \"short_market_value\": \"string\",\n  \"equity\": \"string\",\n  \"last_equity\": \"string\",\n  \"multiplier\": \"string\",\n  \"buying_power\": \"string\",\n  \"initial_margin\": \"string\",\n  \"maintenance_margin\": \"string\",\n  \"sma\": \"string\",\n  \"daytrade_count\": 3204,\n  \"last_maintenance_margin\": \"string\",\n  \"daytrading_buying_power\": \"string\",\n  \"regt_buying_power\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://broker-api.sandbox.alpaca.markets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f1d334c-16e5-457a-9445-0774b5464a1c",
+    "name": "Broker Account Activities Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API\n\nContact Support:\n Name: Alpaca Support\n Email: support@alpaca.markets",
+      "type": "text/plain"
+    }
+  }
+}
