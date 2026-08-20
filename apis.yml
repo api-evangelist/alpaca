@@ -39,6 +39,12 @@ apis:
   - Stocks
   - Options
   - Crypto
+  - Order
+  tags_raw:
+  - Trading
+  - Stocks
+  - Options
+  - Crypto
   - Orders
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.alpaca.markets/v2
@@ -71,6 +77,9 @@ apis:
 - aid: alpaca:oauth-api
   name: Alpaca OAuth API
   tags:
+  - Authentication
+  - Authorization
+  tags_raw:
   - OAuth
   - Authentication
   - Authorization
@@ -136,6 +145,8 @@ apis:
   humanURL: https://docs.alpaca.markets/docs/trading-api
   baseURL: https://api.alpaca.markets/v2
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -249,6 +260,8 @@ apis:
   humanURL: https://docs.alpaca.markets/docs/trading-api
   baseURL: https://api.alpaca.markets/v2
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -331,6 +344,8 @@ apis:
   humanURL: https://docs.alpaca.markets/docs/trading-api
   baseURL: https://api.alpaca.markets/v2
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -433,6 +448,8 @@ apis:
   humanURL: https://docs.alpaca.markets/docs/trading-api
   baseURL: https://api.alpaca.markets/v2
   tags:
+  - Watchlist
+  tags_raw:
   - Watchlists
   properties:
   - type: OpenAPI
