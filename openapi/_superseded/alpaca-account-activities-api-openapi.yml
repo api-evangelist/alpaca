@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Broker Account Activities API
   description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
@@ -170,48 +170,6 @@ components:
       - suspended
       - calculated
       example: new
-    ActivityType:
-      type: string
-      title: ActivityType
-      description: "- FILL\n  Order fills (both partial and full fills)\n\n- TRANS\n  Cash transactions (both CSD and CSW)\n\n- MISC\n  Miscellaneous or rarely used activity types (All types except those in TRANS, DIV, or FILL)\n\n- ACATC\n  ACATS IN/OUT (Cash)\n\n- ACATS\n  ACATS IN/OUT (Securities)\n\n- CFEE\n  Crypto fee\n\n- CSD\n  Cash deposit(+)\n\n- CSW\n  Cash withdrawal(-)\n\n- DIV\n  Dividends\n\n- DIVCGL\n  Dividend (capital gain long term)\n\n- DIVCGS\n  Dividend (capital gain short term)\n\n- DIVFEE\n  Dividend fee\n\n- DIVFT\n  Dividend adjusted (Foreign Tax Withheld)\n\n- DIVNRA\n  Dividend adjusted (NRA Withheld)\n\n- DIVROC\n  Dividend return of capital\n\n- DIVTW\n  Dividend adjusted (Tefra Withheld)\n\n- DIVTXEX\n  Dividend (tax exempt)\n\n- FEE\n  Fee denominated in USD\n\n- INT\n  Interest (credit/margin)\n\n- INTNRA\n  Interest adjusted (NRA Withheld)\n\n- INTTW\n  Interest adjusted (Tefra Withheld)\n\n- JNL\n  Journal entry\n\n- JNLC\n  Journal entry (cash)\n\n- JNLS\n  Journal entry (stock)\n\n- MA\n  Merger/Acquisition\n\n- NC\n  Name change\n\n- OPASN\n  Option assignment\n\n- OPEXP\n  Option expiration\n\n- OPXRC\n  Option exercise\n\n- PTC\n  Pass Thru Charge\n\n- PTR\n  Pass Thru Rebate\n\n- REORG\n  Reorg CA\n\n- SC\n  Symbol change\n\n- SSO\n  Stock spinoff\n\n- SSP\n  Stock split"
-      enum:
-      - FILL
-      - TRANS
-      - MISC
-      - ACATC
-      - ACATS
-      - CSD
-      - CSW
-      - DIV
-      - DIVCGL
-      - DIVCGS
-      - DIVFEE
-      - DIVFT
-      - DIVNRA
-      - DIVROC
-      - DIVTW
-      - DIVTXEX
-      - INT
-      - INTNRA
-      - INTTW
-      - JNL
-      - JNLC
-      - JNLS
-      - MA
-      - NC
-      - OPASN
-      - OPEXP
-      - OPXRC
-      - PTC
-      - PTR
-      - REORG
-      - SC
-      - SSO
-      - SSP
-      - CFEE
-      - FEE
-      x-examples:
-        example-1: FILL
     TradingActivities:
       title: AccountTradingActivities
       type: object
@@ -273,6 +231,48 @@ components:
           example: fill
         order_status:
           $ref: '#/components/schemas/OrderStatus'
+    ActivityType:
+      type: string
+      title: ActivityType
+      description: "- FILL\n  Order fills (both partial and full fills)\n\n- TRANS\n  Cash transactions (both CSD and CSW)\n\n- MISC\n  Miscellaneous or rarely used activity types (All types except those in TRANS, DIV, or FILL)\n\n- ACATC\n  ACATS IN/OUT (Cash)\n\n- ACATS\n  ACATS IN/OUT (Securities)\n\n- CFEE\n  Crypto fee\n\n- CSD\n  Cash deposit(+)\n\n- CSW\n  Cash withdrawal(-)\n\n- DIV\n  Dividends\n\n- DIVCGL\n  Dividend (capital gain long term)\n\n- DIVCGS\n  Dividend (capital gain short term)\n\n- DIVFEE\n  Dividend fee\n\n- DIVFT\n  Dividend adjusted (Foreign Tax Withheld)\n\n- DIVNRA\n  Dividend adjusted (NRA Withheld)\n\n- DIVROC\n  Dividend return of capital\n\n- DIVTW\n  Dividend adjusted (Tefra Withheld)\n\n- DIVTXEX\n  Dividend (tax exempt)\n\n- FEE\n  Fee denominated in USD\n\n- INT\n  Interest (credit/margin)\n\n- INTNRA\n  Interest adjusted (NRA Withheld)\n\n- INTTW\n  Interest adjusted (Tefra Withheld)\n\n- JNL\n  Journal entry\n\n- JNLC\n  Journal entry (cash)\n\n- JNLS\n  Journal entry (stock)\n\n- MA\n  Merger/Acquisition\n\n- NC\n  Name change\n\n- OPASN\n  Option assignment\n\n- OPEXP\n  Option expiration\n\n- OPXRC\n  Option exercise\n\n- PTC\n  Pass Thru Charge\n\n- PTR\n  Pass Thru Rebate\n\n- REORG\n  Reorg CA\n\n- SC\n  Symbol change\n\n- SSO\n  Stock spinoff\n\n- SSP\n  Stock split"
+      enum:
+      - FILL
+      - TRANS
+      - MISC
+      - ACATC
+      - ACATS
+      - CSD
+      - CSW
+      - DIV
+      - DIVCGL
+      - DIVCGS
+      - DIVFEE
+      - DIVFT
+      - DIVNRA
+      - DIVROC
+      - DIVTW
+      - DIVTXEX
+      - INT
+      - INTNRA
+      - INTTW
+      - JNL
+      - JNLC
+      - JNLS
+      - MA
+      - NC
+      - OPASN
+      - OPEXP
+      - OPXRC
+      - PTC
+      - PTR
+      - REORG
+      - SC
+      - SSO
+      - SSP
+      - CFEE
+      - FEE
+      x-examples:
+        example-1: FILL
     NonTradeActivities:
       title: AccountNonTradeActivities
       type: object

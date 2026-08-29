@@ -1,20 +1,21 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Broker Account Activities Stock Pricing Data API API
-  description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
-  version: 1.0.0
+  title: Market Data Stock Pricing Data API
+  description: Access Alpaca’s historical and real-time US stock market and crypto data through REST API and WebSocket. There are APIs for Stock Pricing, Crypto Pricing, and News.
+  version: 2.0.0
   contact:
     name: Alpaca Support
     email: support@alpaca.markets
     url: https://alpaca.markets/support
   termsOfService: https://s3.amazonaws.com/files.alpaca.markets/disclosures/library/TermsAndConditions.pdf
 servers:
-- url: https://broker-api.sandbox.alpaca.markets
-  description: Sandbox endpoint
-- url: https://broker-api.alpaca.markets
-  description: Production endpoint
+- url: https://data.alpaca.markets
+  description: Production
+- description: Sandbox
+  url: https://data.sandbox.alpaca.markets
 security:
-- BasicAuth: []
+- API_Key: []
+  API_Secret: []
 tags:
 - name: Stock Pricing Data API
 paths:
@@ -861,332 +862,7 @@ paths:
       tags:
       - Stock Pricing Data API
 components:
-  parameters:
-    stock-symbols:
-      name: symbols
-      in: query
-      required: true
-      schema:
-        type: string
-        example: AAPL,TSLA
-      description: The comma-separated list of stock ticker symbols to query for.
-    stock-symbol:
-      name: symbol
-      in: path
-      required: true
-      schema:
-        type: string
-        example: AAPL
-      description: The stock ticker symbol to query for.
-    timeframe:
-      name: timeframe
-      in: query
-      required: true
-      schema:
-        type: string
-      description: 'Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour.'
-    end:
-      name: end
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-01-01T00:00:00Z'
-      description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
-    adjustment:
-      name: adjustment
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - raw
-        - split
-        - dividend
-        - all
-      description: specifies the corporate action adjustment(s) for bars data
-    feed:
-      name: feed
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - iex
-        - sip
-        - otc
-        example: sip
-      description: Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription
-    page_token:
-      name: page_token
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.
-    limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 10000
-      description: Number of data points to return. Must be in range 1-10000, defaults to 1000.
-    start:
-      name: start
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-01-01T00:00:00Z'
-      description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
   schemas:
-    Trade:
-      title: Trade
-      type: object
-      description: A model representing a trade
-      x-examples:
-        trade-example-1:
-          t: '2021-02-06T13:04:56.334320128Z'
-          x: C
-          p: 387.62
-          s: 100
-          c:
-          - ' '
-          - T
-          i: 52983525029461
-          z: B
-        example-crypto:
-          t: '2022-02-27T11:04:55.82622Z'
-          x: FTXU
-          p: 39330
-          s: 0.0003
-          tks: B
-          i: 25783365
-      properties:
-        t:
-          type: string
-          description: Timestamp in RFC-3339 format with nanosecond precision
-          format: date-time
-        x:
-          type: string
-          description: Exchange where the trade happened.
-        p:
-          type: number
-          description: Trade price.
-        s:
-          type: number
-          description: Trade Size.
-        c:
-          type: array
-          description: Trade conditions (Stock trade only)
-          items:
-            type: string
-        i:
-          type: integer
-          description: Trade ID
-          format: int64
-        z:
-          type: string
-          description: Tape (Stock trade only)
-        tks:
-          type: string
-          description: Taker's side (crypto trade only)
-      required:
-      - x
-      - i
-    LatestMultiTradesResponse:
-      description: ''
-      type: object
-      x-examples:
-        example-crypto-1:
-          trades:
-            ETHUSD:
-              t: '2022-03-08T22:13:55.777631Z'
-              x: FTXU
-              p: 2562.8
-              s: 0.881
-              tks: S
-              i: 26271234
-            BTCUSD:
-              t: '2022-03-08T22:14:47.379901Z'
-              x: FTXU
-              p: 38510
-              s: 0.05
-              tks: B
-              i: 26271277
-        example-1:
-          trades:
-            TSLA:
-              t: '2022-03-11T17:24:55.143671726Z'
-              x: V
-              p: 801.83
-              s: 100
-              c:
-              - '@'
-              i: 9924
-              z: C
-            AAPL:
-              t: '2022-03-11T17:24:56.321817175Z'
-              x: V
-              p: 155.105
-              s: 300
-              c:
-              - '@'
-              i: 7741
-              z: C
-      properties:
-        trades:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Trade'
-      required:
-      - trades
-    BarsResponse:
-      description: ''
-      type: object
-      x-examples:
-        barsResponse-stock-example-1:
-          bars:
-          - t: '2021-02-01T16:01:00Z'
-            o: 133.32
-            h: 133.74
-            l: 133.31
-            c: 133.5
-            v: 9876
-          - t: '2021-02-01T16:02:00Z'
-            o: 133.5
-            h: 133.58
-            l: 133.44
-            c: 133.58
-            v: 3567
-          symbol: AAPL
-          next_page_token: MjAyMS0wMi0wMVQxNDowMjowMFo7MQ==
-        barsResponse-crypto-example-1:
-          bars:
-          - t: '2022-03-10T06:00:00Z'
-            x: CBSE
-            o: 39230.55
-            h: 40302.06
-            l: 38560.85
-            c: 39259.91
-            v: 11328.17046589
-            n: 353132
-            vw: 39208.3129673941
-          - t: '2022-03-10T06:00:00Z'
-            x: ERSX
-            o: 39246.4
-            h: 40151
-            l: 38791
-            c: 39270
-            v: 153.254034
-            n: 230
-            vw: 39255.8594375793
-          - t: '2022-03-10T06:00:00Z'
-            x: FTXU
-            o: 39170
-            h: 40290
-            l: 38560
-            c: 39200
-            v: 1511.2828
-            n: 5248
-            vw: 39214.2388224758
-          symbol: BTCUSD
-          next_page_token: null
-      title: BarsResponse
-      properties:
-        bars:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          description: The array of Bar data
-          items:
-            $ref: '#/components/schemas/Bar'
-        symbol:
-          type: string
-          minLength: 1
-          example: AAPL
-          description: the stock ticker or crypto symbol this set of bar data is for
-        next_page_token:
-          type: string
-          minLength: 1
-          nullable: true
-      required:
-      - bars
-      - symbol
-      - next_page_token
-    ExchangesResponse:
-      title: ExchangesResponse
-      type: object
-      additionalProperties:
-        type: string
-      x-examples:
-        example-1:
-          Z: Cboe BZ
-          I: International Securities Exchange
-          M: Chicago Stock Exchange
-          U: Members Exchange
-          L: Long Term Stock Exchange
-          W: CBOE
-          X: NASDAQ OMX PSX
-          B: NASDAQ OMX BX
-          D: FINRA ADF
-          J: Cboe EDGA
-          P: NYSE Arca
-          Q: NASDAQ OMX
-          S: NASDAQ Small Cap
-          V: IEX
-          A: NYSE American (AMEX)
-          E: Market Independent
-          N: New York Stock Exchange
-          T: NASDAQ Int
-          Y: Cboe BYX
-          C: National Stock Exchange
-          H: MIAX
-          K: Cboe EDGX
-      description: Returns an object representing the exchanges we support. The keys are the short form codes you will see in our responses and the values are their respective full names.
-    LatestBarResponse:
-      description: 'A model representing the result of hitting one of the Latest Bar api endpoints.
-
-
-        Represents a single Bar that should be the latest Bar data for a given ticker symbol'
-      type: object
-      x-examples:
-        crypto-example-1:
-          symbol: BTCUSD
-          bar:
-            t: '2022-03-08T21:05:00Z'
-            x: FTXU
-            o: 38576
-            h: 38576
-            l: 38576
-            c: 38576
-            v: 0.063
-            n: 1
-            vw: 38576
-        stock-example-1:
-          symbol: AAPL
-          bar:
-            t: '2022-03-10T19:26:00Z'
-            o: 158.035
-            h: 158.21
-            l: 158.035
-            c: 158.21
-            v: 800
-            n: 15
-            vw: 158.113144
-      properties:
-        symbol:
-          type: string
-          minLength: 1
-        bar:
-          $ref: '#/components/schemas/Bar'
-      required:
-      - symbol
-      - bar
     Bar:
       title: Bar
       type: object
@@ -1256,364 +932,87 @@ components:
       - l
       - c
       - v
-    Snapshot:
-      title: Snapshot
+    ExchangesResponse:
+      title: ExchangesResponse
       type: object
-      description: 'The Snapshot API for one ticker provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for a given ticker symbol.
-
-        '
-      x-examples:
-        snapshot-example-1:
-          symbol: AAPL
-          latestTrade:
-            t: '2021-05-11T20:00:00.435997104Z'
-            x: Q
-            p: 125.91
-            s: 5589631
-            c:
-            - '@'
-            - M
-            i: 179430
-            z: C
-          latestQuote:
-            t: '2021-05-11T22:05:02.307304704Z'
-            ax: P
-            ap: 125.68
-            as: 12
-            bx: P
-            bp: 125.6
-            bs: 4
-            c:
-            - R
-          minuteBar:
-            t: '2021-05-11T22:02:00Z'
-            o: 125.66
-            h: 125.66
-            l: 125.66
-            c: 125.66
-            v: 396
-          dailyBar:
-            t: '2021-05-11T04:00:00Z'
-            o: 123.5
-            h: 126.27
-            l: 122.77
-            c: 125.91
-            v: 125863164
-          prevDailyBar:
-            t: '2021-05-10T04:00:00Z'
-            o: 129.41
-            h: 129.54
-            l: 126.81
-            c: 126.85
-            v: 79569305
-      properties:
-        latestTrade:
-          $ref: '#/components/schemas/Trade'
-        latestQuote:
-          $ref: '#/components/schemas/Quote'
-        minuteBar:
-          $ref: '#/components/schemas/Bar'
-        dailyBar:
-          $ref: '#/components/schemas/Bar'
-        prevDailyBar:
-          $ref: '#/components/schemas/Bar'
-    Quote:
-      title: Quote
-      type: object
-      description: 'The Quotes API provides NBBO quotes for a given ticker symbol at a specified date.
-
-        '
+      additionalProperties:
+        type: string
       x-examples:
         example-1:
-          t: '2022-03-11T13:13:49.975594385Z'
-          ax: V
-          ap: 18696.3338
-          as: 1
-          bx: V
-          bp: 0
-          bs: 0
-          c:
-          - R
-          z: C
-        example-crypto:
-          t: '2022-03-21T05:00:00.011543552Z'
-          x: FTXU
-          bp: 40761.35
-          bs: 0.465
-          ap: 41007.66
-          as: 2.8675
-      properties:
-        t:
-          type: string
-          description: Timestamp in RFC-3339 format with nanosecond precision
-          format: date-time
-        ax:
-          type: string
-          description: ask exchange (Stock quote only)
-        ap:
-          type: number
-          description: 'ask price
-
-            '
-        as:
-          type: number
-          description: 'ask size
-
-            '
-        bx:
-          type: string
-          description: bid exchange (Stock quote only)
-        bp:
-          type: number
-          description: 'bid price
-
-            '
-        bs:
-          description: bid size
-          type: number
-        c:
-          type: array
-          description: quote conditions (Stock quotes only)
-          items:
-            type: string
-        x:
-          type: string
-          description: Exchange (Crypto quote Only)
-        z:
-          type: string
-          description: Tape (Stock quote only)
-      required:
-      - t
-    MultiQuotesReponse:
-      title: MultiQuotesReponse
+          Z: Cboe BZ
+          I: International Securities Exchange
+          M: Chicago Stock Exchange
+          U: Members Exchange
+          L: Long Term Stock Exchange
+          W: CBOE
+          X: NASDAQ OMX PSX
+          B: NASDAQ OMX BX
+          D: FINRA ADF
+          J: Cboe EDGA
+          P: NYSE Arca
+          Q: NASDAQ OMX
+          S: NASDAQ Small Cap
+          V: IEX
+          A: NYSE American (AMEX)
+          E: Market Independent
+          N: New York Stock Exchange
+          T: NASDAQ Int
+          Y: Cboe BYX
+          C: National Stock Exchange
+          H: MIAX
+          K: Cboe EDGX
+      description: Returns an object representing the exchanges we support. The keys are the short form codes you will see in our responses and the values are their respective full names.
+    LatestMultiQuotesResponse:
+      description: ''
       type: object
-      description: 'A model representing the result of hitting the Multi Quotes api; represents multiple Quotes for multiple symbols.
-
-
-        Returned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.
-
-
-        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them.
-
-        '
       x-examples:
-        multiQuotesResponse-example-1:
+        example-crypto:
+          quotes:
+            ETHUSD:
+              t: '2022-03-08T22:40:52.536436224Z'
+              x: FTXU
+              bp: 2562.99
+              bs: 23.798
+              ap: 2579.11
+              as: 22.155
+            BTCUSD:
+              t: '2022-03-08T22:40:52.662990848Z'
+              x: FTXU
+              bp: 38465.26
+              bs: 2.641
+              ap: 38698.75
+              as: 1.3746
+        example-1:
           quotes:
             AAPL:
-            - t: '2022-02-01T09:00:00.000448Z'
-              ax: K
-              ap: 175
-              as: 1
-              bx: Q
-              bp: 174.96
-              bs: 4
+              t: '2022-03-11T18:40:13.514830169Z'
+              ax: V
+              ap: 156.47
+              as: 3
+              bx: V
+              bp: 156.45
+              bs: 1
               c:
               - R
               z: C
-          next_page_token: QUFQTHwyMDIyLTAyLTAxVDA5OjAwOjAwLjAwMDQ0ODAwMFp8MjIzMEUxOUM=
-        multiTradesResponse-with-multiple-symbols-at-once-example-1:
-          quotes:
-            AAPL:
-            - t: '2022-02-01T09:00:00.000448Z'
-              ax: K
-              ap: 175
+            TSLA:
+              t: '2022-03-11T18:40:12.416216587Z'
+              ax: V
+              ap: 850
               as: 1
-              bx: Q
-              bp: 174.96
-              bs: 4
+              bx: V
+              bp: 798
+              bs: 2
               c:
               - R
               z: C
-            GOOGL:
-            - t: '2022-02-01T09:00:00.000448Z'
-              ax: K
-              ap: 175
-              as: 1
-              bx: Q
-              bp: 175
-              bs: 4
-              c:
-              - R
-              z: C
-          next_page_token: QUFQTHwyMDIyLTAyLTAxVDA5OjAwOjAwLjAwMDQ0ODAwMFp8MjIzMEUxOUM=
       properties:
         quotes:
           type: object
           additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/Quote'
-        next_page_token:
-          type: string
-          description: pass this token with your request again to get the next page of results
-          nullable: true
+            $ref: '#/components/schemas/Quote'
       required:
       - quotes
-    LatestTradeResponse:
-      title: LatestTradeResponse
-      type: object
-      description: 'A model representing the result of hitting the Latest Trade api.
-
-
-        Represents a single Trade that should be the latest trade data for a given ticker symbol'
-      x-examples:
-        latestTradesResponse-example-1:
-          symbol: AAPL
-          trade:
-            t: '2022-02-01T17:46:51.111055251Z'
-            x: V
-            p: 173.06
-            s: 100
-            c:
-            - '@'
-            i: 6519
-            z: C
-        crypto-example-1:
-          symbol: BTCUSD
-          trade:
-            t: '2022-03-08T22:27:26.573044Z'
-            x: FTXU
-            p: 38614
-            s: 0.0019
-            tks: S
-            i: 26271424
-      properties:
-        trade:
-          $ref: '#/components/schemas/Trade'
-        symbol:
-          type: string
-          description: Symbol that was queried
-          example: AAPL
-          minLength: 1
-      required:
-      - symbol
-    TradesResponse:
-      title: TradesResponse
-      type: object
-      description: 'A model representing the result of hitting the Trades api.
-
-
-        Represents multiple Trades for a single symbol with support for paging.'
-      x-examples:
-        trades-example-1:
-          trades:
-          - t: '2021-02-06T13:04:56.334320128Z'
-            x: C
-            p: 387.62
-            s: 100
-            c:
-            - ' '
-            - T
-            i: 52983525029461
-            z: B
-          - t: '2021-02-06T13:09:42.325484032Z'
-            x: C
-            p: 387.69
-            s: 100
-            c:
-            - ' '
-            - T
-            i: 52983525033813
-            z: B
-          symbol: SPY
-          next_page_token: MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==
-      properties:
-        trades:
-          type: array
-          description: Array of trades
-          items:
-            $ref: '#/components/schemas/Trade'
-        symbol:
-          type: string
-          description: Symbol that was queried
-          example: AAPL
-          minLength: 1
-        next_page_token:
-          type: string
-          description: Token that can be used to query the next page
-          nullable: true
-      required:
-      - trades
-      - symbol
-    MultiTradesResponse:
-      title: MultiTradesResponse
-      type: object
-      description: 'A model representing the result of hitting the Multi Trades api; represents multiple trades for multiple symbols.
-
-
-        Returned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.
-
-
-        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for them.
-
-        '
-      x-examples:
-        multiTradesResponse-example-1:
-          trades:
-            SPY:
-            - t: '2021-02-06T13:04:56.334320128Z'
-              x: C
-              p: 387.62
-              s: 100
-              c:
-              - ' '
-              - T
-              i: 52983525029461
-              z: B
-            - t: '2021-02-06T13:09:42.325484032Z'
-              x: C
-              p: 387.69
-              s: 100
-              c:
-              - ' '
-              - T
-              i: 52983525033813
-              z: B
-          next_page_token: MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==
-        multiTradesResponse-with-multiple-symbols-at-once-example-1:
-          trades:
-            AAPL:
-            - t: '2021-02-06T13:04:56.334320128Z'
-              x: C
-              p: 387.62
-              s: 100
-              c:
-              - ' '
-              - T
-              i: 52983525029461
-              z: B
-            - t: '2021-02-06T13:09:42.325484032Z'
-              x: C
-              p: 387.69
-              s: 100
-              c:
-              - ' '
-              - T
-              i: 52983525033813
-              z: B
-            SPY:
-            - t: '2021-02-06T05:09:42.325484032Z'
-              x: C
-              p: 400.55
-              s: 100
-              c:
-              - ' '
-              - T
-              i: 52983525033954
-              z: B
-          next_page_token: MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==
-      properties:
-        trades:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/Trade'
-        next_page_token:
-          type: string
-          nullable: true
-      required:
-      - trades
     MultiSnapshotResponse:
       title: MultiSnapshotResponse
       type: object
@@ -1754,96 +1153,250 @@ components:
       required:
       - quote
       - symbol
-    QuotesResponse:
-      description: 'The Quotes API provides NBBO quotes for a given ticker symbol at a specified date.
+    LatestBarResponse:
+      description: 'A model representing the result of hitting one of the Latest Bar api endpoints.
 
-        '
+
+        Represents a single Bar that should be the latest Bar data for a given ticker symbol'
       type: object
       x-examples:
-        quotesResponse-example-1:
-          quotes:
-          - t: '2022-02-01T09:00:00.000448Z'
-            ax: K
-            ap: 175
-            as: 1
-            bx: Q
-            bp: 174.96
-            bs: 4
-            c:
-            - R
-            z: C
-          - t: '2022-02-01T09:00:00.000448Z'
-            ax: K
-            ap: 175
-            as: 12
-            bx: Q
-            bp: 174.96
-            bs: 4
-            c:
-            - R
-            z: C
+        crypto-example-1:
+          symbol: BTCUSD
+          bar:
+            t: '2022-03-08T21:05:00Z'
+            x: FTXU
+            o: 38576
+            h: 38576
+            l: 38576
+            c: 38576
+            v: 0.063
+            n: 1
+            vw: 38576
+        stock-example-1:
           symbol: AAPL
-          next_page_token: QUFQTHwyMDIyLTAyLTAxVDA5OjAwOjAwLjAwMDQ0ODAwMFp8MzFDODgxNkY=
-        no-data-found-example:
-          quotes: null
-          symbol: AAPL
-          next_page_token: null
-      title: QuotesResponse
+          bar:
+            t: '2022-03-10T19:26:00Z'
+            o: 158.035
+            h: 158.21
+            l: 158.035
+            c: 158.21
+            v: 800
+            n: 15
+            vw: 158.113144
       properties:
-        quotes:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          nullable: true
-          items:
-            $ref: '#/components/schemas/Quote'
         symbol:
           type: string
           minLength: 1
-          example: AAPL
-        next_page_token:
-          type: string
-          minLength: 1
-          nullable: true
+        bar:
+          $ref: '#/components/schemas/Bar'
       required:
-      - quotes
       - symbol
-    LatestMultiBarsResponse:
-      title: LatestMultiBarsResponse
+      - bar
+    MultiQuotesReponse:
+      title: MultiQuotesReponse
       type: object
-      x-examples:
-        example-1:
-          bars:
-            LINKUSD:
-              t: '2022-03-08T17:33:00Z'
-              x: FTXU
-              o: 13.3565
-              h: 13.3565
-              l: 13.3565
-              c: 13.3565
-              v: 41.4
-              n: 1
-              vw: 13.3565
-            BTCUSD:
-              t: '2022-03-08T17:40:00Z'
-              x: FTXU
-              o: 39055
-              h: 39055
-              l: 39055
-              c: 39055
-              v: 0.1
-              n: 1
-              vw: 39055
-      description: 'A model representing the result of hitting the Latest Multi Bars api; represents the latest Bars for multiple symbols.
+      description: 'A model representing the result of hitting the Multi Quotes api; represents multiple Quotes for multiple symbols.
+
+
+        Returned results are sorted by symbol first then by Quote timestamp. This means that you are likely to see only one symbol in your first response if there are enough Quotes for that symbol to hit the limit you requested on that request.
+
+
+        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Quotes were found for them.
 
         '
+      x-examples:
+        multiQuotesResponse-example-1:
+          quotes:
+            AAPL:
+            - t: '2022-02-01T09:00:00.000448Z'
+              ax: K
+              ap: 175
+              as: 1
+              bx: Q
+              bp: 174.96
+              bs: 4
+              c:
+              - R
+              z: C
+          next_page_token: QUFQTHwyMDIyLTAyLTAxVDA5OjAwOjAwLjAwMDQ0ODAwMFp8MjIzMEUxOUM=
+        multiTradesResponse-with-multiple-symbols-at-once-example-1:
+          quotes:
+            AAPL:
+            - t: '2022-02-01T09:00:00.000448Z'
+              ax: K
+              ap: 175
+              as: 1
+              bx: Q
+              bp: 174.96
+              bs: 4
+              c:
+              - R
+              z: C
+            GOOGL:
+            - t: '2022-02-01T09:00:00.000448Z'
+              ax: K
+              ap: 175
+              as: 1
+              bx: Q
+              bp: 175
+              bs: 4
+              c:
+              - R
+              z: C
+          next_page_token: QUFQTHwyMDIyLTAyLTAxVDA5OjAwOjAwLjAwMDQ0ODAwMFp8MjIzMEUxOUM=
       properties:
-        bars:
+        quotes:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/Bar'
+            type: array
+            items:
+              $ref: '#/components/schemas/Quote'
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: pass this token with your request again to get the next page of results
       required:
-      - bars
+      - quotes
+    LatestTradeResponse:
+      title: LatestTradeResponse
+      type: object
+      description: 'A model representing the result of hitting the Latest Trade api.
+
+
+        Represents a single Trade that should be the latest trade data for a given ticker symbol'
+      x-examples:
+        latestTradesResponse-example-1:
+          symbol: AAPL
+          trade:
+            t: '2022-02-01T17:46:51.111055251Z'
+            x: V
+            p: 173.06
+            s: 100
+            c:
+            - '@'
+            i: 6519
+            z: C
+        crypto-example-1:
+          symbol: BTCUSD
+          trade:
+            t: '2022-03-08T22:27:26.573044Z'
+            x: FTXU
+            p: 38614
+            s: 0.0019
+            tks: S
+            i: 26271424
+      properties:
+        trade:
+          $ref: '#/components/schemas/Trade'
+        symbol:
+          type: string
+          description: Symbol that was queried
+          example: AAPL
+          minLength: 1
+      required:
+      - symbol
+    Trade:
+      title: Trade
+      type: object
+      description: A model representing a trade
+      x-examples:
+        trade-example-1:
+          t: '2021-02-06T13:04:56.334320128Z'
+          x: C
+          p: 387.62
+          s: 100
+          c:
+          - ' '
+          - T
+          i: 52983525029461
+          z: B
+        example-crypto:
+          t: '2022-02-27T11:04:55.82622Z'
+          x: FTXU
+          p: 39330
+          s: 0.0003
+          tks: B
+          i: 25783365
+      properties:
+        t:
+          type: string
+          description: Timestamp in RFC-3339 format with nanosecond precision
+          format: date-time
+        x:
+          type: string
+          description: Exchange where the trade happened.
+        p:
+          type: number
+          description: Trade price.
+        s:
+          type: number
+          description: Trade Size.
+        c:
+          type: array
+          description: Trade conditions (Stock trade only)
+          items:
+            type: string
+        i:
+          type: integer
+          description: Trade ID
+          format: int64
+        z:
+          type: string
+          description: Tape (Stock trade only)
+        tks:
+          type: string
+          description: Taker's side (crypto trade only)
+      required:
+      - x
+      - i
+    LatestMultiTradesResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-crypto-1:
+          trades:
+            ETHUSD:
+              t: '2022-03-08T22:13:55.777631Z'
+              x: FTXU
+              p: 2562.8
+              s: 0.881
+              tks: S
+              i: 26271234
+            BTCUSD:
+              t: '2022-03-08T22:14:47.379901Z'
+              x: FTXU
+              p: 38510
+              s: 0.05
+              tks: B
+              i: 26271277
+        example-1:
+          trades:
+            TSLA:
+              t: '2022-03-11T17:24:55.143671726Z'
+              x: V
+              p: 801.83
+              s: 100
+              c:
+              - '@'
+              i: 9924
+              z: C
+            AAPL:
+              t: '2022-03-11T17:24:56.321817175Z'
+              x: V
+              p: 155.105
+              s: 300
+              c:
+              - '@'
+              i: 7741
+              z: C
+      properties:
+        trades:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Trade'
+      required:
+      - trades
     MultiBarsResponse:
       description: 'A model representing the result of hitting the Multi Bars api; represents multiple Bars for multiple symbols.
 
@@ -1907,62 +1460,522 @@ components:
             items:
               $ref: '#/components/schemas/Bar'
         next_page_token:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       required:
       - bars
-    LatestMultiQuotesResponse:
+    MultiTradesResponse:
+      title: MultiTradesResponse
+      type: object
+      description: 'A model representing the result of hitting the Multi Trades api; represents multiple trades for multiple symbols.
+
+
+        Returned results are sorted by symbol first then by Trade timestamp. This means that you are likely to see only one symbol in your first response if there are enough Trades for that symbol to hit the limit you requested on that request.
+
+
+        In these situations if you keep requesting again with the next_page_token you will eventually reach the next symbols if any Trades were found for them.
+
+        '
+      x-examples:
+        multiTradesResponse-example-1:
+          trades:
+            SPY:
+            - t: '2021-02-06T13:04:56.334320128Z'
+              x: C
+              p: 387.62
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525029461
+              z: B
+            - t: '2021-02-06T13:09:42.325484032Z'
+              x: C
+              p: 387.69
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525033813
+              z: B
+          next_page_token: MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==
+        multiTradesResponse-with-multiple-symbols-at-once-example-1:
+          trades:
+            AAPL:
+            - t: '2021-02-06T13:04:56.334320128Z'
+              x: C
+              p: 387.62
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525029461
+              z: B
+            - t: '2021-02-06T13:09:42.325484032Z'
+              x: C
+              p: 387.69
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525033813
+              z: B
+            SPY:
+            - t: '2021-02-06T05:09:42.325484032Z'
+              x: C
+              p: 400.55
+              s: 100
+              c:
+              - ' '
+              - T
+              i: 52983525033954
+              z: B
+          next_page_token: MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==
+      properties:
+        trades:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Trade'
+        next_page_token:
+          type:
+          - string
+          - 'null'
+      required:
+      - trades
+    BarsResponse:
       description: ''
       type: object
       x-examples:
-        example-crypto:
-          quotes:
-            ETHUSD:
-              t: '2022-03-08T22:40:52.536436224Z'
-              x: FTXU
-              bp: 2562.99
-              bs: 23.798
-              ap: 2579.11
-              as: 22.155
-            BTCUSD:
-              t: '2022-03-08T22:40:52.662990848Z'
-              x: FTXU
-              bp: 38465.26
-              bs: 2.641
-              ap: 38698.75
-              as: 1.3746
+        barsResponse-stock-example-1:
+          bars:
+          - t: '2021-02-01T16:01:00Z'
+            o: 133.32
+            h: 133.74
+            l: 133.31
+            c: 133.5
+            v: 9876
+          - t: '2021-02-01T16:02:00Z'
+            o: 133.5
+            h: 133.58
+            l: 133.44
+            c: 133.58
+            v: 3567
+          symbol: AAPL
+          next_page_token: MjAyMS0wMi0wMVQxNDowMjowMFo7MQ==
+        barsResponse-crypto-example-1:
+          bars:
+          - t: '2022-03-10T06:00:00Z'
+            x: CBSE
+            o: 39230.55
+            h: 40302.06
+            l: 38560.85
+            c: 39259.91
+            v: 11328.17046589
+            n: 353132
+            vw: 39208.3129673941
+          - t: '2022-03-10T06:00:00Z'
+            x: ERSX
+            o: 39246.4
+            h: 40151
+            l: 38791
+            c: 39270
+            v: 153.254034
+            n: 230
+            vw: 39255.8594375793
+          - t: '2022-03-10T06:00:00Z'
+            x: FTXU
+            o: 39170
+            h: 40290
+            l: 38560
+            c: 39200
+            v: 1511.2828
+            n: 5248
+            vw: 39214.2388224758
+          symbol: BTCUSD
+          next_page_token: null
+      title: BarsResponse
+      properties:
+        bars:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          description: The array of Bar data
+          items:
+            $ref: '#/components/schemas/Bar'
+        symbol:
+          type: string
+          minLength: 1
+          example: AAPL
+          description: the stock ticker or crypto symbol this set of bar data is for
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      required:
+      - bars
+      - symbol
+      - next_page_token
+    Quote:
+      title: Quote
+      type: object
+      description: 'The Quotes API provides NBBO quotes for a given ticker symbol at a specified date.
+
+        '
+      x-examples:
         example-1:
+          t: '2022-03-11T13:13:49.975594385Z'
+          ax: V
+          ap: 18696.3338
+          as: 1
+          bx: V
+          bp: 0
+          bs: 0
+          c:
+          - R
+          z: C
+        example-crypto:
+          t: '2022-03-21T05:00:00.011543552Z'
+          x: FTXU
+          bp: 40761.35
+          bs: 0.465
+          ap: 41007.66
+          as: 2.8675
+      properties:
+        t:
+          type: string
+          description: Timestamp in RFC-3339 format with nanosecond precision
+          format: date-time
+        ax:
+          type: string
+          description: ask exchange (Stock quote only)
+        ap:
+          type: number
+          description: 'ask price
+
+            '
+        as:
+          type: number
+          description: 'ask size
+
+            '
+        bx:
+          type: string
+          description: bid exchange (Stock quote only)
+        bp:
+          type: number
+          description: 'bid price
+
+            '
+        bs:
+          description: bid size
+          type: number
+        c:
+          type: array
+          description: quote conditions (Stock quotes only)
+          items:
+            type: string
+        x:
+          type: string
+          description: Exchange (Crypto quote Only)
+        z:
+          type: string
+          description: Tape (Stock quote only)
+      required:
+      - t
+    QuotesResponse:
+      description: 'The Quotes API provides NBBO quotes for a given ticker symbol at a specified date.
+
+        '
+      type: object
+      x-examples:
+        quotesResponse-example-1:
           quotes:
-            AAPL:
-              t: '2022-03-11T18:40:13.514830169Z'
-              ax: V
-              ap: 156.47
-              as: 3
-              bx: V
-              bp: 156.45
-              bs: 1
-              c:
-              - R
-              z: C
-            TSLA:
-              t: '2022-03-11T18:40:12.416216587Z'
-              ax: V
-              ap: 850
-              as: 1
-              bx: V
-              bp: 798
-              bs: 2
-              c:
-              - R
-              z: C
+          - t: '2022-02-01T09:00:00.000448Z'
+            ax: K
+            ap: 175
+            as: 1
+            bx: Q
+            bp: 174.96
+            bs: 4
+            c:
+            - R
+            z: C
+          - t: '2022-02-01T09:00:00.000448Z'
+            ax: K
+            ap: 175
+            as: 12
+            bx: Q
+            bp: 174.96
+            bs: 4
+            c:
+            - R
+            z: C
+          symbol: AAPL
+          next_page_token: QUFQTHwyMDIyLTAyLTAxVDA5OjAwOjAwLjAwMDQ0ODAwMFp8MzFDODgxNkY=
+        no-data-found-example:
+          quotes: null
+          symbol: AAPL
+          next_page_token: null
+      title: QuotesResponse
       properties:
         quotes:
-          type: object
-          additionalProperties:
+          type:
+          - array
+          - 'null'
+          uniqueItems: true
+          minItems: 1
+          items:
             $ref: '#/components/schemas/Quote'
+        symbol:
+          type: string
+          minLength: 1
+          example: AAPL
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          minLength: 1
       required:
       - quotes
+      - symbol
+    LatestMultiBarsResponse:
+      title: LatestMultiBarsResponse
+      type: object
+      x-examples:
+        example-1:
+          bars:
+            LINKUSD:
+              t: '2022-03-08T17:33:00Z'
+              x: FTXU
+              o: 13.3565
+              h: 13.3565
+              l: 13.3565
+              c: 13.3565
+              v: 41.4
+              n: 1
+              vw: 13.3565
+            BTCUSD:
+              t: '2022-03-08T17:40:00Z'
+              x: FTXU
+              o: 39055
+              h: 39055
+              l: 39055
+              c: 39055
+              v: 0.1
+              n: 1
+              vw: 39055
+      description: 'A model representing the result of hitting the Latest Multi Bars api; represents the latest Bars for multiple symbols.
+
+        '
+      properties:
+        bars:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Bar'
+      required:
+      - bars
+    Snapshot:
+      title: Snapshot
+      type: object
+      description: 'The Snapshot API for one ticker provides the latest trade, latest quote, minute bar daily bar and previous daily bar data for a given ticker symbol.
+
+        '
+      x-examples:
+        snapshot-example-1:
+          symbol: AAPL
+          latestTrade:
+            t: '2021-05-11T20:00:00.435997104Z'
+            x: Q
+            p: 125.91
+            s: 5589631
+            c:
+            - '@'
+            - M
+            i: 179430
+            z: C
+          latestQuote:
+            t: '2021-05-11T22:05:02.307304704Z'
+            ax: P
+            ap: 125.68
+            as: 12
+            bx: P
+            bp: 125.6
+            bs: 4
+            c:
+            - R
+          minuteBar:
+            t: '2021-05-11T22:02:00Z'
+            o: 125.66
+            h: 125.66
+            l: 125.66
+            c: 125.66
+            v: 396
+          dailyBar:
+            t: '2021-05-11T04:00:00Z'
+            o: 123.5
+            h: 126.27
+            l: 122.77
+            c: 125.91
+            v: 125863164
+          prevDailyBar:
+            t: '2021-05-10T04:00:00Z'
+            o: 129.41
+            h: 129.54
+            l: 126.81
+            c: 126.85
+            v: 79569305
+      properties:
+        latestTrade:
+          $ref: '#/components/schemas/Trade'
+        latestQuote:
+          $ref: '#/components/schemas/Quote'
+        minuteBar:
+          $ref: '#/components/schemas/Bar'
+        dailyBar:
+          $ref: '#/components/schemas/Bar'
+        prevDailyBar:
+          $ref: '#/components/schemas/Bar'
+    TradesResponse:
+      title: TradesResponse
+      type: object
+      description: 'A model representing the result of hitting the Trades api.
+
+
+        Represents multiple Trades for a single symbol with support for paging.'
+      x-examples:
+        trades-example-1:
+          trades:
+          - t: '2021-02-06T13:04:56.334320128Z'
+            x: C
+            p: 387.62
+            s: 100
+            c:
+            - ' '
+            - T
+            i: 52983525029461
+            z: B
+          - t: '2021-02-06T13:09:42.325484032Z'
+            x: C
+            p: 387.69
+            s: 100
+            c:
+            - ' '
+            - T
+            i: 52983525033813
+            z: B
+          symbol: SPY
+          next_page_token: MjAyMS0wMi0wNlQxMzowOTo0Mlo7MQ==
+      properties:
+        trades:
+          type: array
+          description: Array of trades
+          items:
+            $ref: '#/components/schemas/Trade'
+        symbol:
+          type: string
+          description: Symbol that was queried
+          example: AAPL
+          minLength: 1
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token that can be used to query the next page
+      required:
+      - trades
+      - symbol
+  parameters:
+    adjustment:
+      name: adjustment
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - raw
+        - split
+        - dividend
+        - all
+      description: specifies the corporate action adjustment(s) for bars data
+    feed:
+      name: feed
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - iex
+        - sip
+        - otc
+        example: sip
+      description: Which feed to pull market data from. This is either `iex`, `otc`, or `sip`. `sip` and `otc` are only available to those with a subscription
+    timeframe:
+      name: timeframe
+      in: query
+      required: true
+      schema:
+        type: string
+      description: 'Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day. Limits: 1Min-59Min, 1Hour-23Hour.'
+    stock-symbols:
+      name: symbols
+      in: query
+      required: true
+      schema:
+        type: string
+        example: AAPL,TSLA
+      description: The comma-separated list of stock ticker symbols to query for.
+    start:
+      name: start
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-01-01T00:00:00Z'
+      description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
+    page_token:
+      name: page_token
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.
+    end:
+      name: end
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-01-01T00:00:00Z'
+      description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
+    stock-symbol:
+      name: symbol
+      in: path
+      required: true
+      schema:
+        type: string
+        example: AAPL
+      description: The stock ticker symbol to query for.
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+      description: Number of data points to return. Must be in range 1-10000, defaults to 1000.
   securitySchemes:
-    BasicAuth:
-      type: http
-      scheme: basic
+    API_Key:
+      name: APCA-API-KEY-ID
+      type: apiKey
+      in: header
+    API_Secret:
+      name: APCA-API-SECRET-KEY
+      type: apiKey
+      in: header

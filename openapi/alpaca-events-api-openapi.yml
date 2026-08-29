@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Broker Account Activities Events API
+  title: Broker Events API
   description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
   version: 1.0.0
   contact:
@@ -290,13 +290,6 @@ paths:
         If you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.'
 components:
   schemas:
-    JournalEntryType:
-      type: string
-      title: ''
-      description: "This enum represents the various kinds of Journal alpaca supports.\n\nCurrent values are:\n\n- **JNLC**\n\n  Journal Cash between accounts\n\n- **JNLS**\n\n  Journal Securities between accounts"
-      enum:
-      - JNLC
-      - JNLS
     TransferStatus:
       type: string
       example: QUEUED
@@ -347,6 +340,51 @@ components:
         The bank issued an ACH return for the transfer.
 
         '
+    JournalStatusEvent:
+      description: 'Represents a change in a Journal''s status, sent over the events streaming api.
+
+        '
+      type: object
+      x-examples:
+        example-1:
+          at: '2021-05-07T10:28:23.163857Z'
+          entry_type: JNLC
+          event_id: 1406
+          journal_id: 2f144d2a-91e6-46ff-8e37-959a701cc58d
+          status_from: ''
+          status_to: queued
+      title: JournalStatusEvent
+      properties:
+        at:
+          type: string
+          minLength: 1
+          description: Timestamp of event
+          format: date-time
+        entry_type:
+          $ref: '#/components/schemas/JournalEntryType'
+        event_id:
+          type: integer
+          description: Monotonically increasing 64bit integer
+        journal_id:
+          type: string
+          description: The UUID of the related Journal
+          format: uuid
+        status_from:
+          $ref: '#/components/schemas/JournalStatus'
+        status_to:
+          $ref: '#/components/schemas/JournalStatus'
+      required:
+      - at
+      - entry_type
+      - event_id
+      - journal_id
+      - status_from
+      - status_to
+    AssetClass:
+      type: string
+      enum:
+      - us_equity
+      - crypto
     AccountStatusEvent:
       description: 'Represents a change in an Account''s status, sent over the events streaming api.
 
@@ -395,15 +433,6 @@ components:
       - reason
       - at
       - event_id
-    OrderType:
-      type: string
-      enum:
-      - market
-      - limit
-      - stop
-      - stop_limit
-      - trailing_stop
-      example: stop
     TimeInForce:
       type: string
       enum:
@@ -414,6 +443,92 @@ components:
       - ioc
       - fok
       example: gtc
+    TradeUpdateEvent:
+      description: Represents an update to an order/trade, sent over the events streaming api.
+      type: object
+      title: TradeUpdateEvent
+      x-examples:
+        example-1:
+          account_id: 529248ad-c4cc-4a50-bea4-6bfd2953f83a
+          at: '2022-04-19T14:12:30.656741Z'
+          event: new
+          event_id: 37782
+          execution_id: 7e544af3-3104-4e1a-8cbc-dab2624949ff
+          order:
+            asset_class: us_equity
+            asset_id: a4778bc8-fad1-47b7-87fe-d5cde10d43f4
+            cancel_requested_at: null
+            canceled_at: null
+            client_order_id: 6d873193-dac6-4f72-8e13-c57853a9339d
+            commission: '1'
+            created_at: '2022-04-19T10:12:30.57117938-04:00'
+            expired_at: null
+            extended_hours: false
+            failed_at: null
+            filled_at: null
+            filled_avg_price: null
+            filled_qty: '0'
+            hwm: null
+            id: edada91a-8b55-4916-a153-8c7a9817e708
+            legs: null
+            limit_price: '700'
+            notional: null
+            order_class: ''
+            order_type: limit
+            qty: '4'
+            replaced_at: null
+            replaced_by: null
+            replaces: null
+            side: buy
+            status: new
+            stop_price: null
+            submitted_at: '2022-04-19T10:12:30.403135025-04:00'
+            symbol: TSLA
+            time_in_force: day
+            trail_percent: null
+            trail_price: null
+            type: limit
+            updated_at: '2022-04-19T10:12:30.609783218-04:00'
+          timestamp: '2022-04-19T14:12:30.602193534Z'
+      properties:
+        account_id:
+          type: string
+          minLength: 1
+          description: Account UUID
+          format: uuid
+        at:
+          type: string
+          minLength: 1
+          description: Timestamp of event
+          format: date-time
+        event:
+          $ref: '#/components/schemas/TradeUpdateEventType'
+        event_id:
+          type: integer
+          format: int64
+          description: Monotonically increasing 64bit integer
+        execution_id:
+          type: string
+          description: Corresponding execution of an order. If an order gets filled over two executions (a partial_fill for example), you will receive two events with different IDs.
+          format: uuid
+        order:
+          $ref: '#/components/schemas/Order'
+        timestamp:
+          type: string
+          description: 'Has various different meanings depending on the value of `event`, please see the [Trading Events](https://alpaca.markets/docs/api-references/broker-api/events/#trade-events)
+
+            Enum in the documentation or the TradeUpdateEventType model for more details on when it means different things.
+
+            '
+          format: date-time
+      required:
+      - account_id
+      - at
+      - event
+      - event_id
+      - execution_id
+      - order
+      - timestamp
     TradeUpdateEventType:
       type: string
       description: "**Common events**\n\nThese are the events that are the expected results of actions you may have taken by sending API requests.\n\nThe meaning of the `timestamp` field changes for each type; the meanings have been specified here for which types the\ntimestamp field will be present.\n\n- `new`: Sent when an order has been routed to exchanges for execution.\n- `fill`: Sent when your order has been completely filled.\n  - `timestamp`: The time at which the order was filled.\n- `partial_fill`: Sent when a number of shares less than the total remaining quantity on your order has been filled.\n  - `timestamp`: The time at which the shares were filled.\n- `canceled`: Sent when your requested cancellation of an order is processed.\n  - `timestamp`: The time at which the order was canceled.\n- `expired`: Sent when an order has reached the end of its lifespan, as determined by the order’s time in force value.\n  - `timestamp`: The time at which the order expired.\n- `done_for_day`: Sent when the order is done executing for the day, and will not receive further updates until the next trading day.\n- `replaced`: Sent when your requested replacement of an order is processed.\n  - `timestamp`: The time at which the order was replaced.\n\n**Rarer events**\n\nThese are events that may rarely be sent due to unexpected circumstances on the exchanges. It is unlikely you will need to design your code around them, but you may still wish to account for the possibility that they will occur.\n\n- `rejected`: Sent when your order has been rejected.\n  - `timestamp`: The time at which the rejection occurred.\n- `pending_new`: Sent when the order has been received by Alpaca and routed to the exchanges, but has not yet been accepted for execution.\n- `stopped`: Sent when your order has been stopped, and a trade is guaranteed for the order, usually at a stated price or better, but has not yet occurred.\n- `pending_cancel`: Sent when the order is awaiting cancellation. Most cancellations will occur without the order entering this state.\n- `pending_replace`: Sent when the order is awaiting replacement.\n- `calculated`: Sent when the order has been completed for the day - it is either `filled` or `done_for_day` - but remaining settlement calculations are still pending.\n- `suspended`: Sent when the order has been suspended and is not eligible for trading.\n- `order_replace_rejected`: Sent when the order replace has been rejected.\n- `order_cancel_rejected`: Sent when the order cancel has been rejected.\n"
@@ -434,193 +549,6 @@ components:
       - suspended
       - order_replace_rejected
       - order_cancel_rejected
-    JournalStatus:
-      type: string
-      enum:
-      - pending
-      - canceled
-      - executed
-      - queued
-      - rejected
-      - deleted
-      description: "Represents the status that a Journal instance can be in.\n\nCurrent Values:\n  - pending\n  - canceled\n  - executed\n  - queued\n  - rejected\n  - deleted"
-    JournalStatusEvent:
-      description: 'Represents a change in a Journal''s status, sent over the events streaming api.
-
-        '
-      type: object
-      x-examples:
-        example-1:
-          at: '2021-05-07T10:28:23.163857Z'
-          entry_type: JNLC
-          event_id: 1406
-          journal_id: 2f144d2a-91e6-46ff-8e37-959a701cc58d
-          status_from: ''
-          status_to: queued
-      title: JournalStatusEvent
-      properties:
-        at:
-          type: string
-          minLength: 1
-          description: Timestamp of event
-          format: date-time
-        entry_type:
-          $ref: '#/components/schemas/JournalEntryType'
-        event_id:
-          type: integer
-          description: Monotonically increasing 64bit integer
-        journal_id:
-          type: string
-          description: The UUID of the related Journal
-          format: uuid
-        status_from:
-          $ref: '#/components/schemas/JournalStatus'
-        status_to:
-          $ref: '#/components/schemas/JournalStatus'
-      required:
-      - at
-      - entry_type
-      - event_id
-      - journal_id
-      - status_from
-      - status_to
-    Order:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        client_order_id:
-          type: string
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        created_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        submitted_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        filled_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        expired_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        canceled_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        failed_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        replaced_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        replaced_by:
-          nullable: true
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        replaces:
-          nullable: true
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        asset_id:
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        symbol:
-          type: string
-          example: AALP
-        asset_class:
-          $ref: '#/components/schemas/AssetClass'
-        notional:
-          nullable: true
-          type: string
-          format: decimal
-          example: '4.2'
-        qty:
-          nullable: true
-          type: string
-          format: decimal
-          example: '4.2'
-        filled_qty:
-          type: string
-          format: decimal
-          example: '4.2'
-        filled_avg_price:
-          nullable: true
-          type: string
-          format: decimal
-          example: '4.2'
-        order_class:
-          $ref: '#/components/schemas/OrderClass'
-        order_type:
-          $ref: '#/components/schemas/OrderType'
-        type:
-          $ref: '#/components/schemas/OrderType'
-        side:
-          $ref: '#/components/schemas/OrderSide'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
-        limit_price:
-          nullable: true
-          type: string
-          format: decimal
-          example: '3.14'
-        stop_price:
-          nullable: true
-          type: string
-          format: decimal
-          example: '3.14'
-        status:
-          $ref: '#/components/schemas/OrderStatus'
-        extended_hours:
-          type: boolean
-          example: true
-        legs:
-          nullable: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Order'
-        trail_price:
-          nullable: true
-          type: string
-          format: decimal
-          example: '3.14'
-        trail_percent:
-          nullable: true
-          type: string
-          format: decimal
-          example: '5.0'
-        hwm:
-          nullable: true
-          type: string
-          format: decimal
-          example: '3.14'
-        commission:
-          type: string
-          format: decimal
-          example: '3.14'
-      required:
-      - id
-      - symbol
     AccountStatus:
       type: string
       example: ACTIVE
@@ -731,6 +659,213 @@ components:
         Used to display when only paper trading is allowed for this account
 
         '
+    JournalEntryType:
+      type: string
+      title: ''
+      description: "This enum represents the various kinds of Journal alpaca supports.\n\nCurrent values are:\n\n- **JNLC**\n\n  Journal Cash between accounts\n\n- **JNLS**\n\n  Journal Securities between accounts"
+      enum:
+      - JNLC
+      - JNLS
+    OrderStatus:
+      type: string
+      enum:
+      - new
+      - partially_filled
+      - filled
+      - done_for_day
+      - canceled
+      - expired
+      - replaced
+      - pending_cancel
+      - pending_replace
+      - accepted
+      - pending_new
+      - accepted_for_bidding
+      - stopped
+      - rejected
+      - suspended
+      - calculated
+      example: filled
+    OrderClass:
+      type: string
+      enum:
+      - simple
+      - bracket
+      - oco
+      - oto
+      example: bracket
+    OrderType:
+      type: string
+      enum:
+      - market
+      - limit
+      - stop
+      - stop_limit
+      - trailing_stop
+      example: stop
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        client_order_id:
+          type: string
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        created_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        submitted_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        filled_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        expired_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        canceled_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        failed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        replaced_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        replaced_by:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        replaces:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        asset_id:
+          type: string
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        symbol:
+          type: string
+          example: AALP
+        asset_class:
+          $ref: '#/components/schemas/AssetClass'
+        notional:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '4.2'
+        qty:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '4.2'
+        filled_qty:
+          type: string
+          format: decimal
+          example: '4.2'
+        filled_avg_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '4.2'
+        order_class:
+          $ref: '#/components/schemas/OrderClass'
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        type:
+          $ref: '#/components/schemas/OrderType'
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        limit_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '3.14'
+        stop_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '3.14'
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        extended_hours:
+          type: boolean
+          example: true
+        legs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Order'
+        trail_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '3.14'
+        trail_percent:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '5.0'
+        hwm:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '3.14'
+        commission:
+          type: string
+          format: decimal
+          example: '3.14'
+      required:
+      - id
+      - symbol
+    JournalStatus:
+      type: string
+      enum:
+      - pending
+      - canceled
+      - executed
+      - queued
+      - rejected
+      - deleted
+      description: "Represents the status that a Journal instance can be in.\n\nCurrent Values:\n  - pending\n  - canceled\n  - executed\n  - queued\n  - rejected\n  - deleted"
     TransferStatusEvent:
       description: Represents a change in a Transfer's status, sent over the events streaming api.
       type: object
@@ -780,125 +915,18 @@ components:
       - status_from
       - status_to
       - transfer_id
-    TradeUpdateEvent:
-      description: Represents an update to an order/trade, sent over the events streaming api.
+    KYCResult:
       type: object
-      title: TradeUpdateEvent
-      x-examples:
-        example-1:
-          account_id: 529248ad-c4cc-4a50-bea4-6bfd2953f83a
-          at: '2022-04-19T14:12:30.656741Z'
-          event: new
-          event_id: 37782
-          execution_id: 7e544af3-3104-4e1a-8cbc-dab2624949ff
-          order:
-            asset_class: us_equity
-            asset_id: a4778bc8-fad1-47b7-87fe-d5cde10d43f4
-            cancel_requested_at: null
-            canceled_at: null
-            client_order_id: 6d873193-dac6-4f72-8e13-c57853a9339d
-            commission: '1'
-            created_at: '2022-04-19T10:12:30.57117938-04:00'
-            expired_at: null
-            extended_hours: false
-            failed_at: null
-            filled_at: null
-            filled_avg_price: null
-            filled_qty: '0'
-            hwm: null
-            id: edada91a-8b55-4916-a153-8c7a9817e708
-            legs: null
-            limit_price: '700'
-            notional: null
-            order_class: ''
-            order_type: limit
-            qty: '4'
-            replaced_at: null
-            replaced_by: null
-            replaces: null
-            side: buy
-            status: new
-            stop_price: null
-            submitted_at: '2022-04-19T10:12:30.403135025-04:00'
-            symbol: TSLA
-            time_in_force: day
-            trail_percent: null
-            trail_price: null
-            type: limit
-            updated_at: '2022-04-19T10:12:30.609783218-04:00'
-          timestamp: '2022-04-19T14:12:30.602193534Z'
+      description: Hold information about the result of KYC. Please see the documentation [here](https://alpaca.markets/docs/api-references/broker-api/events/#kyc-results) for more indepth details
       properties:
-        account_id:
+        reject:
+          type: object
+        accept:
+          type: object
+        indeterminate:
+          type: object
+        addidional_information:
           type: string
-          minLength: 1
-          description: Account UUID
-          format: uuid
-        at:
-          type: string
-          minLength: 1
-          description: Timestamp of event
-          format: date-time
-        event:
-          $ref: '#/components/schemas/TradeUpdateEventType'
-        event_id:
-          type: integer
-          format: int64
-          description: Monotonically increasing 64bit integer
-        execution_id:
-          type: string
-          description: Corresponding execution of an order. If an order gets filled over two executions (a partial_fill for example), you will receive two events with different IDs.
-          format: uuid
-        order:
-          $ref: '#/components/schemas/Order'
-        timestamp:
-          type: string
-          description: 'Has various different meanings depending on the value of `event`, please see the [Trading Events](https://alpaca.markets/docs/api-references/broker-api/events/#trade-events)
-
-            Enum in the documentation or the TradeUpdateEventType model for more details on when it means different things.
-
-            '
-          format: date-time
-      required:
-      - account_id
-      - at
-      - event
-      - event_id
-      - execution_id
-      - order
-      - timestamp
-    AssetClass:
-      type: string
-      enum:
-      - us_equity
-      - crypto
-    OrderStatus:
-      type: string
-      enum:
-      - new
-      - partially_filled
-      - filled
-      - done_for_day
-      - canceled
-      - expired
-      - replaced
-      - pending_cancel
-      - pending_replace
-      - accepted
-      - pending_new
-      - accepted_for_bidding
-      - stopped
-      - rejected
-      - suspended
-      - calculated
-      example: filled
-    OrderClass:
-      type: string
-      enum:
-      - simple
-      - bracket
-      - oco
-      - oto
-      example: bracket
     OrderSide:
       type: string
       enum:
@@ -913,18 +941,6 @@ components:
       - cross_short
       example: buy
       description: Represents what side of the transaction an order was on.
-    KYCResult:
-      type: object
-      description: Hold information about the result of KYC. Please see the documentation [here](https://alpaca.markets/docs/api-references/broker-api/events/#kyc-results) for more indepth details
-      properties:
-        reject:
-          type: object
-        accept:
-          type: object
-        indeterminate:
-          type: object
-        addidional_information:
-          type: string
   securitySchemes:
     BasicAuth:
       type: http

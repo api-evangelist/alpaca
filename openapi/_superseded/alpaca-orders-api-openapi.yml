@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Broker Account Activities Orders API
   description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
@@ -199,63 +199,23 @@ paths:
       description: Attempts to cancel an Open Order. If the order is no longer cancelable, the request will be rejected with status 422; otherwise accepted with return status 204.
 components:
   schemas:
-    TimeInForce:
-      type: string
-      title: TimeInForce
-      description: "Note: For Crypto Trading, Alpaca supports the following Time-In-Force designations: day, gtc, ioc and fok. OPG and CLS are not supported.\n\nAlpaca supports the following Time-In-Force designations:\n\n- day\n  A day order is eligible for execution only on the day it is live. By default, the order is only valid during Regular Trading Hours (9:30am - 4:00pm ET). If unfilled after the closing auction, it is automatically canceled. If submitted after the close, it is queued and submitted the following trading day. However, if marked as eligible for extended hours, the order can also execute during supported extended hours.\n\n- gtc\n  The order is good until canceled. Non-marketable GTC limit orders are subject to price adjustments to offset corporate actions affecting the issue. We do not currently support Do Not Reduce(DNR) orders to opt out of such price adjustments.\n\n- opg\n  Use this TIF with a market/limit order type to submit “market on open” (MOO) and “limit on open” (LOO) orders. This order is eligible to execute only in the market opening auction. Any unfilled orders after the open will be cancelled. OPG orders submitted after 9:28am but before 7:00pm ET will be rejected. OPG orders submitted after 7:00pm will be queued and routed to the following day’s opening auction. On open/on close orders are routed to the primary exchange. Such orders do not necessarily execute exactly at 9:30am / 4:00pm ET but execute per the exchange’s auction rules.\n\n- cls\n  Use this TIF with a market/limit order type to submit “market on close” (MOC) and “limit on close” (LOC) orders. This order is eligible to execute only in the market closing auction. Any unfilled orders after the close will be cancelled. CLS orders submitted after 3:50pm but before 7:00pm ET will be rejected. CLS orders submitted after 7:00pm will be queued and routed to the following day’s closing auction. Only available with API v2.\n\n- ioc\n  An Immediate Or Cancel (IOC) order requires all or part of the order to be executed immediately. Any unfilled portion of the order is canceled. Only available with API v2. Most market makers who receive IOC orders will attempt to fill the order on a principal basis only, and cancel any unfilled balance. On occasion, this can result in the entire order being cancelled if the market maker does not have any existing inventory of the security in question.\n\n- fok\n  A Fill or Kill (FOK) order is only executed if the entire order quantity can be filled, otherwise the order is canceled. Only available with API v2."
-      enum:
-      - day
-      - gtc
-      - opg
-      - cls
-      - ioc
-      - fok
-      example: day
-    OrderType:
-      type: string
-      enum:
-      - market
-      - limit
-      - stop
-      - stop_limit
-      - trailing_stop
-      example: stop
-      description: 'Represents the types of orders Alpaca currently supports
-
-
-        - market
-
-        - limit
-
-        - stop
-
-        - stop_limit
-
-        - trailing_stop'
-      title: OrderType
-    PatchOrderRequest:
-      title: PatchOrderRequest
+    CanceledOrderResponse:
+      title: CanceledOrderResponse
       type: object
-      description: Represents a request to patch an order.
+      x-examples:
+        example-1:
+          id: d56ba3ea-6d04-48ce-8175-817e242ee608
+          status: 200
+      description: Represents the result of a request to cancel and order
       properties:
-        qty:
+        id:
           type: string
-          description: number of shares to trade
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
-        limit_price:
-          type: string
-          description: required if original order type is limit or stop_limit
-        stop_price:
-          type: string
-          description: required if original order type is limit or stop_limit
-        trail:
-          type: string
-          description: the new value of the trail_price or trail_percent value (works only for type=“trailing_stop”)
-        client_order_id:
-          type: string
-          description: A unique identifier for the order. Automatically generated if not sent.
-          maxLength: 48
+          format: uuid
+          description: orderId
+        status:
+          type: integer
+          description: http response code
+          example: 200
     Order:
       description: 'The Orders API allows a user to monitor, place and cancel their orders with Alpaca.
 
@@ -312,43 +272,52 @@ components:
           type: string
           format: date-time
         updated_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         submitted_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         filled_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         expired_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         canceled_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         failed_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         replaced_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         replaced_by:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
           description: The order ID that this order was replaced by
-          nullable: true
         replaces:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
           description: The order ID that this order replaces
-          nullable: true
         asset_id:
           type: string
           format: uuid
@@ -360,23 +329,26 @@ components:
         asset_class:
           $ref: '#/components/schemas/AssetClass'
         notional:
-          type: string
+          type:
+          - string
+          - 'null'
           minLength: 1
           description: Ordered notional amount. If entered, qty will be null. Can take up to 9 decimal points.
-          nullable: true
         qty:
-          type: string
+          type:
+          - string
+          - 'null'
           minLength: 1
           description: Ordered quantity. If entered, notional will be null. Can take up to 9 decimal points.
-          nullable: true
         filled_qty:
           type: string
           minLength: 1
           description: Filled quantity
         filled_avg_price:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Filled average price
-          nullable: true
         order_class:
           $ref: '#/components/schemas/OrderClass'
         order_type:
@@ -390,22 +362,25 @@ components:
         time_in_force:
           $ref: '#/components/schemas/TimeInForce'
         limit_price:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Limit price
-          nullable: true
         stop_price:
           description: Stop price
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         status:
           $ref: '#/components/schemas/OrderStatus'
         extended_hours:
           type: boolean
           description: If true, eligible for execution outside regular trading hours.
         legs:
-          type: array
+          type:
+          - array
+          - 'null'
           description: When querying non-simple order_class orders in a nested style, an array of Order entities associated with this order. Otherwise, null.
-          nullable: true
           items:
             $ref: '#/components/schemas/Order'
         trail_percent:
@@ -424,16 +399,29 @@ components:
       - type
       - side
       - time_in_force
-    AssetClass:
-      type: string
-      title: AssetClass
-      enum:
-      - us_equity
-      - crypto
-      example: us_equity
-      description: Represents what class of asset this is. Currently only supports `us_equity` or `crypto`
-      x-examples:
-        example-1: us_equity
+    PatchOrderRequest:
+      title: PatchOrderRequest
+      type: object
+      description: Represents a request to patch an order.
+      properties:
+        qty:
+          type: string
+          description: number of shares to trade
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        limit_price:
+          type: string
+          description: required if original order type is limit or stop_limit
+        stop_price:
+          type: string
+          description: required if original order type is limit or stop_limit
+        trail:
+          type: string
+          description: the new value of the trail_price or trail_percent value (works only for type=“trailing_stop”)
+        client_order_id:
+          type: string
+          description: A unique identifier for the order. Automatically generated if not sent.
+          maxLength: 48
     OrderStatus:
       type: string
       title: OrderStatus
@@ -469,6 +457,50 @@ components:
         - buy
 
         - sell'
+    TimeInForce:
+      type: string
+      title: TimeInForce
+      description: "Note: For Crypto Trading, Alpaca supports the following Time-In-Force designations: day, gtc, ioc and fok. OPG and CLS are not supported.\n\nAlpaca supports the following Time-In-Force designations:\n\n- day\n  A day order is eligible for execution only on the day it is live. By default, the order is only valid during Regular Trading Hours (9:30am - 4:00pm ET). If unfilled after the closing auction, it is automatically canceled. If submitted after the close, it is queued and submitted the following trading day. However, if marked as eligible for extended hours, the order can also execute during supported extended hours.\n\n- gtc\n  The order is good until canceled. Non-marketable GTC limit orders are subject to price adjustments to offset corporate actions affecting the issue. We do not currently support Do Not Reduce(DNR) orders to opt out of such price adjustments.\n\n- opg\n  Use this TIF with a market/limit order type to submit “market on open” (MOO) and “limit on open” (LOO) orders. This order is eligible to execute only in the market opening auction. Any unfilled orders after the open will be cancelled. OPG orders submitted after 9:28am but before 7:00pm ET will be rejected. OPG orders submitted after 7:00pm will be queued and routed to the following day’s opening auction. On open/on close orders are routed to the primary exchange. Such orders do not necessarily execute exactly at 9:30am / 4:00pm ET but execute per the exchange’s auction rules.\n\n- cls\n  Use this TIF with a market/limit order type to submit “market on close” (MOC) and “limit on close” (LOC) orders. This order is eligible to execute only in the market closing auction. Any unfilled orders after the close will be cancelled. CLS orders submitted after 3:50pm but before 7:00pm ET will be rejected. CLS orders submitted after 7:00pm will be queued and routed to the following day’s closing auction. Only available with API v2.\n\n- ioc\n  An Immediate Or Cancel (IOC) order requires all or part of the order to be executed immediately. Any unfilled portion of the order is canceled. Only available with API v2. Most market makers who receive IOC orders will attempt to fill the order on a principal basis only, and cancel any unfilled balance. On occasion, this can result in the entire order being cancelled if the market maker does not have any existing inventory of the security in question.\n\n- fok\n  A Fill or Kill (FOK) order is only executed if the entire order quantity can be filled, otherwise the order is canceled. Only available with API v2."
+      enum:
+      - day
+      - gtc
+      - opg
+      - cls
+      - ioc
+      - fok
+      example: day
+    AssetClass:
+      type: string
+      title: AssetClass
+      enum:
+      - us_equity
+      - crypto
+      example: us_equity
+      description: Represents what class of asset this is. Currently only supports `us_equity` or `crypto`
+      x-examples:
+        example-1: us_equity
+    OrderType:
+      type: string
+      enum:
+      - market
+      - limit
+      - stop
+      - stop_limit
+      - trailing_stop
+      example: stop
+      description: 'Represents the types of orders Alpaca currently supports
+
+
+        - market
+
+        - limit
+
+        - stop
+
+        - stop_limit
+
+        - trailing_stop'
+      title: OrderType
     OrderClass:
       type: string
       enum:
@@ -480,23 +512,6 @@ components:
       example: bracket
       description: This will either be the empty string "", "simple", "bracket", "oco", or "oto".
       title: OrderClass
-    CanceledOrderResponse:
-      title: CanceledOrderResponse
-      type: object
-      x-examples:
-        example-1:
-          id: d56ba3ea-6d04-48ce-8175-817e242ee608
-          status: 200
-      description: Represents the result of a request to cancel and order
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: orderId
-        status:
-          type: integer
-          description: http response code
-          example: 200
   securitySchemes:
     BasicAuth:
       type: http

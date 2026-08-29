@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Broker Account Activities Watchlist API
+  title: Broker Watchlist API
   description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
   version: 1.0.0
   contact:
@@ -118,71 +118,28 @@ paths:
       description: Irrevocably delete a watchlist.
 components:
   schemas:
-    Asset:
-      title: Asset
+    CreateWatchlistRequest:
+      title: CreateWatchlistRequest
       type: object
-      description: Assets are sorted by asset class, exchange and symbol. Some assets are not tradable with Alpaca. These assets will be marked with the flag tradable=false
+      description: This model represents the fields you can specify when Creating or Updating/Replacing a Watchlist
       properties:
-        id:
-          type: string
-          example: 904837e3-3b76-47ec-b432-046db621571b
-          format: uuid
-          description: Asset ID
-        class:
-          $ref: '#/components/schemas/AssetClass'
-        exchange:
-          $ref: '#/components/schemas/Exchange'
-        symbol:
-          type: string
-          example: AAPL
-          description: The symbol of the asset
         name:
           type: string
-          example: Apple Inc. Common Stock
-          description: The official name of the asset
-        status:
-          type: string
-          enum:
-          - active
-          - inactive
-          description: active or inactive
-          example: active
-        tradable:
-          type: boolean
-          example: true
-          description: Asset is tradable on Alpaca or not
-        marginable:
-          type: boolean
-          example: true
-          description: Asset is marginable or not
-        shortable:
-          type: boolean
-          example: true
-          description: Asset is shortable or not
-        easy_to_borrow:
-          type: boolean
-          example: true
-          description: Asset is easy-to-borrow or not (filtering for easy_to_borrow = True is the best way to check whether the name is currently available to short at Alpaca).
-        fractionable:
-          type: boolean
-          example: true
-          description: Asset is fractionable or not
-        last_close_pct_change:
-          type: string
-          format: decimal
-          description: 'Percent change for the trading day as of last market closure. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
-        last_price:
-          type: string
-          format: decimal
-          description: 'Most recent available price for this asset on the market. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
-        last_close:
-          type: string
-          description: 'Last price of the asset upon market closure on the most recent trading day. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
-          format: decimal
+          description: The watchlist name
+        symbols:
+          type: array
+          description: The new list of symbol names to watch
+          items:
+            type: string
+            example: '["AAPL", "TSLA"]'
       required:
-      - id
-      - class
-      - symbol
+      - name
+      - symbols
+    AssetClass:
+      type: string
+      enum:
+      - us_equity
+      - crypto
     Watchlist:
       title: Watchlist
       type: object
@@ -259,28 +216,71 @@ components:
       - OTC
       - ERSX
       - FTXU
-    AssetClass:
-      type: string
-      enum:
-      - us_equity
-      - crypto
-    CreateWatchlistRequest:
-      title: CreateWatchlistRequest
+    Asset:
+      title: Asset
       type: object
-      description: This model represents the fields you can specify when Creating or Updating/Replacing a Watchlist
+      description: Assets are sorted by asset class, exchange and symbol. Some assets are not tradable with Alpaca. These assets will be marked with the flag tradable=false
       properties:
+        id:
+          type: string
+          example: 904837e3-3b76-47ec-b432-046db621571b
+          format: uuid
+          description: Asset ID
+        class:
+          $ref: '#/components/schemas/AssetClass'
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        symbol:
+          type: string
+          example: AAPL
+          description: The symbol of the asset
         name:
           type: string
-          description: The watchlist name
-        symbols:
-          type: array
-          description: The new list of symbol names to watch
-          items:
-            type: string
-            example: '["AAPL", "TSLA"]'
+          example: Apple Inc. Common Stock
+          description: The official name of the asset
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          description: active or inactive
+          example: active
+        tradable:
+          type: boolean
+          example: true
+          description: Asset is tradable on Alpaca or not
+        marginable:
+          type: boolean
+          example: true
+          description: Asset is marginable or not
+        shortable:
+          type: boolean
+          example: true
+          description: Asset is shortable or not
+        easy_to_borrow:
+          type: boolean
+          example: true
+          description: Asset is easy-to-borrow or not (filtering for easy_to_borrow = True is the best way to check whether the name is currently available to short at Alpaca).
+        fractionable:
+          type: boolean
+          example: true
+          description: Asset is fractionable or not
+        last_close_pct_change:
+          type: string
+          format: decimal
+          description: 'Percent change for the trading day as of last market closure. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
+        last_price:
+          type: string
+          format: decimal
+          description: 'Most recent available price for this asset on the market. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
+        last_close:
+          type: string
+          description: 'Last price of the asset upon market closure on the most recent trading day. NOTE: This field is currently in this spec however it may not be present in the production environment at time of publishing. It will be coming in a future update at which point this spec should be updated.'
+          format: decimal
       required:
-      - name
-      - symbols
+      - id
+      - class
+      - symbol
   securitySchemes:
     BasicAuth:
       type: http

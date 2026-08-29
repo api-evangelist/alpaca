@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Broker Account Activities Clock API
+  title: Broker Clock API
   description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
   version: 1.0.0
   contact:
@@ -33,55 +33,8 @@ paths:
               examples: {}
       operationId: queryMarketClock
       description: The Clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close.
-  /v2/clock:
-    get:
-      summary: Get Market Clock info
-      parameters: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Clock_2'
-      operationId: getClock
-      description: 'The clock API serves the current market timestamp, whether or not the market is currently open, as well as the times of the next market open and close.
-
-
-        Returns the market clock.'
-      tags:
-      - Clock
 components:
   schemas:
-    Clock_2:
-      title: Clock
-      type: object
-      properties:
-        timestamp:
-          type: string
-          description: 'Current timestamp
-
-            '
-          format: date-time
-        is_open:
-          type: boolean
-          description: 'Whether or not the market is open
-
-            '
-        next_open:
-          type: string
-          description: Next Market open timestamp
-          format: date-time
-        next_close:
-          type: string
-          description: Next market close timestamp
-          format: date-time
-      x-examples:
-        example-1:
-          timestamp: '2019-08-24T14:15:22Z'
-          is_open: true
-          next_open: '2019-08-24T14:15:22Z'
-          next_close: '2019-08-24T14:15:22Z'
     Clock:
       description: Represents the current market time and open/close events.
       type: object

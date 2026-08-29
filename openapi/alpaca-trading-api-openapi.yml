@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Broker Account Activities Trading API
+  title: Broker Trading API
   description: Open brokerage accounts, enable crypto and stock trading, and manage the ongoing user experience with Alpaca Broker API
   version: 1.0.0
   contact:
@@ -383,240 +383,6 @@ paths:
         If you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.'
 components:
   schemas:
-    TimeInForce:
-      type: string
-      enum:
-      - day
-      - gtc
-      - opg
-      - cls
-      - ioc
-      - fok
-      example: gtc
-    UpdateOrderRequest:
-      type: object
-      title: OrderUpdateRequest
-      description: 'Represents the fields that are editable in an order replace/update call.
-
-
-        Note: client_order_id is currently not editable on its own, one of the other fields must be changed at the same time to effectively replace the order'
-      properties:
-        qty:
-          type: string
-          format: decimal
-          example: '4.2'
-          description: You can only patch full shares for now
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
-        limit_price:
-          type: string
-          format: decimal
-          example: '3.14'
-          description: Required if original order's `type` field was limit or stop_limit
-        stop_price:
-          type: string
-          format: decimal
-          example: '3.14'
-          description: Required if original order's `type` field was stop or stop_limit
-        trail:
-          type: string
-          format: decimal
-          example: '3.14'
-          description: The new value of the trail_price or trail_percent
-        client_order_id:
-          type: string
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-    OrderStatus:
-      type: string
-      enum:
-      - new
-      - partially_filled
-      - filled
-      - done_for_day
-      - canceled
-      - expired
-      - replaced
-      - pending_cancel
-      - pending_replace
-      - accepted
-      - pending_new
-      - accepted_for_bidding
-      - stopped
-      - rejected
-      - suspended
-      - calculated
-      example: filled
-    Error:
-      title: Error
-      type: object
-      properties:
-        code:
-          type: number
-        message:
-          type: string
-      required:
-      - code
-      - message
-    OrderSide:
-      type: string
-      enum:
-      - buy
-      - sell
-      - buy_minus
-      - sell_plus
-      - sell_short
-      - sell_short_exempt
-      - undisclosed
-      - cross
-      - cross_short
-      example: buy
-      description: Represents what side of the transaction an order was on.
-    Position:
-      description: ''
-      type: object
-      x-examples:
-        example-1:
-          asset_id: 93f58d0b-6c53-432d-b8ce-2bad264dbd94
-          symbol: AAPL
-          exchange: NASDAQ
-          asset_class: us_equity
-          asset_marginable: false
-          qty: '4'
-          avg_entry_price: '172.08'
-          side: long
-          market_value: '688.32'
-          cost_basis: '688.32'
-          unrealized_pl: '0'
-          unrealized_plpc: '0'
-          unrealized_intraday_pl: '0'
-          unrealized_intraday_plpc: '0'
-          current_price: '172.08'
-          lastday_price: '168.88'
-          change_today: '0.0189483657034581'
-      properties:
-        asset_id:
-          type: string
-          example: 904837e3-3b76-47ec-b432-046db621571b
-          format: uuid
-          description: Asset ID
-        symbol:
-          type: string
-          example: AAPL
-          description: Asset symbol
-        exchange:
-          type: string
-          example: NASDAQ
-          description: Exchange name of the asset
-        asset_class:
-          $ref: '#/components/schemas/AssetClass'
-        asset_marginable:
-          type: boolean
-          description: Indicates if this asset is marginable
-        avg_entry_price:
-          type: string
-          example: '100.0'
-          description: Average entry price of the position
-        qty:
-          type: string
-          example: '5'
-          description: The number of shares
-        side:
-          type: string
-          example: long
-          enum:
-          - long
-          - short
-        market_value:
-          type: string
-          format: decimal
-          example: '600.0'
-          description: Total dollar amount of the position
-        cost_basis:
-          type: string
-          format: decimal
-          example: '500.0'
-          description: Total cost basis in dollar
-        unrealized_pl:
-          type: string
-          format: decimal
-          example: '100.0'
-          description: Unrealized profit/loss in dollars
-        unrealized_plpc:
-          type: string
-          format: decimal
-          example: '0.20'
-          description: Unrealized profit/loss percent (by a factor of 1)
-        unrealized_intraday_pl:
-          type: string
-          format: decimal
-          example: '10.0'
-          description: Unrealized profit/loss in dollars for the day
-        unrealized_intraday_plpc:
-          type: string
-          format: decimal
-          example: '0.0084'
-          description: Unrealized interday profit/loss percent (by a factor of 1)
-        current_price:
-          type: string
-          format: decimal
-          example: '120.0'
-          description: Current asset price per share
-        lastday_price:
-          type: string
-          format: decimal
-          example: '119.0'
-          description: Last day’s asset price per share based on the closing value of the last trading day
-        change_today:
-          type: string
-          format: decimal
-          example: '0.0084'
-          description: Percent change from last day price (by a factor of 1)
-      required:
-      - asset_id
-      - symbol
-      - exchange
-      - asset_class
-      - avg_entry_price
-      - qty
-      - side
-      - market_value
-      - cost_basis
-      - unrealized_pl
-      - unrealized_plpc
-      - unrealized_intraday_pl
-      - unrealized_intraday_plpc
-      - current_price
-      - lastday_price
-      - change_today
-    TradeUpdateEventType:
-      type: string
-      description: "**Common events**\n\nThese are the events that are the expected results of actions you may have taken by sending API requests.\n\nThe meaning of the `timestamp` field changes for each type; the meanings have been specified here for which types the\ntimestamp field will be present.\n\n- `new`: Sent when an order has been routed to exchanges for execution.\n- `fill`: Sent when your order has been completely filled.\n  - `timestamp`: The time at which the order was filled.\n- `partial_fill`: Sent when a number of shares less than the total remaining quantity on your order has been filled.\n  - `timestamp`: The time at which the shares were filled.\n- `canceled`: Sent when your requested cancellation of an order is processed.\n  - `timestamp`: The time at which the order was canceled.\n- `expired`: Sent when an order has reached the end of its lifespan, as determined by the order’s time in force value.\n  - `timestamp`: The time at which the order expired.\n- `done_for_day`: Sent when the order is done executing for the day, and will not receive further updates until the next trading day.\n- `replaced`: Sent when your requested replacement of an order is processed.\n  - `timestamp`: The time at which the order was replaced.\n\n**Rarer events**\n\nThese are events that may rarely be sent due to unexpected circumstances on the exchanges. It is unlikely you will need to design your code around them, but you may still wish to account for the possibility that they will occur.\n\n- `rejected`: Sent when your order has been rejected.\n  - `timestamp`: The time at which the rejection occurred.\n- `pending_new`: Sent when the order has been received by Alpaca and routed to the exchanges, but has not yet been accepted for execution.\n- `stopped`: Sent when your order has been stopped, and a trade is guaranteed for the order, usually at a stated price or better, but has not yet occurred.\n- `pending_cancel`: Sent when the order is awaiting cancellation. Most cancellations will occur without the order entering this state.\n- `pending_replace`: Sent when the order is awaiting replacement.\n- `calculated`: Sent when the order has been completed for the day - it is either `filled` or `done_for_day` - but remaining settlement calculations are still pending.\n- `suspended`: Sent when the order has been suspended and is not eligible for trading.\n- `order_replace_rejected`: Sent when the order replace has been rejected.\n- `order_cancel_rejected`: Sent when the order cancel has been rejected.\n"
-      enum:
-      - new
-      - fill
-      - partial_fill
-      - canceled
-      - expired
-      - done_for_day
-      - replaced
-      - rejected
-      - pending_new
-      - stopped
-      - pending_cancel
-      - pending_replace
-      - calculated
-      - suspended
-      - order_replace_rejected
-      - order_cancel_rejected
-    OrderType:
-      type: string
-      enum:
-      - market
-      - limit
-      - stop
-      - stop_limit
-      - trailing_stop
-      example: stop
     CreateOrderRequest:
       type: object
       description: ''
@@ -759,176 +525,6 @@ components:
       required:
       - symbol
       - status
-    OrderClass:
-      type: string
-      enum:
-      - simple
-      - bracket
-      - oco
-      - oto
-      example: bracket
-    OrderClosedResponse:
-      title: OrderClosedResponse
-      type: object
-      description: 'Represents the result of asking the api to cancel an Order.
-
-        '
-      x-examples: {}
-      properties:
-        id:
-          type: string
-          description: UUID of the order that was canceled
-          format: uuid
-        status:
-          type: integer
-          description: Http status code for the attempt to close this Order
-        body:
-          $ref: '#/components/schemas/Order'
-      required:
-      - id
-      - status
-    Order:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        client_order_id:
-          type: string
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        created_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        submitted_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        filled_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        expired_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        canceled_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        failed_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        replaced_at:
-          nullable: true
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-        replaced_by:
-          nullable: true
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        replaces:
-          nullable: true
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        asset_id:
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        symbol:
-          type: string
-          example: AALP
-        asset_class:
-          $ref: '#/components/schemas/AssetClass'
-        notional:
-          nullable: true
-          type: string
-          format: decimal
-          example: '4.2'
-        qty:
-          nullable: true
-          type: string
-          format: decimal
-          example: '4.2'
-        filled_qty:
-          type: string
-          format: decimal
-          example: '4.2'
-        filled_avg_price:
-          nullable: true
-          type: string
-          format: decimal
-          example: '4.2'
-        order_class:
-          $ref: '#/components/schemas/OrderClass'
-        order_type:
-          $ref: '#/components/schemas/OrderType'
-        type:
-          $ref: '#/components/schemas/OrderType'
-        side:
-          $ref: '#/components/schemas/OrderSide'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
-        limit_price:
-          nullable: true
-          type: string
-          format: decimal
-          example: '3.14'
-        stop_price:
-          nullable: true
-          type: string
-          format: decimal
-          example: '3.14'
-        status:
-          $ref: '#/components/schemas/OrderStatus'
-        extended_hours:
-          type: boolean
-          example: true
-        legs:
-          nullable: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Order'
-        trail_price:
-          nullable: true
-          type: string
-          format: decimal
-          example: '3.14'
-        trail_percent:
-          nullable: true
-          type: string
-          format: decimal
-          example: '5.0'
-        hwm:
-          nullable: true
-          type: string
-          format: decimal
-          example: '3.14'
-        commission:
-          type: string
-          format: decimal
-          example: '3.14'
-      required:
-      - id
-      - symbol
-    AssetClass:
-      type: string
-      enum:
-      - us_equity
-      - crypto
     TradeUpdateEvent:
       description: Represents an update to an order/trade, sent over the events streaming api.
       type: object
@@ -1015,6 +611,475 @@ components:
       - execution_id
       - order
       - timestamp
+    TradeUpdateEventType:
+      type: string
+      description: "**Common events**\n\nThese are the events that are the expected results of actions you may have taken by sending API requests.\n\nThe meaning of the `timestamp` field changes for each type; the meanings have been specified here for which types the\ntimestamp field will be present.\n\n- `new`: Sent when an order has been routed to exchanges for execution.\n- `fill`: Sent when your order has been completely filled.\n  - `timestamp`: The time at which the order was filled.\n- `partial_fill`: Sent when a number of shares less than the total remaining quantity on your order has been filled.\n  - `timestamp`: The time at which the shares were filled.\n- `canceled`: Sent when your requested cancellation of an order is processed.\n  - `timestamp`: The time at which the order was canceled.\n- `expired`: Sent when an order has reached the end of its lifespan, as determined by the order’s time in force value.\n  - `timestamp`: The time at which the order expired.\n- `done_for_day`: Sent when the order is done executing for the day, and will not receive further updates until the next trading day.\n- `replaced`: Sent when your requested replacement of an order is processed.\n  - `timestamp`: The time at which the order was replaced.\n\n**Rarer events**\n\nThese are events that may rarely be sent due to unexpected circumstances on the exchanges. It is unlikely you will need to design your code around them, but you may still wish to account for the possibility that they will occur.\n\n- `rejected`: Sent when your order has been rejected.\n  - `timestamp`: The time at which the rejection occurred.\n- `pending_new`: Sent when the order has been received by Alpaca and routed to the exchanges, but has not yet been accepted for execution.\n- `stopped`: Sent when your order has been stopped, and a trade is guaranteed for the order, usually at a stated price or better, but has not yet occurred.\n- `pending_cancel`: Sent when the order is awaiting cancellation. Most cancellations will occur without the order entering this state.\n- `pending_replace`: Sent when the order is awaiting replacement.\n- `calculated`: Sent when the order has been completed for the day - it is either `filled` or `done_for_day` - but remaining settlement calculations are still pending.\n- `suspended`: Sent when the order has been suspended and is not eligible for trading.\n- `order_replace_rejected`: Sent when the order replace has been rejected.\n- `order_cancel_rejected`: Sent when the order cancel has been rejected.\n"
+      enum:
+      - new
+      - fill
+      - partial_fill
+      - canceled
+      - expired
+      - done_for_day
+      - replaced
+      - rejected
+      - pending_new
+      - stopped
+      - pending_cancel
+      - pending_replace
+      - calculated
+      - suspended
+      - order_replace_rejected
+      - order_cancel_rejected
+    OrderClass:
+      type: string
+      enum:
+      - simple
+      - bracket
+      - oco
+      - oto
+      example: bracket
+    OrderType:
+      type: string
+      enum:
+      - market
+      - limit
+      - stop
+      - stop_limit
+      - trailing_stop
+      example: stop
+    Position:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          asset_id: 93f58d0b-6c53-432d-b8ce-2bad264dbd94
+          symbol: AAPL
+          exchange: NASDAQ
+          asset_class: us_equity
+          asset_marginable: false
+          qty: '4'
+          avg_entry_price: '172.08'
+          side: long
+          market_value: '688.32'
+          cost_basis: '688.32'
+          unrealized_pl: '0'
+          unrealized_plpc: '0'
+          unrealized_intraday_pl: '0'
+          unrealized_intraday_plpc: '0'
+          current_price: '172.08'
+          lastday_price: '168.88'
+          change_today: '0.0189483657034581'
+      properties:
+        asset_id:
+          type: string
+          example: 904837e3-3b76-47ec-b432-046db621571b
+          format: uuid
+          description: Asset ID
+        symbol:
+          type: string
+          example: AAPL
+          description: Asset symbol
+        exchange:
+          type: string
+          example: NASDAQ
+          description: Exchange name of the asset
+        asset_class:
+          $ref: '#/components/schemas/AssetClass'
+        asset_marginable:
+          type: boolean
+          description: Indicates if this asset is marginable
+        avg_entry_price:
+          type: string
+          example: '100.0'
+          description: Average entry price of the position
+        qty:
+          type: string
+          example: '5'
+          description: The number of shares
+        side:
+          type: string
+          example: long
+          enum:
+          - long
+          - short
+        market_value:
+          type: string
+          format: decimal
+          example: '600.0'
+          description: Total dollar amount of the position
+        cost_basis:
+          type: string
+          format: decimal
+          example: '500.0'
+          description: Total cost basis in dollar
+        unrealized_pl:
+          type: string
+          format: decimal
+          example: '100.0'
+          description: Unrealized profit/loss in dollars
+        unrealized_plpc:
+          type: string
+          format: decimal
+          example: '0.20'
+          description: Unrealized profit/loss percent (by a factor of 1)
+        unrealized_intraday_pl:
+          type: string
+          format: decimal
+          example: '10.0'
+          description: Unrealized profit/loss in dollars for the day
+        unrealized_intraday_plpc:
+          type: string
+          format: decimal
+          example: '0.0084'
+          description: Unrealized interday profit/loss percent (by a factor of 1)
+        current_price:
+          type: string
+          format: decimal
+          example: '120.0'
+          description: Current asset price per share
+        lastday_price:
+          type: string
+          format: decimal
+          example: '119.0'
+          description: Last day’s asset price per share based on the closing value of the last trading day
+        change_today:
+          type: string
+          format: decimal
+          example: '0.0084'
+          description: Percent change from last day price (by a factor of 1)
+      required:
+      - asset_id
+      - symbol
+      - exchange
+      - asset_class
+      - avg_entry_price
+      - qty
+      - side
+      - market_value
+      - cost_basis
+      - unrealized_pl
+      - unrealized_plpc
+      - unrealized_intraday_pl
+      - unrealized_intraday_plpc
+      - current_price
+      - lastday_price
+      - change_today
+    OrderClosedResponse:
+      title: OrderClosedResponse
+      type: object
+      description: 'Represents the result of asking the api to cancel an Order.
+
+        '
+      x-examples: {}
+      properties:
+        id:
+          type: string
+          description: UUID of the order that was canceled
+          format: uuid
+        status:
+          type: integer
+          description: Http status code for the attempt to close this Order
+        body:
+          $ref: '#/components/schemas/Order'
+      required:
+      - id
+      - status
+    TimeInForce:
+      type: string
+      enum:
+      - day
+      - gtc
+      - opg
+      - cls
+      - ioc
+      - fok
+      example: gtc
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        client_order_id:
+          type: string
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        created_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        submitted_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        filled_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        expired_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        canceled_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        failed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        replaced_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+        replaced_by:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        replaces:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        asset_id:
+          type: string
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        symbol:
+          type: string
+          example: AALP
+        asset_class:
+          $ref: '#/components/schemas/AssetClass'
+        notional:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '4.2'
+        qty:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '4.2'
+        filled_qty:
+          type: string
+          format: decimal
+          example: '4.2'
+        filled_avg_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '4.2'
+        order_class:
+          $ref: '#/components/schemas/OrderClass'
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        type:
+          $ref: '#/components/schemas/OrderType'
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        limit_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '3.14'
+        stop_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '3.14'
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        extended_hours:
+          type: boolean
+          example: true
+        legs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Order'
+        trail_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '3.14'
+        trail_percent:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '5.0'
+        hwm:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '3.14'
+        commission:
+          type: string
+          format: decimal
+          example: '3.14'
+      required:
+      - id
+      - symbol
+    UpdateOrderRequest:
+      type: object
+      title: OrderUpdateRequest
+      description: 'Represents the fields that are editable in an order replace/update call.
+
+
+        Note: client_order_id is currently not editable on its own, one of the other fields must be changed at the same time to effectively replace the order'
+      properties:
+        qty:
+          type: string
+          format: decimal
+          example: '4.2'
+          description: You can only patch full shares for now
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        limit_price:
+          type: string
+          format: decimal
+          example: '3.14'
+          description: Required if original order's `type` field was limit or stop_limit
+        stop_price:
+          type: string
+          format: decimal
+          example: '3.14'
+          description: Required if original order's `type` field was stop or stop_limit
+        trail:
+          type: string
+          format: decimal
+          example: '3.14'
+          description: The new value of the trail_price or trail_percent
+        client_order_id:
+          type: string
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+      required:
+      - code
+      - message
+    OrderSide:
+      type: string
+      enum:
+      - buy
+      - sell
+      - buy_minus
+      - sell_plus
+      - sell_short
+      - sell_short_exempt
+      - undisclosed
+      - cross
+      - cross_short
+      example: buy
+      description: Represents what side of the transaction an order was on.
+    AssetClass:
+      type: string
+      enum:
+      - us_equity
+      - crypto
+    OrderStatus:
+      type: string
+      enum:
+      - new
+      - partially_filled
+      - filled
+      - done_for_day
+      - canceled
+      - expired
+      - replaced
+      - pending_cancel
+      - pending_replace
+      - accepted
+      - pending_new
+      - accepted_for_bidding
+      - stopped
+      - rejected
+      - suspended
+      - calculated
+      example: filled
+  parameters:
+    Direction:
+      name: direction
+      in: query
+      description: The chronological order of response based on the submission time. asc or desc. Defaults to desc.
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        example: desc
+    After:
+      name: after
+      in: query
+      description: The response will include only ones submitted after this timestamp (exclusive.)
+      schema:
+        type: string
+        format: date-time
+        example: '2021-03-16T18:38:01.942282Z'
+    Symbols:
+      name: symbols
+      in: query
+      description: A comma-separated list of symbols to filter by.
+      schema:
+        type: string
+        example: AAPL,TSLA,MSFT
+    OrderID:
+      name: order_id
+      in: path
+      required: true
+      description: Order identifier.
+      schema:
+        type: string
+    AccountID:
+      name: account_id
+      in: path
+      required: true
+      description: Account identifier.
+      schema:
+        type: string
+        format: uuid
+    Until:
+      name: until
+      in: query
+      description: The response will include only ones submitted until this timestamp (exclusive.)
+      schema:
+        type: string
+        format: date-time
+        example: '2021-03-16T18:38:01.942282Z'
   responses:
     Forbidden:
       description: Request is forbidden
@@ -1034,55 +1099,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Direction:
-      name: direction
-      in: query
-      description: The chronological order of response based on the submission time. asc or desc. Defaults to desc.
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-        example: desc
-    AccountID:
-      name: account_id
-      in: path
-      required: true
-      description: Account identifier.
-      schema:
-        type: string
-        format: uuid
-    OrderID:
-      name: order_id
-      in: path
-      required: true
-      description: Order identifier.
-      schema:
-        type: string
-    After:
-      name: after
-      in: query
-      description: The response will include only ones submitted after this timestamp (exclusive.)
-      schema:
-        type: string
-        format: date-time
-        example: '2021-03-16T18:38:01.942282Z'
-    Symbols:
-      name: symbols
-      in: query
-      description: A comma-separated list of symbols to filter by.
-      schema:
-        type: string
-        example: AAPL,TSLA,MSFT
-    Until:
-      name: until
-      in: query
-      description: The response will include only ones submitted until this timestamp (exclusive.)
-      schema:
-        type: string
-        format: date-time
-        example: '2021-03-16T18:38:01.942282Z'
   securitySchemes:
     BasicAuth:
       type: http
