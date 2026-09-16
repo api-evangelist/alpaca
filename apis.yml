@@ -29,20 +29,20 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/alpaca.png
 tags:
-  - Fintech
-  - Trading
-  - Stocks
-  - Crypto
-  - Brokerage
-  - Market Data
-  - Options
+- Fintech
+- Trading
+- Stocks
+- Crypto
+- Brokerage
+- Market Data
+- Options
 created: '2026-05-08'
-modified: '2026-07-22'
+modified: '2026-09-16'
 specificationVersion: '0.23'
-description: >-
-  Alpaca is an API-first commission-free stock and crypto trading broker offering trading, market data, options, and
-  broker-as-a-service APIs. Alpaca publishes its OpenAPI specifications publicly via the alpacahq/alpaca-docs GitHub
-  repository, with separate specs for Trading, Broker, Market Data, and OAuth.
+description: Alpaca is an API-first commission-free stock and crypto trading broker offering trading,
+  market data, options, and broker-as-a-service APIs. Alpaca publishes its OpenAPI specifications publicly
+  via the alpacahq/alpaca-docs GitHub repository, with separate specs for Trading, Broker, Market Data,
+  and OAuth.
 apis:
 - aid: alpaca:trading-api
   name: Alpaca Trading API
@@ -61,10 +61,9 @@ apis:
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.alpaca.markets/v2
   humanURL: https://docs.alpaca.markets/docs/trading-api
-  description: >-
-    The Alpaca Trading API enables commission-free trading of US-listed equities, options, and crypto.
-    It exposes endpoints for orders, positions, account information, watchlists, calendar, clock, and
-    assets. A paper trading sandbox is available at paper-api.alpaca.markets.
+  description: The Alpaca Trading API enables commission-free trading of US-listed equities, options,
+    and crypto. It exposes endpoints for orders, positions, account information, watchlists, calendar,
+    clock, and assets. A paper trading sandbox is available at paper-api.alpaca.markets.
   properties:
   - type: Documentation
     url: https://docs.alpaca.markets/docs/trading-api
@@ -98,9 +97,8 @@ apis:
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.alpaca.markets/oauth
   humanURL: https://docs.alpaca.markets/docs/oauth-tokens
-  description: >-
-    The Alpaca OAuth API allows third-party applications to authenticate Alpaca users and obtain access
-    tokens for the Trading and Market Data APIs.
+  description: The Alpaca OAuth API allows third-party applications to authenticate Alpaca users and obtain
+    access tokens for the Trading and Market Data APIs.
   properties:
   - type: Documentation
     url: https://docs.alpaca.markets/docs/oauth-tokens
@@ -198,9 +196,8 @@ apis:
   - type: Documentation
     url: https://docs.alpaca.markets/docs/about-broker-api
 - aid: alpaca:alpaca-crypto-pricing-data-api-api
-  name: Alpaca Crypto Pricing Data API API
-  description: >-
-    The Crypto Pricing Data API API from Alpaca — 17 operation(s) for crypto pricing data api.
+  name: Alpaca Crypto Pricing Data API
+  description: The Crypto Pricing Data API API from Alpaca — 17 operation(s) for crypto pricing data api.
   humanURL: https://docs.alpaca.markets/docs/trading-api
   baseURL: https://api.alpaca.markets/v2
   tags:
@@ -329,7 +326,7 @@ apis:
   - type: Documentation
     url: https://docs.alpaca.markets/docs/about-broker-api
 - aid: alpaca:alpaca-stock-pricing-data-api-api
-  name: Alpaca Stock Pricing Data API API
+  name: Alpaca Stock Pricing Data API
   description: The Stock Pricing Data API API from Alpaca — 16 operation(s) for stock pricing data api.
   humanURL: https://docs.alpaca.markets/docs/trading-api
   baseURL: https://api.alpaca.markets/v2
@@ -361,118 +358,118 @@ apis:
   - type: Documentation
     url: https://docs.alpaca.markets/docs/about-broker-api
 common:
-  - type: Website
-    url: https://www.alpaca.markets/
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/alpaca/overview
-  - type: AgenticAccess
-    url: agentic-access/alpaca-agentic-access.yml
-  - type: DomainSecurity
-    url: security/alpaca-domain-security.yml
-  - type: Authentication
-    url: authentication/alpaca-authentication.yml
-  - type: Packages
-    url: packages/alpaca-packages.yml
-  - type: SDKs
-    url: packages/alpaca-packages.yml
-  - type: WellKnown
-    url: well-known/alpaca-well-known.yml
-  - type: MCPServer
-    url: mcp/alpaca-mcp.yml
-  - type: ToolCrosswalk
-    url: mcp/alpaca-tool-crosswalk.yml
-  - type: LLMsTxt
-    url: llms/alpaca-llms.txt
-  - type: AgentSkill
-    url: skills/_index.yml
-  - type: Sandbox
-    url: sandbox/alpaca-sandbox.yml
-  - type: Conventions
-    url: conventions/alpaca-conventions.yml
-  - type: Idempotency
-    url: conventions/alpaca-conventions.yml
-  - type: ChangeLog
-    url: changelog/alpaca-changelog.yml
-  - type: CLI
-    url: cli/alpaca-cli.yml
-  - type: OAuthScopes
-    url: scopes/alpaca-scopes.yml
-  - type: ErrorCatalog
-    url: errors/alpaca-problem-types.yml
-  - type: Lifecycle
-    url: lifecycle/alpaca-lifecycle.yml
-  - type: Deprecation
-    url: lifecycle/alpaca-lifecycle.yml
-  - type: Conformance
-    url: conformance/alpaca-conformance.yml
-  - type: Compliance
-    url: https://alpaca.markets/security
-  - type: VulnerabilityDisclosure
-    url: security/alpaca-vulnerability-disclosure.yml
-  - type: Security
-    url: https://alpaca.markets/security
-  - type: TrustCenter
-    url: https://trust.alpaca.markets/
-  - type: DataModel
-    url: data-model/alpaca-data-model.yml
-  - type: Postman
-    url: https://github.com/alpacahq/alpaca-postman
-  - type: APIReference
-    url: https://docs.alpaca.markets/reference
-  - type: GettingStarted
-    url: https://docs.alpaca.markets/docs/getting-started
-  - type: Support
-    url: https://alpaca.markets/support
-  - type: SignUp
-    url: https://app.alpaca.markets/signup
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/alpacamarkets
-  - type: Portal
-    url: https://alpaca.markets/
-  - type: Documentation
-    url: https://docs.alpaca.markets/
-  - type: Pricing
-    url: https://alpaca.markets/data
-  - type: GitHub
-    url: https://github.com/alpacahq
-  - type: StatusPage
-    url: https://status.alpaca.markets/
-  - type: TermsOfService
-    url: https://alpaca.markets/legal
-  - type: PrivacyPolicy
-    url: https://alpaca.markets/privacy
-  - type: Plans
-    url: plans/alpaca-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/alpaca-rate-limits.yml
-  - type: FinOps
-    url: finops/alpaca-finops.yml
-  - type: Integrations
-    url: https://alpaca.markets/integrations
-  - type: LlmsText
-    url: https://docs.alpaca.markets/llms.txt
-  - url: https://alpaca.markets/blog/feed/
-    type: Blog
+- type: Website
+  url: https://www.alpaca.markets/
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/alpaca/overview
+- type: AgenticAccess
+  url: agentic-access/alpaca-agentic-access.yml
+- type: DomainSecurity
+  url: security/alpaca-domain-security.yml
+- type: Authentication
+  url: authentication/alpaca-authentication.yml
+- type: Packages
+  url: packages/alpaca-packages.yml
+- type: SDKs
+  url: packages/alpaca-packages.yml
+- type: WellKnown
+  url: well-known/alpaca-well-known.yml
+- type: MCPServer
+  url: mcp/alpaca-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/alpaca-tool-crosswalk.yml
+- type: LLMsTxt
+  url: llms/alpaca-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/alpaca-sandbox.yml
+- type: Conventions
+  url: conventions/alpaca-conventions.yml
+- type: Idempotency
+  url: conventions/alpaca-conventions.yml
+- type: ChangeLog
+  url: changelog/alpaca-changelog.yml
+- type: CLI
+  url: cli/alpaca-cli.yml
+- type: OAuthScopes
+  url: scopes/alpaca-scopes.yml
+- type: ErrorCatalog
+  url: errors/alpaca-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/alpaca-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/alpaca-lifecycle.yml
+- type: Conformance
+  url: conformance/alpaca-conformance.yml
+- type: Compliance
+  url: https://alpaca.markets/security
+- type: VulnerabilityDisclosure
+  url: security/alpaca-vulnerability-disclosure.yml
+- type: Security
+  url: https://alpaca.markets/security
+- type: TrustCenter
+  url: https://trust.alpaca.markets/
+- type: DataModel
+  url: data-model/alpaca-data-model.yml
+- type: Postman
+  url: https://github.com/alpacahq/alpaca-postman
+- type: APIReference
+  url: https://docs.alpaca.markets/reference
+- type: GettingStarted
+  url: https://docs.alpaca.markets/docs/getting-started
+- type: Support
+  url: https://alpaca.markets/support
+- type: SignUp
+  url: https://app.alpaca.markets/signup
+- type: LinkedIn
+  url: https://www.linkedin.com/company/alpacamarkets
+- type: Portal
+  url: https://alpaca.markets/
+- type: Documentation
+  url: https://docs.alpaca.markets/
+- type: Pricing
+  url: https://alpaca.markets/data
+- type: GitHub
+  url: https://github.com/alpacahq
+- type: StatusPage
+  url: https://status.alpaca.markets/
+- type: TermsOfService
+  url: https://alpaca.markets/legal
+- type: PrivacyPolicy
+  url: https://alpaca.markets/privacy
+- type: Plans
+  url: plans/alpaca-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/alpaca-rate-limits.yml
+- type: FinOps
+  url: finops/alpaca-finops.yml
+- type: Integrations
+  url: https://alpaca.markets/integrations
+- type: LlmsText
+  url: https://docs.alpaca.markets/llms.txt
+- url: https://alpaca.markets/blog/feed/
+  type: Blog
 integrations:
-  - name: TradingView
-  - name: Streak
-  - name: Slack
-  - name: QuantRocket
-  - name: Blueshift
-  - name: Tradetron
-  - name: Passiv
-  - name: Zapier
-  - name: Alexa
-  - name: Arcade Trader
-  - name: PredictNow.ai
-  - name: AlgoBulls
-  - name: Trellis
-  - name: Breaking Equity
-  - name: Composer
-  - name: Algorum
-  - name: Wealth-Lab
-  - name: Your project here
-  - name: Close modal
+- name: TradingView
+- name: Streak
+- name: Slack
+- name: QuantRocket
+- name: Blueshift
+- name: Tradetron
+- name: Passiv
+- name: Zapier
+- name: Alexa
+- name: Arcade Trader
+- name: PredictNow.ai
+- name: AlgoBulls
+- name: Trellis
+- name: Breaking Equity
+- name: Composer
+- name: Algorum
+- name: Wealth-Lab
+- name: Your project here
+- name: Close modal
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
