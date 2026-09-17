@@ -61,9 +61,10 @@ apis:
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.alpaca.markets/v2
   humanURL: https://docs.alpaca.markets/docs/trading-api
-  description: The Alpaca Trading API enables commission-free trading of US-listed equities, options,
-    and crypto. It exposes endpoints for orders, positions, account information, watchlists, calendar,
-    clock, and assets. A paper trading sandbox is available at paper-api.alpaca.markets.
+  description: >-
+    The Alpaca Trading API enables commission-free trading of US-listed equities, options, and crypto.
+    It exposes endpoints for orders, positions, account information, watchlists, calendar, clock, and
+    assets. A paper trading sandbox is available at paper-api.alpaca.markets.
   properties:
   - type: Documentation
     url: https://docs.alpaca.markets/docs/trading-api
@@ -85,34 +86,6 @@ apis:
   - Build automated trading strategies
   - Power retail trading apps
   - Backtest with paper trading sandbox
-- aid: alpaca:oauth-api
-  name: Alpaca OAuth API
-  tags:
-  - Authentication
-  - Authorization
-  tags_raw:
-  - OAuth
-  - Authentication
-  - Authorization
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api.alpaca.markets/oauth
-  humanURL: https://docs.alpaca.markets/docs/oauth-tokens
-  description: The Alpaca OAuth API allows third-party applications to authenticate Alpaca users and obtain
-    access tokens for the Trading and Market Data APIs.
-  properties:
-  - type: Documentation
-    url: https://docs.alpaca.markets/docs/oauth-tokens
-  - type: OpenAPI
-    url: openapi/alpaca-oauth-api-openapi.yml
-  - type: Overlay
-    url: overlays/alpaca-oauth-api-overlay.yaml
-  x-features:
-  - OAuth 2.0 authorization code flow
-  - Token issuance and refresh
-  - Scope-limited access
-  x-use-cases:
-  - Build apps that act on behalf of Alpaca users
-  - Integrate Alpaca login into third-party tools
 - aid: alpaca:alpaca-accounts-api
   name: Alpaca Accounts API
   description: The Accounts API from Alpaca — 14 operation(s) for accounts.
@@ -197,7 +170,8 @@ apis:
     url: https://docs.alpaca.markets/docs/about-broker-api
 - aid: alpaca:alpaca-crypto-pricing-data-api-api
   name: Alpaca Crypto Pricing Data API
-  description: The Crypto Pricing Data API API from Alpaca — 17 operation(s) for crypto pricing data api.
+  description: >-
+    The Crypto Pricing Data API API from Alpaca — 17 operation(s) for crypto pricing data api.
   humanURL: https://docs.alpaca.markets/docs/trading-api
   baseURL: https://api.alpaca.markets/v2
   tags:
@@ -357,7 +331,21 @@ apis:
     url: asyncapi/alpaca-asyncapi.yml
   - type: Documentation
     url: https://docs.alpaca.markets/docs/about-broker-api
+- aid: alpaca:alpaca-oauth-api
+  name: Alpaca O Auth API
+  description: The OAuth API from Alpaca — 3 operation(s) for oauth.
+  humanURL: https://docs.alpaca.markets/docs/trading-api
+  baseURL: https://api.alpaca.markets/v2
+  tags:
+  - OAuth
+  properties:
+  - type: OpenAPI
+    url: openapi/alpaca-oauth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.alpaca.markets/docs/oauth-tokens
 common:
+- type: Overlay
+  url: overlays/alpaca-oauth-api-overlay.yaml
 - type: Website
   url: https://www.alpaca.markets/
 - type: PostmanWorkspace
