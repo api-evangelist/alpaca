@@ -1,31 +1,29 @@
-# Kin Score artifact — alpaca — 2026-08-19T114122
+# Kin Score artifact — alpaca — 2026-09-19T165737
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: alpaca
-  schema_version: 0.12.0
-  scored_at: '2026-08-19'
-  run_ts: 2026-08-19T114122
-  composite: 63.2
+  schema_version: 0.22.0
+  scored_at: '2026-09-19'
+  run_ts: 2026-09-19T165737
+  composite: 59.7
   band: strong
   facets:
-    discoverability: 92.6
-    contract_quality: 68.8
-    governance: 43.9
+    discoverability: 75.9
+    contract_quality: 65.4
+    contract_governance: 31.8
     operational_transparency: 63.2
     developer_ergonomics: 53.6
-    commercial_clarity: 34.2
-    contract_governance: 43.9
     access_clarity: 34.2
   agent_readiness:
-    score: 52.4
+    score: 58.2
     band: agent-native
     dimensions:
       spec_presence: true
       agentic_access: derived
-      reversibility_documented: false
-      mcp_server: documented
-      auth_clarity: true
+      reversibility_documented: documented
+      mcp_server: verified
+      auth_clarity: served
       idempotency: documented
       error_semantics: documented
       openapi_examples: partial
@@ -36,6 +34,10 @@ kin_score:
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: served
+      protected_resource_metadata: verified
+      dynamic_client_registration: false
+      agentic_commerce: false
   regulatory:
     applies: true
     regime: Securities & Market Data
