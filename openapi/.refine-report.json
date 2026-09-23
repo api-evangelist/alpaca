@@ -23,17 +23,19 @@
     "alpaca-screener-api-openapi.yml",
     "alpaca-stock-pricing-data-api-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "alpaca-broker-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
-    "alpaca-data-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0"
+    "alpaca-data-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: alpaca-o-auth-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 17 total)"
   ],
   "skipped": [
-    "alpaca-account-activities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "alpaca-account-configurations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "alpaca-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "alpaca-assets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "alpaca-calendar-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -46,14 +48,10 @@
     "alpaca-journals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "alpaca-logo-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "alpaca-news-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "alpaca-oauth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "alpaca-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "alpaca-portfolio-history-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "alpaca-positions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "alpaca-o-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "alpaca-screener-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "alpaca-stock-pricing-data-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "alpaca-trading-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "alpaca-watchlist-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "alpaca-watchlists-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "alpaca-watchlist-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

@@ -102,16 +102,13 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountID'
     get:
-      summary: Return a list of transfers for an account.
+      summary: Return a list of transfers for an account
       tags:
       - Funding
       description: 'You can query a list of transfers for an account.
 
 
-
-        You can filter requested transfers by values such as direction and status.
-
-        '
+        You can filter requested transfers by values such as direction and status.'
       parameters:
       - name: direction
         in: query
@@ -179,7 +176,7 @@ paths:
       description: 'Create a new transfer to an account to fund it.
 
 
-        In the sandbox environment, you can instantly deposit to or withdraw from an account with a virtual money amount. In the production environment, this endpoint is used only for requesting an outgoing (withdrawal) wire transfer at this moment. For the wire transfer (in production), you need to create a bank resource first using the Bank API. For more on how to fund an account in sandbox please check out this tutorial [here](https://alpaca.markets/learn/fund-broker-api/).'
+        In the sandbox environment, you can instantly deposit to or withdraw from an account with a virtual money amount. In the production environment, this endpoint is used only for requesting an outgoing (withdrawal) wire transfer at this moment. For the wire transfer (in production), you need to create a bank resource first using the Bank API. For more on how to fund an account in sandbox please check out this tutorial here.'
       parameters:
       - name: account_id
         in: path
@@ -219,7 +216,6 @@ paths:
           description: Success (No Content)
         '404':
           $ref: '#/components/responses/NotFound'
-      description: Request to close a transfer
       tags:
       - Funding
   /v1/accounts/{account_id}/ach_relationships:
@@ -371,119 +367,7 @@ paths:
 
         If you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.'
 components:
-  responses:
-    NotAuthorized:
-      description: Client is not authorized for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Malformed input.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    CreateTransferRequest:
-      title: CreateTransferRequest
-      type: object
-      properties:
-        transfer_type:
-          $ref: '#/components/schemas/TransferType'
-        relationship_id:
-          type: string
-          format: uuid
-          description: 'Required if type = `ach`
-
-
-            The ach_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#creating-an-ach-relationship)'
-        bank_id:
-          type: string
-          format: uuid
-          description: 'Required if type = `wire`
-
-
-            The bank_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/bank/#creating-a-new-bank-relationship)'
-        amount:
-          type: string
-          format: decimal
-          description: Must be > 0.00
-        direction:
-          $ref: '#/components/schemas/TransferDirection'
-        timing:
-          $ref: '#/components/schemas/TransferTiming'
-        additional_information:
-          type:
-          - string
-          - 'null'
-          description: Additional details for when type = `wire`
-      required:
-      - transfer_type
-      - amount
-      - direction
-      - timing
-      description: '[See main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#creating-a-transfer-entity)'
-    CreateBankRequest:
-      title: CreateBankRequest
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of recipient bank
-        bank_code:
-          type: string
-          description: 9-Digit ABA RTN (Routing Number) or BIC
-        bank_code_type:
-          type: string
-          enum:
-          - ABA
-          - BIC
-          description: ABA (Domestic) or BIC (International)
-        country:
-          type: string
-          description: Only for international banks
-        state_province:
-          type: string
-          description: Only for international banks
-        postal_code:
-          type: string
-          description: Only for international banks
-        city:
-          type: string
-          description: Only for international banks
-        street_address:
-          type: string
-          description: Only for international banks
-        account_number:
-          type: string
-      required:
-      - name
-      - bank_code
-      - bank_code_type
-      - account_number
-      description: Represents the possible fields to send when creating a new associated Bank resource for an account
-    TransferDirection:
-      type: string
-      example: INCOMING
-      enum:
-      - INCOMING
-      - OUTGOING
-      description: '- **INCOMING**
-
-        Funds incoming to user’s account (deposit).
-
-        - **OUTGOING**
-
-        Funds outgoing from user’s account (withdrawal).
-
-        '
     TransferTiming:
       type: string
       example: immediate
@@ -499,110 +383,21 @@ components:
 
 
         - **next_day**'
-    Transfer:
-      title: Transfer
-      type: object
-      x-examples:
-        example-1:
-          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-          relationship_id: 81412018-ffa2-43f9-a3eb-d39f1c5e0f87
-          bank_id: f1ae96de-94c1-468e-93a3-6b7213930ca8
-          account_id: 449e7a5c-69d3-4b8a-aaaf-5c9b713ebc65
-          type: ach
-          status: QUEUED
-          reason: string
-          amount: string
-          direction: INCOMING
-          created_at: '2019-08-24T14:15:22Z'
-          updated_at: '2019-08-24T14:15:22Z'
-          expires_at: '2019-08-24T14:15:22Z'
-          additional_information: string
-      description: 'Transfers allow you to transfer money/balance into your end customers'' account (deposits) or out (withdrawal).
-
-
-        [Main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#the-transfer-object)'
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The transfer ID
-        relationship_id:
-          type: string
-          format: uuid
-          description: The ACH relationship ID only present if type = "ach"
-        bank_id:
-          type: string
-          format: uuid
-          description: The ID of the Bank, only present if type = "wire"
-        account_id:
-          type: string
-          format: uuid
-          description: The account ID
-        type:
-          $ref: '#/components/schemas/TransferType'
-        status:
-          $ref: '#/components/schemas/TransferStatus'
-        reason:
-          type:
-          - string
-          - 'null'
-          description: Cause of the status
-        amount:
-          type: string
-          description: Must be > 0.00
-          format: decimal
-        direction:
-          $ref: '#/components/schemas/TransferDirection'
-        created_at:
-          type: string
-          format: date-time
-          description: Timedate when transfer was created
-        updated_at:
-          type: string
-          format: date-time
-          description: Timedate when transfer was updated
-        expires_at:
-          type: string
-          format: date-time
-          description: Timedate when transfer was expired
-        additional_information:
-          type:
-          - string
-          - 'null'
-          description: Additional information. Only applies when type = "wire".
-        hold_until:
-          type: string
-          format: date-time
-        instant_amount:
-          type: string
-      required:
-      - id
-      - account_id
-      - type
-      - status
-      - amount
-      - direction
-      - created_at
-    TransferType:
+    TransferDirection:
       type: string
-      example: ach
+      example: INCOMING
       enum:
-      - ach
-      - instant_ach
-      - wire
-      description: '**NOTE:** The Sandbox environment currently only supports `ach`
+      - INCOMING
+      - OUTGOING
+      description: '- **INCOMING**
 
+        Funds incoming to user’s account (deposit).
 
-        - **ach**
+        - **OUTGOING**
 
-        Transfer via ACH (US Only).
-
-        - **wire**
-
-        Transfer via wire (international).
+        Funds outgoing from user’s account (withdrawal).
 
         '
-      title: TransferType
     ACHRelationship:
       title: ACHRelationship
       type: object
@@ -658,57 +453,6 @@ components:
       - account_id
       - status
       - account_owner_name
-    Error:
-      title: Error
-      type: object
-      properties:
-        code:
-          type: number
-        message:
-          type: string
-      required:
-      - code
-      - message
-    CreateACHRelationshipRequest:
-      description: 'Represents the fields used in creation of a new ACHRelationship.
-
-
-        You can create an ACHRelationship by passing the required fields here or if you have an account with Plaid you can use our integration with Plaid to create a relationship.
-
-
-        Please see the documentation [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#plaid-integration-for-bank-transfers) for more info on using Plaid with Alpaca'
-      type: object
-      title: CreateACHRelationshipRequest
-      properties:
-        account_owner_name:
-          type: string
-          minLength: 1
-        bank_account_type:
-          type: string
-          minLength: 1
-          enum:
-          - CHECKING
-          - SAVINGS
-          description: Must be CHECKING or SAVINGS
-        bank_account_number:
-          type: string
-          minLength: 1
-          description: In sandbox, this still must be a valid format
-        bank_routing_number:
-          type: string
-          minLength: 1
-          description: In sandbox, this still must be a valid format
-        nickname:
-          type: string
-          minLength: 1
-        processor_token:
-          type: string
-          description: 'If using Plaid, you can specify a Plaid processor token here '
-      required:
-      - account_owner_name
-      - bank_account_type
-      - bank_account_number
-      - bank_routing_number
     Bank:
       type: object
       x-examples:
@@ -839,6 +583,140 @@ components:
       - status_from
       - status_to
       - transfer_id
+    Transfer:
+      title: Transfer
+      type: object
+      x-examples:
+        example-1:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          relationship_id: 81412018-ffa2-43f9-a3eb-d39f1c5e0f87
+          bank_id: f1ae96de-94c1-468e-93a3-6b7213930ca8
+          account_id: 449e7a5c-69d3-4b8a-aaaf-5c9b713ebc65
+          type: ach
+          status: QUEUED
+          reason: string
+          amount: string
+          direction: INCOMING
+          created_at: '2019-08-24T14:15:22Z'
+          updated_at: '2019-08-24T14:15:22Z'
+          expires_at: '2019-08-24T14:15:22Z'
+          additional_information: string
+      description: 'Transfers allow you to transfer money/balance into your end customers'' account (deposits) or out (withdrawal).
+
+
+        [Main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#the-transfer-object)'
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The transfer ID
+        relationship_id:
+          type: string
+          format: uuid
+          description: The ACH relationship ID only present if type = "ach"
+        bank_id:
+          type: string
+          format: uuid
+          description: The ID of the Bank, only present if type = "wire"
+        account_id:
+          type: string
+          format: uuid
+          description: The account ID
+        type:
+          $ref: '#/components/schemas/TransferType'
+        status:
+          $ref: '#/components/schemas/TransferStatus'
+        reason:
+          type:
+          - string
+          - 'null'
+          description: Cause of the status
+        amount:
+          type: string
+          description: Must be > 0.00
+          format: decimal
+        direction:
+          $ref: '#/components/schemas/TransferDirection'
+        created_at:
+          type: string
+          format: date-time
+          description: Timedate when transfer was created
+        updated_at:
+          type: string
+          format: date-time
+          description: Timedate when transfer was updated
+        expires_at:
+          type: string
+          format: date-time
+          description: Timedate when transfer was expired
+        additional_information:
+          type:
+          - string
+          - 'null'
+          description: Additional information. Only applies when type = "wire".
+        hold_until:
+          type: string
+          format: date-time
+        instant_amount:
+          type: string
+      required:
+      - id
+      - account_id
+      - type
+      - status
+      - amount
+      - direction
+      - created_at
+    CreateTransferRequest:
+      title: CreateTransferRequest
+      type: object
+      properties:
+        transfer_type:
+          $ref: '#/components/schemas/TransferType'
+        relationship_id:
+          type: string
+          format: uuid
+          description: 'Required if type = `ach`
+
+
+            The ach_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#creating-an-ach-relationship)'
+        bank_id:
+          type: string
+          format: uuid
+          description: 'Required if type = `wire`
+
+
+            The bank_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/bank/#creating-a-new-bank-relationship)'
+        amount:
+          type: string
+          format: decimal
+          description: Must be > 0.00
+        direction:
+          $ref: '#/components/schemas/TransferDirection'
+        timing:
+          $ref: '#/components/schemas/TransferTiming'
+        additional_information:
+          type:
+          - string
+          - 'null'
+          description: Additional details for when type = `wire`
+      required:
+      - transfer_type
+      - amount
+      - direction
+      - timing
+      description: '[See main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#creating-a-transfer-entity)'
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+      required:
+      - code
+      - message
     TransferStatus:
       type: string
       example: QUEUED
@@ -889,6 +767,124 @@ components:
         The bank issued an ACH return for the transfer.
 
         '
+    CreateBankRequest:
+      title: CreateBankRequest
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of recipient bank
+        bank_code:
+          type: string
+          description: 9-Digit ABA RTN (Routing Number) or BIC
+        bank_code_type:
+          type: string
+          enum:
+          - ABA
+          - BIC
+          description: ABA (Domestic) or BIC (International)
+        country:
+          type: string
+          description: Only for international banks
+        state_province:
+          type: string
+          description: Only for international banks
+        postal_code:
+          type: string
+          description: Only for international banks
+        city:
+          type: string
+          description: Only for international banks
+        street_address:
+          type: string
+          description: Only for international banks
+        account_number:
+          type: string
+      required:
+      - name
+      - bank_code
+      - bank_code_type
+      - account_number
+      description: Represents the possible fields to send when creating a new associated Bank resource for an account
+    TransferType:
+      type: string
+      example: ach
+      enum:
+      - ach
+      - instant_ach
+      - wire
+      description: '**NOTE:** The Sandbox environment currently only supports `ach`
+
+
+        - **ach**
+
+        Transfer via ACH (US Only).
+
+        - **wire**
+
+        Transfer via wire (international).
+
+        '
+      title: TransferType
+    CreateACHRelationshipRequest:
+      description: 'Represents the fields used in creation of a new ACHRelationship.
+
+
+        You can create an ACHRelationship by passing the required fields here or if you have an account with Plaid you can use our integration with Plaid to create a relationship.
+
+
+        Please see the documentation [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#plaid-integration-for-bank-transfers) for more info on using Plaid with Alpaca'
+      type: object
+      title: CreateACHRelationshipRequest
+      properties:
+        account_owner_name:
+          type: string
+          minLength: 1
+        bank_account_type:
+          type: string
+          minLength: 1
+          enum:
+          - CHECKING
+          - SAVINGS
+          description: Must be CHECKING or SAVINGS
+        bank_account_number:
+          type: string
+          minLength: 1
+          description: In sandbox, this still must be a valid format
+        bank_routing_number:
+          type: string
+          minLength: 1
+          description: In sandbox, this still must be a valid format
+        nickname:
+          type: string
+          minLength: 1
+        processor_token:
+          type: string
+          description: 'If using Plaid, you can specify a Plaid processor token here '
+      required:
+      - account_owner_name
+      - bank_account_type
+      - bank_account_number
+      - bank_routing_number
+  responses:
+    BadRequest:
+      description: Malformed input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotAuthorized:
+      description: Client is not authorized for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     AccountID:
       name: account_id

@@ -22,7 +22,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountID'
     get:
-      summary: Return a list of account documents.
+      summary: Return a list of account documents
       tags:
       - Documents
       description: This endpoint allows you to query all the documents that belong to a certain account. You can filter by date, or type of document.
@@ -64,15 +64,13 @@ paths:
     get:
       security:
       - BasicAuth: []
-      summary: Download a document file that belongs to an account.
+      summary: Download a document file that belongs to an account
       tags:
       - Documents
       description: 'This endpoint allows you to download a document identified by the document_id passed in the header. The returned document is in PDF format.
 
 
-        The operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.
-
-        '
+        The operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.'
       responses:
         '301':
           description: 'Redirect to the pre-signed download link for the document PDF file.
@@ -90,9 +88,7 @@ paths:
       summary: Download a document file directly
       tags:
       - Documents
-      description: 'The operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.
-
-        '
+      description: The operation returns a pre-signed downloadable link as a redirect with HTTP status code 301 if one is found.
       responses:
         '301':
           description: 'Redirect to the pre-signed download link for the document PDF file.
@@ -102,38 +98,6 @@ paths:
           description: The document was not found.
       operationId: downloadDocumentById
 components:
-  parameters:
-    DocumentType:
-      name: type
-      in: query
-      required: false
-      description: See DocumentType model for reference and explanation of values
-      schema:
-        example: identity_verification
-        type: string
-        enum:
-        - identity_verification
-        - address_verification
-        - date_of_birth_verification
-        - tax_id_verification
-        - account_approval_letter
-        - cip_result
-    AccountID:
-      name: account_id
-      in: path
-      required: true
-      description: Account identifier.
-      schema:
-        type: string
-        format: uuid
-    DocumentID:
-      name: document_id
-      in: path
-      required: true
-      description: Document identifier.
-      schema:
-        type: string
-        format: uuid
   schemas:
     DocumentType:
       type: string
@@ -173,6 +137,38 @@ components:
         - document_id
         - document_type
         - document_date
+  parameters:
+    DocumentID:
+      name: document_id
+      in: path
+      required: true
+      description: Document identifier.
+      schema:
+        type: string
+        format: uuid
+    DocumentType:
+      name: type
+      in: query
+      required: false
+      description: See DocumentType model for reference and explanation of values
+      schema:
+        example: identity_verification
+        type: string
+        enum:
+        - identity_verification
+        - address_verification
+        - date_of_birth_verification
+        - tax_id_verification
+        - account_approval_letter
+        - cip_result
+    AccountID:
+      name: account_id
+      in: path
+      required: true
+      description: Account identifier.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     BasicAuth:
       type: http

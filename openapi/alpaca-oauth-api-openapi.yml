@@ -30,9 +30,7 @@ paths:
       summary: Get an OAuth client
       tags:
       - OAuth
-      description: 'The endpoint returns the details of OAuth client to display in the authorization page.
-
-        '
+      description: The endpoint returns the details of OAuth client to display in the authorization page.
       parameters:
       - name: response_type
         in: query
@@ -86,12 +84,10 @@ paths:
       operationId: getOAuthClient
   /v1/oauth/token:
     post:
-      summary: Issue an OAuth token.
+      summary: Issue an OAuth token
       tags:
       - OAuth
-      description: 'The operation issues an OAuth code which can be used in the OAuth code flow.
-
-        '
+      description: The operation issues an OAuth code which can be used in the OAuth code flow.
       requestBody:
         required: true
         content:
@@ -133,9 +129,7 @@ paths:
       summary: Authorize an OAuth Token
       tags:
       - OAuth
-      description: 'The operation issues an OAuth code which can be used in the OAuth code flow.
-
-        '
+      description: The operation issues an OAuth code which can be used in the OAuth code flow.
       requestBody:
         required: true
         content:
@@ -168,61 +162,6 @@ paths:
       operationId: authorizeOAuthToken
 components:
   schemas:
-    AuthorizeOAuthTokenResponse:
-      description: ''
-      type: object
-      x-examples:
-        example-1:
-          code: 912b5502-c983-40f7-a01d-6a66f13a754d
-          client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
-          redirect_uri: http://localhost
-          scope: ''
-      properties:
-        code:
-          type: string
-          minLength: 1
-          description: OAuth code to exchange with token
-        client_id:
-          type: string
-          minLength: 1
-          description: OAuth `client_id`
-        redirect_uri:
-          type: string
-          minLength: 1
-          description: Redirect URI of OAuth flow
-        scope:
-          type: string
-          description: Granted scopes
-      required:
-      - code
-      - client_id
-      - redirect_uri
-      - scope
-    IssueOAuthTokenResponse:
-      description: ''
-      type: object
-      x-examples:
-        example-1:
-          access_token: 87586f14-c3f4-4912-b107-f75bc17ff87a
-          token_type: Bearer
-          scope: general
-      properties:
-        access_token:
-          type: string
-          description: OAuth token
-        token_type:
-          type: string
-          description: Always `Bearer`
-          enum:
-          - Bearer
-          example: Bearer
-        scope:
-          type: string
-          description: Token’s scope
-      required:
-      - access_token
-      - token_type
-      - scope
     OathClientResponse:
       title: OathClientResponse
       type: object
@@ -280,6 +219,61 @@ components:
         live_trading_approved:
           type: boolean
           example: true
+    AuthorizeOAuthTokenResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          code: 912b5502-c983-40f7-a01d-6a66f13a754d
+          client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
+          redirect_uri: http://localhost
+          scope: ''
+      properties:
+        code:
+          type: string
+          minLength: 1
+          description: OAuth code to exchange with token
+        client_id:
+          type: string
+          minLength: 1
+          description: OAuth `client_id`
+        redirect_uri:
+          type: string
+          minLength: 1
+          description: Redirect URI of OAuth flow
+        scope:
+          type: string
+          description: Granted scopes
+      required:
+      - code
+      - client_id
+      - redirect_uri
+      - scope
+    IssueOAuthTokenResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          access_token: 87586f14-c3f4-4912-b107-f75bc17ff87a
+          token_type: Bearer
+          scope: general
+      properties:
+        access_token:
+          type: string
+          description: OAuth token
+        token_type:
+          type: string
+          description: Always `Bearer`
+          enum:
+          - Bearer
+          example: Bearer
+        scope:
+          type: string
+          description: Token’s scope
+      required:
+      - access_token
+      - token_type
+      - scope
     OAuthTokenRequest:
       title: OAuthTokenRequest
       type: object

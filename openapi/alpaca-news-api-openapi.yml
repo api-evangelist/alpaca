@@ -77,6 +77,45 @@ paths:
       - News
 components:
   schemas:
+    GetNewsResponse:
+      title: GetNewsResponse
+      type: object
+      properties:
+        news:
+          type: array
+          items:
+            $ref: '#/components/schemas/News'
+        next_page_token:
+          type: string
+          description: Pagination token for next page
+    NewsImage:
+      description: A model representing images for news article. simply a url to the image along with a size parameter suggesting the display size of the image
+      type: object
+      x-examples:
+        newsimage-example-1:
+          size: thumb
+          url: https://cdn.benzinga.com/files/imagecache/250x187xUP/images/story/2012/doge_12.jpg
+      title: NewsImage
+      properties:
+        size:
+          type: string
+          minLength: 1
+          description: Possible values for size are thumb, small and large.
+          example: thumb
+          enum:
+          - thumb
+          - small
+          - large
+          readOnly: true
+        url:
+          type: string
+          minLength: 1
+          description: url to image from news article
+          format: uri
+          readOnly: true
+      required:
+      - size
+      - url
     News:
       description: Model representing a news article from the Alpaca Market Data API
       type: object
@@ -170,79 +209,7 @@ components:
       - images
       - symbols
       - source
-    NewsImage:
-      description: A model representing images for news article. simply a url to the image along with a size parameter suggesting the display size of the image
-      type: object
-      x-examples:
-        newsimage-example-1:
-          size: thumb
-          url: https://cdn.benzinga.com/files/imagecache/250x187xUP/images/story/2012/doge_12.jpg
-      title: NewsImage
-      properties:
-        size:
-          type: string
-          minLength: 1
-          description: Possible values for size are thumb, small and large.
-          example: thumb
-          enum:
-          - thumb
-          - small
-          - large
-          readOnly: true
-        url:
-          type: string
-          minLength: 1
-          description: url to image from news article
-          format: uri
-          readOnly: true
-      required:
-      - size
-      - url
-    GetNewsResponse:
-      title: GetNewsResponse
-      type: object
-      properties:
-        news:
-          type: array
-          items:
-            $ref: '#/components/schemas/News'
-        next_page_token:
-          type: string
-          description: Pagination token for next page
   parameters:
-    page_token:
-      name: page_token
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.
-    end:
-      name: end
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-01-01T00:00:00Z'
-      description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
-    start:
-      name: start
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-01-01T00:00:00Z'
-      description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
-    crypto-symbols:
-      name: symbols
-      in: query
-      required: true
-      schema:
-        type: string
-        example: BTCUSD,ETHUSD
-      description: The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with "USD", ie "BTCUSD,ETHUSD" would get both BTC and ETH
     limit:
       name: limit
       in: query
@@ -252,6 +219,39 @@ components:
         minimum: 1
         maximum: 10000
       description: Number of data points to return. Must be in range 1-10000, defaults to 1000.
+    start:
+      name: start
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-01-01T00:00:00Z'
+      description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
+    page_token:
+      name: page_token
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination token to continue from. The value to pass here is returned in specific requests when more data is available than the request limit allows.
+    crypto-symbols:
+      name: symbols
+      in: query
+      required: true
+      schema:
+        type: string
+        example: BTCUSD,ETHUSD
+      description: The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with "USD", ie "BTCUSD,ETHUSD" would get both BTC and ETH
+    end:
+      name: end
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-01-01T00:00:00Z'
+      description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
   securitySchemes:
     API_Key:
       name: APCA-API-KEY-ID

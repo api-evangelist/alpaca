@@ -99,17 +99,15 @@ paths:
               schema:
                 type: string
       operationId: createAccount
-      description: 'Submit an account application with KYC information. This will create a trading account for the end user. The account status may or may not be ACTIVE immediately and you will receive account status updates on the event API. '
+      description: Submit an account application with KYC information. This will create a trading account for the end user. The account status may or may not be ACTIVE immediately and you will receive account status updates on the event API.
   /v1/accounts/{account_id}:
     parameters:
     - $ref: '#/components/parameters/AccountID'
     get:
-      summary: Get an account by Id.
+      summary: Get an account by Id
       tags:
       - Accounts
-      description: 'You can query a specific account that you submitted to Alpaca by passing into the query the account_id associated with the account you’re retrieving.
-
-        '
+      description: You can query a specific account that you submitted to Alpaca by passing into the query the account_id associated with the account you’re retrieving.
       responses:
         '200':
           description: Will return an AccountExtended if an account with account_id exists, otherwise will throw an error.
@@ -278,16 +276,13 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AccountID'
     get:
-      summary: Return a list of transfers for an account.
+      summary: Return a list of transfers for an account
       tags:
       - Accounts
       description: 'You can query a list of transfers for an account.
 
 
-
-        You can filter requested transfers by values such as direction and status.
-
-        '
+        You can filter requested transfers by values such as direction and status.'
       parameters:
       - name: direction
         in: query
@@ -355,7 +350,7 @@ paths:
       description: 'Create a new transfer to an account to fund it.
 
 
-        In the sandbox environment, you can instantly deposit to or withdraw from an account with a virtual money amount. In the production environment, this endpoint is used only for requesting an outgoing (withdrawal) wire transfer at this moment. For the wire transfer (in production), you need to create a bank resource first using the Bank API. For more on how to fund an account in sandbox please check out this tutorial [here](https://alpaca.markets/learn/fund-broker-api/).'
+        In the sandbox environment, you can instantly deposit to or withdraw from an account with a virtual money amount. In the production environment, this endpoint is used only for requesting an outgoing (withdrawal) wire transfer at this moment. For the wire transfer (in production), you need to create a bank resource first using the Bank API. For more on how to fund an account in sandbox please check out this tutorial here.'
       parameters:
       - name: account_id
         in: path
@@ -395,7 +390,6 @@ paths:
           description: Success (No Content)
         '404':
           $ref: '#/components/responses/NotFound'
-      description: Request to close a transfer
       tags:
       - Accounts
   /v1/accounts/activities:
@@ -449,7 +443,27 @@ paths:
                 items:
                   $ref: '#/components/schemas/Activity'
       operationId: getAccountActivities
-      description: "Returns an array of Activities\n\nNotes:\n* Pagination is handled using the `page_token` and `page_size` parameters.\n* `page_token` represents the ID of the end of your current page of results.\n  for example if in your first response the id of the last Activiy item returned in the array was `20220203000000000::045b3b8d-c566-4bef-b741-2bf598dd6ae7`, you'd pass that value as `page_token` to get the next page of results\n\n* If specified with a `direction` of `desc`, for example, the results will end before the activity with the specified ID.\n* If specified with a `direction` of `asc`, results will begin with the activity immediately after the one specified.\n* `page_size` is the maximum number of entries to return in the response.\n* If `date` is not specified, the default and maximum value is 100.\n* If `date` is specified, the default behavior is to return all results, and there is no maximum page size."
+      description: 'Returns an array of Activities
+
+
+        Notes:
+
+        * Pagination is handled using the `page_token` and `page_size` parameters.
+
+        * `page_token` represents the ID of the end of your current page of results.
+
+        for example if in your first response the id of the last Activiy item returned in the array was `20220203000000000::045b3b8d-c566-4bef-b741-2bf598dd6ae7`, you''d pass that value as `page_token` to get the next page of results
+
+
+        * If specified with a `direction` of `desc`, for example, the results will end before the activity with the specified ID.
+
+        * If specified with a `direction` of `asc`, results will begin with the activity immediately after the one specified.
+
+        * `page_size` is the maximum number of entries to return in the response.
+
+        * If `date` is not specified, the default and maximum value is 100.
+
+        * If `date` is specified, the default behavior is to return all results, and there is no maximum page size.'
   /v1/accounts/activities/{activity_type}:
     parameters:
     - $ref: '#/components/parameters/ActivityType'
@@ -506,7 +520,27 @@ paths:
                 items:
                   $ref: '#/components/schemas/Activity'
       operationId: getAccountActivitiesByType
-      description: "Retrieves an Array of Activies by type\n\nNotes:\n* Pagination is handled using the `page_token` and `page_size` parameters.\n* `page_token` represents the ID of the end of your current page of results.\n  for example if in your first response the id of the last Activiy item returned in the array was `20220203000000000::045b3b8d-c566-4bef-b741-2bf598dd6ae7`, you'd pass that value as `page_token` to get the next page of results\n\n* If specified with a `direction` of `desc`, for example, the results will end before the activity with the specified ID.\n* If specified with a `direction` of `asc`, results will begin with the activity immediately after the one specified.\n* `page_size` is the maximum number of entries to return in the response.\n* If `date` is not specified, the default and maximum value is 100.\n* If `date` is specified, the default behavior is to return all results, and there is no maximum page size."
+      description: 'Retrieves an Array of Activies by type
+
+
+        Notes:
+
+        * Pagination is handled using the `page_token` and `page_size` parameters.
+
+        * `page_token` represents the ID of the end of your current page of results.
+
+        for example if in your first response the id of the last Activiy item returned in the array was `20220203000000000::045b3b8d-c566-4bef-b741-2bf598dd6ae7`, you''d pass that value as `page_token` to get the next page of results
+
+
+        * If specified with a `direction` of `desc`, for example, the results will end before the activity with the specified ID.
+
+        * If specified with a `direction` of `asc`, results will begin with the activity immediately after the one specified.
+
+        * `page_size` is the maximum number of entries to return in the response.
+
+        * If `date` is not specified, the default and maximum value is 100.
+
+        * If `date` is specified, the default behavior is to return all results, and there is no maximum page size.'
   /v1/accounts/{account_id}/ach_relationships:
     parameters:
     - $ref: '#/components/parameters/AccountID'
@@ -592,7 +626,7 @@ paths:
     - $ref: '#/components/parameters/AccountID'
     get:
       operationId: getTradingAccount
-      summary: Retrieve trading details for an account.
+      summary: Retrieve trading details for an account
       tags:
       - Accounts
       description: 'As a broker you can view more trading details about your users.
@@ -608,7 +642,7 @@ paths:
                 $ref: '#/components/schemas/TradeAccount'
   /v1/events/accounts/status:
     get:
-      summary: Subscribe to account status events (SSE).
+      summary: Subscribe to account status events (SSE)
       tags:
       - Accounts
       description: 'Events API provide event push as well as historical queries via SSE (server sent events).
@@ -638,9 +672,7 @@ paths:
         Note for people using the clients generated from this OAS spec. Currently OAS-3 doesn''t have full support for representing SSE style responses from an API, so if you are using a generated client and don''t specify a `since` and `until` there is a good chance the generated clients will hang waiting for the response to end.
 
 
-        If you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.
-
-        '
+        If you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.'
       parameters:
       - name: since
         in: query
@@ -675,97 +707,170 @@ paths:
       operationId: suscribeToAccountStatusSSE
 components:
   schemas:
-    TradeActivity:
-      title: TradeActivity
+    DocumentUploadRequest:
       type: object
+      description: 'If an account has documents after the submission, it has
+
+        the Document model in exchange with DocumentUploadRequest.
+
+        '
       properties:
-        transaction_time:
+        document_type:
+          $ref: '#/components/schemas/DocumentType'
+        document_sub_type:
           type: string
-          format: date-time
-          example: '2021-05-10T14:01:04.650275Z'
-          description: Valid only for trading activity types. Null for non-trading activites.
-        type:
+          example: passport
+        content:
           type: string
-          enum:
-          - fill
-          - partial_fill
-          example: fill
-          description: Valid only for trading activity types. Null for non-trading activites.
-        price:
+          format: base64
+          example: /9j/Cg==
+        mime_type:
           type: string
-          format: decimal
-          example: '3.1415'
-          description: Valid only for trading activity types. Null for non-trading activites.
-        qty:
-          type: string
-          format: decimal
-          example: '0.38921'
-          description: Valid only for trading activity types. Null for non-trading activites.
-        side:
-          $ref: '#/components/schemas/OrderSide'
-        symbol:
-          type: string
-          example: AAPL
-          description: Valid only for trading activity types. Null for non-trading activites.
-        leaves_qty:
-          type: string
-          format: decimal
-          example: '0.5123'
-          description: Valid only for trading activity types. Null for non-trading activites.
-        order_id:
-          type: string
-          format: uuid
-          example: fe060a1b-5b45-4eba-ba46-c3a3345d8255
-          description: Valid only for trading activity types. Null for non-trading activites.
-        cum_qty:
-          type: string
-          format: decimal
-          example: '0.9723'
-          description: Valid only for trading activity types. Null for non-trading activites.
-        order_status:
-          $ref: '#/components/schemas/OrderStatus'
-    AccountConfigurations:
-      title: AccountConfigurations
-      type: object
-      description: Represents additional configuration settings for an account
-      properties:
-        dtbp_check:
-          type: string
-          description: both, entry, or exit. Controls Day Trading Margin Call (DTMC) checks.
-          example: both
-          enum:
-          - both
-          - entry
-          - exit
-        trade_confirm_email:
-          type: string
-          description: all or none. If none, emails for order fills are not sent.
-          enum:
-          - all
-          - none
-        suspend_trade:
-          type: boolean
-          description: If true, new orders are blocked.
-        no_shorting:
-          type: boolean
-          description: If true, account becomes long-only mode.
-        fractional_trading:
-          type: boolean
-          description: If true, account is able to participate in fractional trading
-        max_margin_multiplier:
-          type: string
-          description: Can be "1" or "2"
-        pdt_check:
-          type: string
-          example: entry
+          example: image/jpeg
       required:
-      - dtbp_check
-      - trade_confirm_email
-      - suspend_trade
-      - no_shorting
-      - fractional_trading
-      - max_margin_multiplier
-      - pdt_check
+      - document_type
+      - content
+      - mime_type
+      example:
+        document_type: identity_verification
+        document_sub_type: passport
+        content: /9j/Cg==
+        mime_type: image/jpeg
+      title: DocumentUploadRequest
+      x-examples:
+        example-1:
+          document_type: identity_verification
+          document_sub_type: passport
+          content: /9j/Cg==
+          mime_type: image/jpeg
+    DocumentType:
+      type: string
+      enum:
+      - identity_verification
+      - address_verification
+      - date_of_birth_verification
+      - tax_id_verification
+      - account_approval_letter
+      - cip_result
+      description: "- identity_verification:\n  identity verification document\n\n- address_verification:\n  address verification document\n\n- date_of_birth_verification:\n  date of birth verification document\n\n- tax_id_verification:\n  tax ID verification document\n\n- account_approval_letter:\n  407 approval letter\n\n- cip_result:\n  initial CIP result\n"
+      example: identity_verification
+    Activity:
+      title: Activity
+      description: Base for activity types
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            example: 20220208125959696::88b5f678-fef5-447b-af15-f21e367e6d8c
+          account_id:
+            type: string
+            format: uuid
+            example: c8f1ef5d-edc0-4f23-9ee4-378f19cb92a4
+          activity_type:
+            $ref: '#/components/schemas/ActivityType'
+      - oneOf:
+        - $ref: '#/components/schemas/TradeActivity'
+        - $ref: '#/components/schemas/NonTradeActivity'
+      required:
+      - id
+      - activity_type
+    KYCResult:
+      type: object
+      description: Hold information about the result of KYC. Please see the documentation [here](https://alpaca.markets/docs/api-references/broker-api/events/#kyc-results) for more indepth details
+      properties:
+        reject:
+          type: object
+        accept:
+          type: object
+        indeterminate:
+          type: object
+        addidional_information:
+          type: string
+    Identity:
+      type: object
+      description: 'Identity is the model to provide account owner’s identity information.
+
+        '
+      example:
+        given_name: John
+        family_name: Doe
+        date_of_birth: '1990-01-01'
+        tax_id: 666-55-4321
+        tax_id_type: USA_SSN
+        country_of_citizenship: AUS
+        country_of_birth: AUS
+        country_of_tax_residence: USA
+        funding_source:
+        - employment_income
+      properties:
+        given_name:
+          type: string
+          example: John
+        family_name:
+          type: string
+          example: Doe
+        date_of_birth:
+          type: string
+          format: date
+          example: '1990-01-01'
+        tax_id:
+          type: string
+          example: 666-55-4321
+        tax_id_type:
+          $ref: '#/components/schemas/TaxIdType'
+        country_of_citizenship:
+          type: string
+          description: '[ISO 3166-1 alpha-3](https://www.iso.org/iso-3166-country-codes.html).
+
+            '
+          example: USA
+        country_of_birth:
+          type: string
+          description: '[ISO 3166-1 alpha-3](https://www.iso.org/iso-3166-country-codes.html).
+
+            '
+          example: USA
+        country_of_tax_residence:
+          type: string
+          description: '[ISO 3166-1 alpha-3](https://www.iso.org/iso-3166-country-codes.html).
+
+            '
+          example: USA
+        funding_source:
+          type: array
+          items:
+            type: string
+            enum:
+            - employment_income
+            - investments
+            - inheritance
+            - business_income
+            - savings
+            - family
+        annual_income_min:
+          type: number
+        annual_income_max:
+          type: number
+        liquid_net_worth_min:
+          type: number
+        liquid_net_worth_max:
+          type: number
+        total_net_worth_min:
+          type: number
+        total_net_worth_max:
+          type: number
+        extra:
+          type: object
+          description: 'any extra information used for KYC purposes
+
+            '
+      required:
+      - given_name
+      - family_name
+      - date_of_birth
+      - country_of_tax_residence
+      - funding_source
     TradeAccount:
       type: object
       x-examples:
@@ -1041,17 +1146,49 @@ components:
       - equity
       - cash
       - buying_power
-    DocumentType:
+    StreetAddress:
+      type: string
+      example: 20 N San Mateo Dr
+    ActivityType:
+      title: ActivityType
       type: string
       enum:
-      - identity_verification
-      - address_verification
-      - date_of_birth_verification
-      - tax_id_verification
-      - account_approval_letter
-      - cip_result
-      description: "- identity_verification:\n  identity verification document\n\n- address_verification:\n  address verification document\n\n- date_of_birth_verification:\n  date of birth verification document\n\n- tax_id_verification:\n  tax ID verification document\n\n- account_approval_letter:\n  407 approval letter\n\n- cip_result:\n  initial CIP result\n"
-      example: identity_verification
+      - FILL
+      - ACATC
+      - ACATS
+      - CIL
+      - CSD
+      - CSW
+      - DIV
+      - DIVCGL
+      - DIVCGS
+      - DIVNRA
+      - DIVROC
+      - DIVTXEX
+      - FEE
+      - INT
+      - JNLC
+      - JNLS
+      - MA
+      - PTC
+      - REORG
+      - SPIN
+      - SPLIT
+      description: "Represents the various kinds of activity.\n\nTradeActivity's will always have the type `FILL`\n\n- **FILL**\n  Order Fills (Partial/Full)\n- **ACATC**\n  ACATS IN/OUT (Cash)\n- **ACATS**\n  ACATS IN/OUT (Securities)\n- **CIL**\n  Cash in Lieu of Stock\n- **CSD**\n  Cash Disbursement (+)\n- **CSW**\n  Cash Withdrawable\n- **DIV**\n  Dividend\n- **DIVCGL**\n  Dividend (Capital Gain Long Term)\n- **DIVCGS**\n  Dividend (Capital Gain Short Term)\n- **DIVNRA**\n  Dividend Adjusted (NRA Withheld)\n- **DIVROC**\n  Dividend Return of Capital\n- **DIVTXEX**\n  Dividend (Tax Exempt)\n- **FEE**\n  REG and TAF Fees\n- **INT**\n  Interest (Credit/Margin)\n- **JNLC**\n  Journal Entry (Cash)\n- **JNLS**\n  Journal Entry (Stock)\n- **MA**\n  Merger/Acquisition\n- **PTC**\n  Pass Thru Change\n- **REORG**\n  Reorg CA\n- **SPIN**\n  Stock Spinoff\n- **SPLIT**\n  Stock Split"
+    OrderSide:
+      type: string
+      enum:
+      - buy
+      - sell
+      - buy_minus
+      - sell_plus
+      - sell_short
+      - sell_short_exempt
+      - undisclosed
+      - cross
+      - cross_short
+      example: buy
+      description: Represents what side of the transaction an order was on.
     TransferType:
       type: string
       example: ach
@@ -1072,6 +1209,69 @@ components:
 
         '
       title: TransferType
+    TransferTiming:
+      type: string
+      example: immediate
+      enum:
+      - immediate
+      description: 'Only `immediate` is currently supported.
+
+
+        values:
+
+
+        - **immediate**
+
+
+        - **next_day**'
+    AccountStatusEvent:
+      description: 'Represents a change in an Account''s status, sent over the events streaming api.
+
+
+        For partners who utilize Alpaca’s KYC service for opening brokerage accounts an additional `kyc_results` object is represented in the account status update events.'
+      type: object
+      x-examples:
+        example-1:
+          account_id: 4db36989-6565-4011-9126-39fe6b3d9bf6
+          account_number: ''
+          at: '2021-06-14T09:59:15.232782Z'
+          event_id: 122039
+          kyc_results: null
+          status_from: ''
+          status_to: APPROVED
+      title: AccountStatusEvent
+      properties:
+        account_id:
+          type: string
+          minLength: 1
+        account_number:
+          type: string
+          minLength: 1
+        status_from:
+          $ref: '#/components/schemas/AccountStatus'
+        status_to:
+          $ref: '#/components/schemas/AccountStatus'
+        reason:
+          type: string
+          minLength: 1
+          description: Optional
+        at:
+          type: string
+          minLength: 1
+          description: Timestamp of event
+        kyc_result:
+          $ref: '#/components/schemas/KYCResult'
+        event_id:
+          type: integer
+          description: monotonically increasing 64bit integer
+      required:
+      - account_id
+      - account_number
+      - status_from
+      - status_to
+      - reason
+      - at
+      - event_id
     Agreement:
       type: object
       properties:
@@ -1091,90 +1291,429 @@ components:
       - agreement
       - signed_at
       - ip_address
-    Identity:
+    TradeActivity:
+      title: TradeActivity
       type: object
-      description: 'Identity is the model to provide account owner’s identity information.
+      properties:
+        transaction_time:
+          type: string
+          format: date-time
+          example: '2021-05-10T14:01:04.650275Z'
+          description: Valid only for trading activity types. Null for non-trading activites.
+        type:
+          type: string
+          enum:
+          - fill
+          - partial_fill
+          example: fill
+          description: Valid only for trading activity types. Null for non-trading activites.
+        price:
+          type: string
+          format: decimal
+          example: '3.1415'
+          description: Valid only for trading activity types. Null for non-trading activites.
+        qty:
+          type: string
+          format: decimal
+          example: '0.38921'
+          description: Valid only for trading activity types. Null for non-trading activites.
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        symbol:
+          type: string
+          example: AAPL
+          description: Valid only for trading activity types. Null for non-trading activites.
+        leaves_qty:
+          type: string
+          format: decimal
+          example: '0.5123'
+          description: Valid only for trading activity types. Null for non-trading activites.
+        order_id:
+          type: string
+          format: uuid
+          example: fe060a1b-5b45-4eba-ba46-c3a3345d8255
+          description: Valid only for trading activity types. Null for non-trading activites.
+        cum_qty:
+          type: string
+          format: decimal
+          example: '0.9723'
+          description: Valid only for trading activity types. Null for non-trading activites.
+        order_status:
+          $ref: '#/components/schemas/OrderStatus'
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+      required:
+      - code
+      - message
+    OrderStatus:
+      type: string
+      enum:
+      - new
+      - partially_filled
+      - filled
+      - done_for_day
+      - canceled
+      - expired
+      - replaced
+      - pending_cancel
+      - pending_replace
+      - accepted
+      - pending_new
+      - accepted_for_bidding
+      - stopped
+      - rejected
+      - suspended
+      - calculated
+      example: filled
+    Contact:
+      type: object
+      description: 'Contact is the model for the account owner contact information.
 
         '
-      example:
-        given_name: John
-        family_name: Doe
-        date_of_birth: '1990-01-01'
-        tax_id: 666-55-4321
-        tax_id_type: USA_SSN
-        country_of_citizenship: AUS
-        country_of_birth: AUS
-        country_of_tax_residence: USA
-        funding_source:
-        - employment_income
       properties:
-        given_name:
+        email_address:
           type: string
-          example: John
-        family_name:
+          format: email
+          example: john.doe@example.com
+        phone_number:
           type: string
-          example: Doe
-        date_of_birth:
-          type: string
-          format: date
-          example: '1990-01-01'
-        tax_id:
-          type: string
-          example: 666-55-4321
-        tax_id_type:
-          $ref: '#/components/schemas/TaxIdType'
-        country_of_citizenship:
-          type: string
-          description: '[ISO 3166-1 alpha-3](https://www.iso.org/iso-3166-country-codes.html).
-
-            '
-          example: USA
-        country_of_birth:
-          type: string
-          description: '[ISO 3166-1 alpha-3](https://www.iso.org/iso-3166-country-codes.html).
-
-            '
-          example: USA
-        country_of_tax_residence:
-          type: string
-          description: '[ISO 3166-1 alpha-3](https://www.iso.org/iso-3166-country-codes.html).
-
-            '
-          example: USA
-        funding_source:
+          description: with country code, no hyphen or space
+          example: '+15556667788'
+        street_address:
           type: array
           items:
-            type: string
-            enum:
-            - employment_income
-            - investments
-            - inheritance
-            - business_income
-            - savings
-            - family
-        annual_income_min:
-          type: number
-        annual_income_max:
-          type: number
-        liquid_net_worth_min:
-          type: number
-        liquid_net_worth_max:
-          type: number
-        total_net_worth_min:
-          type: number
-        total_net_worth_max:
-          type: number
-        extra:
-          type: object
-          description: 'any extra information used for KYC purposes
-
-            '
+            $ref: '#/components/schemas/StreetAddress'
+        city:
+          type: string
+          example: San Mateo
+        state:
+          type: string
+          example: CA
+        postal_code:
+          type: string
+          example: '94401'
+    ACHRelationship:
+      title: ACHRelationship
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        created_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+          description: 'Format: 2020-01-01T01:01:01Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+          description: 'Format: 2020-01-01T01:01:01Z'
+        account_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+          - QUEUED
+          - APPROVED
+          - PENDING
+          - CANCEL_REQUESTED
+        account_owner_name:
+          type: string
+          minLength: 1
+          description: Name of the account owner
+        bank_account_type:
+          type: string
+          minLength: 1
+          enum:
+          - CHECKING
+          - SAVINGS
+          description: Must be CHECKING or SAVINGS
+        bank_account_number:
+          type: string
+          minLength: 1
+        bank_routing_number:
+          type: string
+          minLength: 1
+        nickname:
+          type: string
+          minLength: 1
       required:
-      - given_name
-      - family_name
-      - date_of_birth
-      - country_of_tax_residence
-      - funding_source
+      - id
+      - created_at
+      - updated_at
+      - account_id
+      - status
+      - account_owner_name
+    Bank:
+      type: object
+      x-examples:
+        example-1:
+          id: 8475c676-68e3-4cfc-a683-9ca2f47a6172
+          account_id: 56712986-9ff7-4d8f-8e52-077e099e533e
+          name: Bank XYZ
+          status: QUEUED
+          country: ''
+          state_province: ''
+          postal_code: ''
+          city: ''
+          street_address: ''
+          account_number: 123456789abc
+          bank_code: '123456789'
+          bank_code_type: ABA
+          created_at: '2022-02-11T21:35:19.268681613Z'
+          updated_at: '2022-02-11T21:35:19.268681613Z'
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        created_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+          description: 'Format: 2020-01-01T01:01:01Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+          description: 'Format: 2020-01-01T01:01:01Z'
+        account_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+          - QUEUED
+          - SENT_TO_CLEARING
+          - APPROVED
+          - CANCELED
+          description: QUEUED, SENT_TO_CLEARING, APPROVED, CANCELED
+        name:
+          type: string
+          description: Name of recipient bank
+        bank_code:
+          type: string
+          description: 9-Digit ABA RTN (Routing Number) or BIC
+        bank_code_type:
+          type: string
+          enum:
+          - ABA
+          - BIC
+          description: ABA (Domestic) or BIC (International)
+        country:
+          type: string
+          description: Only for international banks
+        state_province:
+          type: string
+          description: Only for international banks
+        postal_code:
+          type: string
+          description: Only for international banks
+        city:
+          type: string
+          description: Only for international banks
+        street_address:
+          type: string
+          description: Only for international banks
+        account_number:
+          type: string
+      required:
+      - id
+      - created_at
+      - updated_at
+      - name
+      - bank_code
+      - bank_code_type
+      - account_number
+    AccountUpdateRequest:
+      type: object
+      x-examples:
+        example-1:
+          contact:
+            email_address: john.doe@example.com
+            phone_number: '+15556667788'
+            street_address:
+            - 20 N San Mateo Dr
+            city: San Mateo
+            state: CA
+            postal_code: '94401'
+          identity:
+            given_name: John
+            family_name: Doe
+            date_of_birth: '1990-01-01'
+            tax_id: 666-55-4321
+            tax_id_type: USA_SSN
+            country_of_citizenship: AUS
+            country_of_birth: AUS
+            country_of_tax_residence: USA
+            funding_source:
+            - employment_income
+          disclosures:
+            is_control_person: false
+            is_affiliated_exchange_or_finra: false
+            is_politically_exposed: false
+            immediate_family_exposed: false
+          trustedContact:
+            given_name: Jane
+            family_name: Doe
+            email_address: jane.doe@example.com
+      properties:
+        contact:
+          $ref: '#/components/schemas/Contact'
+        identity:
+          $ref: '#/components/schemas/Identity'
+        disclosures:
+          $ref: '#/components/schemas/Disclosures'
+        trustedContact:
+          $ref: '#/components/schemas/TrustedContact'
+    CreateTransferRequest:
+      title: CreateTransferRequest
+      type: object
+      properties:
+        transfer_type:
+          $ref: '#/components/schemas/TransferType'
+        relationship_id:
+          type: string
+          format: uuid
+          description: 'Required if type = `ach`
+
+
+            The ach_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#creating-an-ach-relationship)'
+        bank_id:
+          type: string
+          format: uuid
+          description: 'Required if type = `wire`
+
+
+            The bank_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/bank/#creating-a-new-bank-relationship)'
+        amount:
+          type: string
+          format: decimal
+          description: Must be > 0.00
+        direction:
+          $ref: '#/components/schemas/TransferDirection'
+        timing:
+          $ref: '#/components/schemas/TransferTiming'
+        additional_information:
+          type:
+          - string
+          - 'null'
+          description: Additional details for when type = `wire`
+      required:
+      - transfer_type
+      - amount
+      - direction
+      - timing
+      description: '[See main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#creating-a-transfer-entity)'
+    Transfer:
+      title: Transfer
+      type: object
+      x-examples:
+        example-1:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          relationship_id: 81412018-ffa2-43f9-a3eb-d39f1c5e0f87
+          bank_id: f1ae96de-94c1-468e-93a3-6b7213930ca8
+          account_id: 449e7a5c-69d3-4b8a-aaaf-5c9b713ebc65
+          type: ach
+          status: QUEUED
+          reason: string
+          amount: string
+          direction: INCOMING
+          created_at: '2019-08-24T14:15:22Z'
+          updated_at: '2019-08-24T14:15:22Z'
+          expires_at: '2019-08-24T14:15:22Z'
+          additional_information: string
+      description: 'Transfers allow you to transfer money/balance into your end customers'' account (deposits) or out (withdrawal).
+
+
+        [Main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#the-transfer-object)'
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The transfer ID
+        relationship_id:
+          type: string
+          format: uuid
+          description: The ACH relationship ID only present if type = "ach"
+        bank_id:
+          type: string
+          format: uuid
+          description: The ID of the Bank, only present if type = "wire"
+        account_id:
+          type: string
+          format: uuid
+          description: The account ID
+        type:
+          $ref: '#/components/schemas/TransferType'
+        status:
+          $ref: '#/components/schemas/TransferStatus'
+        reason:
+          type:
+          - string
+          - 'null'
+          description: Cause of the status
+        amount:
+          type: string
+          description: Must be > 0.00
+          format: decimal
+        direction:
+          $ref: '#/components/schemas/TransferDirection'
+        created_at:
+          type: string
+          format: date-time
+          description: Timedate when transfer was created
+        updated_at:
+          type: string
+          format: date-time
+          description: Timedate when transfer was updated
+        expires_at:
+          type: string
+          format: date-time
+          description: Timedate when transfer was expired
+        additional_information:
+          type:
+          - string
+          - 'null'
+          description: Additional information. Only applies when type = "wire".
+        hold_until:
+          type: string
+          format: date-time
+        instant_amount:
+          type: string
+      required:
+      - id
+      - account_id
+      - type
+      - status
+      - amount
+      - direction
+      - created_at
+    AccountType:
+      type: string
+      title: AccountType
+      description: 'Possible values are:
+
+
+        - trading
+
+        - custodial
+
+        - donor_advised'
+      enum:
+      - trading
+      - custodial
+      - donor_advised
+      example: trading
     TaxIdType:
       type: string
       title: TaxIdType
@@ -1413,54 +1952,186 @@ components:
 
         Other Tax IDs'
       example: USA_SSN
-    TransferStatus:
+    AccountStatus:
       type: string
-      example: QUEUED
+      example: ACTIVE
       enum:
-      - QUEUED
+      - ONBOARDING
+      - SUBMITTED
+      - RESUBMITTED
+      - SUBMISSION_FAILED
+      - ACTION_REQUIRED
+      - EDITED
+      - ACCOUNT_UPDATED
       - APPROVAL_PENDING
-      - PENDING
-      - SENT_TO_CLEARING
-      - REJECTED
-      - CANCELED
+      - REAPPROVAL_PENDING
+      - SIGNED_UP
+      - KYC_SUBMITTED
+      - LIMITED
+      - AML_REVIEW
       - APPROVED
-      - COMPLETE
-      - RETURNED
-      description: '- **QUEUED**
+      - REJECTED
+      - ACTIVE
+      - DISABLED
+      - DISABLE_PENDING
+      - ACCOUNT_CLOSED
+      - PAPER_ONLY
+      description: 'Designates the current status of this account
 
-        Transfer is in queue to be processed.
+
+        Possible Values:
+
+        - **ONBOARDING**
+
+        An application is expected for this user, but has not been submitted yet.
+
+        - **SUBMITTED**
+
+        The application has been submitted and in process.
+
+        - **RESUBMITTED**
+
+        Resubmitted is used to display when request has been re-submitted to Apex after account update
+
+        - **SUBMISSION_FAILED**
+
+        Used to display if failure on submission
+
+        - **ACTION_REQUIRED**
+
+        The application requires manual action.
+
+        - **EDITED**
+
+        Application was edited (e.g. to match info from uploaded docs). This is a transient status.
+
+        - **ACCOUNT_UPDATED**
+
+        Used to display when Account has been modified by user
 
         - **APPROVAL_PENDING**
 
-        Transfer is pending approval.
+        Initial value. The application approval process is in process.
 
-        - **PENDING**
+        - **REAPPROVAL_PENDING**
 
-        Transfer is pending processing.
+        This is a transient status used to display once apex approves a re-submission
 
-        - **SENT_TO_CLEARING**
+        - **SIGNED_UP**
 
-        Transfer is being processed by the clearing firm.
+        Users who were directed to and competed the [first stage](https://app.alpaca.markets/signup) of v2 registration
 
-        - **REJECTED**
+        - **KYC_SUBMITTED**
 
-        Transfer is rejected.
+        Users that have had their KYC submitted to the routed KYC Provider
 
-        - **CANCELED**
+        - **LIMITED**
 
-        Client initiated transfer cancellation.
+        Limited Users that pass KYC but are missing financial_information and employment_details
+
+        - **AML_REVIEW**
+
+        Users that pass KYC but from a restricted/high risk country and need manual AML approval
 
         - **APPROVED**
 
-        Transfer is approved.
+        The account application has been approved, and waiting to be ACTIVE
 
-        - **COMPLETE**
+        - **REJECTED**
 
-        Transfer is completed.
+        The account application is rejected for some reason
 
-        - **RETURNED**
+        - **ACTIVE**
 
-        The bank issued an ACH return for the transfer.
+        The account is fully active. Trading and funding are processed under this status.
+
+        - **DISABLED**
+
+        The account is disabled after ACTIVE status.
+
+        - **DISABLE_PENDING**
+
+        DisablePending is used for accounts which requested to be disabled, but have not been processed yet.
+
+        - **ACCOUNT_CLOSED**
+
+        The account is closed.
+
+        - **PAPER_ONLY**
+
+        Used to display when only paper trading is allowed for this account
+
+        '
+    CreateBankRequest:
+      title: CreateBankRequest
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of recipient bank
+        bank_code:
+          type: string
+          description: 9-Digit ABA RTN (Routing Number) or BIC
+        bank_code_type:
+          type: string
+          enum:
+          - ABA
+          - BIC
+          description: ABA (Domestic) or BIC (International)
+        country:
+          type: string
+          description: Only for international banks
+        state_province:
+          type: string
+          description: Only for international banks
+        postal_code:
+          type: string
+          description: Only for international banks
+        city:
+          type: string
+          description: Only for international banks
+        street_address:
+          type: string
+          description: Only for international banks
+        account_number:
+          type: string
+      required:
+      - name
+      - bank_code
+      - bank_code_type
+      - account_number
+      description: Represents the possible fields to send when creating a new associated Bank resource for an account
+    AgreementType:
+      type: string
+      title: AgreementType
+      description: '- margin_agreement: Alpaca Margin Agreement
+
+        - account_agreement: Alpaca Account Agreement
+
+        - customer_agreement: Alpaca Customer Agreement
+
+        - crypto_agreement: Alpaca Crypto agreement
+
+        '
+      enum:
+      - margin_agreement
+      - account_agreement
+      - customer_agreement
+      - crypto_agreement
+      example: customer_agreement
+    TransferDirection:
+      type: string
+      example: INCOMING
+      enum:
+      - INCOMING
+      - OUTGOING
+      description: '- **INCOMING**
+
+        Funds incoming to user’s account (deposit).
+
+        - **OUTGOING**
+
+        Funds outgoing from user’s account (withdrawal).
 
         '
     ApplicationDocument:
@@ -1495,156 +2166,48 @@ components:
         document_sub_type: passport
         mime_type: image/jpeg
         created_at: '2019-09-30T23:55:31.185998Z'
-    DocumentUploadRequest:
+    AccountConfigurations:
+      title: AccountConfigurations
       type: object
-      description: 'If an account has documents after the submission, it has
-
-        the Document model in exchange with DocumentUploadRequest.
-
-        '
+      description: Represents additional configuration settings for an account
       properties:
-        document_type:
-          $ref: '#/components/schemas/DocumentType'
-        document_sub_type:
+        dtbp_check:
           type: string
-          example: passport
-        content:
+          description: both, entry, or exit. Controls Day Trading Margin Call (DTMC) checks.
+          example: both
+          enum:
+          - both
+          - entry
+          - exit
+        trade_confirm_email:
           type: string
-          format: base64
-          example: /9j/Cg==
-        mime_type:
+          description: all or none. If none, emails for order fills are not sent.
+          enum:
+          - all
+          - none
+        suspend_trade:
+          type: boolean
+          description: If true, new orders are blocked.
+        no_shorting:
+          type: boolean
+          description: If true, account becomes long-only mode.
+        fractional_trading:
+          type: boolean
+          description: If true, account is able to participate in fractional trading
+        max_margin_multiplier:
           type: string
-          example: image/jpeg
+          description: Can be "1" or "2"
+        pdt_check:
+          type: string
+          example: entry
       required:
-      - document_type
-      - content
-      - mime_type
-      example:
-        document_type: identity_verification
-        document_sub_type: passport
-        content: /9j/Cg==
-        mime_type: image/jpeg
-      title: DocumentUploadRequest
-      x-examples:
-        example-1:
-          document_type: identity_verification
-          document_sub_type: passport
-          content: /9j/Cg==
-          mime_type: image/jpeg
-    AccountStatusEvent:
-      description: 'Represents a change in an Account''s status, sent over the events streaming api.
-
-
-        For partners who utilize Alpaca’s KYC service for opening brokerage accounts an additional `kyc_results` object is represented in the account status update events.'
-      type: object
-      x-examples:
-        example-1:
-          account_id: 4db36989-6565-4011-9126-39fe6b3d9bf6
-          account_number: ''
-          at: '2021-06-14T09:59:15.232782Z'
-          event_id: 122039
-          kyc_results: null
-          status_from: ''
-          status_to: APPROVED
-      title: AccountStatusEvent
-      properties:
-        account_id:
-          type: string
-          minLength: 1
-        account_number:
-          type: string
-          minLength: 1
-        status_from:
-          $ref: '#/components/schemas/AccountStatus'
-        status_to:
-          $ref: '#/components/schemas/AccountStatus'
-        reason:
-          type: string
-          minLength: 1
-          description: Optional
-        at:
-          type: string
-          minLength: 1
-          description: Timestamp of event
-        kyc_result:
-          $ref: '#/components/schemas/KYCResult'
-        event_id:
-          type: integer
-          description: monotonically increasing 64bit integer
-      required:
-      - account_id
-      - account_number
-      - status_from
-      - status_to
-      - reason
-      - at
-      - event_id
-    CreateTransferRequest:
-      title: CreateTransferRequest
-      type: object
-      properties:
-        transfer_type:
-          $ref: '#/components/schemas/TransferType'
-        relationship_id:
-          type: string
-          format: uuid
-          description: 'Required if type = `ach`
-
-
-            The ach_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#creating-an-ach-relationship)'
-        bank_id:
-          type: string
-          format: uuid
-          description: 'Required if type = `wire`
-
-
-            The bank_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/bank/#creating-a-new-bank-relationship)'
-        amount:
-          type: string
-          format: decimal
-          description: Must be > 0.00
-        direction:
-          $ref: '#/components/schemas/TransferDirection'
-        timing:
-          $ref: '#/components/schemas/TransferTiming'
-        additional_information:
-          type:
-          - string
-          - 'null'
-          description: Additional details for when type = `wire`
-      required:
-      - transfer_type
-      - amount
-      - direction
-      - timing
-      description: '[See main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#creating-a-transfer-entity)'
-    AccountCreationRequest:
-      type: object
-      title: AccountCreationRequest
-      description: Represents the fields required to create a new account
-      properties:
-        contact:
-          $ref: '#/components/schemas/Contact'
-        identity:
-          $ref: '#/components/schemas/Identity'
-        disclosures:
-          $ref: '#/components/schemas/Disclosures'
-        agreements:
-          type: array
-          description: The client has to present the Alpaca Account and Margin Agreements to the end user, and have them read full sentences.
-          items:
-            $ref: '#/components/schemas/Agreement'
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentUploadRequest'
-        trusted_contact:
-          $ref: '#/components/schemas/TrustedContact'
-      required:
-      - contact
-      - identity
-      - disclosures
-      - agreements
+      - dtbp_check
+      - trade_confirm_email
+      - suspend_trade
+      - no_shorting
+      - fractional_trading
+      - max_margin_multiplier
+      - pdt_check
     DisclosureContextAnnotation:
       title: DisclosureContextAnnotation
       type: object
@@ -1682,169 +2245,33 @@ components:
           description: Required for immediate family members of politically exposed persons.
       required:
       - context_type
-    TransferDirection:
-      type: string
-      example: INCOMING
-      enum:
-      - INCOMING
-      - OUTGOING
-      description: '- **INCOMING**
-
-        Funds incoming to user’s account (deposit).
-
-        - **OUTGOING**
-
-        Funds outgoing from user’s account (withdrawal).
-
-        '
-    TransferTiming:
-      type: string
-      example: immediate
-      enum:
-      - immediate
-      description: 'Only `immediate` is currently supported.
-
-
-        values:
-
-
-        - **immediate**
-
-
-        - **next_day**'
-    ActivityType:
-      title: ActivityType
-      type: string
-      enum:
-      - FILL
-      - ACATC
-      - ACATS
-      - CIL
-      - CSD
-      - CSW
-      - DIV
-      - DIVCGL
-      - DIVCGS
-      - DIVNRA
-      - DIVROC
-      - DIVTXEX
-      - FEE
-      - INT
-      - JNLC
-      - JNLS
-      - MA
-      - PTC
-      - REORG
-      - SPIN
-      - SPLIT
-      description: "Represents the various kinds of activity.\n\nTradeActivity's will always have the type `FILL`\n\n- **FILL**\n  Order Fills (Partial/Full)\n- **ACATC**\n  ACATS IN/OUT (Cash)\n- **ACATS**\n  ACATS IN/OUT (Securities)\n- **CIL**\n  Cash in Lieu of Stock\n- **CSD**\n  Cash Disbursement (+)\n- **CSW**\n  Cash Withdrawable\n- **DIV**\n  Dividend\n- **DIVCGL**\n  Dividend (Capital Gain Long Term)\n- **DIVCGS**\n  Dividend (Capital Gain Short Term)\n- **DIVNRA**\n  Dividend Adjusted (NRA Withheld)\n- **DIVROC**\n  Dividend Return of Capital\n- **DIVTXEX**\n  Dividend (Tax Exempt)\n- **FEE**\n  REG and TAF Fees\n- **INT**\n  Interest (Credit/Margin)\n- **JNLC**\n  Journal Entry (Cash)\n- **JNLS**\n  Journal Entry (Stock)\n- **MA**\n  Merger/Acquisition\n- **PTC**\n  Pass Thru Change\n- **REORG**\n  Reorg CA\n- **SPIN**\n  Stock Spinoff\n- **SPLIT**\n  Stock Split"
-    CreateACHRelationshipRequest:
-      description: 'Represents the fields used in creation of a new ACHRelationship.
-
-
-        You can create an ACHRelationship by passing the required fields here or if you have an account with Plaid you can use our integration with Plaid to create a relationship.
-
-
-        Please see the documentation [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#plaid-integration-for-bank-transfers) for more info on using Plaid with Alpaca'
+    AccountCreationRequest:
       type: object
-      title: CreateACHRelationshipRequest
+      title: AccountCreationRequest
+      description: Represents the fields required to create a new account
       properties:
-        account_owner_name:
-          type: string
-          minLength: 1
-        bank_account_type:
-          type: string
-          minLength: 1
-          enum:
-          - CHECKING
-          - SAVINGS
-          description: Must be CHECKING or SAVINGS
-        bank_account_number:
-          type: string
-          minLength: 1
-          description: In sandbox, this still must be a valid format
-        bank_routing_number:
-          type: string
-          minLength: 1
-          description: In sandbox, this still must be a valid format
-        nickname:
-          type: string
-          minLength: 1
-        processor_token:
-          type: string
-          description: 'If using Plaid, you can specify a Plaid processor token here '
-      required:
-      - account_owner_name
-      - bank_account_type
-      - bank_account_number
-      - bank_routing_number
-    NonTradeActivity:
-      title: NonTradeActivity
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          example: '2021-05-21'
-          description: Valid only for non-trading activity types. Null for trading activites.
-        net_amount:
-          type: string
-          format: decimal
-          example: '1234'
-          description: Valid only for non-trading activity types. Null for trading activites.
-        description:
-          type: string
-          example: Example description
-          description: Valid only for non-trading activity types. Null for trading activites.
-        status:
-          type: string
-          enum:
-          - executed
-          - correct
-          - canceled
-          example: executed
-          description: Valid only for non-trading activity types. Null for trading activites.
-        symbol:
-          type: string
-          example: AAPL
-          description: Valid only for non-trading activity types. Null for trading activites.
-        qty:
-          type: string
-          format: decimal
-          example: '0.38921'
-          description: Valid only for non-trading activity types. Null for trading activites.
-        per_share_amount:
-          type: string
-          format: decimal
-          example: '0.38921'
-          description: Valid only for non-trading activity types. Null for trading activites.
-    Contact:
-      type: object
-      description: 'Contact is the model for the account owner contact information.
-
-        '
-      properties:
-        email_address:
-          type: string
-          format: email
-          example: john.doe@example.com
-        phone_number:
-          type: string
-          description: with country code, no hyphen or space
-          example: '+15556667788'
-        street_address:
+        contact:
+          $ref: '#/components/schemas/Contact'
+        identity:
+          $ref: '#/components/schemas/Identity'
+        disclosures:
+          $ref: '#/components/schemas/Disclosures'
+        agreements:
+          type: array
+          description: The client has to present the Alpaca Account and Margin Agreements to the end user, and have them read full sentences.
+          items:
+            $ref: '#/components/schemas/Agreement'
+        documents:
           type: array
           items:
-            $ref: '#/components/schemas/StreetAddress'
-        city:
-          type: string
-          example: San Mateo
-        state:
-          type: string
-          example: CA
-        postal_code:
-          type: string
-          example: '94401'
+            $ref: '#/components/schemas/DocumentUploadRequest'
+        trusted_contact:
+          $ref: '#/components/schemas/TrustedContact'
+      required:
+      - contact
+      - identity
+      - disclosures
+      - agreements
     Account:
       type: object
       title: ''
@@ -1924,371 +2351,126 @@ components:
       - country_of_tax_residence
       - state
       - email
-    ACHRelationship:
-      title: ACHRelationship
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        created_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-          description: 'Format: 2020-01-01T01:01:01Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-          description: 'Format: 2020-01-01T01:01:01Z'
-        account_id:
-          type: string
-          format: uuid
-        status:
-          type: string
-          enum:
-          - QUEUED
-          - APPROVED
-          - PENDING
-          - CANCEL_REQUESTED
-        account_owner_name:
-          type: string
-          minLength: 1
-          description: Name of the account owner
-        bank_account_type:
-          type: string
-          minLength: 1
-          enum:
-          - CHECKING
-          - SAVINGS
-          description: Must be CHECKING or SAVINGS
-        bank_account_number:
-          type: string
-          minLength: 1
-        bank_routing_number:
-          type: string
-          minLength: 1
-        nickname:
-          type: string
-          minLength: 1
-      required:
-      - id
-      - created_at
-      - updated_at
-      - account_id
-      - status
-      - account_owner_name
-    Disclosures:
-      type: object
-      description: 'Disclosures fields denote if the account owner falls under
+    TransferStatus:
+      type: string
+      example: QUEUED
+      enum:
+      - QUEUED
+      - APPROVAL_PENDING
+      - PENDING
+      - SENT_TO_CLEARING
+      - REJECTED
+      - CANCELED
+      - APPROVED
+      - COMPLETE
+      - RETURNED
+      description: '- **QUEUED**
 
-        each category defined by FINRA rule. The client has to ask
+        Transfer is in queue to be processed.
 
-        questions for the end user and the values should reflect
+        - **APPROVAL_PENDING**
 
-        their answers.
+        Transfer is pending approval.
 
-        If one of the answers is true (yes), the account goes into
+        - **PENDING**
 
-        ACTION_REQUIRED status.
+        Transfer is pending processing.
+
+        - **SENT_TO_CLEARING**
+
+        Transfer is being processed by the clearing firm.
+
+        - **REJECTED**
+
+        Transfer is rejected.
+
+        - **CANCELED**
+
+        Client initiated transfer cancellation.
+
+        - **APPROVED**
+
+        Transfer is approved.
+
+        - **COMPLETE**
+
+        Transfer is completed.
+
+        - **RETURNED**
+
+        The bank issued an ACH return for the transfer.
 
         '
-      example:
-        is_control_person: false
-        is_affiliated_exchange_or_finra: false
-        is_politically_exposed: false
-        immediate_family_exposed: false
+    TrustedContact:
+      type: object
+      description: 'This model input is optional. However, the client should
+
+        make reasonable effort to obtain the trusted contact information.
+
+        See more details in [FINRA Notice 17-11](https://www.finra.org/sites/default/files/Regulatory-Notice-17-11.pdf)
+
+        '
       properties:
-        employment_status:
+        given_name:
           type: string
-          enum:
-          - unemployed
-          - employed
-          - student
-          - retired
-        employer_name:
+          example: Jane
+        family_name:
           type: string
-        employer_address:
+          example: Doe
+        email_address:
           type: string
-        employment_position:
+          format: email
+          description: 'at least one of `email_address`, `phone_number` or
+
+            `street_address` is required
+
+            '
+          example: jane.doe@example.com
+        phone_number:
           type: string
-        is_control_person:
-          type: boolean
-        is_affiliated_exchange_or_finra:
-          type: boolean
-        is_politically_exposed:
-          type: boolean
-        immediate_family_exposed:
-          type: boolean
-        context:
-          type:
-          - array
-          - 'null'
-          description: Array of annotations describing the rational for marking `is_control_person`, `is_affiliated_exchange_or_finra`, and/or `immediate_family_exposed` as true
+          description: 'at least one of `email_address`, `phone_number` or
+
+            `street_address` is required
+
+            '
+        street_address:
+          type: array
           items:
-            $ref: '#/components/schemas/DisclosureContextAnnotation'
-      required:
-      - is_control_person
-      - is_affiliated_exchange_or_finra
-      - is_politically_exposed
-      - immediate_family_exposed
-    Error:
-      title: Error
-      type: object
-      properties:
-        code:
-          type: number
-        message:
-          type: string
-      required:
-      - code
-      - message
-    Bank:
-      type: object
-      x-examples:
-        example-1:
-          id: 8475c676-68e3-4cfc-a683-9ca2f47a6172
-          account_id: 56712986-9ff7-4d8f-8e52-077e099e533e
-          name: Bank XYZ
-          status: QUEUED
-          country: ''
-          state_province: ''
-          postal_code: ''
-          city: ''
-          street_address: ''
-          account_number: 123456789abc
-          bank_code: '123456789'
-          bank_code_type: ABA
-          created_at: '2022-02-11T21:35:19.268681613Z'
-          updated_at: '2022-02-11T21:35:19.268681613Z'
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        created_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-          description: 'Format: 2020-01-01T01:01:01Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-          description: 'Format: 2020-01-01T01:01:01Z'
-        account_id:
-          type: string
-          format: uuid
-        status:
-          type: string
-          enum:
-          - QUEUED
-          - SENT_TO_CLEARING
-          - APPROVED
-          - CANCELED
-          description: QUEUED, SENT_TO_CLEARING, APPROVED, CANCELED
-        name:
-          type: string
-          description: Name of recipient bank
-        bank_code:
-          type: string
-          description: 9-Digit ABA RTN (Routing Number) or BIC
-        bank_code_type:
-          type: string
-          enum:
-          - ABA
-          - BIC
-          description: ABA (Domestic) or BIC (International)
-        country:
-          type: string
-          description: Only for international banks
-        state_province:
-          type: string
-          description: Only for international banks
-        postal_code:
-          type: string
-          description: Only for international banks
+            type: string
+          description: 'at least one of `email_address`, `phone_number` or
+
+            `street_address` is required
+
+            '
         city:
           type: string
-          description: Only for international banks
-        street_address:
-          type: string
-          description: Only for international banks
-        account_number:
-          type: string
-      required:
-      - id
-      - created_at
-      - updated_at
-      - name
-      - bank_code
-      - bank_code_type
-      - account_number
-    AgreementType:
-      type: string
-      title: AgreementType
-      description: '- margin_agreement: Alpaca Margin Agreement
+          description: 'required if `street_address` is set
 
-        - account_agreement: Alpaca Account Agreement
+            '
+        state:
+          type: string
+          description: 'required if `street_address` is set
 
-        - customer_agreement: Alpaca Customer Agreement
-
-        - crypto_agreement: Alpaca Crypto agreement
-
-        '
-      enum:
-      - margin_agreement
-      - account_agreement
-      - customer_agreement
-      - crypto_agreement
-      example: customer_agreement
-    KYCResult:
-      type: object
-      description: Hold information about the result of KYC. Please see the documentation [here](https://alpaca.markets/docs/api-references/broker-api/events/#kyc-results) for more indepth details
-      properties:
-        reject:
-          type: object
-        accept:
-          type: object
-        indeterminate:
-          type: object
-        addidional_information:
-          type: string
-    StreetAddress:
-      type: string
-      example: 20 N San Mateo Dr
-    OrderSide:
-      type: string
-      enum:
-      - buy
-      - sell
-      - buy_minus
-      - sell_plus
-      - sell_short
-      - sell_short_exempt
-      - undisclosed
-      - cross
-      - cross_short
-      example: buy
-      description: Represents what side of the transaction an order was on.
-    Activity:
-      title: Activity
-      description: Base for activity types
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            example: 20220208125959696::88b5f678-fef5-447b-af15-f21e367e6d8c
-          account_id:
-            type: string
-            format: uuid
-            example: c8f1ef5d-edc0-4f23-9ee4-378f19cb92a4
-          activity_type:
-            $ref: '#/components/schemas/ActivityType'
-      - oneOf:
-        - $ref: '#/components/schemas/TradeActivity'
-        - $ref: '#/components/schemas/NonTradeActivity'
-      required:
-      - id
-      - activity_type
-    AccountUpdateRequest:
-      type: object
-      x-examples:
-        example-1:
-          contact:
-            email_address: john.doe@example.com
-            phone_number: '+15556667788'
-            street_address:
-            - 20 N San Mateo Dr
-            city: San Mateo
-            state: CA
-            postal_code: '94401'
-          identity:
-            given_name: John
-            family_name: Doe
-            date_of_birth: '1990-01-01'
-            tax_id: 666-55-4321
-            tax_id_type: USA_SSN
-            country_of_citizenship: AUS
-            country_of_birth: AUS
-            country_of_tax_residence: USA
-            funding_source:
-            - employment_income
-          disclosures:
-            is_control_person: false
-            is_affiliated_exchange_or_finra: false
-            is_politically_exposed: false
-            immediate_family_exposed: false
-          trustedContact:
-            given_name: Jane
-            family_name: Doe
-            email_address: jane.doe@example.com
-      properties:
-        contact:
-          $ref: '#/components/schemas/Contact'
-        identity:
-          $ref: '#/components/schemas/Identity'
-        disclosures:
-          $ref: '#/components/schemas/Disclosures'
-        trustedContact:
-          $ref: '#/components/schemas/TrustedContact'
-    CreateBankRequest:
-      title: CreateBankRequest
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of recipient bank
-        bank_code:
-          type: string
-          description: 9-Digit ABA RTN (Routing Number) or BIC
-        bank_code_type:
-          type: string
-          enum:
-          - ABA
-          - BIC
-          description: ABA (Domestic) or BIC (International)
-        country:
-          type: string
-          description: Only for international banks
-        state_province:
-          type: string
-          description: Only for international banks
+            '
         postal_code:
           type: string
-          description: Only for international banks
-        city:
+          description: 'required if `street_address` is set
+
+            '
+        country:
           type: string
-          description: Only for international banks
-        street_address:
-          type: string
-          description: Only for international banks
-        account_number:
-          type: string
+          description: '[ISO 3166-1 alpha-3](https://www.iso.org/iso-3166-country-codes.html).
+
+            required if `street_address` is set
+
+            '
       required:
-      - name
-      - bank_code
-      - bank_code_type
-      - account_number
-      description: Represents the possible fields to send when creating a new associated Bank resource for an account
-    AccountType:
-      type: string
-      title: AccountType
-      description: 'Possible values are:
-
-
-        - trading
-
-        - custodial
-
-        - donor_advised'
-      enum:
-      - trading
-      - custodial
-      - donor_advised
-      example: trading
+      - given_name
+      - family_name
+      example:
+        given_name: Jane
+        family_name: Doe
+        email_address: jane.doe@example.com
     AccountExtended:
       type: object
       description: Represents an account with all data available. If your api response is missing some of these fields, there is a good chance you are using a route that returns `Account` instances instead of these.
@@ -2416,293 +2598,162 @@ components:
       - last_equity
       - created_at
       - account_type
-    AccountStatus:
-      type: string
-      example: ACTIVE
-      enum:
-      - ONBOARDING
-      - SUBMITTED
-      - RESUBMITTED
-      - SUBMISSION_FAILED
-      - ACTION_REQUIRED
-      - EDITED
-      - ACCOUNT_UPDATED
-      - APPROVAL_PENDING
-      - REAPPROVAL_PENDING
-      - SIGNED_UP
-      - KYC_SUBMITTED
-      - LIMITED
-      - AML_REVIEW
-      - APPROVED
-      - REJECTED
-      - ACTIVE
-      - DISABLED
-      - DISABLE_PENDING
-      - ACCOUNT_CLOSED
-      - PAPER_ONLY
-      description: 'Designates the current status of this account
-
-
-        Possible Values:
-
-        - **ONBOARDING**
-
-        An application is expected for this user, but has not been submitted yet.
-
-        - **SUBMITTED**
-
-        The application has been submitted and in process.
-
-        - **RESUBMITTED**
-
-        Resubmitted is used to display when request has been re-submitted to Apex after account update
-
-        - **SUBMISSION_FAILED**
-
-        Used to display if failure on submission
-
-        - **ACTION_REQUIRED**
-
-        The application requires manual action.
-
-        - **EDITED**
-
-        Application was edited (e.g. to match info from uploaded docs). This is a transient status.
-
-        - **ACCOUNT_UPDATED**
-
-        Used to display when Account has been modified by user
-
-        - **APPROVAL_PENDING**
-
-        Initial value. The application approval process is in process.
-
-        - **REAPPROVAL_PENDING**
-
-        This is a transient status used to display once apex approves a re-submission
-
-        - **SIGNED_UP**
-
-        Users who were directed to and competed the [first stage](https://app.alpaca.markets/signup) of v2 registration
-
-        - **KYC_SUBMITTED**
-
-        Users that have had their KYC submitted to the routed KYC Provider
-
-        - **LIMITED**
-
-        Limited Users that pass KYC but are missing financial_information and employment_details
-
-        - **AML_REVIEW**
-
-        Users that pass KYC but from a restricted/high risk country and need manual AML approval
-
-        - **APPROVED**
-
-        The account application has been approved, and waiting to be ACTIVE
-
-        - **REJECTED**
-
-        The account application is rejected for some reason
-
-        - **ACTIVE**
-
-        The account is fully active. Trading and funding are processed under this status.
-
-        - **DISABLED**
-
-        The account is disabled after ACTIVE status.
-
-        - **DISABLE_PENDING**
-
-        DisablePending is used for accounts which requested to be disabled, but have not been processed yet.
-
-        - **ACCOUNT_CLOSED**
-
-        The account is closed.
-
-        - **PAPER_ONLY**
-
-        Used to display when only paper trading is allowed for this account
-
-        '
-    OrderStatus:
-      type: string
-      enum:
-      - new
-      - partially_filled
-      - filled
-      - done_for_day
-      - canceled
-      - expired
-      - replaced
-      - pending_cancel
-      - pending_replace
-      - accepted
-      - pending_new
-      - accepted_for_bidding
-      - stopped
-      - rejected
-      - suspended
-      - calculated
-      example: filled
-    Transfer:
-      title: Transfer
+    NonTradeActivity:
+      title: NonTradeActivity
       type: object
-      x-examples:
-        example-1:
-          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-          relationship_id: 81412018-ffa2-43f9-a3eb-d39f1c5e0f87
-          bank_id: f1ae96de-94c1-468e-93a3-6b7213930ca8
-          account_id: 449e7a5c-69d3-4b8a-aaaf-5c9b713ebc65
-          type: ach
-          status: QUEUED
-          reason: string
-          amount: string
-          direction: INCOMING
-          created_at: '2019-08-24T14:15:22Z'
-          updated_at: '2019-08-24T14:15:22Z'
-          expires_at: '2019-08-24T14:15:22Z'
-          additional_information: string
-      description: 'Transfers allow you to transfer money/balance into your end customers'' account (deposits) or out (withdrawal).
-
-
-        [Main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#the-transfer-object)'
       properties:
-        id:
+        date:
           type: string
-          format: uuid
-          description: The transfer ID
-        relationship_id:
+          format: date
+          example: '2021-05-21'
+          description: Valid only for non-trading activity types. Null for trading activites.
+        net_amount:
           type: string
-          format: uuid
-          description: The ACH relationship ID only present if type = "ach"
-        bank_id:
-          type: string
-          format: uuid
-          description: The ID of the Bank, only present if type = "wire"
-        account_id:
-          type: string
-          format: uuid
-          description: The account ID
-        type:
-          $ref: '#/components/schemas/TransferType'
-        status:
-          $ref: '#/components/schemas/TransferStatus'
-        reason:
-          type:
-          - string
-          - 'null'
-          description: Cause of the status
-        amount:
-          type: string
-          description: Must be > 0.00
           format: decimal
-        direction:
-          $ref: '#/components/schemas/TransferDirection'
-        created_at:
+          example: '1234'
+          description: Valid only for non-trading activity types. Null for trading activites.
+        description:
           type: string
-          format: date-time
-          description: Timedate when transfer was created
-        updated_at:
+          example: Example description
+          description: Valid only for non-trading activity types. Null for trading activites.
+        status:
           type: string
-          format: date-time
-          description: Timedate when transfer was updated
-        expires_at:
+          enum:
+          - executed
+          - correct
+          - canceled
+          example: executed
+          description: Valid only for non-trading activity types. Null for trading activites.
+        symbol:
           type: string
-          format: date-time
-          description: Timedate when transfer was expired
-        additional_information:
-          type:
-          - string
-          - 'null'
-          description: Additional information. Only applies when type = "wire".
-        hold_until:
+          example: AAPL
+          description: Valid only for non-trading activity types. Null for trading activites.
+        qty:
           type: string
-          format: date-time
-        instant_amount:
+          format: decimal
+          example: '0.38921'
+          description: Valid only for non-trading activity types. Null for trading activites.
+        per_share_amount:
           type: string
-      required:
-      - id
-      - account_id
-      - type
-      - status
-      - amount
-      - direction
-      - created_at
-    TrustedContact:
+          format: decimal
+          example: '0.38921'
+          description: Valid only for non-trading activity types. Null for trading activites.
+    Disclosures:
       type: object
-      description: 'This model input is optional. However, the client should
+      description: 'Disclosures fields denote if the account owner falls under
 
-        make reasonable effort to obtain the trusted contact information.
+        each category defined by FINRA rule. The client has to ask
 
-        See more details in [FINRA Notice 17-11](https://www.finra.org/sites/default/files/Regulatory-Notice-17-11.pdf)
+        questions for the end user and the values should reflect
+
+        their answers.
+
+        If one of the answers is true (yes), the account goes into
+
+        ACTION_REQUIRED status.
 
         '
-      properties:
-        given_name:
-          type: string
-          example: Jane
-        family_name:
-          type: string
-          example: Doe
-        email_address:
-          type: string
-          format: email
-          description: 'at least one of `email_address`, `phone_number` or
-
-            `street_address` is required
-
-            '
-          example: jane.doe@example.com
-        phone_number:
-          type: string
-          description: 'at least one of `email_address`, `phone_number` or
-
-            `street_address` is required
-
-            '
-        street_address:
-          type: array
-          items:
-            type: string
-          description: 'at least one of `email_address`, `phone_number` or
-
-            `street_address` is required
-
-            '
-        city:
-          type: string
-          description: 'required if `street_address` is set
-
-            '
-        state:
-          type: string
-          description: 'required if `street_address` is set
-
-            '
-        postal_code:
-          type: string
-          description: 'required if `street_address` is set
-
-            '
-        country:
-          type: string
-          description: '[ISO 3166-1 alpha-3](https://www.iso.org/iso-3166-country-codes.html).
-
-            required if `street_address` is set
-
-            '
-      required:
-      - given_name
-      - family_name
       example:
-        given_name: Jane
-        family_name: Doe
-        email_address: jane.doe@example.com
+        is_control_person: false
+        is_affiliated_exchange_or_finra: false
+        is_politically_exposed: false
+        immediate_family_exposed: false
+      properties:
+        employment_status:
+          type: string
+          enum:
+          - unemployed
+          - employed
+          - student
+          - retired
+        employer_name:
+          type: string
+        employer_address:
+          type: string
+        employment_position:
+          type: string
+        is_control_person:
+          type: boolean
+        is_affiliated_exchange_or_finra:
+          type: boolean
+        is_politically_exposed:
+          type: boolean
+        immediate_family_exposed:
+          type: boolean
+        context:
+          type:
+          - array
+          - 'null'
+          description: Array of annotations describing the rational for marking `is_control_person`, `is_affiliated_exchange_or_finra`, and/or `immediate_family_exposed` as true
+          items:
+            $ref: '#/components/schemas/DisclosureContextAnnotation'
+      required:
+      - is_control_person
+      - is_affiliated_exchange_or_finra
+      - is_politically_exposed
+      - immediate_family_exposed
+    CreateACHRelationshipRequest:
+      description: 'Represents the fields used in creation of a new ACHRelationship.
+
+
+        You can create an ACHRelationship by passing the required fields here or if you have an account with Plaid you can use our integration with Plaid to create a relationship.
+
+
+        Please see the documentation [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#plaid-integration-for-bank-transfers) for more info on using Plaid with Alpaca'
+      type: object
+      title: CreateACHRelationshipRequest
+      properties:
+        account_owner_name:
+          type: string
+          minLength: 1
+        bank_account_type:
+          type: string
+          minLength: 1
+          enum:
+          - CHECKING
+          - SAVINGS
+          description: Must be CHECKING or SAVINGS
+        bank_account_number:
+          type: string
+          minLength: 1
+          description: In sandbox, this still must be a valid format
+        bank_routing_number:
+          type: string
+          minLength: 1
+          description: In sandbox, this still must be a valid format
+        nickname:
+          type: string
+          minLength: 1
+        processor_token:
+          type: string
+          description: 'If using Plaid, you can specify a Plaid processor token here '
+      required:
+      - account_owner_name
+      - bank_account_type
+      - bank_account_number
+      - bank_routing_number
+  responses:
+    BadRequest:
+      description: Malformed input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotAuthorized:
+      description: Client is not authorized for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    Direction:
-      name: direction
+    Sort:
+      name: sort
       in: query
       description: The chronological order of response based on the submission time. asc or desc. Defaults to desc.
       schema:
@@ -2740,16 +2791,6 @@ components:
         - SPIN
         - SPLIT
       description: see ActivityType model for details about what the different types mean
-    Sort:
-      name: sort
-      in: query
-      description: The chronological order of response based on the submission time. asc or desc. Defaults to desc.
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-        example: desc
     AccountID:
       name: account_id
       in: path
@@ -2758,25 +2799,16 @@ components:
       schema:
         type: string
         format: uuid
-  responses:
-    NotAuthorized:
-      description: Client is not authorized for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Malformed input.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Direction:
+      name: direction
+      in: query
+      description: The chronological order of response based on the submission time. asc or desc. Defaults to desc.
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        example: desc
   securitySchemes:
     BasicAuth:
       type: http
