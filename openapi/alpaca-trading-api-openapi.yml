@@ -381,75 +381,162 @@ paths:
 
         If you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.'
 components:
-  parameters:
-    OrderID:
-      name: order_id
-      in: path
-      required: true
-      description: Order identifier.
-      schema:
-        type: string
-    Until:
-      name: until
-      in: query
-      description: The response will include only ones submitted until this timestamp (exclusive.)
-      schema:
-        type: string
-        format: date-time
-        example: '2021-03-16T18:38:01.942282Z'
-    After:
-      name: after
-      in: query
-      description: The response will include only ones submitted after this timestamp (exclusive.)
-      schema:
-        type: string
-        format: date-time
-        example: '2021-03-16T18:38:01.942282Z'
-    Symbols:
-      name: symbols
-      in: query
-      description: A comma-separated list of symbols to filter by.
-      schema:
-        type: string
-        example: AAPL,TSLA,MSFT
-    AccountID:
-      name: account_id
-      in: path
-      required: true
-      description: Account identifier.
-      schema:
-        type: string
-        format: uuid
-    Direction:
-      name: direction
-      in: query
-      description: The chronological order of response based on the submission time. asc or desc. Defaults to desc.
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-        example: desc
-  responses:
-    BadRequest:
-      description: Malformed input.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Request is forbidden
-      content:
-        application/json:
-          schema:
-            type: string
   schemas:
+    AssetClass:
+      type: string
+      enum:
+      - us_equity
+      - crypto
+    CreateOrderRequest:
+      type: object
+      description: ''
+      properties:
+        symbol:
+          type: string
+          example: AAPL
+          description: Symbol or asset ID to identify the asset to trade
+        qty:
+          type: string
+          format: decimal
+          example: '4.124'
+          description: Number of shares to trade. Can be fractionable for only market and day order types.
+        notional:
+          type: string
+          format: decimal
+          example: '3'
+          description: Dollar amount to trade. Cannot work with qty. Can only work for market order types and time_in_force = day.
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        type:
+          $ref: '#/components/schemas/OrderType'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        limit_price:
+          type: string
+          format: decimal
+          example: '3.14'
+          description: Required if type is limit or stop_limit
+        stop_price:
+          type: string
+          format: decimal
+          example: '3.14'
+          description: Required if type is stop or stop_limit
+        trail_price:
+          type: string
+          format: decimal
+          example: '3.14'
+          description: If type is trailing_stop, then one of trail_price or trail_percent is required
+        trail_percent:
+          type: string
+          format: decimal
+          example: '5.0'
+          description: If type is trailing_stop, then one of trail_price or trail_percent is required
+        extended_hours:
+          type: boolean
+          example: false
+          description: Defaults to false. If true, order will be eligible to execute in premarket/afterhours. Only works with type limit and time_in_force = day.
+        client_order_id:
+          type: string
+          example: eb9e2aaa-f71a-4f51-b5b4-52a6c565dad4
+          description: A unique identifier for the order. Automatically generated if not sent. (<= 48 characters)
+          maxLength: 48
+        order_class:
+          $ref: '#/components/schemas/OrderClass'
+        take_profit:
+          type: object
+          description: Takes in a string/number value for limit_price
+          properties:
+            limit_price:
+              type: string
+              format: decimal
+              example: '3.14'
+        stop_loss:
+          description: Takes in a string/number values for stop_price and limit_price
+          type: object
+          properties:
+            stop_price:
+              type: string
+              format: decimal
+              example: '3.14'
+            limit_price:
+              type: string
+              format: decimal
+              example: '3.14'
+        commission:
+          type: string
+          format: decimal
+          example: '1.0'
+          description: The commission you want to collect from the user.
+      required:
+      - symbol
+      - side
+      - type
+      - time_in_force
+    PositionClosedResponse:
+      title: PositionClosedResponse
+      type: object
+      description: 'Represents the result of asking the api to close a position.
+
+
+        `body` is the Order used to close out the position.'
+      x-examples:
+        example-1:
+          symbol: AAPL
+          status: 200
+          body:
+            id: f7f25e89-939a-4587-aaf6-414a6b3c341d
+            client_order_id: 52f8574c-96d5-49b6-94c1-2570a268434e
+            created_at: '2022-02-04T16:53:29.53427917Z'
+            updated_at: '2022-02-04T16:53:29.53427917Z'
+            submitted_at: '2022-02-04T16:53:29.533738219Z'
+            filled_at: null
+            expired_at: null
+            canceled_at: null
+            failed_at: null
+            replaced_at: null
+            replaced_by: null
+            replaces: null
+            asset_id: b0b6dd9d-8b9b-48a9-ba46-b9d54906e415
+            symbol: AAPL
+            asset_class: us_equity
+            notional: null
+            qty: '2'
+            filled_qty: '0'
+            filled_avg_price: null
+            order_class: ''
+            order_type: market
+            type: market
+            side: sell
+            time_in_force: day
+            limit_price: null
+            stop_price: null
+            status: accepted
+            extended_hours: false
+            legs: null
+            trail_percent: null
+            trail_price: null
+            hwm: null
+            commision: '1.0'
+      properties:
+        symbol:
+          type: string
+          description: Symbol name of the asset
+        status:
+          type: integer
+          description: Http status code for the attempt to close this position
+        body:
+          $ref: '#/components/schemas/Order'
+      required:
+      - symbol
+      - status
+    OrderClass:
+      type: string
+      enum:
+      - simple
+      - bracket
+      - oco
+      - oto
+      example: bracket
     Position:
       description: ''
       type: object
@@ -567,6 +654,162 @@ components:
       - current_price
       - lastday_price
       - change_today
+    TradeUpdateEvent:
+      description: Represents an update to an order/trade, sent over the events streaming api.
+      type: object
+      title: TradeUpdateEvent
+      x-examples:
+        example-1:
+          account_id: 529248ad-c4cc-4a50-bea4-6bfd2953f83a
+          at: '2022-04-19T14:12:30.656741Z'
+          event: new
+          event_id: 37782
+          execution_id: 7e544af3-3104-4e1a-8cbc-dab2624949ff
+          order:
+            asset_class: us_equity
+            asset_id: a4778bc8-fad1-47b7-87fe-d5cde10d43f4
+            cancel_requested_at: null
+            canceled_at: null
+            client_order_id: 6d873193-dac6-4f72-8e13-c57853a9339d
+            commission: '1'
+            created_at: '2022-04-19T10:12:30.57117938-04:00'
+            expired_at: null
+            extended_hours: false
+            failed_at: null
+            filled_at: null
+            filled_avg_price: null
+            filled_qty: '0'
+            hwm: null
+            id: edada91a-8b55-4916-a153-8c7a9817e708
+            legs: null
+            limit_price: '700'
+            notional: null
+            order_class: ''
+            order_type: limit
+            qty: '4'
+            replaced_at: null
+            replaced_by: null
+            replaces: null
+            side: buy
+            status: new
+            stop_price: null
+            submitted_at: '2022-04-19T10:12:30.403135025-04:00'
+            symbol: TSLA
+            time_in_force: day
+            trail_percent: null
+            trail_price: null
+            type: limit
+            updated_at: '2022-04-19T10:12:30.609783218-04:00'
+          timestamp: '2022-04-19T14:12:30.602193534Z'
+      properties:
+        account_id:
+          type: string
+          minLength: 1
+          description: Account UUID
+          format: uuid
+        at:
+          type: string
+          minLength: 1
+          description: Timestamp of event
+          format: date-time
+        event:
+          $ref: '#/components/schemas/TradeUpdateEventType'
+        event_id:
+          type: integer
+          format: int64
+          description: Monotonically increasing 64bit integer
+        execution_id:
+          type: string
+          description: Corresponding execution of an order. If an order gets filled over two executions (a partial_fill for example), you will receive two events with different IDs.
+          format: uuid
+        order:
+          $ref: '#/components/schemas/Order'
+        timestamp:
+          type: string
+          description: 'Has various different meanings depending on the value of `event`, please see the [Trading Events](https://alpaca.markets/docs/api-references/broker-api/events/#trade-events)
+
+            Enum in the documentation or the TradeUpdateEventType model for more details on when it means different things.
+
+            '
+          format: date-time
+      required:
+      - account_id
+      - at
+      - event
+      - event_id
+      - execution_id
+      - order
+      - timestamp
+    OrderType:
+      type: string
+      enum:
+      - market
+      - limit
+      - stop
+      - stop_limit
+      - trailing_stop
+      example: stop
+    OrderClosedResponse:
+      title: OrderClosedResponse
+      type: object
+      description: 'Represents the result of asking the api to cancel an Order.
+
+        '
+      x-examples: {}
+      properties:
+        id:
+          type: string
+          description: UUID of the order that was canceled
+          format: uuid
+        status:
+          type: integer
+          description: Http status code for the attempt to close this Order
+        body:
+          $ref: '#/components/schemas/Order'
+      required:
+      - id
+      - status
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+      required:
+      - code
+      - message
+    TradeUpdateEventType:
+      type: string
+      description: "**Common events**\n\nThese are the events that are the expected results of actions you may have taken by sending API requests.\n\nThe meaning of the `timestamp` field changes for each type; the meanings have been specified here for which types the\ntimestamp field will be present.\n\n- `new`: Sent when an order has been routed to exchanges for execution.\n- `fill`: Sent when your order has been completely filled.\n  - `timestamp`: The time at which the order was filled.\n- `partial_fill`: Sent when a number of shares less than the total remaining quantity on your order has been filled.\n  - `timestamp`: The time at which the shares were filled.\n- `canceled`: Sent when your requested cancellation of an order is processed.\n  - `timestamp`: The time at which the order was canceled.\n- `expired`: Sent when an order has reached the end of its lifespan, as determined by the order’s time in force value.\n  - `timestamp`: The time at which the order expired.\n- `done_for_day`: Sent when the order is done executing for the day, and will not receive further updates until the next trading day.\n- `replaced`: Sent when your requested replacement of an order is processed.\n  - `timestamp`: The time at which the order was replaced.\n\n**Rarer events**\n\nThese are events that may rarely be sent due to unexpected circumstances on the exchanges. It is unlikely you will need to design your code around them, but you may still wish to account for the possibility that they will occur.\n\n- `rejected`: Sent when your order has been rejected.\n  - `timestamp`: The time at which the rejection occurred.\n- `pending_new`: Sent when the order has been received by Alpaca and routed to the exchanges, but has not yet been accepted for execution.\n- `stopped`: Sent when your order has been stopped, and a trade is guaranteed for the order, usually at a stated price or better, but has not yet occurred.\n- `pending_cancel`: Sent when the order is awaiting cancellation. Most cancellations will occur without the order entering this state.\n- `pending_replace`: Sent when the order is awaiting replacement.\n- `calculated`: Sent when the order has been completed for the day - it is either `filled` or `done_for_day` - but remaining settlement calculations are still pending.\n- `suspended`: Sent when the order has been suspended and is not eligible for trading.\n- `order_replace_rejected`: Sent when the order replace has been rejected.\n- `order_cancel_rejected`: Sent when the order cancel has been rejected.\n"
+      enum:
+      - new
+      - fill
+      - partial_fill
+      - canceled
+      - expired
+      - done_for_day
+      - replaced
+      - rejected
+      - pending_new
+      - stopped
+      - pending_cancel
+      - pending_replace
+      - calculated
+      - suspended
+      - order_replace_rejected
+      - order_cancel_rejected
+    TimeInForce:
+      type: string
+      enum:
+      - day
+      - gtc
+      - opg
+      - cls
+      - ioc
+      - fok
+      example: gtc
     OrderSide:
       type: string
       enum:
@@ -734,109 +977,6 @@ components:
       required:
       - id
       - symbol
-    AssetClass:
-      type: string
-      enum:
-      - us_equity
-      - crypto
-    PositionClosedResponse:
-      title: PositionClosedResponse
-      type: object
-      description: 'Represents the result of asking the api to close a position.
-
-
-        `body` is the Order used to close out the position.'
-      x-examples:
-        example-1:
-          symbol: AAPL
-          status: 200
-          body:
-            id: f7f25e89-939a-4587-aaf6-414a6b3c341d
-            client_order_id: 52f8574c-96d5-49b6-94c1-2570a268434e
-            created_at: '2022-02-04T16:53:29.53427917Z'
-            updated_at: '2022-02-04T16:53:29.53427917Z'
-            submitted_at: '2022-02-04T16:53:29.533738219Z'
-            filled_at: null
-            expired_at: null
-            canceled_at: null
-            failed_at: null
-            replaced_at: null
-            replaced_by: null
-            replaces: null
-            asset_id: b0b6dd9d-8b9b-48a9-ba46-b9d54906e415
-            symbol: AAPL
-            asset_class: us_equity
-            notional: null
-            qty: '2'
-            filled_qty: '0'
-            filled_avg_price: null
-            order_class: ''
-            order_type: market
-            type: market
-            side: sell
-            time_in_force: day
-            limit_price: null
-            stop_price: null
-            status: accepted
-            extended_hours: false
-            legs: null
-            trail_percent: null
-            trail_price: null
-            hwm: null
-            commision: '1.0'
-      properties:
-        symbol:
-          type: string
-          description: Symbol name of the asset
-        status:
-          type: integer
-          description: Http status code for the attempt to close this position
-        body:
-          $ref: '#/components/schemas/Order'
-      required:
-      - symbol
-      - status
-    TradeUpdateEventType:
-      type: string
-      description: "**Common events**\n\nThese are the events that are the expected results of actions you may have taken by sending API requests.\n\nThe meaning of the `timestamp` field changes for each type; the meanings have been specified here for which types the\ntimestamp field will be present.\n\n- `new`: Sent when an order has been routed to exchanges for execution.\n- `fill`: Sent when your order has been completely filled.\n  - `timestamp`: The time at which the order was filled.\n- `partial_fill`: Sent when a number of shares less than the total remaining quantity on your order has been filled.\n  - `timestamp`: The time at which the shares were filled.\n- `canceled`: Sent when your requested cancellation of an order is processed.\n  - `timestamp`: The time at which the order was canceled.\n- `expired`: Sent when an order has reached the end of its lifespan, as determined by the order’s time in force value.\n  - `timestamp`: The time at which the order expired.\n- `done_for_day`: Sent when the order is done executing for the day, and will not receive further updates until the next trading day.\n- `replaced`: Sent when your requested replacement of an order is processed.\n  - `timestamp`: The time at which the order was replaced.\n\n**Rarer events**\n\nThese are events that may rarely be sent due to unexpected circumstances on the exchanges. It is unlikely you will need to design your code around them, but you may still wish to account for the possibility that they will occur.\n\n- `rejected`: Sent when your order has been rejected.\n  - `timestamp`: The time at which the rejection occurred.\n- `pending_new`: Sent when the order has been received by Alpaca and routed to the exchanges, but has not yet been accepted for execution.\n- `stopped`: Sent when your order has been stopped, and a trade is guaranteed for the order, usually at a stated price or better, but has not yet occurred.\n- `pending_cancel`: Sent when the order is awaiting cancellation. Most cancellations will occur without the order entering this state.\n- `pending_replace`: Sent when the order is awaiting replacement.\n- `calculated`: Sent when the order has been completed for the day - it is either `filled` or `done_for_day` - but remaining settlement calculations are still pending.\n- `suspended`: Sent when the order has been suspended and is not eligible for trading.\n- `order_replace_rejected`: Sent when the order replace has been rejected.\n- `order_cancel_rejected`: Sent when the order cancel has been rejected.\n"
-      enum:
-      - new
-      - fill
-      - partial_fill
-      - canceled
-      - expired
-      - done_for_day
-      - replaced
-      - rejected
-      - pending_new
-      - stopped
-      - pending_cancel
-      - pending_replace
-      - calculated
-      - suspended
-      - order_replace_rejected
-      - order_cancel_rejected
-    TimeInForce:
-      type: string
-      enum:
-      - day
-      - gtc
-      - opg
-      - cls
-      - ioc
-      - fok
-      example: gtc
-    Error:
-      title: Error
-      type: object
-      properties:
-        code:
-          type: number
-        message:
-          type: string
-      required:
-      - code
-      - message
     OrderStatus:
       type: string
       enum:
@@ -857,194 +997,6 @@ components:
       - suspended
       - calculated
       example: filled
-    OrderType:
-      type: string
-      enum:
-      - market
-      - limit
-      - stop
-      - stop_limit
-      - trailing_stop
-      example: stop
-    CreateOrderRequest:
-      type: object
-      description: ''
-      properties:
-        symbol:
-          type: string
-          example: AAPL
-          description: Symbol or asset ID to identify the asset to trade
-        qty:
-          type: string
-          format: decimal
-          example: '4.124'
-          description: Number of shares to trade. Can be fractionable for only market and day order types.
-        notional:
-          type: string
-          format: decimal
-          example: '3'
-          description: Dollar amount to trade. Cannot work with qty. Can only work for market order types and time_in_force = day.
-        side:
-          $ref: '#/components/schemas/OrderSide'
-        type:
-          $ref: '#/components/schemas/OrderType'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
-        limit_price:
-          type: string
-          format: decimal
-          example: '3.14'
-          description: Required if type is limit or stop_limit
-        stop_price:
-          type: string
-          format: decimal
-          example: '3.14'
-          description: Required if type is stop or stop_limit
-        trail_price:
-          type: string
-          format: decimal
-          example: '3.14'
-          description: If type is trailing_stop, then one of trail_price or trail_percent is required
-        trail_percent:
-          type: string
-          format: decimal
-          example: '5.0'
-          description: If type is trailing_stop, then one of trail_price or trail_percent is required
-        extended_hours:
-          type: boolean
-          example: false
-          description: Defaults to false. If true, order will be eligible to execute in premarket/afterhours. Only works with type limit and time_in_force = day.
-        client_order_id:
-          type: string
-          example: eb9e2aaa-f71a-4f51-b5b4-52a6c565dad4
-          description: A unique identifier for the order. Automatically generated if not sent. (<= 48 characters)
-          maxLength: 48
-        order_class:
-          $ref: '#/components/schemas/OrderClass'
-        take_profit:
-          type: object
-          description: Takes in a string/number value for limit_price
-          properties:
-            limit_price:
-              type: string
-              format: decimal
-              example: '3.14'
-        stop_loss:
-          description: Takes in a string/number values for stop_price and limit_price
-          type: object
-          properties:
-            stop_price:
-              type: string
-              format: decimal
-              example: '3.14'
-            limit_price:
-              type: string
-              format: decimal
-              example: '3.14'
-        commission:
-          type: string
-          format: decimal
-          example: '1.0'
-          description: The commission you want to collect from the user.
-      required:
-      - symbol
-      - side
-      - type
-      - time_in_force
-    OrderClass:
-      type: string
-      enum:
-      - simple
-      - bracket
-      - oco
-      - oto
-      example: bracket
-    TradeUpdateEvent:
-      description: Represents an update to an order/trade, sent over the events streaming api.
-      type: object
-      title: TradeUpdateEvent
-      x-examples:
-        example-1:
-          account_id: 529248ad-c4cc-4a50-bea4-6bfd2953f83a
-          at: '2022-04-19T14:12:30.656741Z'
-          event: new
-          event_id: 37782
-          execution_id: 7e544af3-3104-4e1a-8cbc-dab2624949ff
-          order:
-            asset_class: us_equity
-            asset_id: a4778bc8-fad1-47b7-87fe-d5cde10d43f4
-            cancel_requested_at: null
-            canceled_at: null
-            client_order_id: 6d873193-dac6-4f72-8e13-c57853a9339d
-            commission: '1'
-            created_at: '2022-04-19T10:12:30.57117938-04:00'
-            expired_at: null
-            extended_hours: false
-            failed_at: null
-            filled_at: null
-            filled_avg_price: null
-            filled_qty: '0'
-            hwm: null
-            id: edada91a-8b55-4916-a153-8c7a9817e708
-            legs: null
-            limit_price: '700'
-            notional: null
-            order_class: ''
-            order_type: limit
-            qty: '4'
-            replaced_at: null
-            replaced_by: null
-            replaces: null
-            side: buy
-            status: new
-            stop_price: null
-            submitted_at: '2022-04-19T10:12:30.403135025-04:00'
-            symbol: TSLA
-            time_in_force: day
-            trail_percent: null
-            trail_price: null
-            type: limit
-            updated_at: '2022-04-19T10:12:30.609783218-04:00'
-          timestamp: '2022-04-19T14:12:30.602193534Z'
-      properties:
-        account_id:
-          type: string
-          minLength: 1
-          description: Account UUID
-          format: uuid
-        at:
-          type: string
-          minLength: 1
-          description: Timestamp of event
-          format: date-time
-        event:
-          $ref: '#/components/schemas/TradeUpdateEventType'
-        event_id:
-          type: integer
-          format: int64
-          description: Monotonically increasing 64bit integer
-        execution_id:
-          type: string
-          description: Corresponding execution of an order. If an order gets filled over two executions (a partial_fill for example), you will receive two events with different IDs.
-          format: uuid
-        order:
-          $ref: '#/components/schemas/Order'
-        timestamp:
-          type: string
-          description: 'Has various different meanings depending on the value of `event`, please see the [Trading Events](https://alpaca.markets/docs/api-references/broker-api/events/#trade-events)
-
-            Enum in the documentation or the TradeUpdateEventType model for more details on when it means different things.
-
-            '
-          format: date-time
-      required:
-      - account_id
-      - at
-      - event
-      - event_id
-      - execution_id
-      - order
-      - timestamp
     UpdateOrderRequest:
       type: object
       title: OrderUpdateRequest
@@ -1078,26 +1030,74 @@ components:
         client_order_id:
           type: string
           example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-    OrderClosedResponse:
-      title: OrderClosedResponse
-      type: object
-      description: 'Represents the result of asking the api to cancel an Order.
-
-        '
-      x-examples: {}
-      properties:
-        id:
-          type: string
-          description: UUID of the order that was canceled
-          format: uuid
-        status:
-          type: integer
-          description: Http status code for the attempt to close this Order
-        body:
-          $ref: '#/components/schemas/Order'
-      required:
-      - id
-      - status
+  parameters:
+    Until:
+      name: until
+      in: query
+      description: The response will include only ones submitted until this timestamp (exclusive.)
+      schema:
+        type: string
+        format: date-time
+        example: '2021-03-16T18:38:01.942282Z'
+    Symbols:
+      name: symbols
+      in: query
+      description: A comma-separated list of symbols to filter by.
+      schema:
+        type: string
+        example: AAPL,TSLA,MSFT
+    OrderID:
+      name: order_id
+      in: path
+      required: true
+      description: Order identifier.
+      schema:
+        type: string
+    Direction:
+      name: direction
+      in: query
+      description: The chronological order of response based on the submission time. asc or desc. Defaults to desc.
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        example: desc
+    AccountID:
+      name: account_id
+      in: path
+      required: true
+      description: Account identifier.
+      schema:
+        type: string
+        format: uuid
+    After:
+      name: after
+      in: query
+      description: The response will include only ones submitted after this timestamp (exclusive.)
+      schema:
+        type: string
+        format: date-time
+        example: '2021-03-16T18:38:01.942282Z'
+  responses:
+    Forbidden:
+      description: Request is forbidden
+      content:
+        application/json:
+          schema:
+            type: string
+    BadRequest:
+      description: Malformed input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

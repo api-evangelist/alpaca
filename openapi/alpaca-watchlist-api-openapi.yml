@@ -118,6 +118,28 @@ paths:
       description: Irrevocably delete a watchlist.
 components:
   schemas:
+    CreateWatchlistRequest:
+      title: CreateWatchlistRequest
+      type: object
+      description: This model represents the fields you can specify when Creating or Updating/Replacing a Watchlist
+      properties:
+        name:
+          type: string
+          description: The watchlist name
+        symbols:
+          type: array
+          description: The new list of symbol names to watch
+          items:
+            type: string
+            example: '["AAPL", "TSLA"]'
+      required:
+      - name
+      - symbols
+    AssetClass:
+      type: string
+      enum:
+      - us_equity
+      - crypto
     Exchange:
       type: string
       title: Exchange
@@ -194,23 +216,6 @@ components:
       required:
       - id
       - name
-    CreateWatchlistRequest:
-      title: CreateWatchlistRequest
-      type: object
-      description: This model represents the fields you can specify when Creating or Updating/Replacing a Watchlist
-      properties:
-        name:
-          type: string
-          description: The watchlist name
-        symbols:
-          type: array
-          description: The new list of symbol names to watch
-          items:
-            type: string
-            example: '["AAPL", "TSLA"]'
-      required:
-      - name
-      - symbols
     Asset:
       title: Asset
       type: object
@@ -276,11 +281,6 @@ components:
       - id
       - class
       - symbol
-    AssetClass:
-      type: string
-      enum:
-      - us_equity
-      - crypto
   securitySchemes:
     BasicAuth:
       type: http

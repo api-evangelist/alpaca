@@ -81,6 +81,11 @@ paths:
       operationId: getAssetBySymbolOrId
 components:
   schemas:
+    AssetClass:
+      type: string
+      enum:
+      - us_equity
+      - crypto
     Exchange:
       type: string
       title: Exchange
@@ -120,11 +125,6 @@ components:
       - OTC
       - ERSX
       - FTXU
-    AssetClass:
-      type: string
-      enum:
-      - us_equity
-      - crypto
     Asset:
       title: Asset
       type: object
