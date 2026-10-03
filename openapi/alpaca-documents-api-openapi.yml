@@ -99,14 +99,6 @@ paths:
       operationId: downloadDocumentById
 components:
   parameters:
-    AccountID:
-      name: account_id
-      in: path
-      required: true
-      description: Account identifier.
-      schema:
-        type: string
-        format: uuid
     DocumentType:
       name: type
       in: query
@@ -122,6 +114,14 @@ components:
         - tax_id_verification
         - account_approval_letter
         - cip_result
+    AccountID:
+      name: account_id
+      in: path
+      required: true
+      description: Account identifier.
+      schema:
+        type: string
+        format: uuid
     DocumentID:
       name: document_id
       in: path
@@ -131,6 +131,17 @@ components:
         type: string
         format: uuid
   schemas:
+    DocumentType:
+      type: string
+      enum:
+      - identity_verification
+      - address_verification
+      - date_of_birth_verification
+      - tax_id_verification
+      - account_approval_letter
+      - cip_result
+      description: "- identity_verification:\n  identity verification document\n\n- address_verification:\n  address verification document\n\n- date_of_birth_verification:\n  date of birth verification document\n\n- tax_id_verification:\n  tax ID verification document\n\n- account_approval_letter:\n  407 approval letter\n\n- cip_result:\n  initial CIP result\n"
+      example: identity_verification
     Document:
       type: array
       description: ''
@@ -158,17 +169,6 @@ components:
         - document_id
         - document_type
         - document_date
-    DocumentType:
-      type: string
-      enum:
-      - identity_verification
-      - address_verification
-      - date_of_birth_verification
-      - tax_id_verification
-      - account_approval_letter
-      - cip_result
-      description: "- identity_verification:\n  identity verification document\n\n- address_verification:\n  address verification document\n\n- date_of_birth_verification:\n  date of birth verification document\n\n- tax_id_verification:\n  tax ID verification document\n\n- account_approval_letter:\n  407 approval letter\n\n- cip_result:\n  initial CIP result\n"
-      example: identity_verification
   securitySchemes:
     BasicAuth:
       type: http

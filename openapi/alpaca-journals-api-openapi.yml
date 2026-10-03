@@ -252,44 +252,164 @@ paths:
       - Journals
 components:
   schemas:
-    JNLC:
-      example:
-        id: f45g67h8-d1fc-4136-aa4f-cf4460aecdfc
-        entry_type: JNLC
-        from_account: 8fjkjn-4483-4199-840f-6c5fe0b7ca24
-        to_account: 3gtt65jd-6f2a-433c-8c33-17b66b8941fa
-        status: pending
-        net_amount: '115.5'
-      description: Journal information specific to cash transfers. This field is required for `Journal`s with an `entry_type` of `jnlc` (cash transfers), but will be null for those with `jnls` (securities transfers).
+    JournalStatus:
+      type: string
+      enum:
+      - pending
+      - canceled
+      - executed
+      - queued
+      - rejected
+      - deleted
+      description: "Represents the status that a Journal instance can be in.\n\nCurrent Values:\n  - pending\n  - canceled\n  - executed\n  - queued\n  - rejected\n  - deleted"
+    JournalEntryType:
+      type: string
+      title: ''
+      description: "This enum represents the various kinds of Journal alpaca supports.\n\nCurrent values are:\n\n- **JNLC**\n\n  Journal Cash between accounts\n\n- **JNLS**\n\n  Journal Securities between accounts"
+      enum:
+      - JNLC
+      - JNLS
+    JournalStatusEvent:
+      description: 'Represents a change in a Journal''s status, sent over the events streaming api.
+
+        '
       type: object
-      title: JNLC
+      x-examples:
+        example-1:
+          at: '2021-05-07T10:28:23.163857Z'
+          entry_type: JNLC
+          event_id: 1406
+          journal_id: 2f144d2a-91e6-46ff-8e37-959a701cc58d
+          status_from: ''
+          status_to: queued
+      title: JournalStatusEvent
       properties:
+        at:
+          type: string
+          minLength: 1
+          description: Timestamp of event
+          format: date-time
+        entry_type:
+          $ref: '#/components/schemas/JournalEntryType'
+        event_id:
+          type: integer
+          description: Monotonically increasing 64bit integer
+        journal_id:
+          type: string
+          description: The UUID of the related Journal
+          format: uuid
+        status_from:
+          $ref: '#/components/schemas/JournalStatus'
+        status_to:
+          $ref: '#/components/schemas/JournalStatus'
+      required:
+      - at
+      - entry_type
+      - event_id
+      - journal_id
+      - status_from
+      - status_to
+    CreateJournalRequest:
+      description: "Journals API allows you to move cash or securities from one account to another.\n\nThis model represents the fields you can specify when creating a Journal\n\nFixture Rules\n\n- No Fixtures\n  - anything below limit is executed immediately\n  - anything above limit is pending until executed at EOD,\n- With Fixtures\n  - any status = rejected will be rejected EOD\n  - any status = pending will be pending forever"
+      type: object
+      x-examples:
+        example-1:
+          from_account: c94bu7rn-4483-4199-840f-6c5fe0b7ca24
+          entry_type: JNLC
+          to_account: fn68sbrk-6f2a-433c-8c33-17b66b8941fa
+          amount: '51'
+          description: test text /fixtures/status=rejected/fixtures/
+      properties:
+        to_account:
+          type: string
+          minLength: 1
+          format: uuid
+          description: The account_id you wish to journal to
+        from_account:
+          type: string
+          minLength: 1
+          format: uuid
+          description: The account_id you wish to journal from
+        entry_type:
+          $ref: '#/components/schemas/JournalEntryType'
+        amount:
+          type: string
+          description: Required if `entry_type` = `JNLC`
+        symbol:
+          type: string
+          description: Required if `entry_type` = `JNLS`
+        qty:
+          type: string
+          description: Required if `entry_type` = `JNLS`
         description:
           type: string
-          description: ID the amount goes to. Only valid for JNLC journals. Null for JNLS.
-        net_amount:
-          type: string
-          format: decimal
-          description: Only valid for JNLC journals. Null for JNLS.
+          description: Max 1024 characters. Can include fixtures for amounts that are above the transaction limit
+          maxLength: 1024
         transmitter_name:
           type: string
-          description: Only valid for JNLC journals. Null for JNLS. Max 255 characters.
+          maxLength: 255
+          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
         transmitter_account_number:
           type: string
-          description: Only valid for JNLC journals. Null for JNLS.max 255 characters
+          maxLength: 255
+          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
         transmitter_address:
           type: string
-          description: Only valid for JNLC journals. Null for JNLS.max 255 characters
+          maxLength: 255
+          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
         transmitter_financial_institution:
           type: string
-          description: Only valid for JNLC journals. Null for JNLS.max 255 characters
+          maxLength: 255
+          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
         transmitter_timestamp:
           type: string
+          description: RFC 3339 format. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
           format: date-time
-          description: Only valid for JNLC journals. Null for JNLS.
       required:
-      - net_amount
-      x-examples: {}
+      - to_account
+      - from_account
+      - entry_type
+    BatchJournalRequest:
+      title: BatchJournalRequest
+      type: object
+      description: 'Journals API allows you to move cash or securities from one account to another.
+
+
+        This model represents the fields you can specify when creating a request of many Journals out of one account to many others at once.'
+      properties:
+        entry_type:
+          type: string
+          enum:
+          - JNLC
+          description: Only supports `JNLC` for now
+        from_account:
+          type: string
+          format: uuid
+          description: The account id that is the originator of the funds being moved. Most likely is your Sweep Firm Account
+        description:
+          type: string
+          description: Journal description, gets returned in the response
+        entries:
+          type: array
+          minItems: 1
+          description: An array of objects describing to what accounts you want to move funds into and how much to move into for each account
+          items:
+            type: object
+            properties:
+              to_account:
+                type: string
+                format: uuid
+                description: The ID of the account that you want to journal funds into
+              amount:
+                type: string
+                description: Journal amount in USD
+            required:
+            - to_account
+            - amount
+      required:
+      - entry_type
+      - from_account
+      - entries
     Journal:
       title: Journal
       example:
@@ -370,191 +490,6 @@ components:
       - oneOf:
         - $ref: '#/components/schemas/JNLS'
         - $ref: '#/components/schemas/JNLC'
-    BatchJournalRequest:
-      title: BatchJournalRequest
-      type: object
-      description: 'Journals API allows you to move cash or securities from one account to another.
-
-
-        This model represents the fields you can specify when creating a request of many Journals out of one account to many others at once.'
-      properties:
-        entry_type:
-          type: string
-          enum:
-          - JNLC
-          description: Only supports `JNLC` for now
-        from_account:
-          type: string
-          format: uuid
-          description: The account id that is the originator of the funds being moved. Most likely is your Sweep Firm Account
-        description:
-          type: string
-          description: Journal description, gets returned in the response
-        entries:
-          type: array
-          minItems: 1
-          description: An array of objects describing to what accounts you want to move funds into and how much to move into for each account
-          items:
-            type: object
-            properties:
-              to_account:
-                type: string
-                format: uuid
-                description: The ID of the account that you want to journal funds into
-              amount:
-                type: string
-                description: Journal amount in USD
-            required:
-            - to_account
-            - amount
-      required:
-      - entry_type
-      - from_account
-      - entries
-    JournalStatus:
-      type: string
-      enum:
-      - pending
-      - canceled
-      - executed
-      - queued
-      - rejected
-      - deleted
-      description: "Represents the status that a Journal instance can be in.\n\nCurrent Values:\n  - pending\n  - canceled\n  - executed\n  - queued\n  - rejected\n  - deleted"
-    BatchJournalResponse:
-      title: BatchJournalResponse
-      description: A Journal object with an extra attribute error_message in the case when a specific account fails to receive a journal.
-      allOf:
-      - $ref: '#/components/schemas/Journal'
-      - type: object
-        properties:
-          error_message:
-            type: string
-            description: Description of why this journal transaction failed
-        required:
-        - error_message
-      x-examples:
-        example-1:
-          error_message: ''
-          id: 56f106e5-25a4-4eee-96fa-25bb05dc86bc
-          entry_type: JNLC
-          from_account: 8f8c8cee-2591-4f83-be12-82c659b5e748
-          to_account: 399f85f1-cbbd-4eaa-a934-70027fb5c1de
-          symbol: ''
-          qty: null
-          price: null
-          status: pending
-          settle_date: null
-          system_date: null
-          net_amount: '1000'
-          description: ''
-    CreateJournalRequest:
-      description: "Journals API allows you to move cash or securities from one account to another.\n\nThis model represents the fields you can specify when creating a Journal\n\nFixture Rules\n\n- No Fixtures\n  - anything below limit is executed immediately\n  - anything above limit is pending until executed at EOD,\n- With Fixtures\n  - any status = rejected will be rejected EOD\n  - any status = pending will be pending forever"
-      type: object
-      x-examples:
-        example-1:
-          from_account: c94bu7rn-4483-4199-840f-6c5fe0b7ca24
-          entry_type: JNLC
-          to_account: fn68sbrk-6f2a-433c-8c33-17b66b8941fa
-          amount: '51'
-          description: test text /fixtures/status=rejected/fixtures/
-      properties:
-        to_account:
-          type: string
-          minLength: 1
-          format: uuid
-          description: The account_id you wish to journal to
-        from_account:
-          type: string
-          minLength: 1
-          format: uuid
-          description: The account_id you wish to journal from
-        entry_type:
-          $ref: '#/components/schemas/JournalEntryType'
-        amount:
-          type: string
-          description: Required if `entry_type` = `JNLC`
-        symbol:
-          type: string
-          description: Required if `entry_type` = `JNLS`
-        qty:
-          type: string
-          description: Required if `entry_type` = `JNLS`
-        description:
-          type: string
-          description: Max 1024 characters. Can include fixtures for amounts that are above the transaction limit
-          maxLength: 1024
-        transmitter_name:
-          type: string
-          maxLength: 255
-          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
-        transmitter_account_number:
-          type: string
-          maxLength: 255
-          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
-        transmitter_address:
-          type: string
-          maxLength: 255
-          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
-        transmitter_financial_institution:
-          type: string
-          maxLength: 255
-          description: Max 255 characters. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
-        transmitter_timestamp:
-          type: string
-          description: RFC 3339 format. See more details about [Travel Rule](https://alpaca.markets/docs/broker/integration/funding/#travel-rule) in our main documentation.
-          format: date-time
-      required:
-      - to_account
-      - from_account
-      - entry_type
-    JournalStatusEvent:
-      description: 'Represents a change in a Journal''s status, sent over the events streaming api.
-
-        '
-      type: object
-      x-examples:
-        example-1:
-          at: '2021-05-07T10:28:23.163857Z'
-          entry_type: JNLC
-          event_id: 1406
-          journal_id: 2f144d2a-91e6-46ff-8e37-959a701cc58d
-          status_from: ''
-          status_to: queued
-      title: JournalStatusEvent
-      properties:
-        at:
-          type: string
-          minLength: 1
-          description: Timestamp of event
-          format: date-time
-        entry_type:
-          $ref: '#/components/schemas/JournalEntryType'
-        event_id:
-          type: integer
-          description: Monotonically increasing 64bit integer
-        journal_id:
-          type: string
-          description: The UUID of the related Journal
-          format: uuid
-        status_from:
-          $ref: '#/components/schemas/JournalStatus'
-        status_to:
-          $ref: '#/components/schemas/JournalStatus'
-      required:
-      - at
-      - entry_type
-      - event_id
-      - journal_id
-      - status_from
-      - status_to
-    JournalEntryType:
-      type: string
-      title: ''
-      description: "This enum represents the various kinds of Journal alpaca supports.\n\nCurrent values are:\n\n- **JNLC**\n\n  Journal Cash between accounts\n\n- **JNLS**\n\n  Journal Securities between accounts"
-      enum:
-      - JNLC
-      - JNLS
     JNLS:
       example:
         id: h7h5g33f-ef01-4458-9a4b-9598727a406s
@@ -594,6 +529,71 @@ components:
       - symbol
       - qty
       - price
+    JNLC:
+      example:
+        id: f45g67h8-d1fc-4136-aa4f-cf4460aecdfc
+        entry_type: JNLC
+        from_account: 8fjkjn-4483-4199-840f-6c5fe0b7ca24
+        to_account: 3gtt65jd-6f2a-433c-8c33-17b66b8941fa
+        status: pending
+        net_amount: '115.5'
+      description: Journal information specific to cash transfers. This field is required for `Journal`s with an `entry_type` of `jnlc` (cash transfers), but will be null for those with `jnls` (securities transfers).
+      type: object
+      title: JNLC
+      properties:
+        description:
+          type: string
+          description: ID the amount goes to. Only valid for JNLC journals. Null for JNLS.
+        net_amount:
+          type: string
+          format: decimal
+          description: Only valid for JNLC journals. Null for JNLS.
+        transmitter_name:
+          type: string
+          description: Only valid for JNLC journals. Null for JNLS. Max 255 characters.
+        transmitter_account_number:
+          type: string
+          description: Only valid for JNLC journals. Null for JNLS.max 255 characters
+        transmitter_address:
+          type: string
+          description: Only valid for JNLC journals. Null for JNLS.max 255 characters
+        transmitter_financial_institution:
+          type: string
+          description: Only valid for JNLC journals. Null for JNLS.max 255 characters
+        transmitter_timestamp:
+          type: string
+          format: date-time
+          description: Only valid for JNLC journals. Null for JNLS.
+      required:
+      - net_amount
+      x-examples: {}
+    BatchJournalResponse:
+      title: BatchJournalResponse
+      description: A Journal object with an extra attribute error_message in the case when a specific account fails to receive a journal.
+      allOf:
+      - $ref: '#/components/schemas/Journal'
+      - type: object
+        properties:
+          error_message:
+            type: string
+            description: Description of why this journal transaction failed
+        required:
+        - error_message
+      x-examples:
+        example-1:
+          error_message: ''
+          id: 56f106e5-25a4-4eee-96fa-25bb05dc86bc
+          entry_type: JNLC
+          from_account: 8f8c8cee-2591-4f83-be12-82c659b5e748
+          to_account: 399f85f1-cbbd-4eaa-a934-70027fb5c1de
+          symbol: ''
+          qty: null
+          price: null
+          status: pending
+          settle_date: null
+          system_date: null
+          net_amount: '1000'
+          description: ''
   securitySchemes:
     BasicAuth:
       type: http
