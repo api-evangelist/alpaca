@@ -98,6 +98,45 @@ paths:
           description: The document was not found.
       operationId: downloadDocumentById
 components:
+  schemas:
+    Document:
+      type: array
+      description: ''
+      minItems: 1
+      uniqueItems: true
+      x-examples:
+        example:
+        - document_id: b792e8ae-2cb4-4209-85b9-32be4c2fcdd6
+          document_type: account_statement
+          document_date: '2019-08-24'
+      items:
+        type: object
+        properties:
+          document_id:
+            type: string
+            minLength: 1
+            format: uuid
+          document_type:
+            $ref: '#/components/schemas/DocumentType'
+          document_date:
+            type: string
+            minLength: 1
+            format: date-time
+        required:
+        - document_id
+        - document_type
+        - document_date
+    DocumentType:
+      type: string
+      enum:
+      - identity_verification
+      - address_verification
+      - date_of_birth_verification
+      - tax_id_verification
+      - account_approval_letter
+      - cip_result
+      description: "- identity_verification:\n  identity verification document\n\n- address_verification:\n  address verification document\n\n- date_of_birth_verification:\n  date of birth verification document\n\n- tax_id_verification:\n  tax ID verification document\n\n- account_approval_letter:\n  407 approval letter\n\n- cip_result:\n  initial CIP result\n"
+      example: identity_verification
   parameters:
     DocumentType:
       name: type
@@ -130,45 +169,6 @@ components:
       schema:
         type: string
         format: uuid
-  schemas:
-    DocumentType:
-      type: string
-      enum:
-      - identity_verification
-      - address_verification
-      - date_of_birth_verification
-      - tax_id_verification
-      - account_approval_letter
-      - cip_result
-      description: "- identity_verification:\n  identity verification document\n\n- address_verification:\n  address verification document\n\n- date_of_birth_verification:\n  date of birth verification document\n\n- tax_id_verification:\n  tax ID verification document\n\n- account_approval_letter:\n  407 approval letter\n\n- cip_result:\n  initial CIP result\n"
-      example: identity_verification
-    Document:
-      type: array
-      description: ''
-      minItems: 1
-      uniqueItems: true
-      x-examples:
-        example:
-        - document_id: b792e8ae-2cb4-4209-85b9-32be4c2fcdd6
-          document_type: account_statement
-          document_date: '2019-08-24'
-      items:
-        type: object
-        properties:
-          document_id:
-            type: string
-            minLength: 1
-            format: uuid
-          document_type:
-            $ref: '#/components/schemas/DocumentType'
-          document_date:
-            type: string
-            minLength: 1
-            format: date-time
-        required:
-        - document_id
-        - document_type
-        - document_date
   securitySchemes:
     BasicAuth:
       type: http

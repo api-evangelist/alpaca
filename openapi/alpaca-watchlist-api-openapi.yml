@@ -118,6 +118,11 @@ paths:
       description: Irrevocably delete a watchlist.
 components:
   schemas:
+    AssetClass:
+      type: string
+      enum:
+      - us_equity
+      - crypto
     Asset:
       title: Asset
       type: object
@@ -183,23 +188,43 @@ components:
       - id
       - class
       - symbol
-    CreateWatchlistRequest:
-      title: CreateWatchlistRequest
+    Watchlist:
+      title: Watchlist
       type: object
-      description: This model represents the fields you can specify when Creating or Updating/Replacing a Watchlist
+      description: Represents a set of securities observed by a user.
       properties:
+        id:
+          type: string
+          format: uuid
+          description: 'Unique identifier of the watchlist itself.
+
+            '
+        account_id:
+          type: string
+          format: uuid
+          description: 'Unique identifier of the account that owns this watchlist.
+
+            '
+        created_at:
+          type: string
+          format: date-time
+          description: When watchlist was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When watchlist was last updated
         name:
           type: string
-          description: The watchlist name
-        symbols:
+          pattern: ^[a-zA-Z0-9]+$
+          description: User friendly Name of watchlist
+        assets:
           type: array
-          description: The new list of symbol names to watch
+          description: The contents of the watchlist, in the order as registered
           items:
-            type: string
-            example: '["AAPL", "TSLA"]'
+            $ref: '#/components/schemas/Asset'
       required:
+      - id
       - name
-      - symbols
     Exchange:
       type: string
       title: Exchange
@@ -239,48 +264,23 @@ components:
       - OTC
       - ERSX
       - FTXU
-    AssetClass:
-      type: string
-      enum:
-      - us_equity
-      - crypto
-    Watchlist:
-      title: Watchlist
+    CreateWatchlistRequest:
+      title: CreateWatchlistRequest
       type: object
-      description: Represents a set of securities observed by a user.
+      description: This model represents the fields you can specify when Creating or Updating/Replacing a Watchlist
       properties:
-        id:
-          type: string
-          format: uuid
-          description: 'Unique identifier of the watchlist itself.
-
-            '
-        account_id:
-          type: string
-          format: uuid
-          description: 'Unique identifier of the account that owns this watchlist.
-
-            '
-        created_at:
-          type: string
-          format: date-time
-          description: When watchlist was created
-        updated_at:
-          type: string
-          format: date-time
-          description: When watchlist was last updated
         name:
           type: string
-          pattern: ^[a-zA-Z0-9]+$
-          description: User friendly Name of watchlist
-        assets:
+          description: The watchlist name
+        symbols:
           type: array
-          description: The contents of the watchlist, in the order as registered
+          description: The new list of symbol names to watch
           items:
-            $ref: '#/components/schemas/Asset'
+            type: string
+            example: '["AAPL", "TSLA"]'
       required:
-      - id
       - name
+      - symbols
   securitySchemes:
     BasicAuth:
       type: http

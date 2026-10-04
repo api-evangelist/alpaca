@@ -162,39 +162,6 @@ paths:
       operationId: authorizeOAuthToken
 components:
   schemas:
-    OAuthTokenRequest:
-      title: OAuthTokenRequest
-      type: object
-      example:
-        client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
-        client_secret: bbb14da2b6b8e7117a3c52a910e1dc2a
-        redirect_uri: http://localhost
-        scope: general
-        account_id: 0d18ae51-3c94-4511-b209-101e1666416b
-      properties:
-        client_id:
-          type: string
-          description: OAuth client ID
-        client_secret:
-          type: string
-          description: OAuth client secret
-        redirect_uri:
-          type: string
-          description: redirect URI for the OAuth flow
-        scope:
-          type: string
-          description: scopes requested by the OAuth flow
-        account_id:
-          type: string
-          format: uuid
-          description: end-user account ID
-      required:
-      - client_id
-      - client_secret
-      - redirect_uri
-      - scope
-      - account_id
-      description: This model is used for both the Issue and Authorize OAuth token routes
     IssueOAuthTokenResponse:
       description: ''
       type: object
@@ -219,36 +186,6 @@ components:
       required:
       - access_token
       - token_type
-      - scope
-    AuthorizeOAuthTokenResponse:
-      description: ''
-      type: object
-      x-examples:
-        example-1:
-          code: 912b5502-c983-40f7-a01d-6a66f13a754d
-          client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
-          redirect_uri: http://localhost
-          scope: ''
-      properties:
-        code:
-          type: string
-          minLength: 1
-          description: OAuth code to exchange with token
-        client_id:
-          type: string
-          minLength: 1
-          description: OAuth `client_id`
-        redirect_uri:
-          type: string
-          minLength: 1
-          description: Redirect URI of OAuth flow
-        scope:
-          type: string
-          description: Granted scopes
-      required:
-      - code
-      - client_id
-      - redirect_uri
       - scope
     OathClientResponse:
       title: OathClientResponse
@@ -307,6 +244,69 @@ components:
         live_trading_approved:
           type: boolean
           example: true
+    AuthorizeOAuthTokenResponse:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          code: 912b5502-c983-40f7-a01d-6a66f13a754d
+          client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
+          redirect_uri: http://localhost
+          scope: ''
+      properties:
+        code:
+          type: string
+          minLength: 1
+          description: OAuth code to exchange with token
+        client_id:
+          type: string
+          minLength: 1
+          description: OAuth `client_id`
+        redirect_uri:
+          type: string
+          minLength: 1
+          description: Redirect URI of OAuth flow
+        scope:
+          type: string
+          description: Granted scopes
+      required:
+      - code
+      - client_id
+      - redirect_uri
+      - scope
+    OAuthTokenRequest:
+      title: OAuthTokenRequest
+      type: object
+      example:
+        client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
+        client_secret: bbb14da2b6b8e7117a3c52a910e1dc2a
+        redirect_uri: http://localhost
+        scope: general
+        account_id: 0d18ae51-3c94-4511-b209-101e1666416b
+      properties:
+        client_id:
+          type: string
+          description: OAuth client ID
+        client_secret:
+          type: string
+          description: OAuth client secret
+        redirect_uri:
+          type: string
+          description: redirect URI for the OAuth flow
+        scope:
+          type: string
+          description: scopes requested by the OAuth flow
+        account_id:
+          type: string
+          format: uuid
+          description: end-user account ID
+      required:
+      - client_id
+      - client_secret
+      - redirect_uri
+      - scope
+      - account_id
+      description: This model is used for both the Issue and Authorize OAuth token routes
   securitySchemes:
     BasicAuth:
       type: http

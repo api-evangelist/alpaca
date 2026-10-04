@@ -77,32 +77,6 @@ paths:
       - News
 components:
   parameters:
-    limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 10000
-      description: Number of data points to return. Must be in range 1-10000, defaults to 1000.
-    crypto-symbols:
-      name: symbols
-      in: query
-      required: true
-      schema:
-        type: string
-        example: BTCUSD,ETHUSD
-      description: The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with "USD", ie "BTCUSD,ETHUSD" would get both BTC and ETH
-    start:
-      name: start
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-01-01T00:00:00Z'
-      description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
     end:
       name: end
       in: query
@@ -112,6 +86,32 @@ components:
         format: date-time
         example: '2021-01-01T00:00:00Z'
       description: Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+      description: Number of data points to return. Must be in range 1-10000, defaults to 1000.
+    start:
+      name: start
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-01-01T00:00:00Z'
+      description: Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.
+    crypto-symbols:
+      name: symbols
+      in: query
+      required: true
+      schema:
+        type: string
+        example: BTCUSD,ETHUSD
+      description: The comma-separated list of crypto symbols to query for. Note, currently all crypto symbols must be appended with "USD", ie "BTCUSD,ETHUSD" would get both BTC and ETH
     page_token:
       name: page_token
       in: query

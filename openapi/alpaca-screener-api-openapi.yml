@@ -77,6 +77,35 @@ paths:
         description: Number of top market movers to fetch (gainers and losers). Will return number top for each. By default 10 gainers and 10 losers.
 components:
   schemas:
+    MarketMoverAsset:
+      title: MarketMoverAsset
+      type: object
+      description: Name or source of given news article
+      x-examples:
+        example-1:
+          symbol: AGRI
+          percent_change: 145.56
+          change: 2.46
+          price: 4.15
+      x-internal: true
+      properties:
+        symbol:
+          type: string
+          description: Symbol of market moving asset
+        percent_change:
+          type: number
+          description: Percentage difference change for the day
+        change:
+          type: number
+          description: Difference in change for the day
+        price:
+          type: number
+          description: Current price of market moving asset
+      required:
+      - symbol
+      - percent_change
+      - change
+      - price
     MarketMoversResponse:
       title: MarketMovers
       type: object
@@ -120,35 +149,6 @@ components:
       - losers
       - market_type
       - last_updated
-    MarketMoverAsset:
-      title: MarketMoverAsset
-      type: object
-      description: Name or source of given news article
-      x-examples:
-        example-1:
-          symbol: AGRI
-          percent_change: 145.56
-          change: 2.46
-          price: 4.15
-      x-internal: true
-      properties:
-        symbol:
-          type: string
-          description: Symbol of market moving asset
-        percent_change:
-          type: number
-          description: Percentage difference change for the day
-        change:
-          type: number
-          description: Difference in change for the day
-        price:
-          type: number
-          description: Current price of market moving asset
-      required:
-      - symbol
-      - percent_change
-      - change
-      - price
   securitySchemes:
     API_Key:
       name: APCA-API-KEY-ID
