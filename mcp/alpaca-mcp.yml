@@ -253,3 +253,19 @@ deployment:
   source: wall re-adjudication 2026-09-11 (RFC 9728 / JSON-RPC envelope)
   probe_prior: wall
   probe_why: RFC 9728 challenge on the MCP path only
+rfc9728:
+  endpoint: https://broker-api.alpaca.markets/mcp
+  metadata_url: https://broker-api.alpaca.markets/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://broker-api.alpaca.markets
+    authorization_servers:
+    - https://authx.alpaca.markets/v1
+    scopes_supported: []
+    bearer_methods_supported:
+    - header
+    resource_name: Alpaca Broker MCP Server
+    resource_documentation: https://docs.alpaca.markets/

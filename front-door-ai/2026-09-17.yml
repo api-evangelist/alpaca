@@ -7,14 +7,17 @@ front_door_ai:
   probed_at: '2026-09-17'
   host: www.alpaca.markets
   final_host: alpaca.markets
-  ownership: inherited
+  ownership: own
   owner: alpaca
   shares_host_with: null
-  inherited_from: alpaca.markets
+  inherited_from: null
+  alias_of: alpaca.markets
   verdict: scored
-  score: null
+  score: 6
+  band: 4
+  band_label: moderate
   host_score: 6
-  density: null
+  density: 1.33
   words: 4512
   tiers:
     agentic: 3
