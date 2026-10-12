@@ -1,0 +1,20 @@
+edges:
+- partner_name: CCXT
+  partner: null
+  partner_match: null
+  type: coverage
+  channel: open-source-node
+  relationship: connector-coverage
+  direction: partner-built
+  evidence: https://github.com/ccxt/ccxt/blob/master/ts/src/alpaca.ts
+  ccxt_id: alpaca
+  ccxt_certified: null
+  ccxt_pro: true
+  matched_by: domain:alpaca.markets
+  partner_gap: no ccxt repo in all/* (catalog gap)
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+generated: '2026-10-13'
+method: searched
+checked:
+- https://raw.githubusercontent.com/ccxt/ccxt/master/exchanges.json
