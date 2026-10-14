@@ -13,7 +13,7 @@ edges:
   matched_by: domain:alpaca.markets
   partner_gap: no ccxt repo in all/* (catalog gap)
   detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
+  first_seen: '2026-10-14'
 generated: '2026-10-13'
 method: searched
 checked:
