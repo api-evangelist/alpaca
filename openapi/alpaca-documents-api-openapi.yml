@@ -138,6 +138,22 @@ components:
       description: "- identity_verification:\n  identity verification document\n\n- address_verification:\n  address verification document\n\n- date_of_birth_verification:\n  date of birth verification document\n\n- tax_id_verification:\n  tax ID verification document\n\n- account_approval_letter:\n  407 approval letter\n\n- cip_result:\n  initial CIP result\n"
       example: identity_verification
   parameters:
+    DocumentID:
+      name: document_id
+      in: path
+      required: true
+      description: Document identifier.
+      schema:
+        type: string
+        format: uuid
+    AccountID:
+      name: account_id
+      in: path
+      required: true
+      description: Account identifier.
+      schema:
+        type: string
+        format: uuid
     DocumentType:
       name: type
       in: query
@@ -153,22 +169,6 @@ components:
         - tax_id_verification
         - account_approval_letter
         - cip_result
-    AccountID:
-      name: account_id
-      in: path
-      required: true
-      description: Account identifier.
-      schema:
-        type: string
-        format: uuid
-    DocumentID:
-      name: document_id
-      in: path
-      required: true
-      description: Document identifier.
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     BasicAuth:
       type: http

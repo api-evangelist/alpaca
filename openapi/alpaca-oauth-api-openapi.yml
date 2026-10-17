@@ -162,31 +162,39 @@ paths:
       operationId: authorizeOAuthToken
 components:
   schemas:
-    IssueOAuthTokenResponse:
-      description: ''
+    OAuthTokenRequest:
+      title: OAuthTokenRequest
       type: object
-      x-examples:
-        example-1:
-          access_token: 87586f14-c3f4-4912-b107-f75bc17ff87a
-          token_type: Bearer
-          scope: general
+      example:
+        client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
+        client_secret: bbb14da2b6b8e7117a3c52a910e1dc2a
+        redirect_uri: http://localhost
+        scope: general
+        account_id: 0d18ae51-3c94-4511-b209-101e1666416b
       properties:
-        access_token:
+        client_id:
           type: string
-          description: OAuth token
-        token_type:
+          description: OAuth client ID
+        client_secret:
           type: string
-          description: Always `Bearer`
-          enum:
-          - Bearer
-          example: Bearer
+          description: OAuth client secret
+        redirect_uri:
+          type: string
+          description: redirect URI for the OAuth flow
         scope:
           type: string
-          description: Token’s scope
+          description: scopes requested by the OAuth flow
+        account_id:
+          type: string
+          format: uuid
+          description: end-user account ID
       required:
-      - access_token
-      - token_type
+      - client_id
+      - client_secret
+      - redirect_uri
       - scope
+      - account_id
+      description: This model is used for both the Issue and Authorize OAuth token routes
     OathClientResponse:
       title: OathClientResponse
       type: object
@@ -274,39 +282,31 @@ components:
       - client_id
       - redirect_uri
       - scope
-    OAuthTokenRequest:
-      title: OAuthTokenRequest
+    IssueOAuthTokenResponse:
+      description: ''
       type: object
-      example:
-        client_id: 7a3c52a910e1dc2abbb14da2b6b8e711
-        client_secret: bbb14da2b6b8e7117a3c52a910e1dc2a
-        redirect_uri: http://localhost
-        scope: general
-        account_id: 0d18ae51-3c94-4511-b209-101e1666416b
+      x-examples:
+        example-1:
+          access_token: 87586f14-c3f4-4912-b107-f75bc17ff87a
+          token_type: Bearer
+          scope: general
       properties:
-        client_id:
+        access_token:
           type: string
-          description: OAuth client ID
-        client_secret:
+          description: OAuth token
+        token_type:
           type: string
-          description: OAuth client secret
-        redirect_uri:
-          type: string
-          description: redirect URI for the OAuth flow
+          description: Always `Bearer`
+          enum:
+          - Bearer
+          example: Bearer
         scope:
           type: string
-          description: scopes requested by the OAuth flow
-        account_id:
-          type: string
-          format: uuid
-          description: end-user account ID
+          description: Token’s scope
       required:
-      - client_id
-      - client_secret
-      - redirect_uri
+      - access_token
+      - token_type
       - scope
-      - account_id
-      description: This model is used for both the Issue and Authorize OAuth token routes
   securitySchemes:
     BasicAuth:
       type: http

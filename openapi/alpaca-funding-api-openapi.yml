@@ -367,157 +367,7 @@ paths:
 
         If you require the streaming capabilities we recommend not using the generated clients for this specific usecase until the OAS-3 standards come to a consensus on how to represent this correcting in OAS-3.'
 components:
-  responses:
-    NotAuthorized:
-      description: Client is not authorized for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Malformed input.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    TransferStatus:
-      type: string
-      example: QUEUED
-      enum:
-      - QUEUED
-      - APPROVAL_PENDING
-      - PENDING
-      - SENT_TO_CLEARING
-      - REJECTED
-      - CANCELED
-      - APPROVED
-      - COMPLETE
-      - RETURNED
-      description: '- **QUEUED**
-
-        Transfer is in queue to be processed.
-
-        - **APPROVAL_PENDING**
-
-        Transfer is pending approval.
-
-        - **PENDING**
-
-        Transfer is pending processing.
-
-        - **SENT_TO_CLEARING**
-
-        Transfer is being processed by the clearing firm.
-
-        - **REJECTED**
-
-        Transfer is rejected.
-
-        - **CANCELED**
-
-        Client initiated transfer cancellation.
-
-        - **APPROVED**
-
-        Transfer is approved.
-
-        - **COMPLETE**
-
-        Transfer is completed.
-
-        - **RETURNED**
-
-        The bank issued an ACH return for the transfer.
-
-        '
-    Bank:
-      type: object
-      x-examples:
-        example-1:
-          id: 8475c676-68e3-4cfc-a683-9ca2f47a6172
-          account_id: 56712986-9ff7-4d8f-8e52-077e099e533e
-          name: Bank XYZ
-          status: QUEUED
-          country: ''
-          state_province: ''
-          postal_code: ''
-          city: ''
-          street_address: ''
-          account_number: 123456789abc
-          bank_code: '123456789'
-          bank_code_type: ABA
-          created_at: '2022-02-11T21:35:19.268681613Z'
-          updated_at: '2022-02-11T21:35:19.268681613Z'
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
-        created_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-          description: 'Format: 2020-01-01T01:01:01Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2021-03-16T18:38:01.942282Z'
-          description: 'Format: 2020-01-01T01:01:01Z'
-        account_id:
-          type: string
-          format: uuid
-        status:
-          type: string
-          enum:
-          - QUEUED
-          - SENT_TO_CLEARING
-          - APPROVED
-          - CANCELED
-          description: QUEUED, SENT_TO_CLEARING, APPROVED, CANCELED
-        name:
-          type: string
-          description: Name of recipient bank
-        bank_code:
-          type: string
-          description: 9-Digit ABA RTN (Routing Number) or BIC
-        bank_code_type:
-          type: string
-          enum:
-          - ABA
-          - BIC
-          description: ABA (Domestic) or BIC (International)
-        country:
-          type: string
-          description: Only for international banks
-        state_province:
-          type: string
-          description: Only for international banks
-        postal_code:
-          type: string
-          description: Only for international banks
-        city:
-          type: string
-          description: Only for international banks
-        street_address:
-          type: string
-          description: Only for international banks
-        account_number:
-          type: string
-      required:
-      - id
-      - created_at
-      - updated_at
-      - name
-      - bank_code
-      - bank_code_type
-      - account_number
     TransferDirection:
       type: string
       example: INCOMING
@@ -533,6 +383,55 @@ components:
         Funds outgoing from user’s account (withdrawal).
 
         '
+    TransferStatusEvent:
+      description: Represents a change in a Transfer's status, sent over the events streaming api.
+      type: object
+      x-examples:
+        example-1:
+          account_id: 8e00606a-c9ac-409a-ba45-f55e8f77984a
+          at: '2021-06-10T19:52:24.066998Z'
+          event_id: 15961
+          status_from: QUEUED
+          status_to: SENT_TO_CLEARING
+          transfer_id: c4ed4206-697b-4859-ab71-b9de6649859d
+        example-2:
+          account_id: 8e00606a-c9ac-409a-ba45-f55e8f77984a
+          at: '2021-06-10T20:02:24.280178Z'
+          event_id: 15962
+          status_from: SENT_TO_CLEARING
+          status_to: COMPLETE
+          transfer_id: c4ed4206-697b-4859-ab71-b9de6649859d
+      title: TransferStatusEvent
+      properties:
+        account_id:
+          type: string
+          minLength: 1
+          description: Account UUID
+          format: uuid
+        at:
+          type: string
+          minLength: 1
+          description: Timedate of when the transfer status changed
+          format: date-time
+        event_id:
+          type: integer
+          description: Monotonically increasing 64bit integer
+        status_from:
+          $ref: '#/components/schemas/TransferStatus'
+        status_to:
+          $ref: '#/components/schemas/TransferStatus'
+        transfer_id:
+          type: string
+          minLength: 1
+          description: Transfer UUID
+          format: uuid
+      required:
+      - account_id
+      - at
+      - event_id
+      - status_from
+      - status_to
+      - transfer_id
     CreateACHRelationshipRequest:
       description: 'Represents the fields used in creation of a new ACHRelationship.
 
@@ -573,56 +472,6 @@ components:
       - bank_account_type
       - bank_account_number
       - bank_routing_number
-    Error:
-      title: Error
-      type: object
-      properties:
-        code:
-          type: number
-        message:
-          type: string
-      required:
-      - code
-      - message
-    CreateBankRequest:
-      title: CreateBankRequest
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of recipient bank
-        bank_code:
-          type: string
-          description: 9-Digit ABA RTN (Routing Number) or BIC
-        bank_code_type:
-          type: string
-          enum:
-          - ABA
-          - BIC
-          description: ABA (Domestic) or BIC (International)
-        country:
-          type: string
-          description: Only for international banks
-        state_province:
-          type: string
-          description: Only for international banks
-        postal_code:
-          type: string
-          description: Only for international banks
-        city:
-          type: string
-          description: Only for international banks
-        street_address:
-          type: string
-          description: Only for international banks
-        account_number:
-          type: string
-      required:
-      - name
-      - bank_code
-      - bank_code_type
-      - account_number
-      description: Represents the possible fields to send when creating a new associated Bank resource for an account
     ACHRelationship:
       title: ACHRelationship
       type: object
@@ -678,94 +527,141 @@ components:
       - account_id
       - status
       - account_owner_name
-    CreateTransferRequest:
-      title: CreateTransferRequest
+    TransferStatus:
+      type: string
+      example: QUEUED
+      enum:
+      - QUEUED
+      - APPROVAL_PENDING
+      - PENDING
+      - SENT_TO_CLEARING
+      - REJECTED
+      - CANCELED
+      - APPROVED
+      - COMPLETE
+      - RETURNED
+      description: '- **QUEUED**
+
+        Transfer is in queue to be processed.
+
+        - **APPROVAL_PENDING**
+
+        Transfer is pending approval.
+
+        - **PENDING**
+
+        Transfer is pending processing.
+
+        - **SENT_TO_CLEARING**
+
+        Transfer is being processed by the clearing firm.
+
+        - **REJECTED**
+
+        Transfer is rejected.
+
+        - **CANCELED**
+
+        Client initiated transfer cancellation.
+
+        - **APPROVED**
+
+        Transfer is approved.
+
+        - **COMPLETE**
+
+        Transfer is completed.
+
+        - **RETURNED**
+
+        The bank issued an ACH return for the transfer.
+
+        '
+    CreateBankRequest:
+      title: CreateBankRequest
       type: object
       properties:
-        transfer_type:
-          $ref: '#/components/schemas/TransferType'
-        relationship_id:
+        name:
           type: string
-          format: uuid
-          description: 'Required if type = `ach`
-
-
-            The ach_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#creating-an-ach-relationship)'
-        bank_id:
+          description: Name of recipient bank
+        bank_code:
           type: string
-          format: uuid
-          description: 'Required if type = `wire`
-
-
-            The bank_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/bank/#creating-a-new-bank-relationship)'
-        amount:
+          description: 9-Digit ABA RTN (Routing Number) or BIC
+        bank_code_type:
           type: string
-          format: decimal
-          description: Must be > 0.00
-        direction:
-          $ref: '#/components/schemas/TransferDirection'
-        timing:
-          $ref: '#/components/schemas/TransferTiming'
-        additional_information:
-          type:
-          - string
-          - 'null'
-          description: Additional details for when type = `wire`
+          enum:
+          - ABA
+          - BIC
+          description: ABA (Domestic) or BIC (International)
+        country:
+          type: string
+          description: Only for international banks
+        state_province:
+          type: string
+          description: Only for international banks
+        postal_code:
+          type: string
+          description: Only for international banks
+        city:
+          type: string
+          description: Only for international banks
+        street_address:
+          type: string
+          description: Only for international banks
+        account_number:
+          type: string
       required:
-      - transfer_type
-      - amount
-      - direction
-      - timing
-      description: '[See main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#creating-a-transfer-entity)'
-    TransferStatusEvent:
-      description: Represents a change in a Transfer's status, sent over the events streaming api.
+      - name
+      - bank_code
+      - bank_code_type
+      - account_number
+      description: Represents the possible fields to send when creating a new associated Bank resource for an account
+    Error:
+      title: Error
       type: object
-      x-examples:
-        example-1:
-          account_id: 8e00606a-c9ac-409a-ba45-f55e8f77984a
-          at: '2021-06-10T19:52:24.066998Z'
-          event_id: 15961
-          status_from: QUEUED
-          status_to: SENT_TO_CLEARING
-          transfer_id: c4ed4206-697b-4859-ab71-b9de6649859d
-        example-2:
-          account_id: 8e00606a-c9ac-409a-ba45-f55e8f77984a
-          at: '2021-06-10T20:02:24.280178Z'
-          event_id: 15962
-          status_from: SENT_TO_CLEARING
-          status_to: COMPLETE
-          transfer_id: c4ed4206-697b-4859-ab71-b9de6649859d
-      title: TransferStatusEvent
       properties:
-        account_id:
+        code:
+          type: number
+        message:
           type: string
-          minLength: 1
-          description: Account UUID
-          format: uuid
-        at:
-          type: string
-          minLength: 1
-          description: Timedate of when the transfer status changed
-          format: date-time
-        event_id:
-          type: integer
-          description: Monotonically increasing 64bit integer
-        status_from:
-          $ref: '#/components/schemas/TransferStatus'
-        status_to:
-          $ref: '#/components/schemas/TransferStatus'
-        transfer_id:
-          type: string
-          minLength: 1
-          description: Transfer UUID
-          format: uuid
       required:
-      - account_id
-      - at
-      - event_id
-      - status_from
-      - status_to
-      - transfer_id
+      - code
+      - message
+    TransferType:
+      type: string
+      example: ach
+      enum:
+      - ach
+      - instant_ach
+      - wire
+      description: '**NOTE:** The Sandbox environment currently only supports `ach`
+
+
+        - **ach**
+
+        Transfer via ACH (US Only).
+
+        - **wire**
+
+        Transfer via wire (international).
+
+        '
+      title: TransferType
+    TransferTiming:
+      type: string
+      example: immediate
+      enum:
+      - immediate
+      description: 'Only `immediate` is currently supported.
+
+
+        values:
+
+
+        - **immediate**
+
+
+        - **next_day**'
     Transfer:
       title: Transfer
       type: object
@@ -850,41 +746,145 @@ components:
       - amount
       - direction
       - created_at
-    TransferTiming:
-      type: string
-      example: immediate
-      enum:
-      - immediate
-      description: 'Only `immediate` is currently supported.
+    CreateTransferRequest:
+      title: CreateTransferRequest
+      type: object
+      properties:
+        transfer_type:
+          $ref: '#/components/schemas/TransferType'
+        relationship_id:
+          type: string
+          format: uuid
+          description: 'Required if type = `ach`
 
 
-        values:
+            The ach_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/ach/#creating-an-ach-relationship)'
+        bank_id:
+          type: string
+          format: uuid
+          description: 'Required if type = `wire`
 
 
-        - **immediate**
-
-
-        - **next_day**'
-    TransferType:
-      type: string
-      example: ach
-      enum:
-      - ach
-      - instant_ach
-      - wire
-      description: '**NOTE:** The Sandbox environment currently only supports `ach`
-
-
-        - **ach**
-
-        Transfer via ACH (US Only).
-
-        - **wire**
-
-        Transfer via wire (international).
-
-        '
-      title: TransferType
+            The bank_relationship created for the account_id [here](https://alpaca.markets/docs/api-references/broker-api/funding/bank/#creating-a-new-bank-relationship)'
+        amount:
+          type: string
+          format: decimal
+          description: Must be > 0.00
+        direction:
+          $ref: '#/components/schemas/TransferDirection'
+        timing:
+          $ref: '#/components/schemas/TransferTiming'
+        additional_information:
+          type:
+          - string
+          - 'null'
+          description: Additional details for when type = `wire`
+      required:
+      - transfer_type
+      - amount
+      - direction
+      - timing
+      description: '[See main docs here](https://alpaca.markets/docs/api-references/broker-api/funding/transfers/#creating-a-transfer-entity)'
+    Bank:
+      type: object
+      x-examples:
+        example-1:
+          id: 8475c676-68e3-4cfc-a683-9ca2f47a6172
+          account_id: 56712986-9ff7-4d8f-8e52-077e099e533e
+          name: Bank XYZ
+          status: QUEUED
+          country: ''
+          state_province: ''
+          postal_code: ''
+          city: ''
+          street_address: ''
+          account_number: 123456789abc
+          bank_code: '123456789'
+          bank_code_type: ABA
+          created_at: '2022-02-11T21:35:19.268681613Z'
+          updated_at: '2022-02-11T21:35:19.268681613Z'
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 61e69015-8549-4bfd-b9c3-01e75843f47d
+        created_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+          description: 'Format: 2020-01-01T01:01:01Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2021-03-16T18:38:01.942282Z'
+          description: 'Format: 2020-01-01T01:01:01Z'
+        account_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+          - QUEUED
+          - SENT_TO_CLEARING
+          - APPROVED
+          - CANCELED
+          description: QUEUED, SENT_TO_CLEARING, APPROVED, CANCELED
+        name:
+          type: string
+          description: Name of recipient bank
+        bank_code:
+          type: string
+          description: 9-Digit ABA RTN (Routing Number) or BIC
+        bank_code_type:
+          type: string
+          enum:
+          - ABA
+          - BIC
+          description: ABA (Domestic) or BIC (International)
+        country:
+          type: string
+          description: Only for international banks
+        state_province:
+          type: string
+          description: Only for international banks
+        postal_code:
+          type: string
+          description: Only for international banks
+        city:
+          type: string
+          description: Only for international banks
+        street_address:
+          type: string
+          description: Only for international banks
+        account_number:
+          type: string
+      required:
+      - id
+      - created_at
+      - updated_at
+      - name
+      - bank_code
+      - bank_code_type
+      - account_number
+  responses:
+    BadRequest:
+      description: Malformed input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotAuthorized:
+      description: Client is not authorized for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     AccountID:
       name: account_id

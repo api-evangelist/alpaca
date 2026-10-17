@@ -105,17 +105,6 @@ components:
       - reverse_split
       - recapitalization
       - spinoff
-    Error:
-      title: Error
-      type: object
-      properties:
-        code:
-          type: number
-        message:
-          type: string
-      required:
-      - code
-      - message
     Announcement:
       description: 'The announcements endpoint contains public information on previous and upcoming dividends, mergers, spinoffs, and stock splits.
 
@@ -227,6 +216,17 @@ components:
       - cash
       - old_rate
       - new_rate
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+      required:
+      - code
+      - message
     AnnouncementCAType:
       type: string
       description: "Announcements have both a type and a subtype to categorize them. This model represents the higher level abstract \"types\" of Announcement. Please see the AnnouncementCASubType model for finer grain descriptions of the subtypes\n\nPossible values are:\n- dividend\n  can have `cash` and `stock` subtypes\n- merger\n  has `merger_update` and `merger_completion` sub types\n- split\n  has `stock_split`, `until_split`, `reverse_split`, and `recapitalization` sub types\n- spinoff\n  currently has only the `spinoff` subtype and thus is just this higher level category for now. A disbursement of a newly tradable security when the intiating_symbol creates the target_symbol."
