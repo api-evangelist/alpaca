@@ -35,6 +35,17 @@ tags:
 - Fintech
 - Trading
 - Stocks
+- Cryptocurrency
+- Brokerage
+- Market Data
+- Options
+- Real-Time
+- Investing
+- Financial Services
+tags_raw:
+- Fintech
+- Trading
+- Stocks
 - Crypto
 - Brokerage
 - Market Data
@@ -56,7 +67,7 @@ apis:
   - Trading
   - Stocks
   - Options
-  - Crypto
+  - Cryptocurrency
   - Order
   tags_raw:
   - Trading
