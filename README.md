@@ -1,4 +1,4 @@
-# Alpaca (alpaca)
+# Alpaca
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,132 +66,208 @@
 
 Alpaca is an API-first commission-free stock and crypto trading broker offering trading, market data, options, and broker-as-a-service APIs. Alpaca publishes its OpenAPI specifications publicly via the alpacahq/alpaca-docs GitHub repository, with separate specs for Trading, Broker, Market Data, and OAuth.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/alpaca/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/alpaca/refs/heads/main/apis.yml)
+**Areas:** Fintech · Trading · Stocks · Cryptocurrency · Brokerage · Market Data · Options · Real-Time · Investing · Financial Services
 
-## Tags
+## Alpaca on APIs.io
 
-- Fintech
-- Trading
-- Stocks
-- Crypto
-- Brokerage
-- Market Data
-- Options
+Everything profiled for Alpaca is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/alpaca/](https://apis.io/providers/alpaca/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (17)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-29
+- [Alpaca Trading API](https://apis.io/apis/alpaca/trading-api/) — The Alpaca Trading API enables commission-free trading of US-listed equities, options, and crypto. It exposes endpoints for orders, positions, account…
+- [Alpaca Accounts API](https://apis.io/apis/alpaca/alpaca-accounts-api/) — The Accounts API from Alpaca — 14 operation(s) for accounts.
+- [Alpaca Assets API](https://apis.io/apis/alpaca/alpaca-assets-api/) — The Assets API from Alpaca — 2 operation(s) for assets.
+- [Alpaca Calendar API](https://apis.io/apis/alpaca/alpaca-calendar-api/) — The Calendar API from Alpaca — 2 operation(s) for calendar.
+- [Alpaca Clock API](https://apis.io/apis/alpaca/alpaca-clock-api/) — The Clock API from Alpaca — 2 operation(s) for clock.
+- [Alpaca Corporate Actions API](https://apis.io/apis/alpaca/alpaca-corporate-actions-api/) — The Corporate Actions API from Alpaca — 1 operation(s) for corporate actions.
+- [Alpaca Crypto Pricing Data API](https://apis.io/apis/alpaca/alpaca-crypto-pricing-data-api-api/) — The Crypto Pricing Data API API from Alpaca — 17 operation(s) for crypto pricing data api.
+- [Alpaca Documents API](https://apis.io/apis/alpaca/alpaca-documents-api/) — The Documents API from Alpaca — 3 operation(s) for documents.
+- [Alpaca Events API](https://apis.io/apis/alpaca/alpaca-events-api/) — The Events API from Alpaca — 4 operation(s) for events.
+- [Alpaca Funding API](https://apis.io/apis/alpaca/alpaca-funding-api/) — The Funding API from Alpaca — 7 operation(s) for funding.
+- [Alpaca Journals API](https://apis.io/apis/alpaca/alpaca-journals-api/) — The Journals API from Alpaca — 4 operation(s) for journals.
+- [Alpaca Logo API](https://apis.io/apis/alpaca/alpaca-logo-api/) — The Logo API from Alpaca — 1 operation(s) for logo.
+- [Alpaca News API](https://apis.io/apis/alpaca/alpaca-news-api/) — The News API from Alpaca — 1 operation(s) for news.
+- [Alpaca Screener API](https://apis.io/apis/alpaca/alpaca-screener-api/) — The Screener API from Alpaca — 1 operation(s) for screener.
+- [Alpaca Stock Pricing Data API](https://apis.io/apis/alpaca/alpaca-stock-pricing-data-api-api/) — The Stock Pricing Data API API from Alpaca — 16 operation(s) for stock pricing data api.
+- [Alpaca Watchlist API](https://apis.io/apis/alpaca/alpaca-watchlist-api/) — The Watchlist API from Alpaca — 2 operation(s) for watchlist.
+- [Alpaca O Auth API](https://apis.io/apis/alpaca/alpaca-oauth-api/) — The OAuth API from Alpaca — 3 operation(s) for oauth.
 
-## APIs
+### Published properties
 
-### Alpaca Trading API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The Alpaca Trading API enables commission-free trading of US-listed equities, options, and crypto. It exposes endpoints for orders, positions, account information, watchlists, calendar, clock, and assets. A paper trading sandbox is available at paper-api.alpaca.markets.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.alpaca.markets/docs/trading-api](https://docs.alpaca.markets/docs/trading-api)
-- **Base URL:** `https://api.alpaca.markets/v2`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Alpaca WebSocket Streaming APIs](https://apis.io/asyncapis/alpaca/alpaca-asyncapi/)
 
-- Trading
-- Stocks
-- Options
-- Crypto
-- Orders
+#### Event channels (2)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://docs.alpaca.markets/docs/trading-api)
-- [OpenAPI](openapi/alpaca-trading-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/alpaca-trading-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/alpaca-trading-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/alpaca-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Sandbox](https://paper-api.alpaca.markets/v2)
+- [trade_updates](https://apis.io/channels/alpaca/trade-updates/)
+- [/](https://apis.io/channels/alpaca/untitled/)
 
-### Alpaca Market Data API
+#### MCP servers (1)
 
-The Alpaca Market Data API delivers real-time and historical pricing data for US stocks (SIP and IEX feeds), options (OPRA), and crypto. Supports REST and WebSocket streaming with bars, quotes, trades, snapshots, and corporate actions endpoints. 7+ years of historical data available.
+Model Context Protocol servers that expose the API to agents.
 
-- **Human URL:** [https://docs.alpaca.markets/docs/about-market-data-api](https://docs.alpaca.markets/docs/about-market-data-api)
-- **Base URL:** `https://data.alpaca.markets`
+- [alpaca-mcp.yml](https://apis.io/servers/alpaca/alpaca-mcp-yml/)
 
-#### Tags
+#### Agentic access (1)
 
-- Market Data
-- Stocks
-- Crypto
-- Options
-- Real-time
-- Historical
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Alpaca Agentic Access](https://apis.io/agentic-access/alpaca/alpaca-agentic-access/)
 
-- [Documentation](https://docs.alpaca.markets/docs/about-market-data-api)
-- [OpenAPI](openapi/alpaca-data-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/alpaca-data-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/alpaca-data-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/alpaca-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+#### Collections (47)
 
-### Alpaca Broker API
+Postman and Open Collection request collections.
 
-The Alpaca Broker API powers white-label brokerage and embedded finance products. It exposes endpoints for account onboarding, KYC/AML, ACATS transfers, ACH funding, journals, and trading on behalf of end users.
+- [Broker Account Activities API](https://apis.io/collections/alpaca/open-alpaca-account-activities-api/)
+- [Broker Account Activities Account Configurations API](https://apis.io/collections/alpaca/open-alpaca-account-configurations-api/)
+- [Broker Account Activities Accounts API](https://apis.io/collections/alpaca/open-alpaca-accounts-api/)
+- [Broker Account Activities Assets API](https://apis.io/collections/alpaca/open-alpaca-assets-api/)
+- [Broker API](https://apis.io/collections/alpaca/open-alpaca-broker-api/)
+- [Broker Account Activities Calendar API](https://apis.io/collections/alpaca/open-alpaca-calendar-api/)
+- [Broker Account Activities Clock API](https://apis.io/collections/alpaca/open-alpaca-clock-api/)
+- [Broker Account Activities Corporate Actions API](https://apis.io/collections/alpaca/open-alpaca-corporate-actions-api/)
+- [Broker Account Activities Crypto Pricing Data API API](https://apis.io/collections/alpaca/open-alpaca-crypto-pricing-data-api-api/)
+- [Market Data API](https://apis.io/collections/alpaca/open-alpaca-data-api/)
+- [Broker Account Activities Documents API](https://apis.io/collections/alpaca/open-alpaca-documents-api/)
+- [Broker Account Activities Events API](https://apis.io/collections/alpaca/open-alpaca-events-api/)
+- [Broker Account Activities Funding API](https://apis.io/collections/alpaca/open-alpaca-funding-api/)
+- [Broker Account Activities Journals API](https://apis.io/collections/alpaca/open-alpaca-journals-api/)
+- [Broker Account Activities Logo API](https://apis.io/collections/alpaca/open-alpaca-logo-api/)
+- [Broker Account Activities News API](https://apis.io/collections/alpaca/open-alpaca-news-api/)
+- [Broker Account Activities OAuth API](https://apis.io/collections/alpaca/open-alpaca-oauth-api/)
+- [Broker Account Activities Orders API](https://apis.io/collections/alpaca/open-alpaca-orders-api/)
+- [Broker Account Activities Portfolio History API](https://apis.io/collections/alpaca/open-alpaca-portfolio-history-api/)
+- [Broker Account Activities Positions API](https://apis.io/collections/alpaca/open-alpaca-positions-api/)
+- [Broker Account Activities Screener API](https://apis.io/collections/alpaca/open-alpaca-screener-api/)
+- [Broker Account Activities Stock Pricing Data API API](https://apis.io/collections/alpaca/open-alpaca-stock-pricing-data-api-api/)
+- [Broker Account Activities Trading API](https://apis.io/collections/alpaca/open-alpaca-trading-api/)
+- [Broker Account Activities Watchlist API](https://apis.io/collections/alpaca/open-alpaca-watchlist-api/)
+- [Broker Account Activities Watchlists API](https://apis.io/collections/alpaca/open-alpaca-watchlists-api/)
+- …and 22 more published on APIs.io
 
-- **Human URL:** [https://docs.alpaca.markets/docs/about-broker-api](https://docs.alpaca.markets/docs/about-broker-api)
-- **Base URL:** `https://broker-api.alpaca.markets/v1`
+#### Overlays (2)
 
-#### Tags
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- Brokerage
-- Embedded Finance
-- White Label
-- Compliance
-- Trading
+- [Alpaca Oauth Api Overlay](https://apis.io/overlays/alpaca/alpaca-oauth-api-overlay/)
+- [Alpaca Trading Api Overlay](https://apis.io/overlays/alpaca/alpaca-trading-api-overlay/)
 
-#### Properties
+#### Governance rules (1)
 
-- [Documentation](https://docs.alpaca.markets/docs/about-broker-api)
-- [OpenAPI](openapi/alpaca-broker-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/alpaca-broker-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/alpaca-broker-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Spectral rulesets for the provider's contracts.
 
-### Alpaca OAuth API
+- [Alpaca — asyncapi rules](https://apis.io/rules/alpaca/alpaca-asyncapi-spectral-rules/)
 
-The Alpaca OAuth API allows third-party applications to authenticate Alpaca users and obtain access tokens for the Trading and Market Data APIs.
+#### Security (4)
 
-- **Human URL:** [https://docs.alpaca.markets/docs/oauth-tokens](https://docs.alpaca.markets/docs/oauth-tokens)
-- **Base URL:** `https://api.alpaca.markets/oauth`
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags
+- [Alpaca Authentication](https://apis.io/security/alpaca/alpaca-authentication/)
+- [Alpaca Domain Security](https://apis.io/security/alpaca/alpaca-domain-security/)
+- [Alpaca Trust Center](https://apis.io/security/alpaca/alpaca-trust-center/)
+- [Alpaca Vulnerability Disclosure](https://apis.io/security/alpaca/alpaca-vulnerability-disclosure/)
 
-- OAuth
-- Authentication
-- Authorization
+#### OAuth scopes (1)
 
-#### Properties
+The permissions the API asks for.
 
-- [Documentation](https://docs.alpaca.markets/docs/oauth-tokens)
-- [OpenAPI](openapi/alpaca-oauth-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/alpaca-oauth-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/alpaca-oauth-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Alpaca Scopes](https://apis.io/scopes/alpaca/alpaca-scopes/)
 
-## Common Properties
+#### Plans and pricing (1)
 
-- [LinkedIn](https://www.linkedin.com/company/alpacamarkets)
-- [Portal](https://alpaca.markets/)
+Published plans, tiers and prices.
+
+- [Alpaca Plans Pricing](https://apis.io/plans/alpaca/alpaca-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Alpaca Rate Limits](https://apis.io/rate-limits/alpaca/alpaca-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Alpaca Finops](https://apis.io/finops/alpaca/alpaca-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.alpaca.markets/)
 - [Documentation](https://docs.alpaca.markets/)
+- [Getting started](https://docs.alpaca.markets/docs/getting-started)
+- [API reference](https://docs.alpaca.markets/reference)
 - [Pricing](https://alpaca.markets/data)
-- [Git Hub](https://github.com/alpacahq)
-- [Status Page](https://status.alpaca.markets/)
-- [Terms of Service](https://alpaca.markets/legal)
-- [Privacy Policy](https://alpaca.markets/privacy)
-- [Plans](plans/alpaca-plans-pricing.yml)
-- [Rate Limits](rate-limits/alpaca-rate-limits.yml)
-- [Fin Ops](finops/alpaca-finops.yml)
-- [Integrations](https://alpaca.markets/integrations)
-- [L L Ms Txt](https://docs.alpaca.markets/llms.txt)
+- [Sign up](https://app.alpaca.markets/signup)
+- [Support](https://alpaca.markets/support)
+- [Blog](https://alpaca.markets/blog/feed/)
+- [Security](https://alpaca.markets/security)
+- [Compliance](https://alpaca.markets/security)
+- [Trust centre](https://trust.alpaca.markets/)
+- [Terms of service](https://alpaca.markets/legal)
+- [Privacy policy](https://alpaca.markets/privacy)
+- [Status](https://status.alpaca.markets/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 53.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 59.9 |
+| Contract governance | 31.8 |
+| Operational transparency | 63.2 |
+| Developer ergonomics | 53.6 |
+| Access clarity | 26.3 |
+
+**Agent readiness 54.9** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | yes |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 40.7** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/alpaca/](https://apis.io/providers/alpaca/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Alpaca: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/alpaca/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
